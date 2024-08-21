@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Page</title>
-    <link rel="stylesheet" href="style/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/styles.css') }}" />
   </head>
   <body>
     <section class="container">
@@ -25,12 +25,12 @@
         </div>
         <div class="stats">
           <article class="stat">
-            <img class="stat-icon" src="svg/humedad.svg" alt="IMG-Humedad" />
+            <img class="stat-icon" src="{{ url_for('static', filename='svg/humedad.svg') }}" alt="IMG-Humedad" />
             <p class="stat-value">80%</p>
             <p class="stat-label">Humedad</p>
           </article>
           <article class="stat">
-            <img class="stat-icon" src="svg/viento.svg" alt="IMG-Viento" />
+            <img class="stat-icon" src="{{ url_for('static', filename='svg/viento.svg') }}" alt="IMG-Viento" />
             <p class="stat-value">5 m/s</p>
             <p class="stat-label">
               Velocidad <br />
