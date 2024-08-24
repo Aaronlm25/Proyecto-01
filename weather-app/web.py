@@ -1,6 +1,7 @@
 import pdfplumber
 from flask import Flask, render_template, request
 import requests
+import Autocorrect
 
 app = Flask(__name__)
 
@@ -69,7 +70,7 @@ def home():
                 weather_data['error'] = "Número de vuelo no válido."
         else:
             if city:
-                weather_data['city'] = get_weather(city)
+                weather_data['city'] = get_weather(Autocorrect.corregir(city))
             elif iata_code:
                 city = get_city_from_iata(iata_code)
                 if city:
