@@ -1,0 +1,138 @@
+[
+    {
+        "coord": {
+            "lon": -99.1277,
+            "lat": 19.4285
+        },
+        "weather": [
+            {
+                "id": 802,
+                "main": "Clouds",
+                "description": "nubes dispersas",
+                "icon": "03d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 16.64,
+            "feels_like": 16.37,
+            "temp_min": 16.64,
+            "temp_max": 16.96,
+            "pressure": 1021,
+            "humidity": 77,
+            "sea_level": 1021,
+            "grnd_level": 768
+        },
+        "visibility": 9656,
+        "wind": {
+            "speed": 1.54,
+            "deg": 60
+        },
+        "clouds": {
+            "all": 40
+        },
+        "dt": 1724598536,
+        "sys": {
+            "type": 2,
+            "id": 47729,
+            "country": "MX",
+            "sunrise": 1724588403,
+            "sunset": 1724633836
+        },
+        "timezone": -21600,
+        "id": 3530597,
+        "name": "Mexico City",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": -106,
+            "lat": 28.5
+        },
+        "weather": [
+            {
+                "id": 803,
+                "main": "Clouds",
+                "description": "muy nuboso",
+                "icon": "04d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 25.46,
+            "feels_like": 25.37,
+            "temp_min": 25.46,
+            "temp_max": 25.46,
+            "pressure": 1018,
+            "humidity": 50,
+            "sea_level": 1018,
+            "grnd_level": 839
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 2.06,
+            "deg": 127,
+            "gust": 2.37
+        },
+        "clouds": {
+            "all": 77
+        },
+        "dt": 1724598886,
+        "sys": {
+            "type": 1,
+            "id": 7111,
+            "country": "MX",
+            "sunrise": 1724589549,
+            "sunset": 1724635988
+        },
+        "timezone": -21600,
+        "id": 4014336,
+        "name": "Chihuahua",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": 9.9187,
+            "lat": 57.048
+        },
+        "weather": [
+            {
+                "id": 801,
+                "main": "Clouds",
+                "description": "algo de nubes",
+                "icon": "02d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 16.96,
+            "feels_like": 16.36,
+            "temp_min": 16.96,
+            "temp_max": 17.76,
+            "pressure": 1014,
+            "humidity": 63,
+            "sea_level": 1014,
+            "grnd_level": 1011
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 11.83,
+            "deg": 250
+        },
+        "clouds": {
+            "all": 20
+        },
+        "dt": 1724599274,
+        "sys": {
+            "type": 1,
+            "id": 1600,
+            "country": "DK",
+            "sunrise": 1724558927,
+            "sunset": 1724610979
+        },
+        "timezone": 7200,
+        "id": 2624886,
+        "name": "Aalborg",
+        "cod": 200
+    }
+]
