@@ -1,5 +1,6 @@
 import os
 import json
+import threading
 
 def get_data(file_route):
     existance_insurer(file_route)
@@ -24,11 +25,16 @@ def update(file_route, weather):
         if os.path.getsize(file_route) != 0:
             raw_data = json.load(file)
     # Si ya se a tiene registrado el clima de una ciudad 
-    # no se hace nada.
+    # lo sobreescribe.
+    override = False
     for data in raw_data:
         if weather['name'] == data['name']:
-            return
-    raw_data.append(weather)
+            raw_data.remove(data)
+            raw_data.append(weather)
+            override = True
+            break
+    if not raw_data or not override:
+        raw_data.append(weather)
     with open(file_route, 'w') as file:
         json.dump(raw_data, file, indent=4)
 
