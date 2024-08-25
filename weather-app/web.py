@@ -1,43 +1,44 @@
-import pdfplumber
-from flask import Flask, render_template, request
 import requests
-import Autocorrect
+import csv
+import autocorrect
+import json
+import cache
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 KEY = 'a3117bc0d7c113aba1f25b2fb28748e1'
 
-def load_iata_data(pdf_path):
-    iata_to_city = {}
-    try:
-        with pdfplumber.open(pdf_path) as pdf:
-            for page in pdf.pages:  # Itera sobre cada página del PDF
-                table = page.extract_table()
-                if table:
-                    for row in table[1:]:  # Salta la fila de encabezados
-                        city_name = row[0].strip()
-                        iata_code = row[1].strip().upper()
-                        airport_name = row[2].strip()  # Puedes usarlo si lo necesitas
-                        iata_to_city[iata_code] = city_name
-    except Exception as e:
-        print(f"Error al leer el PDF: {e}")
-    
-    return iata_to_city
-
-iata_to_city = load_iata_data('datalist/datos_ciudad.pdf')
+# Obtiene los datos de los destinos, de un archivo
+# .csv, el cual contiene por cada destino 3 datos:
+# ciudad, iata, aeropuerto
+def get_destiny_data(route):
+    destiny_data = []
+    with open(route, mode='r') as file:
+        reader = csv.reader(file)
+        data = list(reader)
+    for row in data:
+        destiny_data.append(row)
+    return destiny_data
 
 def get_weather(city):
     try:
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
         response = requests.get(url)
         response.raise_for_status()
+        print(json.dumps(response.json(), indent=4))
         return response.json()
     except requests.exceptions.RequestException as e:
         print(f"Error al obtener datos: {e}")
         return None
 
+# Recibe una lista de listas con 3 elementos los
+# cuales son: ciudad, iata, aeropuerto
 def get_city_from_iata(iata):
-    return iata_to_city.get(iata.upper(), None)
+    for list in get_destiny_data('./weather-app/datalist/datos_destinos.csv'):
+        if list[1] == iata:
+            return list[0]
+    return None
 
 def get_flight_info(flight_number):
     flight_data = {
@@ -48,12 +49,12 @@ def get_flight_info(flight_number):
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    data = cache.get_data('./cache.json')
     weather_data = {}
     if request.method == 'POST':
         city = request.form.get('city')
         iata_code = request.form.get('iata_code')
         flight_number = request.form.get('flight_number')
-
         if flight_number:
             flight_info = get_flight_info(flight_number)
             if flight_info:
@@ -70,16 +71,14 @@ def home():
                 weather_data['error'] = "Número de vuelo no válido."
         else:
             if city:
-                weather_data['city'] = get_weather(Autocorrect.corregir(city))
+                weather_data['city'] = get_weather(autocorrect.correct(city))
             elif iata_code:
                 city = get_city_from_iata(iata_code)
                 if city:
                     weather_data['city'] = get_weather(city)
                 else:
                     weather_data['error'] = "Código IATA no válido."
-
-    print("Weather Data:", weather_data)
-    
+        cache.update('./cache.json', weather_data['city'])
     return render_template('index.html', weather_data=weather_data)
 
 if __name__ == '__main__':
