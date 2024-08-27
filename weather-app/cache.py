@@ -1,6 +1,5 @@
 import os
 import json
-import threading
 
 def get_data(file_route):
     existance_insurer(file_route)

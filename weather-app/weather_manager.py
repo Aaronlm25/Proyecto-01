@@ -1,5 +1,4 @@
 import requests
-import json
 import time
 import cache
 KEY = 'a3117bc0d7c113aba1f25b2fb28748e1'
@@ -19,8 +18,8 @@ def update_weather(destiny_data):
     for data in destiny_data:
         if not STOP_FLAG:
             break   
-        time.sleep(5)
+        time.sleep(2)
         weather = get_weather(data[0])
         if weather:
-            cache.update('./cache.json', weather)
+            cache.update('./weather-app/static/json/cache.json', weather)
 
