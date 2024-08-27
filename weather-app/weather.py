@@ -1,6 +1,6 @@
 import json
 
-class WeatherData:
+class Weather:
     def __init__(self, json_data):
         self.json_data = json_data
         
@@ -44,20 +44,6 @@ class WeatherData:
         self.id = self.json_data.get('id', None)
         self.cod = self.json_data.get('cod', None)
 
-    def __str__(self):
-        return (f"Weather in {self.name} ({self.country}):\n"
-                f"Coordinates: lat {self.lat}, lon {self.lon}\n"
-                f"Weather ID: {self.weather_id}, Main: {self.main_weather}, Description: {self.description}\n"
-                f"Weather icon: {self.icon}\n"
-                f"Temperature: {self.temp}°C (Feels like: {self.feels_like}°C)\n"
-                f"Min Temp: {self.temp_min}°C, Max Temp: {self.temp_max}°C\n"
-                f"Pressure: {self.pressure} hPa, Humidity: {self.humidity}%\n"
-                f"Visibility: {self.visibility} m\n"
-                f"Wind: {self.wind_speed} m/s, Direction: {self.wind_deg}°, Gusts: {self.wind_gust} m/s\n"
-                f"Cloudiness: {self.cloudiness}%\n"
-                f"Sunrise: {self.sunrise}, Sunset: {self.sunset}\n"
-                f"Timezone: {self.timezone}, City ID: {self.id}, Response Code: {self.cod}")
-        
     def _determine_icon(self):
         """
         Determina el icono basado en el ID del clima.
@@ -84,6 +70,102 @@ class WeatherData:
             return "clouds_icon.svg"  # Nubes
         elif 803 <= self.weather_id <= 804:
             return "cloudy_icon.svg"  # Nublado
+    
+    #getters
+    #cords
+    def get_lat(self):
+        return self.lat
+    
+    def get_lon(self):
+        return self.lon
+    
+    #clima
+    def get_weather_id(self):
+        return self.weather_id
+    
+    def get_main_weather(self):
+        return self.main_weather
+    
+    def get_description(self):
+        return self.description
+    
+    def get_icon(self):
+        return self.icon
+    
+    #stats
+    def get_temp(self):
+        return self.temp
+    
+    def get_feels_like(self):
+        return self.feels_like
+    
+    def get_temp_max(self):
+        return self.temp_max
+    
+    def get_temp_min(self):
+        return self.temp_min
+    
+    def get_pressure(self):
+        return self.pressure
+    
+    def get_humidity(self):
+        return self.humidity
+    
+    #visibilidad
+    def get_visibility(self):
+        return self.visibility
+    
+    #viento
+    def get_wind_speed(self):
+        return self.wind_speed
+    
+    def get_wind_deg(self):
+        return self.wind_deg
+    
+    def get_wind_gust(self):
+        return self.icon
+        
+    #nubes
+    def get_cloudiness(self):
+        return self.cloudiness
+    
+    #pais
+    def get_country(self):
+        return self.country
+    
+    def get_sunrise(self):
+        return self.sunrise
+    
+    def get_sunset(self):
+        return self.sunset
+    
+    def get_name(self):
+        return self.name
+    
+    def get_timezone(self):
+        return self.timezone
+    
+    def get_id(self):
+        return self.id
+    
+    def get_cod(self):
+        return self.cod
+    
+    
+    def __str__(self):
+        return (f"Weather in {self.name} ({self.country}):\n"
+                f"Coordinates: lat {self.lat}, lon {self.lon}\n"
+                f"Weather ID: {self.weather_id}, Main: {self.main_weather}, Description: {self.description}\n"
+                f"Weather icon: {self.icon}\n"
+                f"Temperature: {self.temp}°C (Feels like: {self.feels_like}°C)\n"
+                f"Min Temp: {self.temp_min}°C, Max Temp: {self.temp_max}°C\n"
+                f"Pressure: {self.pressure} hPa, Humidity: {self.humidity}%\n"
+                f"Visibility: {self.visibility} m\n"
+                f"Wind: {self.wind_speed} m/s, Direction: {self.wind_deg}°, Gusts: {self.wind_gust} m/s\n"
+                f"Cloudiness: {self.cloudiness}%\n"
+                f"Sunrise: {self.sunrise}, Sunset: {self.sunset}\n"
+                f"Timezone: {self.timezone}, City ID: {self.id}, Response Code: {self.cod}")
+        
 
 #Solo PARA DEPURAR (ELIMINAR PARA ENTREGA )
 # Ejemplo de uso:
@@ -135,5 +217,5 @@ if __name__ == "__main__":
         "cod": 200
     }
     '''
-    weather_data = WeatherData(json.loads(example_json))
+    weather_data = Weather(json.loads(example_json))
     print(weather_data)
