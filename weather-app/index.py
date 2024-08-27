@@ -17,7 +17,7 @@ def get_destiny_data(route):
         destiny_data.append(row)
     return destiny_data
 
-data = get_destiny_data('./weather-app/datalist/datos_destinos.csv')
+data = get_destiny_data('./weather-app/static/datalist/datos_destinos.csv')
 
 # Recibe una lista de listas con 3 elementos los
 # cuales son: ciudad, iata, aeropuerto
@@ -65,7 +65,7 @@ def home():
                     weather_data['city'] = weather.get_weather(city)
                 else:
                     weather_data['error'] = "Código IATA no válido."
-        cache.update('./cache.json', weather_data['city'])
+        cache.update('./weather-app/static/json/cache.json', weather_data['city'])
     return render_template('index.html', weather_data=weather_data)
 
 if __name__ == '__main__':
@@ -73,4 +73,5 @@ if __name__ == '__main__':
     thread = Thread(target=weather.update_weather, args=[data])
     thread.start()
     app.run(debug=True)
+    # Detiene al hilo que actualiza las temperaturas de los destinos
     weather.STOP_FLAG = False
