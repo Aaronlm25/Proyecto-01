@@ -22,5 +22,5 @@ def update_weather(destiny_data):
         time.sleep(1.2)
         weather = get_weather(data[0])
         if weather:
-            cache.update('./weather-app/static/json/cache.json', weather)
+            cache.update('./weather_app/static/json/cache.json', weather)
 
