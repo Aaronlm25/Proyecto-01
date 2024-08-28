@@ -12,7 +12,7 @@ def get_data(file_route):
         if os.path.getsize(file_route) != 0:
             raw_data = json.load(file)
     for weather in raw_data:
-        data[weather['name']] =  weather
+        data[weather['name']] = weather
     return data
 
 def update(file_route, weather):
@@ -32,7 +32,7 @@ def update(file_route, weather):
             raw_data.append(weather)
             override = True
             break
-    if not raw_data or not override:
+    if not (raw_data and override):
         raw_data.append(weather)
     with open(file_route, 'w') as file:
         json.dump(raw_data, file, indent=4)

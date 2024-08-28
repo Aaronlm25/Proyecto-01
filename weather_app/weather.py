@@ -5,8 +5,8 @@ class Weather:
         self.json_data = json_data
         
         # Coordenadas
-        self.lat = self.json_data['coord']['lat']
-        self.lon = self.json_data['coord']['lon']
+        self.latitude = self.json_data['coord']['lat']
+        self.longitude = self.json_data['coord']['lon']
         
         # Información del clima
         self.weather_id = self.json_data['weather'][0]['id']
@@ -69,92 +69,10 @@ class Weather:
                 return icon
 
         return "default_icon.svg"  # Por si no se encuentra un icono correspondiente
-
-    
-    #getters
-    #cords
-    def get_lat(self):
-        return self.lat
-    
-    def get_lon(self):
-        return self.lon
-    
-    #clima
-    def get_weather_id(self):
-        return self.weather_id
-    
-    def get_main_weather(self):
-        return self.main_weather
-    
-    def get_description(self):
-        return self.description
-    
-    def get_icon(self):
-        return self.icon
-    
-    #stats
-    def get_temp(self):
-        return self.temp
-    
-    def get_feels_like(self):
-        return self.feels_like
-    
-    def get_temp_max(self):
-        return self.temp_max
-    
-    def get_temp_min(self):
-        return self.temp_min
-    
-    def get_pressure(self):
-        return self.pressure
-    
-    def get_humidity(self):
-        return self.humidity
-    
-    #visibilidad
-    def get_visibility(self):
-        return self.visibility
-    
-    #viento
-    def get_wind_speed(self):
-        return self.wind_speed
-    
-    def get_wind_deg(self):
-        return self.wind_deg
-    
-    def get_wind_gust(self):
-        return self.icon
-        
-    #nubes
-    def get_cloudiness(self):
-        return self.cloudiness
-    
-    #pais
-    def get_country(self):
-        return self.country
-    
-    def get_sunrise(self):
-        return self.sunrise
-    
-    def get_sunset(self):
-        return self.sunset
-    
-    def get_name(self):
-        return self.name
-    
-    def get_timezone(self):
-        return self.timezone
-    
-    def get_id(self):
-        return self.id
-    
-    def get_cod(self):
-        return self.cod
-    
     
     def __str__(self):
         return (f"Weather in {self.name} ({self.country}):\n"
-                f"Coordinates: lat {self.lat}, lon {self.lon}\n"
+                f"Coordinates: lat {self.latitude}, lon {self.longitude}\n"
                 f"Weather ID: {self.weather_id}, Main: {self.main_weather}, Description: {self.description}\n"
                 f"Weather icon: {self.icon}\n"
                 f"Temperature: {self.temp}°C (Feels like: {self.feels_like}°C)\n"
