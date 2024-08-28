@@ -14,7 +14,7 @@ def get_destiny_data(route):
 # Recibe una lista de listas con 3 elementos los
 # cuales son: ciudad, iata, aeropuerto
 def get_city(iata):
-    for list in data:
+    for list in get_destiny_data('./weather_app/static/datalist/datos_destinos.csv'):
         if list[1] == iata:
             return list[0]
     return None
