@@ -1,81 +1,79 @@
 import os
 import sys 
-sys.path.append(os.path.abspath("./weather_app"))
+import json
 import pytest
 import random
-import json
-import cache
+sys.path.append(os.path.abspath("./weather_app"))
+from cache import Cache
 
-dir = './temp/cache.json'
+path = './weather_app/static/test/temp/cache.json'
 
-def test_get_data_empty_file():
-    data = cache.get_data(dir)
-    assert data == {}
+@pytest.fixture
+def sample_cache():
+    return Cache(path)
 
-def test_update_empty_file():
-    size = random.randint(1, 10)
-    remove_cache()
-    data = example_data(size)
-    for json_object in data:
-            cache.update(json_object)
-    written_data = cache.get_data(dir)
-    assert len(written_data) == size
+@pytest.fixture
+def clean():
+    if os.path.exists(path):
+         os.remove(path)
 
+def json_file():
+    json_file = []
+    with open(path, 'r') as file:
+        if os.path.getsize(path) != 0:
+            json_file = json.load(file)
+    return json_file
 
-def remove_cache():
-    if os.path.exists(dir):
-         os.remove(dir)
+def to_json(weather_records):
+    json_file = []
+    for value in weather_records.values():
+        json_file.append(value)
+    return json_file
 
-def example_data(size):
-    example_json = '''
-        {
-        "coord": {
-            "lon": -69.1956,
-            "lat": 9.5545
-        },
-        "weather": [
-            {
-                "id": 804,
-                "main": "Clouds",
-                "description": "nubes",
-                "icon": "04d"
-            }
-        ],
-        "base": "stations",
-        "main": {
-            "temp": 22.71,
-            "feels_like": 23.6,
-            "temp_min": 22.71,
-            "temp_max": 22.71,
-            "pressure": 1014,
-            "humidity": 98,
-            "sea_level": 1014,
-            "grnd_level": 989
-        },
-        "visibility": 10000,
-        "wind": {
-            "speed": 1.7,
-            "deg": 190,
-            "gust": 3.7
-        },
-        "clouds": {
-            "all": 100
-        },
-        "dt": 1724620125,
-        "sys": {
-            "country": "VE",
-            "sunrise": 1724581701,
-            "sunset": 1724626174
-        },
-        "timezone": -14400,
-        "id": 3649833,
-        "name": "Acarigua",
-        "cod": 200
-    }
-    '''
+def sample_data_adjoint(size):
     data = []
     for x in range(size):
-       data.append(json.loads(example_json))
+       data.append({"name": x})
+       data.append({"name": x})
     return data
+
+def sample_data_disjoint(size):
+    data = []
+    for x in range(size):
+       data.append({"name": x})
+    return data
+
+def test_get_data_empty_file(clean, sample_cache):
+    sample_cache.stop()
+    assert sample_cache.weather_records == {}
+    assert json_file() == [] 
+
+def test_update_empty_file(clean, sample_cache):
+    size = random.randint(1, 10)
+    data_types = (sample_data_adjoint(size) , sample_data_disjoint(size))
+    for data in data_types:
+        for json_object in data:
+            sample_cache.update(json_object)
+        written_data = sample_cache.weather_records
+        assert len(written_data) == size
+    sample_cache.stop()
+    assert json_file() == to_json(sample_cache.weather_records)
+
+
+def test_update_large(clean, sample_cache):
+    size = random.randint(100, 1000)
+    data_types = (sample_data_adjoint(size) , sample_data_disjoint(size))
+    for data in data_types:
+        for json_object in data:
+            sample_cache.update(json_object)
+        written_data = sample_cache.weather_records
+        assert len(written_data) == size
+    sample_cache.stop()
+    assert json_file() == to_json(sample_cache.weather_records)
+
+def test_directory_creation(clean, sample_cache):
+    assert os.path.exists(path)
+
+
     
     
