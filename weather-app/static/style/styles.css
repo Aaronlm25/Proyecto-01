@@ -8,6 +8,42 @@ body {
   min-height: 100vh;
 }
 
+.info {
+  width: 75%;
+  font-size: larger;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-size: larger;
+}
+
+.input button {
+  margin-left: 20px;
+}
+
+.input input {
+  width: 250px;
+  height: 20px;
+}
+
+#menu {
+  border: none;
+  padding-bottom: 15px;
+  font-size: x-large;
+  background: linear-gradient(to bottom, #1e3b8a00, #2564eb00); 
+}
+
+#menu:hover{
+  margin-bottom: 1px white;
+}
+
 .text_box {
   color: rgb(218, 218, 233);
   text-align: center;
