@@ -1,10 +1,11 @@
 import autocorrect
-import cache
 import weather_manager as weather
 import static.python.gather as gatherer
-from threading import Thread
+from weather import Weather
+from cache import Cache
 from flask import Flask, render_template, request
 
+weather_cache = Cache('./weather_app/static/json/cache.json')
 app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -23,7 +24,6 @@ def home():
         city = request.form.get('city')
         iata_code = request.form.get('iata_code')
         flight_number = request.form.get('flight_number')
-        
         if flight_number:
             flight_info = gatherer.get_flight_info(flight_number)
             if flight_info:
@@ -38,24 +38,20 @@ def home():
                     weather_data['error'] = "No se pudo obtener el clima para una o ambas ciudades. Por favor, verifica el número de vuelo."
             else:
                 weather_data['error'] = "Número de vuelo no válido."
-        else:
+        elif city:
+            weather_data['city'] = weather.get_weather(autocorrect.correct(city))
+        elif iata_code:
+            city = gatherer.get_city(iata_code)
             if city:
-                weather_data['city'] = weather.get_weather(autocorrect.correct(city))
-            elif iata_code:
-                city = gatherer.get_city(iata_code)
-                if city:
-                    weather_data['city'] = weather.get_weather(city)
-                else:
-                    weather_data['error'] = "Código IATA no válido."
-        cache.update('./weather_app/static/json/cache.json', weather_data.get('city', {}))
+                weather_data['city'] = weather.get_weather(city)
+            else:
+                weather_data['error'] = "Código IATA no válido."
+        weather_cache.update(weather_data['city'])
     
     return render_template('index.html', weather_data=weather_data)
 
 if __name__ == '__main__':
-    data = gatherer.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
-    # Actualiza constantemente las temperaturas de todos los destinos
-    thread = Thread(target=weather.update_weather, args=[data])
-    thread.start()
+    weather_cache.start()
     app.run(debug=True)
-    # Detiene al hilo que actualiza las temperaturas de los destinos
-    weather.STOP_EVENT.set()
+    weather_cache.stop()
+

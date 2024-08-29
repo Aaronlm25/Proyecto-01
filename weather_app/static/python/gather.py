@@ -1,17 +1,6 @@
 import csv
 import random
 import string
-# Obtiene los datos de los destinos, de un archivo
-# .csv, el cual contiene por cada destino 3 datos:
-# ciudad, iata, aeropuerto
-def get_destiny_data(route):
-    destiny_data = []
-    with open(route, mode='r') as file:
-        reader = csv.reader(file)
-        data = list(reader)
-    for row in data:
-        destiny_data.append(row)
-    return destiny_data
 
 # Recibe una lista de listas con 3 elementos los
 # cuales son: ciudad, iata, aeropuerto
@@ -22,19 +11,19 @@ def get_city(iata):
     return None
 
 # Lee los datos del archivo CSV
-def get_destiny_data(route):
+def get_destiny_data(path):
     destiny_data = []
-    with open(route, mode='r') as file:
+    with open(path, mode='r') as file:
         reader = csv.reader(file)
         next(reader)  # Salta el encabezado si existe
         destiny_data = list(reader)
     return destiny_data
 
 #lee los datos de vuelo del archivo cvs
-def load_flight_data(file_path):
+def load_flight_data(path):
     flight_data = {}
     try:
-        with open(file_path, mode='r') as file:
+        with open(path, mode='r') as file:
             reader = csv.reader(file)
             next(reader)  # Omitir la fila de encabezado si está presente
             for row in reader:
@@ -43,7 +32,7 @@ def load_flight_data(file_path):
                 arrival_iata = row[2]
                 flight_data[flight_number] = {'departure': departure_iata, 'arrival': arrival_iata}
     except FileNotFoundError:
-        print(f"Error: El archivo {file_path} no se encuentra.")
+        print(f"Error: El archivo {path} no se encuentra.")
     return flight_data
 
 #lee los datos del archivo .txt

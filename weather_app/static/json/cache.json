@@ -1,1 +1,273 @@
-{"coord": {"lon": -9.5982, "lat": 30.4202}, "weather": [{"id": 800, "main": "Clear", "description": "cielo claro", "icon": "01n"}], "base": "stations", "main": {"temp": 20.25, "feels_like": 20.5, "temp_min": 20.25, "temp_max": 20.25, "pressure": 1013, "humidity": 83, "sea_level": 1013, "grnd_level": 996}, "visibility": 10000, "wind": {"speed": 2.79, "deg": 126, "gust": 2.52}, "clouds": {"all": 0}, "dt": 1724886267, "sys": {"type": 1, "id": 2393, "country": "MA", "sunrise": 1724912023, "sunset": 1724958311}, "timezone": 3600, "id": 2561668, "name": "Agadir", "cod": 200}
+[
+    {
+        "coord": {
+            "lon": 10.2108,
+            "lat": 56.1567
+        },
+        "weather": [
+            {
+                "id": 803,
+                "main": "Clouds",
+                "description": "muy nuboso",
+                "icon": "04n"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 18.15,
+            "feels_like": 18.32,
+            "temp_min": 17,
+            "temp_max": 18.25,
+            "pressure": 1014,
+            "humidity": 88,
+            "sea_level": 1014,
+            "grnd_level": 1009
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 3.95,
+            "deg": 143,
+            "gust": 10.59
+        },
+        "clouds": {
+            "all": 51
+        },
+        "dt": 1724901701,
+        "sys": {
+            "type": 2,
+            "id": 2001568,
+            "country": "DK",
+            "sunrise": 1724905079,
+            "sunset": 1724955749
+        },
+        "timezone": 7200,
+        "id": 2624652,
+        "name": "Aarhus",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": 48.3043,
+            "lat": 30.3392
+        },
+        "weather": [
+            {
+                "id": 800,
+                "main": "Clear",
+                "description": "cielo claro",
+                "icon": "01d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 29.97,
+            "feels_like": 29.33,
+            "temp_min": 29.97,
+            "temp_max": 29.97,
+            "pressure": 1001,
+            "humidity": 37,
+            "sea_level": 1001,
+            "grnd_level": 1000
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 2.06,
+            "deg": 320
+        },
+        "clouds": {
+            "all": 0
+        },
+        "dt": 1724901702,
+        "sys": {
+            "type": 1,
+            "id": 7439,
+            "country": "IR",
+            "sunrise": 1724898125,
+            "sunset": 1724944422
+        },
+        "timezone": 12600,
+        "id": 145459,
+        "name": "\u0100b\u0101d\u0101n",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": 91.4292,
+            "lat": 53.7156
+        },
+        "weather": [
+            {
+                "id": 800,
+                "main": "Clear",
+                "description": "cielo claro",
+                "icon": "01d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 18.01,
+            "feels_like": 17.64,
+            "temp_min": 18.01,
+            "temp_max": 18.01,
+            "pressure": 1016,
+            "humidity": 68,
+            "sea_level": 1016,
+            "grnd_level": 987
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 1,
+            "deg": 310
+        },
+        "clouds": {
+            "all": 0
+        },
+        "dt": 1724901704,
+        "sys": {
+            "type": 1,
+            "id": 8942,
+            "country": "RU",
+            "sunrise": 1724885884,
+            "sunset": 1724935968
+        },
+        "timezone": 25200,
+        "id": 1512236,
+        "name": "Abakan",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": -2.0981,
+            "lat": 57.1437
+        },
+        "weather": [
+            {
+                "id": 800,
+                "main": "Clear",
+                "description": "cielo claro",
+                "icon": "01n"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 8.27,
+            "feels_like": 6.08,
+            "temp_min": 8.27,
+            "temp_max": 9.74,
+            "pressure": 1008,
+            "humidity": 93,
+            "sea_level": 1008,
+            "grnd_level": 1002
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 3.6,
+            "deg": 200
+        },
+        "clouds": {
+            "all": 1
+        },
+        "dt": 1724901705,
+        "sys": {
+            "type": 1,
+            "id": 1440,
+            "country": "GB",
+            "sunrise": 1724907896,
+            "sunset": 1724958839
+        },
+        "timezone": 3600,
+        "id": 2657832,
+        "name": "Aberdeen",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": 42.5053,
+            "lat": 18.2164
+        },
+        "weather": [
+            {
+                "id": 804,
+                "main": "Clouds",
+                "description": "nubes",
+                "icon": "04d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 17.14,
+            "feels_like": 17.05,
+            "temp_min": 17.14,
+            "temp_max": 17.14,
+            "pressure": 1013,
+            "humidity": 82,
+            "sea_level": 1013,
+            "grnd_level": 810
+        },
+        "visibility": 8000,
+        "wind": {
+            "speed": 0,
+            "deg": 0
+        },
+        "clouds": {
+            "all": 85
+        },
+        "dt": 1724901708,
+        "sys": {
+            "type": 1,
+            "id": 7396,
+            "country": "SA",
+            "sunrise": 1724900115,
+            "sunset": 1724945215
+        },
+        "timezone": 10800,
+        "id": 110690,
+        "name": "Abh\u0101",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": 54.3667,
+            "lat": 24.4667
+        },
+        "weather": [
+            {
+                "id": 721,
+                "main": "Haze",
+                "description": "niebla",
+                "icon": "50d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 32.01,
+            "feels_like": 39.01,
+            "temp_min": 31.06,
+            "temp_max": 32.01,
+            "pressure": 999,
+            "humidity": 84,
+            "sea_level": 999,
+            "grnd_level": 999
+        },
+        "visibility": 3500,
+        "wind": {
+            "speed": 0.51,
+            "deg": 0
+        },
+        "clouds": {
+            "all": 88
+        },
+        "dt": 1724901709,
+        "sys": {
+            "type": 1,
+            "id": 7533,
+            "country": "AE",
+            "sunrise": 1724896976,
+            "sunset": 1724942662
+        },
+        "timezone": 14400,
+        "id": 292968,
+        "name": "Abu Dhabi",
+        "cod": 200
+    }
+]
