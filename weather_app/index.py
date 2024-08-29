@@ -9,10 +9,21 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     weather_data = {}
+
+    # Definir las rutas de los archivos
+    flight_data_file_path = './weather_app/static/datalist/datos_destinos_viajes.csv'
+    tickets_txt_file_path = './weather_app/static/tickets/tickets.txt'
+
+    # Cargar los datos de vuelo desde el archivo CSV
+    flight_data = weather.load_flight_data(flight_data_file_path)
+    # Guardar los datos de vuelo en el archivo TXT
+    weather.save_flight_data_to_txt(flight_data, tickets_txt_file_path)
+
     if request.method == 'POST':
         city = request.form.get('city')
         iata_code = request.form.get('iata_code')
         flight_number = request.form.get('flight_number')
+        
         if flight_number:
             flight_info = gatherer.get_flight_info(flight_number)
             if flight_info:
@@ -36,7 +47,8 @@ def home():
                     weather_data['city'] = weather.get_weather(city)
                 else:
                     weather_data['error'] = "Código IATA no válido."
-        cache.update('./weather_app/static/json/cache.json', weather_data['city'])
+        cache.update('./weather_app/static/json/cache.json', weather_data.get('city', {}))
+    
     return render_template('index.html', weather_data=weather_data)
 
 if __name__ == '__main__':
