@@ -39,7 +39,7 @@ def home():
             else:
                 weather_data['error'] = "Número de vuelo no válido."
         elif city:
-            weather_data['city'] = weather.get_weather(autocorrect.correct(city))
+            weather_data['city'] = weather.get_weather(city)
         elif iata_code:
             city = gatherer.get_city(iata_code)
             if city:
