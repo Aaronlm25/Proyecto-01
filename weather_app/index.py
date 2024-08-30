@@ -13,19 +13,19 @@ def home():
 
     # Definir las rutas de los archivos
     flight_data_file_path = './weather_app/static/datalist/datos_destinos_viajes.csv'
-    tickets_txt_file_path = './weather_app/static/tickets/tickets.txt'
 
     # Cargar los datos de vuelo desde el archivo CSV
     flight_data = weather.load_flight_data(flight_data_file_path)
-    # Guardar los datos de vuelo en el archivo TXT
-    weather.save_flight_data_to_txt(flight_data, tickets_txt_file_path)
 
+    #Solicitud a la web se obtienen los datos enviados a través del formulario HTML
     if request.method == 'POST':
         city = request.form.get('city')
         iata_code = request.form.get('iata_code')
         flight_number = request.form.get('flight_number')
+        #Por numero de vuelo
         if flight_number:
             flight_info = gatherer.get_flight_info(flight_number)
+            #Verificacion de datos
             if flight_info:
                 departure_city = gatherer.get_city(flight_info['departure'])
                 arrival_city = gatherer.get_city(flight_info['arrival'])
@@ -38,8 +38,10 @@ def home():
                     weather_data['error'] = "No se pudo obtener el clima para una o ambas ciudades. Por favor, verifica el número de vuelo."
             else:
                 weather_data['error'] = "Número de vuelo no válido."
+        #Por ciudad
         elif city:
             weather_data['city'] = weather.get_weather(city)
+        #Por IATA
         elif iata_code:
             city = gatherer.get_city(iata_code)
             if city:
