@@ -42,15 +42,8 @@ def get_destiny_data(path):
     return destiny_data
 
 #busca los datos del vuelo por su tiket
-def get_flight_info(flight_number):
-    """
-    Obtiene la información de un vuelo dado su número de vuelo.
-
-    Args:
-        flight_number (str): El número del vuelo.
-
-    Returns:
-        dict or None: Un diccionario con la información de salida y llegada, o None si el vuelo no existe.
-    """
-    return flight_data.get(flight_number.upper(), None)
-
+def buscar_vuelo(ticket):
+    if ticket in flight_data:
+        return flight_data[ticket]
+    else:
+        return f"No se encontró información para el ticket: {ticket}"

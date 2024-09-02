@@ -24,20 +24,21 @@ def home():
         flight_number = request.form.get('flight_number')
         #Por numero de vuelo
         if flight_number:
-            flight_info = gatherer.get_flight_info(flight_number)
-            #Verificacion de datos
-            if flight_info:
-                departure_city = gatherer.get_city(flight_info['departure'])
-                arrival_city = gatherer.get_city(flight_info['arrival'])
-                departure_weather = weather.get_weather(departure_city) if departure_city else None
-                arrival_weather = weather.get_weather(arrival_city) if arrival_city else None
-                if departure_weather and arrival_weather:
-                    weather_data['departure'] = departure_weather
-                    weather_data['arrival'] = arrival_weather
-                else:
-                    weather_data['error'] = "No se pudo obtener el clima para una o ambas ciudades. Por favor, verifica el número de vuelo."
+            flight_info = gatherer.buscar_vuelo(flight_number)
+            if isinstance(flight_info, dict):  # Asegúrate de que es un diccionario
+                departure = flight_info['departure']
+                arrival = flight_info['arrival']               
             else:
-                weather_data['error'] = "Número de vuelo no válido."
+                weather_data['error']= flight_info  # Mensaje de error si no se encontró el vuelo
+            
+            #Busca si la llegada o la salida es la ubicacion distinta de mexico
+            if departure == "MEX":
+                city=gatherer.get_city(departure)
+            else:
+                city=gatherer.get_city(arrival)
+            
+            weather_data['city']=weather.get_weather(city)
+               
         #Por ciudad
         elif city:
             weather_data['city'] = weather.get_weather(city)
