@@ -1,7 +1,45 @@
 import json
 
 class Weather:
+    """
+        Representa la información meteorológica para una ubicación específica.
+
+        Attributes:
+            json_data (dict): Datos meteorológicos en formato JSON.
+            latitude (float): Latitud de la ubicación.
+            longitude (float): Longitud de la ubicación.
+            weather_id (int): ID del clima.
+            main_weather (str): Descripción principal del clima.
+            description (str): Descripción detallada del clima.
+            icon (str): Nombre del archivo del icono asociado con el clima.
+            temp (float): Temperatura actual en grados Celsius.
+            feels_like (float): Sensación térmica en grados Celsius.
+            temp_min (float): Temperatura mínima en grados Celsius.
+            temp_max (float): Temperatura máxima en grados Celsius.
+            pressure (int): Presión atmosférica en hPa.
+            humidity (int): Humedad relativa en porcentaje.
+            visibility (int or None): Visibilidad en metros, o None si no está disponible.
+            wind_speed (float): Velocidad del viento en m/s.
+            wind_deg (int): Dirección del viento en grados.
+            wind_gust (float or None): Ráfagas del viento en m/s, o None si no está disponible.
+            cloudiness (int): Porcentaje de nubosidad.
+            country (str): Código del país.
+            sunrise (int): Hora del amanecer en formato de timestamp.
+            sunset (int): Hora del atardecer en formato de timestamp.
+            name (str): Nombre de la ciudad.
+            timezone (int or None): Desfase horario en segundos desde GMT, o None si no está disponible.
+            id (int or None): ID de la ciudad, o None si no está disponible.
+            cod (int or None): Código de respuesta del API, o None si no está disponible.
+        """
+        
     def __init__(self, json_data):
+        """
+        Inicializa la instancia de la clase Weather con datos meteorológicos.
+
+        Args:
+            json_data (dict): Datos meteorológicos en formato JSON.
+        """
+    
         self.json_data = json_data
         
         # Coordenadas
@@ -47,6 +85,11 @@ class Weather:
     def _determine_icon(self):
         """
         Determina el icono basado en el ID del clima.
+
+        Utiliza un diccionario que mapea los IDs de clima a los nombres de archivo de iconos correspondientes.
+        
+        Returns:
+            str: Nombre del archivo del icono asociado con el clima.
         """
         icon_map = {
             range(200, 233): "storm_icon.svg",         # Tormenta
@@ -71,6 +114,12 @@ class Weather:
         return "default_icon.svg"  # Por si no se encuentra un icono correspondiente
     
     def __str__(self):
+        """
+        Devuelve una representación en cadena de la instancia de la clase Weather.
+
+        Returns:
+            str: Información completa del clima en formato legible.
+        """
         return (f"Weather in {self.name} ({self.country}):\n"
                 f"Coordinates: lat {self.latitude}, lon {self.longitude}\n"
                 f"Weather ID: {self.weather_id}, Main: {self.main_weather}, Description: {self.description}\n"
@@ -84,56 +133,3 @@ class Weather:
                 f"Sunrise: {self.sunrise}, Sunset: {self.sunset}\n"
                 f"Timezone: {self.timezone}, City ID: {self.id}, Response Code: {self.cod}")
         
-
-#Solo PARA DEPURAR (ELIMINAR PARA ENTREGA )
-# Ejemplo de uso:
-if __name__ == "__main__":
-    # Simulación de un JSON obtenido de una API o archivo
-    example_json = '''
-    {
-        "coord": {
-            "lon": -69.1956,
-            "lat": 9.5545
-        },
-        "weather": [
-            {
-                "id": 804,
-                "main": "Clouds",
-                "description": "nubes",
-                "icon": "04d"
-            }
-        ],
-        "base": "stations",
-        "main": {
-            "temp": 22.71,
-            "feels_like": 23.6,
-            "temp_min": 22.71,
-            "temp_max": 22.71,
-            "pressure": 1014,
-            "humidity": 98,
-            "sea_level": 1014,
-            "grnd_level": 989
-        },
-        "visibility": 10000,
-        "wind": {
-            "speed": 1.7,
-            "deg": 190,
-            "gust": 3.7
-        },
-        "clouds": {
-            "all": 100
-        },
-        "dt": 1724620125,
-        "sys": {
-            "country": "VE",
-            "sunrise": 1724581701,
-            "sunset": 1724626174
-        },
-        "timezone": -14400,
-        "id": 3649833,
-        "name": "Acarigua",
-        "cod": 200
-    }
-    '''
-    weather_data = Weather(json.loads(example_json))
-    print(weather_data)
