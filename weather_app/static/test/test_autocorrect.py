@@ -50,6 +50,7 @@ def test_acurracy_basic(city_data):
         extra_letter = city[0:i] + '' + city[i]
         distorted.append(random.choice([missing_letter, extra_letter]))
     for x in range(5):
-        assert revise(distorted[x]) == city_data[x] 
+        similar = revise(distorted[x])
+        assert similar[0] == city_data[x] 
     
     

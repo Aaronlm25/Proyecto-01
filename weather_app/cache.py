@@ -25,8 +25,6 @@ class Cache:
         La ruta del archivo de cache
     """
     def __init__(self, path : str):
-        if Path(path).suffix != '.json':
-            raise InvalidCacheFileException('El archivo cache deber ser .json')
         self.path = path
         self.existance_insurer()
         # Todos los climas de las ciudades registradas
@@ -115,10 +113,10 @@ class Cache:
         """
         Se asegura de que la ruta y el archivo existan.
         """
+        file = Path(self.path)
+        if file.suffix != '.json':
+            raise InvalidCacheFileException('El archivo cache deber ser .json')
         # Asegúrate de que el directorio exista
-        if not os.path.exists(os.path.dirname(self.path)):
-            os.makedirs(os.path.dirname(self.path))
-        # Crear el archivo si no existe
-        if not os.path.isfile(self.path):
-            open(self.path, 'w').close()
-            self.weather_records = dict()
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.touch(exist_ok=True)
+    
