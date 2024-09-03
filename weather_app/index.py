@@ -1,6 +1,5 @@
 import autocorrect
 import weather_manager as weather
-import static.python.gather as gatherer
 from weather import Weather
 from cache import Cache
 from flask import Flask, render_template, request
@@ -22,33 +21,19 @@ def home():
         city = request.form.get('city')
         iata_code = request.form.get('iata_code')
         flight_number = request.form.get('flight_number')
+        
         #Por numero de vuelo
         if flight_number:
-            flight_info = gatherer.buscar_vuelo(flight_number)
-            if isinstance(flight_info, dict):  # Asegúrate de que es un diccionario
-                departure = flight_info['departure']
-                arrival = flight_info['arrival']               
-            else:
-                weather_data['error']= flight_info  # Mensaje de error si no se encontró el vuelo
-            
-            #Busca si la llegada o la salida es la ubicacion distinta de mexico
-            if departure == "MEX":
-                city=gatherer.get_city(departure)
-            else:
-                city=gatherer.get_city(arrival)
-            
-            weather_data['city']=weather.get_weather(city)
-               
+            weather_data=weather.seach_by_id(flight_number) 
+
         #Por ciudad
         elif city:
-            weather_data['city'] = weather.get_weather(city)
+            weather_data= weather.seach_by_city(city)
+        
         #Por IATA
         elif iata_code:
-            city = gatherer.get_city(iata_code)
-            if city:
-                weather_data['city'] = weather.get_weather(city)
-            else:
-                weather_data['error'] = "Código IATA no válido."
+            weather_data=weather.seach_by_iata(iata_code)
+        
         weather_cache.update(weather_data['city'])
     
     return render_template('index.html', weather_data=weather_data)
