@@ -2,25 +2,26 @@ import csv
 import random
 import string
 
-# Recibe una lista de listas con 3 elementos los
-# cuales son: ciudad, iata, aeropuerto
-def get_city(iata):
-    for list in get_destiny_data('./weather_app/static/datalist/datos_destinos.csv'):
-        if list[1] == iata:
-            return list[0]
-    return None
+# Ruta del archivo CSV que contiene los datos de los vuelos
+flight_data_file_path = './weather_app/static/datalist/vuelos.csv'
 
-# Lee los datos del archivo CSV
-def get_destiny_data(path):
-    destiny_data = []
-    with open(path, mode='r') as file:
-        reader = csv.reader(file)
-        next(reader)  # Salta el encabezado si existe
-        destiny_data = list(reader)
-    return destiny_data
-
-#lee los datos de vuelo del archivo cvs
 def load_flight_data(path):
+    """
+    Lee los datos de vuelos desde un archivo CSV y los carga en un diccionario.
+
+    El archivo CSV debe tener los datos en el siguiente formato:
+    flight_number, departure_iata, arrival_iata
+
+    Args:
+        path (str): Ruta del archivo CSV que contiene los datos de vuelos.
+
+    Returns:
+        dict: Un diccionario donde las claves son los números de vuelo y los valores
+              son diccionarios con la información de salida y llegada.
+              
+    Raises:
+        FileNotFoundError: Si el archivo especificado no se encuentra.
+    """
     flight_data = {}
     try:
         with open(path, mode='r') as file:
@@ -35,74 +36,60 @@ def load_flight_data(path):
         print(f"Error: El archivo {path} no se encuentra.")
     return flight_data
 
-#lee los datos del archivo .txt
-def save_flight_data_to_txt(flight_data, txt_file_path):
-    try:
-        # Leer el contenido existente del archivo
-        try:
-            with open(txt_file_path, mode='r') as file:
-                existing_data = file.readlines()
-        except FileNotFoundError:
-            existing_data = []
-        
-        # Preparar los nuevos datos para insertar al principio
-        new_data = [f"{flight_number}: Departure: {info['departure']}, Arrival: {info['arrival']}\n"
-                    for flight_number, info in flight_data.items()]
-        
-        # Escribir los nuevos datos seguidos por los datos existentes
-        with open(txt_file_path, mode='w') as file:
-            file.writelines(new_data + existing_data)
-    except IOError as e:
-        print(f"Error al escribir el archivo {txt_file_path}: {e}")
-
-#Genera los tikets
-def generate_ticket():
-    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
-
-#Genera los datos de el evuelo
-def generate_flight_data(route):
-    flight_data = {}
-    data = get_destiny_data(route)
-    tickets = set()  # Usamos un conjunto para evitar duplicados
-
-    for row in data:
-        if len(row) >= 2:
-            origin_iata = row[0]
-            destination_iata = row[1]
-            
-            # Genera un ticket único y asegúrate de que no esté repetido
-            ticket = generate_ticket()
-            while ticket in tickets:
-                ticket = generate_ticket()
-            tickets.add(ticket)
-            
-            flight_data[ticket] = {
-                'departure': origin_iata,
-                'arrival': destination_iata
-            }
-    
-    return flight_data
-
-# Ruta del archivo CSV que contiene los datos de los vuelos
-flight_data_file_path = './weather_app/static/datalist/datos_destinos_viajes.csv'
 # Cargar los datos de vuelo desde el archivo CSV
-flight_data = generate_flight_data(flight_data_file_path)
+flight_data = load_flight_data(flight_data_file_path)
 
-# Ruta del archivo TXT para guardar los tickets
-tickets_txt_file_path = './weather_app/static/tickets.txt'
-# Guardar los datos de vuelo en el archivo TXT
-save_flight_data_to_txt(flight_data, tickets_txt_file_path)
-
-#busca los datos del vuelo por su tiket
-def get_flight_info(flight_number):
+def get_city(iata):
     """
-    Obtiene la información de un vuelo dado su número de vuelo.
+    Obtiene el nombre de la ciudad basado en el código IATA del aeropuerto.
+
+    Lee los datos de un archivo CSV que contiene información de destinos.
 
     Args:
-        flight_number (str): El número del vuelo.
+        iata (str): Código IATA del aeropuerto.
 
     Returns:
-        dict or None: Un diccionario con la información de salida y llegada, o None si el vuelo no existe.
+        str: Nombre de la ciudad correspondiente al código IATA, o None si no se encuentra.
     """
-    return flight_data.get(flight_number.upper(), None)
+    for list in get_destiny_data('./weather_app/static/datalist/datos_destinos.csv'):
+        if list[1] == iata:
+            return list[0]
+    return None
 
+def get_destiny_data(path):
+    """
+    Lee los datos de destinos desde un archivo CSV y los carga en una lista.
+
+    El archivo CSV debe tener los datos en el siguiente formato:
+    city_name, iata_code, airport_name
+
+    Args:
+        path (str): Ruta del archivo CSV que contiene los datos de destinos.
+
+    Returns:
+        list: Una lista de listas, donde cada sublista contiene la información de una ciudad.
+    """
+    destiny_data = []
+    with open(path, mode='r') as file:
+        reader = csv.reader(file)
+        next(reader)  # Salta el encabezado si existe
+        destiny_data = list(reader)
+    return destiny_data
+
+def buscar_vuelo(ticket):
+    """
+    Busca la información del vuelo basado en el número de ticket.
+
+    Utiliza el diccionario de datos de vuelo cargado previamente.
+
+    Args:
+        ticket (str): Número del ticket de vuelo.
+
+    Returns:
+        dict or str: Un diccionario con la información del vuelo (salida y llegada)
+                     o un mensaje indicando que no se encontró información si el ticket no está en los datos.
+    """
+    if ticket in flight_data:
+        return flight_data[ticket]
+    else:
+        return f"No se encontró información para el ticket: {ticket}"
