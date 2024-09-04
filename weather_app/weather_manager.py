@@ -16,39 +16,19 @@ def get_weather(city):
         except requests.exceptions.RequestException as e:
             print(f"Error al obtener datos: {e}")
             return None
-
-#se usa para leer el archivo csv y los guarda
-def load_flight_data(file_path):
-    """
-    Carga datos de vuelos desde un archivo CSV y retorna un diccionario con los datos.
-    """
-    flight_data = {}
-    try:
-        with open(file_path, mode='r') as file:
-            reader = csv.reader(file)
-            next(reader)  # Omitir la fila de encabezado si está presente
-            for row in reader:
-                flight_number = row[0]
-                departure_iata = row[1]
-                arrival_iata = row[2]
-                flight_data[flight_number] = {'departure': departure_iata, 'arrival': arrival_iata}
-    except FileNotFoundError:
-        print(f"Error: El archivo {file_path} no se encuentra.")
-    return flight_data
-
-#Guarda todos los datos del csv leidos en un .txt
-def save_flight_data_to_txt(flight_data, txt_file_path):
-    """
-    Guarda los datos de vuelo en un archivo de texto.
-    """
-    try:
-        with open(txt_file_path, mode='w') as file:
-            for flight_number, info in flight_data.items():
-                file.write(f"{flight_number}: Departure: {info['departure']}, Arrival: {info['arrival']}\n")
-    except IOError as e:
-        print(f"Error al escribir el archivo {txt_file_path}: {e}")
         
 def seach_by_iata(iata_code):
+    """
+    Hace una peticion a la API segun un codigo IATA.
+
+    Args:
+        iata_code (str): Código IATA del aeropuerto.
+
+    Returns:
+        dict: Información del clima si el código IATA es válido.
+        dict: Error Código IATA no válido si no lo es.tr: Error Codigo IATA invalido si
+    """
+    
     weather_data={}
     city = gatherer.get_city(iata_code)
     if city:
@@ -58,24 +38,59 @@ def seach_by_iata(iata_code):
     return weather_data
         
 def seach_by_city(city):
-    weather_data={}
-    weather_data['city']=get_weather(city)
+    """
+    Hace una petición a la API según una ciudad.
+
+    Args:
+        city (str): Nombre de la ciudad.
+
+    Returns:
+        dict: Información del clima si la ciudad es válida.
+        dict: Error 'Ciudad no válida' si no lo es.
+    """
+    weather_data = {}
+    weather_info = get_weather(city)
+    
+    if weather_info:
+        if 'weather' in weather_info:
+            weather_data['city'] = weather_info
+        else:
+            weather_data['error'] = "Ciudad no válida."
+    else:
+        weather_data['error'] = "Error al obtener los datos del clima."
+    
     return weather_data
+
         
 def seach_by_id(flight_number):
-    weather_data={}
+    """
+    Realiza una búsqueda del clima para una ciudad en función del número de vuelo.
+
+    Args:
+        flight_number (str): Número de vuelo que se utilizará para buscar la información.
+
+    Returns:
+        dict: Información del clima para la ciudad de salida o llegada.
+              Si el vuelo no se encuentra, devuelve un mensaje de error.
+    """
+    weather_data = {}
+    
+    # Busca la información del vuelo utilizando el número de vuelo proporcionado.
     flight_info = gatherer.buscar_vuelo(flight_number)
-    if isinstance(flight_info, dict):  # Asegúrate de que es un diccionario
-        departure = flight_info['departure']
-        arrival = flight_info['arrival']               
+    
+    # Verifica si 'flight_info' es un diccionario para asegurarse de que la búsqueda fue exitosa.
+    if isinstance(flight_info, dict):  
+        departure = flight_info['departure']  
+        arrival = flight_info['arrival']      
     else:
-        weather_data['error']= flight_info  # Mensaje de error si no se encontró el vuelo
-            
-        #Busca si la llegada o la salida es la ubicacion distinta de mexico
+        weather_data['error'] = flight_info
+        return weather_data  
+    
     if departure == "MEX":
-        city=gatherer.get_city(departure)
+        city = gatherer.get_city(departure)
     else:
-        city=gatherer.get_city(arrival)
-            
-    weather_data['city']=get_weather(city)
+        city = gatherer.get_city(arrival)
+    
+    weather_data['city'] = get_weather(city)
+    
     return weather_data
