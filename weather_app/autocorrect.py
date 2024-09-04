@@ -2,7 +2,6 @@ import unidecode
 import pandas as pd
 import Levenshtein as lev
 
-
 def revise(user_ubication):
     
     ubication = unidecode.unidecode(user_ubication).lower()

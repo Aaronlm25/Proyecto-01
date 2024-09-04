@@ -1,5 +1,4 @@
 import requests
-import csv
 import threading
 import static.python.gather as gatherer
 from weather import Weather
@@ -55,7 +54,7 @@ def search_by_id(flight_number):
         Weather: Administrador de la informacion del clima
     """
     # Busca la información del vuelo utilizando el número de vuelo proporcionado.
-    flight_info = gatherer.buscar_vuelo(flight_number)
+    flight_info = gatherer.search_flight(flight_number)
     # Verifica si 'flight_info' es un diccionario para asegurarse de que la búsqueda fue exitosa.
     if isinstance(flight_info, dict):  
         departure = flight_info['departure']  
