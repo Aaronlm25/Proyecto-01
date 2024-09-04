@@ -47,10 +47,13 @@ def test_acurracy_basic(city_data):
     for city in city_data:
         i = random.randint(1,len(city) - 2)
         missing_letter = city[0:i] + '' + city[i + 1:]   
-        extra_letter = city[0:i] + '' + city[i]
+        extra_letter = city[0:i] + '' + city[i:]
         distorted.append(random.choice([missing_letter, extra_letter]))
     for x in range(5):
         similar = revise(distorted[x])
         assert similar[0] == city_data[x] 
+    assert revise('chine') == []
+    assert revise('afsdb')
+    assert revise('')
     
     

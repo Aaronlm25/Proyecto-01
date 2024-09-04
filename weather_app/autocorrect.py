@@ -14,7 +14,7 @@ def revise(user_ubication):
         list: contiene las 5 palabras con mayor indice de coincidencia
     """    
     # Ruta al archivo CSV
-    archivo_csv = './static/datalist/ciudades.csv'
+    archivo_csv = './weather_app/static/datalist/ciudades.csv'
     #Diccionario col las coincidencias e indice de coincidencia
     coincidences = {}
     # Leer el archivo CSV
