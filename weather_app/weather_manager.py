@@ -1,10 +1,11 @@
 import requests
 import threading
-import static.python.gather as gatherer
+import static.python.gather as data_collector
 from weather import Weather
 
 KEY = 'a3117bc0d7c113aba1f25b2fb28748e1'
 LOCK = threading.Lock()
+
 def get_weather(city):
     # Evita que se hagan dos peticiones al mismo tiempo pues esto es motivo de baneo
     with LOCK:
@@ -27,7 +28,7 @@ def search_by_iata(iata_code):
     Returns:
         Weather: Administrador de la informacion del clima
     """
-    city = gatherer.get_city(iata_code)
+    city = data_collector.get_city(iata_code)
     return Weather(get_weather(city))
         
 def search_by_city(city):
@@ -54,7 +55,7 @@ def search_by_id(flight_number):
         Weather: Administrador de la informacion del clima
     """
     # Busca la información del vuelo utilizando el número de vuelo proporcionado.
-    flight_info = gatherer.search_flight(flight_number)
+    flight_info = data_collector.search_flight(flight_number)
     # Verifica si 'flight_info' es un diccionario para asegurarse de que la búsqueda fue exitosa.
     if isinstance(flight_info, dict):  
         departure = flight_info['departure']  
@@ -62,7 +63,7 @@ def search_by_id(flight_number):
     else:
         return None  
     if departure == "MEX":
-        city = gatherer.get_city(departure)
+        city = data_collector.get_city(departure)
     else:
-        city = gatherer.get_city(arrival)
+        city = data_collector.get_city(arrival)
     return Weather(get_weather(city))
