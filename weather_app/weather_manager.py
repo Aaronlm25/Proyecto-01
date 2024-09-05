@@ -92,7 +92,7 @@ def search_by_id(flight_number, weather_cache):
         flight_weather (tuple): Contiene la informacion del clima del lugar de destino y de partida 
                                 de un vuelo.
     """
-    flight_weather = ({}, {})
+    flight_weather = ()
     # Busca la información del vuelo utilizando el número de vuelo proporcionado.
     flight_info = data_collector.search_flight(flight_number)
     # Verifica si 'flight_info' es un diccionario para asegurarse de que la búsqueda fue exitosa.
@@ -100,8 +100,7 @@ def search_by_id(flight_number, weather_cache):
         departure = data_collector.get_city(flight_info['departure'])  
         arrival = data_collector.get_city(flight_info['arrival'])
         # ojo json_data puede ser None manejar excepciones
-        flight_weather[0] = get_weather(departure)
-        flight_weather[1] = get_weather(arrival)
-    determine_icon(flight_weather[0])
-    determine_icon(flight_weather[1])
+        flight_weather = (get_weather(departure), get_weather(arrival))
+        determine_icon(flight_weather[0])
+        determine_icon(flight_weather[1])
     return flight_weather
