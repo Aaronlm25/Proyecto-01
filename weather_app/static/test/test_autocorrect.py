@@ -53,7 +53,7 @@ def test_acurracy_basic(city_data):
         for x in range(5):
             similar = revise(distorted[x], .9)
             assert city_data[x] in similar
-    distorted = []
+        distorted = []
     assert revise('chine', .9) == []
     assert revise('afsdb', .9) == []
     assert revise('', .9) == []
