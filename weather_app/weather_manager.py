@@ -58,8 +58,8 @@ def search_by_iata(iata_code, weather_cache):
     Returns:
         weather: Informacion del clima.
     """
-    weather = get_weather(city)
     city = data_collector.get_city(iata_code)
+    weather = get_weather(city)
     # ojo json_data puede ser None manejar excepciones
     determine_icon(weather)
     return weather
