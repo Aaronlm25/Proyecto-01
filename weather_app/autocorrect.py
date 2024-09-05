@@ -1,37 +1,29 @@
 import Levenshtein as lev
 import csv
+import unidecode as ucode
 
-def revise(user_ubication, coincidence_index):
-    """
-    Funcion para correguir la entrada del usuario
+def extract_column(file_path, ubication):
+    """Funcion para extraer una columna del .csv
+
     Args:
-        user_ubication (String): Ubicacion de la cual se desea conocer el clima
-        coincidence_index (int): Indice que se desea poner como condicion para las comparaciones 
+        file_path (str): ruta hacia el .csv
+        ubication (str): ubicacion de la cual se desea consultar el clima
 
     Returns:
-        list: contiene las 5 palabras con mayor indice de coincidencia
+        list: columna a la que pertenece la ubicacion
     """
-    ubication = user_ubication.lower()
-    file_path = './weather_app/static/datalist/ciudades.csv'
-    
+    if len(ubication) == 0:
+        return []
+    column = []
     with open(file_path, mode='r') as cities_file:
-            reader = csv.DictReader(cities_file)
-            first_row = next(reader)
-            if len(ubication)== 0 or ubication[0] not in first_row:
-                return []
-            column = [row[ubication[0]] for row in reader]
-    
-    coincidences = {}
-    
-    for x in column:
-        levenshtein_index  = lev.ratio(ubication, x)
-        if levenshtein_index >= coincidence_index:
-            if levenshtein_index not in coincidences:
-                coincidences[levenshtein_index] = set()
-            coincidences[levenshtein_index].add(x)
-    ordered_coincidences = organize(coincidences)
-    
-    return first_n(ordered_coincidences, 5)
+        reader = csv.DictReader(cities_file)
+        headers = reader.fieldnames
+        if ubication[0] in headers:
+            for row in reader:
+                column.append(row[ubication[0]])
+        else:
+            return []
+    return column
 
 def organize(similar_locations):
     """
@@ -64,3 +56,30 @@ def first_n(similar, n):
                 first_n.append(item)
                 
     return first_n
+
+def revise(user_ubication, coincidence_index):
+    """
+    Funcion para correguir la entrada del usuario
+    Args:
+        user_ubication (String): Ubicacion de la cual se desea conocer el clima
+        coincidence_index (int): Indice que se desea poner como condicion para las comparaciones 
+
+    Returns:
+        list: contiene las 5 palabras con mayor indice de coincidencia
+    """
+    ubication = ucode.unidecode(user_ubication).lower()
+    file_path = './weather_app/static/datalist/ciudades.csv'    
+    
+    column = extract_column(file_path, ubication)
+    
+    coincidences = {}
+    
+    for x in column:
+        levenshtein_index  = lev.ratio(ubication, x)
+        if levenshtein_index >= coincidence_index:
+            if levenshtein_index not in coincidences:
+               coincidences[levenshtein_index] = set()
+            coincidences[levenshtein_index].add(x)
+    ordered_coincidences = organize(coincidences)
+    
+    return first_n(ordered_coincidences, 5)

@@ -74,7 +74,7 @@ def search_by_city(city, weather_cache):
     Returns:
         weather: Informacion del clima.
     """
-    similar = revise(city, 0.9)
+    similar = revise(city, 0.7)
     # deberia lanzar una excepcion
     weather = get_weather(similar[0] if len(similar) != 0 else city)
     # ojo json_data puede ser None manejar excepciones
