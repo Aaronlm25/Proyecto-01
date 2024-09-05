@@ -36,7 +36,8 @@ python3 -m venv venv
 
 Activar el entorno virtual:
 
-    ```En Ubuntu y Fedora:
+En Ubuntu y Fedora:
+    ```bash
     source venv/bin/activate
     ```
 
@@ -46,8 +47,8 @@ Instale las dependencias necesarias utilizando pip. Asegúrese de que el entorno
 En la carpeta debe de existir un archivo llamado requirements.txt
 En el se encuentra todas las dependencias necesarias para el uso de la pagina web.
 
-```Instale las dependencias con:
-
+Instale las dependencias con:
+```bash
 pip install -r requirements.txt
 ```
 
@@ -55,7 +56,7 @@ pip install -r requirements.txt
 
 Asegúrese de que los archivos necesarios para el funcionamiento de la aplicación estén en los directorios correctos.
 Debe tener la siguiente estructura:
-```
+```bash
 weather_app/
 
     static/
@@ -75,7 +76,7 @@ weather_app/
 
 Ejecute la pagina web con el siguiente comando:
 
-```
+```bash
 python3 weather_app/index.py
 ```
 
