@@ -1,9 +1,7 @@
 import csv
-import random
-import string
 
 # Ruta del archivo CSV que contiene los datos de los vuelos
-flight_data_file_path = './weather_app/static/datalist/vuelos.csv'
+FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
 
 def load_flight_data(path):
     """
@@ -18,9 +16,6 @@ def load_flight_data(path):
     Returns:
         dict: Un diccionario donde las claves son los números de vuelo y los valores
               son diccionarios con la información de salida y llegada.
-              
-    Raises:
-        FileNotFoundError: Si el archivo especificado no se encuentra.
     """
     flight_data = {}
     try:
@@ -37,7 +32,7 @@ def load_flight_data(path):
     return flight_data
 
 # Cargar los datos de vuelo desde el archivo CSV
-flight_data = load_flight_data(flight_data_file_path)
+flight_data = load_flight_data(FLIGHT_DATA_PATH)
 
 def get_city(iata):
     """
@@ -76,7 +71,7 @@ def get_destiny_data(path):
         destiny_data = list(reader)
     return destiny_data
 
-def buscar_vuelo(ticket):
+def search_flight(ticket):
     """
     Busca la información del vuelo basado en el número de ticket.
 

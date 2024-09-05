@@ -40,27 +40,27 @@
       
       <!-- Verifica si se ha recibido la información del clima -->
       <div class="cards">
-      {% if weather_data.city %} 
+      {% if weather_data %} 
         <div class="card weather-card">
-          <h2 class="city-name">Ciudad: {{ weather_data.city['name'] }}</h2>
-          <h1 class="temperature">{{ weather_data.city['main']['temp'] }}°C</h1>
+          <h2 class="city-name">Ciudad: {{ weather_data['name'] }}</h2>
+          <h1 class="temperature">{{ weather_data['main']['temp'] }}°C</h1>
           <div class="weather-info">
             <img
               class="weather-icon"
               src="https://img.icons8.com/3d-fluency/94/storm.png"
               alt="Weather Icon"
             />
-            <p class="weather-description">{{ weather_data.city['weather'][0]['description'] | capitalize }}</p>
+            <p class="weather-description">{{ weather_data['weather'][0]['description'] | capitalize }}</p>
           </div>
           <div class="stats">
             <article class="stat">
               <img class="stat-icon" src="{{ url_for('static', filename='svg/humedad.svg') }}" alt="IMG-Humedad" />
-              <p class="stat-value">{{ weather_data.city['main']['humidity'] }}%</p>
+              <p class="stat-value">{{ weather_data['main']['humidity'] }}%</p>
               <p class="stat-label">Humedad</p>
             </article>
             <article class="stat">
               <img class="stat-icon" src="{{ url_for('static', filename='svg/viento.svg') }}" alt="IMG-Viento" />
-              <p class="stat-value">{{ weather_data.city['wind']['speed'] }} m/s</p>
+              <p class="stat-value">{{ weather_data['wind']['speed'] }} m/s</p>
               <p class="stat-label">Velocidad de viento</p>
             </article>
           </div>

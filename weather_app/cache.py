@@ -3,7 +3,7 @@ import json
 import time
 import threading
 import weather_manager
-import static.python.gather as gatherer
+import static.python.gather as data_collector
 from threading import Thread
 from pathlib import Path
 
@@ -19,8 +19,7 @@ class Cache:
     """
     Clase para manejar el cache de los climas
 
-    Atributo:
-    ---------
+    Args:
     path : str
         La ruta del archivo de cache
     """
@@ -37,8 +36,7 @@ class Cache:
         Obtiene el cache como un diccionario cuyas llaves son los nombres de las 
         ciudades y los valores son objetos json
 
-        Regresa
-        -------
+        Returns
             self.weather_records: Un diccionario con todos los climas de las ciudades registradas
         """
         self.existance_insurer()
@@ -57,8 +55,7 @@ class Cache:
         """
         Actualiza el clima de una sola ciudad
 
-        Parametros
-        ----------
+        Args:
             weather : objeto json que contiene informacion del clima de una ciudad
         """
         name = weather['name']
@@ -69,8 +66,7 @@ class Cache:
         Proceso en segundo plano que hace las peticiones de los climas de las 
         distintas ciudades registradas.
 
-        Parametros
-        ----------
+        Returns:
             destiny_data: lista de las ciudades registradas cada elemento es una lista
                           de tamano 3 que contiene:
                           [0] : Nombre de la ciudad
@@ -92,7 +88,7 @@ class Cache:
         Comienza el proceso del cache y las peticiones de los climas.
         """
         # lista de las ciudades registradas
-        data = gatherer.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
+        data = data_collector.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
         thread = Thread(target=self.update_weather, args=[data])
         thread.start()
 
