@@ -106,4 +106,3 @@ Puede acceder a esta URL en su navegador para utilizar la aplicación.
 ### 6. Detener la Aplicación
 
 Para detener la aplicación Flask, presione Ctrl+C en la terminal donde está ejecutando la aplicación.
-
