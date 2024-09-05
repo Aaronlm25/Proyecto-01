@@ -9,6 +9,8 @@ LOCK = threading.Lock()
 def get_weather(city):
     # Evita que se hagan dos peticiones al mismo tiempo pues esto es motivo de baneo
     with LOCK:
+        if not isinstance(city, str):
+            return None
         try:
             url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
             response = requests.get(url)
@@ -40,14 +42,20 @@ def determine_icon(json_data): # faltan implementar los svg
         802: "clouds_icon.svg",                    # Nubes
         range(803, 805): "cloudy_icon.svg"         # Nublado
     }
-    weather_id = json_data['weather'][0]['id']
-    icon = 'default_icon.svg'
-    for key in icon_map.keys():
-        if weather_id == key or (isinstance(key, range) and weather_id in key):
-            icon = icon_map[key]
-            break
-    json_data['weather'][0]['icon'] = icon
-        
+    if not isinstance(json_data, dict):
+        return
+    
+    try:
+        weather_id = json_data['weather'][0]['id']
+        icon = 'default_icon.svg'
+        for key in icon_map.keys():
+            if weather_id == key or (isinstance(key, range) and weather_id in key):
+                icon = icon_map[key]
+                break
+        json_data['weather'][0]['icon'] = icon
+    except KeyError as e:
+        print(f"Error: Faltan claves en los datos del clima: {e}")
+
 def search_by_iata(iata_code, weather_cache):
     """
     Hace una peticion a la API segun un codigo IATA.
@@ -58,10 +66,16 @@ def search_by_iata(iata_code, weather_cache):
     Returns:
         weather: Informacion del clima.
     """
+    if not isinstance(iata_code, str):
+        return None
+    
     city = data_collector.get_city(iata_code)
+    if not city:
+        return None
+    
     weather = get_weather(city)
-    # ojo json_data puede ser None manejar excepciones
-    determine_icon(weather)
+    if weather:
+        determine_icon(weather)
     return weather
         
 def search_by_city(city, weather_cache):
@@ -74,11 +88,16 @@ def search_by_city(city, weather_cache):
     Returns:
         weather: Informacion del clima.
     """
+    if not isinstance(city, str):
+        return None
+    
     similar = revise(city, 0.7)
-    # deberia lanzar una excepcion
-    weather = get_weather(similar[0] if len(similar) != 0 else city)
-    # ojo json_data puede ser None manejar excepciones
-    determine_icon(weather)
+    if not similar:
+        similar = [city]
+    
+    weather = get_weather(similar[0])
+    if weather:
+        determine_icon(weather)
     return weather
 
 def search_by_id(flight_number, weather_cache):
@@ -92,15 +111,23 @@ def search_by_id(flight_number, weather_cache):
         flight_weather (tuple): Contiene la informacion del clima del lugar de destino y de partida 
                                 de un vuelo.
     """
-    flight_weather = ()
-    # Busca la información del vuelo utilizando el número de vuelo proporcionado.
+    if not isinstance(flight_number, str):
+        return ()
+
     flight_info = data_collector.search_flight(flight_number)
-    # Verifica si 'flight_info' es un diccionario para asegurarse de que la búsqueda fue exitosa.
-    if isinstance(flight_info, dict):  
-        departure = data_collector.get_city(flight_info['departure'])  
-        arrival = data_collector.get_city(flight_info['arrival'])
-        # ojo json_data puede ser None manejar excepciones
-        flight_weather = (get_weather(departure), get_weather(arrival))
+    if not isinstance(flight_info, dict):
+        return ()
+    
+    departure = data_collector.get_city(flight_info.get('departure', ''))
+    arrival = data_collector.get_city(flight_info.get('arrival', ''))
+    
+    if not departure or not arrival:
+        return ()
+    
+    flight_weather = (get_weather(departure), get_weather(arrival))
+    if flight_weather[0]:
         determine_icon(flight_weather[0])
+    if flight_weather[1]:
         determine_icon(flight_weather[1])
+    
     return flight_weather
