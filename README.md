@@ -58,19 +58,39 @@ Asegúrese de que los archivos necesarios para el funcionamiento de la aplicaci�
 Debe tener la siguiente estructura:
 ```bash
 weather_app/
-
+    weather_manager.py (archivo con la lógica del manejo del clima)
+    index.html (plantilla HTML para la aplicación)
+    cache.py (archivo con la clase Cache)
+    autocorrect.py (archivo para el autocorrector de la pagina web)
     static/
+        js/
+            script.js 
         json/
             cache.json (archivo vacío o con datos iniciales)
         datalist/
             vuelos.csv (archivo CSV con datos de vuelos)
             datos_destinos.csv (archivo CSV con datos de destinos)
             ciudades.csv (archivo CSV con datos de ciudades)
+            datos_destinos_viajes.csv ( archivo csv con datos de origen y llegada de viajes)
+        python/
+            gather.py
+            __pycache__/
+                    (archivos .pyc)
+        style/
+            styles.css
+        svg/
+            (Iconos de clima)
+        test/
+            test_autocorrect.py
+            test_cache.py
+            temp/
+                cache.json
     templates/
-        index.html (plantilla HTML para la aplicación)
-    app.py (archivo con el código de la aplicación Flask)
-    weather_manager.py (archivo con la lógica del manejo del clima)
-    cache.py (archivo con la clase Cache)
+            index.html
+            svg/
+                (Iconos de clima)
+    __pycache__/
+            (genera archivos .pyc)
 ```
 ###  5. Ejecutar la Aplicación
 
@@ -87,8 +107,3 @@ Puede acceder a esta URL en su navegador para utilizar la aplicación.
 
 Para detener la aplicación Flask, presione Ctrl+C en la terminal donde está ejecutando la aplicación.
 
-
-
-
-
-cd <NOMBRE_DEL_REPOSITORIO>
