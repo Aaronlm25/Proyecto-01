@@ -37,7 +37,7 @@ python3 -m venv venv
 Activar el entorno virtual:
 
 En Ubuntu y Fedora:
-    ```bash
+    ```
     source venv/bin/activate
     ```
 
