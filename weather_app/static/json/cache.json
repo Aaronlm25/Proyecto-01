@@ -14,31 +14,31 @@
         ],
         "base": "stations",
         "main": {
-            "temp": 18.24,
-            "feels_like": 18.57,
-            "temp_min": 18.11,
-            "temp_max": 18.25,
-            "pressure": 1015,
-            "humidity": 94,
-            "sea_level": 1015,
-            "grnd_level": 1010
+            "temp": 18.28,
+            "feels_like": 18.49,
+            "temp_min": 18.25,
+            "temp_max": 19.12,
+            "pressure": 1019,
+            "humidity": 89,
+            "sea_level": 1019,
+            "grnd_level": 1014
         },
         "visibility": 10000,
         "wind": {
-            "speed": 1.32,
-            "deg": 138,
-            "gust": 1.48
+            "speed": 5,
+            "deg": 95,
+            "gust": 12.89
         },
         "clouds": {
-            "all": 57
+            "all": 55
         },
-        "dt": 1725414321,
+        "dt": 1725495472,
         "sys": {
             "type": 2,
             "id": 2001568,
             "country": "DK",
-            "sunrise": 1725424186,
-            "sunset": 1725473211
+            "sunrise": 1725510704,
+            "sunset": 1725559453
         },
         "timezone": 7200,
         "id": 2624652,
@@ -60,29 +60,30 @@
         ],
         "base": "stations",
         "main": {
-            "temp": 31.93,
-            "feels_like": 29.97,
-            "temp_min": 31.93,
-            "temp_max": 31.93,
-            "pressure": 1002,
-            "humidity": 21,
-            "sea_level": 1002,
-            "grnd_level": 1002
+            "temp": 27.97,
+            "feels_like": 27.57,
+            "temp_min": 27.97,
+            "temp_max": 27.97,
+            "pressure": 1001,
+            "humidity": 39,
+            "sea_level": 1001,
+            "grnd_level": 1001
         },
         "visibility": 10000,
         "wind": {
-            "speed": 4.69,
-            "deg": 307,
-            "gust": 7.09
+            "speed": 2.06,
+            "deg": 270
         },
         "clouds": {
             "all": 0
         },
-        "dt": 1725414323,
+        "dt": 1725495599,
         "sys": {
+            "type": 1,
+            "id": 7439,
             "country": "IR",
-            "sunrise": 1725416726,
-            "sunset": 1725462391
+            "sunrise": 1725503158,
+            "sunset": 1725548718
         },
         "timezone": 12600,
         "id": 145459,
@@ -96,41 +97,38 @@
         },
         "weather": [
             {
-                "id": 520,
-                "main": "Rain",
-                "description": "chubasco de ligera intensidad",
-                "icon": "09d"
+                "id": 802,
+                "main": "Clouds",
+                "description": "nubes dispersas",
+                "icon": "03d"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 12.01,
-            "feels_like": 11.41,
-            "temp_min": 12.01,
-            "temp_max": 12.01,
-            "pressure": 1014,
-            "humidity": 82,
-            "sea_level": 1014,
-            "grnd_level": 984
+            "temp": 11.01,
+            "feels_like": 10.78,
+            "temp_min": 11.01,
+            "temp_max": 11.01,
+            "pressure": 1012,
+            "humidity": 100,
+            "sea_level": 1012,
+            "grnd_level": 983
         },
         "visibility": 10000,
         "wind": {
-            "speed": 3,
-            "deg": 220
-        },
-        "rain": {
-            "1h": 0.57
+            "speed": 0,
+            "deg": 0
         },
         "clouds": {
             "all": 40
         },
-        "dt": 1725414324,
+        "dt": 1725495600,
         "sys": {
             "type": 1,
             "id": 8942,
             "country": "RU",
-            "sunrise": 1725404916,
-            "sunset": 1725453506
+            "sunrise": 1725491421,
+            "sunset": 1725539760
         },
         "timezone": 25200,
         "id": 1512236,
@@ -144,38 +142,38 @@
         },
         "weather": [
             {
-                "id": 803,
+                "id": 804,
                 "main": "Clouds",
-                "description": "muy nuboso",
+                "description": "nubes",
                 "icon": "04n"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 10.8,
-            "feels_like": 10.44,
-            "temp_min": 10.11,
-            "temp_max": 11.27,
-            "pressure": 1014,
-            "humidity": 96,
-            "sea_level": 1014,
-            "grnd_level": 1008
+            "temp": 12.3,
+            "feels_like": 12.04,
+            "temp_min": 11.97,
+            "temp_max": 12.33,
+            "pressure": 1025,
+            "humidity": 94,
+            "sea_level": 1025,
+            "grnd_level": 1020
         },
         "visibility": 10000,
         "wind": {
-            "speed": 3.6,
-            "deg": 320
+            "speed": 2.57,
+            "deg": 350
         },
         "clouds": {
-            "all": 75
+            "all": 100
         },
-        "dt": 1725414326,
+        "dt": 1725495602,
         "sys": {
             "type": 1,
             "id": 1440,
             "country": "GB",
-            "sunrise": 1725427036,
-            "sunset": 1725476268
+            "sunrise": 1725513559,
+            "sunset": 1725562505
         },
         "timezone": 3600,
         "id": 2657832,
@@ -189,22 +187,22 @@
         },
         "weather": [
             {
-                "id": 801,
-                "main": "Clouds",
-                "description": "algo de nubes",
-                "icon": "02n"
+                "id": 800,
+                "main": "Clear",
+                "description": "cielo claro",
+                "icon": "01n"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 17.14,
-            "feels_like": 16.01,
-            "temp_min": 17.14,
-            "temp_max": 17.14,
-            "pressure": 1012,
-            "humidity": 42,
-            "sea_level": 1012,
-            "grnd_level": 809
+            "temp": 18.14,
+            "feels_like": 16.85,
+            "temp_min": 18.14,
+            "temp_max": 18.14,
+            "pressure": 1011,
+            "humidity": 32,
+            "sea_level": 1011,
+            "grnd_level": 808
         },
         "visibility": 10000,
         "wind": {
@@ -212,15 +210,15 @@
             "deg": 0
         },
         "clouds": {
-            "all": 20
+            "all": 0
         },
-        "dt": 1725414328,
+        "dt": 1725495605,
         "sys": {
             "type": 1,
             "id": 7396,
             "country": "SA",
-            "sunrise": 1725418577,
-            "sunset": 1725463323
+            "sunrise": 1725504987,
+            "sunset": 1725549672
         },
         "timezone": 10800,
         "id": 110690,
@@ -246,26 +244,26 @@
             "feels_like": 39.95,
             "temp_min": 31.06,
             "temp_max": 33.86,
-            "pressure": 1003,
-            "humidity": 64,
-            "sea_level": 1003,
-            "grnd_level": 1003
+            "pressure": 1001,
+            "humidity": 71,
+            "sea_level": 1001,
+            "grnd_level": 1001
         },
         "visibility": 10000,
         "wind": {
-            "speed": 2.57,
-            "deg": 80
+            "speed": 1.54,
+            "deg": 70
         },
         "clouds": {
             "all": 0
         },
-        "dt": 1725414330,
+        "dt": 1725495528,
         "sys": {
             "type": 2,
             "id": 2032466,
             "country": "AE",
-            "sunrise": 1725415505,
-            "sunset": 1725460702
+            "sunrise": 1725501926,
+            "sunset": 1725547041
         },
         "timezone": 14400,
         "id": 292968,
@@ -279,10 +277,10 @@
         },
         "weather": [
             {
-                "id": 803,
+                "id": 801,
                 "main": "Clouds",
-                "description": "muy nuboso",
-                "icon": "04n"
+                "description": "algo de nubes",
+                "icon": "02n"
             }
         ],
         "base": "stations",
@@ -291,26 +289,26 @@
             "feels_like": 24.89,
             "temp_min": 23.98,
             "temp_max": 23.98,
-            "pressure": 1013,
+            "pressure": 1014,
             "humidity": 94,
-            "sea_level": 1013,
-            "grnd_level": 1012
+            "sea_level": 1014,
+            "grnd_level": 1014
         },
         "visibility": 10000,
         "wind": {
-            "speed": 3.6,
-            "deg": 230
+            "speed": 3.09,
+            "deg": 210
         },
         "clouds": {
-            "all": 75
+            "all": 20
         },
-        "dt": 1725414331,
+        "dt": 1725495607,
         "sys": {
             "type": 1,
             "id": 1162,
             "country": "CI",
-            "sunrise": 1725430154,
-            "sunset": 1725474072
+            "sunrise": 1725516542,
+            "sunset": 1725560443
         },
         "timezone": 0,
         "id": 2293538,
@@ -327,35 +325,35 @@
                 "id": 804,
                 "main": "Clouds",
                 "description": "nubes",
-                "icon": "04n"
+                "icon": "04d"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 21.56,
-            "feels_like": 22.1,
-            "temp_min": 20.52,
-            "temp_max": 22.27,
+            "temp": 23.27,
+            "feels_like": 23.82,
+            "temp_min": 22.83,
+            "temp_max": 24.15,
             "pressure": 1018,
-            "humidity": 89,
+            "humidity": 83,
             "sea_level": 1018,
             "grnd_level": 955
         },
         "visibility": 10000,
         "wind": {
-            "speed": 2.57,
-            "deg": 70
+            "speed": 3.09,
+            "deg": 60
         },
         "clouds": {
             "all": 100
         },
-        "dt": 1725414333,
+        "dt": 1725495609,
         "sys": {
             "type": 2,
             "id": 2033935,
             "country": "US",
-            "sunrise": 1725365741,
-            "sunset": 1725411658
+            "sunrise": 1725452178,
+            "sunset": 1725497980
         },
         "timezone": -18000,
         "id": 4669635,
@@ -377,34 +375,32 @@
         ],
         "base": "stations",
         "main": {
-            "temp": 24.08,
-            "feels_like": 24.89,
-            "temp_min": 24.08,
-            "temp_max": 24.08,
-            "pressure": 1012,
-            "humidity": 90,
-            "sea_level": 1012,
-            "grnd_level": 957
+            "temp": 21.54,
+            "feels_like": 22.2,
+            "temp_min": 21.54,
+            "temp_max": 21.54,
+            "pressure": 1014,
+            "humidity": 94,
+            "sea_level": 1014,
+            "grnd_level": 960
         },
         "visibility": 10000,
         "wind": {
-            "speed": 1.66,
-            "deg": 180,
-            "gust": 1.85
+            "speed": 0.39,
+            "deg": 325,
+            "gust": 0.48
         },
         "rain": {
-            "1h": 0.11
+            "1h": 0.68
         },
         "clouds": {
-            "all": 98
+            "all": 51
         },
-        "dt": 1725414334,
+        "dt": 1725495610,
         "sys": {
-            "type": 1,
-            "id": 1173,
             "country": "NG",
-            "sunrise": 1725427278,
-            "sunset": 1725471425
+            "sunrise": 1725513672,
+            "sunset": 1725557790
         },
         "timezone": 3600,
         "id": 2352778,
@@ -418,41 +414,38 @@
         },
         "weather": [
             {
-                "id": 500,
-                "main": "Rain",
-                "description": "lluvia ligera",
-                "icon": "10n"
+                "id": 804,
+                "main": "Clouds",
+                "description": "nubes",
+                "icon": "04d"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 29.9,
-            "feels_like": 34.8,
-            "temp_min": 29.9,
-            "temp_max": 29.9,
-            "pressure": 1010,
+            "temp": 30.9,
+            "feels_like": 37.33,
+            "temp_min": 30.9,
+            "temp_max": 30.9,
+            "pressure": 1009,
             "humidity": 70,
-            "sea_level": 1010,
-            "grnd_level": 1000
+            "sea_level": 1009,
+            "grnd_level": 999
         },
-        "visibility": 9656,
+        "visibility": 10000,
         "wind": {
-            "speed": 0,
-            "deg": 0
-        },
-        "rain": {
-            "1h": 0.29
+            "speed": 1.54,
+            "deg": 180
         },
         "clouds": {
-            "all": 75
+            "all": 100
         },
-        "dt": 1725414305,
+        "dt": 1725495370,
         "sys": {
             "type": 1,
             "id": 7103,
             "country": "MX",
-            "sunrise": 1725366393,
-            "sunset": 1725411080
+            "sunrise": 1725452801,
+            "sunset": 1725497433
         },
         "timezone": -21600,
         "id": 3533462,
@@ -466,37 +459,40 @@
         },
         "weather": [
             {
-                "id": 804,
-                "main": "Clouds",
-                "description": "nubes",
-                "icon": "04n"
+                "id": 500,
+                "main": "Rain",
+                "description": "lluvia ligera",
+                "icon": "10n"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 23.85,
-            "feels_like": 24.8,
-            "temp_min": 23.85,
-            "temp_max": 23.85,
-            "pressure": 1013,
-            "humidity": 96,
-            "sea_level": 1013,
-            "grnd_level": 987
+            "temp": 25.09,
+            "feels_like": 26,
+            "temp_min": 25.09,
+            "temp_max": 25.09,
+            "pressure": 1010,
+            "humidity": 90,
+            "sea_level": 1010,
+            "grnd_level": 985
         },
         "visibility": 10000,
         "wind": {
-            "speed": 0.72,
-            "deg": 276,
-            "gust": 0.66
+            "speed": 0.82,
+            "deg": 226,
+            "gust": 0.74
+        },
+        "rain": {
+            "1h": 0.19
         },
         "clouds": {
-            "all": 100
+            "all": 35
         },
-        "dt": 1725414337,
+        "dt": 1725495613,
         "sys": {
             "country": "VE",
-            "sunrise": 1725359271,
-            "sunset": 1725403473
+            "sunrise": 1725445666,
+            "sunset": 1725489838
         },
         "timezone": -14400,
         "id": 3649833,
@@ -518,30 +514,30 @@
         ],
         "base": "stations",
         "main": {
-            "temp": 23.23,
-            "feels_like": 24.06,
-            "temp_min": 23.23,
-            "temp_max": 23.23,
-            "pressure": 1013,
-            "humidity": 94,
-            "sea_level": 1013,
-            "grnd_level": 1010
+            "temp": 24.23,
+            "feels_like": 24.88,
+            "temp_min": 24.23,
+            "temp_max": 24.23,
+            "pressure": 1014,
+            "humidity": 83,
+            "sea_level": 1014,
+            "grnd_level": 1011
         },
         "visibility": 10000,
         "wind": {
-            "speed": 5.14,
-            "deg": 230
+            "speed": 4.63,
+            "deg": 240
         },
         "clouds": {
             "all": 20
         },
-        "dt": 1725414338,
+        "dt": 1725495614,
         "sys": {
             "type": 1,
             "id": 1126,
             "country": "GH",
-            "sunrise": 1725429229,
-            "sunset": 1725473163
+            "sunrise": 1725515618,
+            "sunset": 1725559533
         },
         "timezone": 0,
         "id": 2306104,
@@ -555,38 +551,38 @@
         },
         "weather": [
             {
-                "id": 801,
+                "id": 802,
                 "main": "Clouds",
-                "description": "algo de nubes",
-                "icon": "02n"
+                "description": "nubes dispersas",
+                "icon": "03n"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 25.01,
-            "feels_like": 25.86,
-            "temp_min": 23.29,
-            "temp_max": 25.01,
-            "pressure": 1009,
-            "humidity": 88,
-            "sea_level": 1009,
-            "grnd_level": 1002
+            "temp": 26.01,
+            "feels_like": 26.01,
+            "temp_min": 26.01,
+            "temp_max": 26.29,
+            "pressure": 1008,
+            "humidity": 94,
+            "sea_level": 1008,
+            "grnd_level": 1001
         },
         "visibility": 10000,
         "wind": {
-            "speed": 2.57,
-            "deg": 60
+            "speed": 2.06,
+            "deg": 70
         },
         "clouds": {
-            "all": 20
+            "all": 40
         },
-        "dt": 1725414341,
+        "dt": 1725495617,
         "sys": {
             "type": 1,
             "id": 6946,
             "country": "TR",
-            "sunrise": 1725419545,
-            "sunset": 1725465819
+            "sunrise": 1725505993,
+            "sunset": 1725552130
         },
         "timezone": 10800,
         "id": 325361,
@@ -600,38 +596,41 @@
         },
         "weather": [
             {
-                "id": 802,
-                "main": "Clouds",
-                "description": "nubes dispersas",
-                "icon": "03n"
+                "id": 500,
+                "main": "Rain",
+                "description": "lluvia ligera",
+                "icon": "10n"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 13.49,
-            "feels_like": 13.51,
-            "temp_min": 13.49,
-            "temp_max": 13.49,
-            "pressure": 1018,
-            "humidity": 100,
-            "sea_level": 1018,
+            "temp": 14.49,
+            "feels_like": 14.45,
+            "temp_min": 14.49,
+            "temp_max": 14.49,
+            "pressure": 1017,
+            "humidity": 94,
+            "sea_level": 1017,
             "grnd_level": 769
         },
         "visibility": 10000,
         "wind": {
-            "speed": 3.6,
+            "speed": 2.06,
             "deg": 130
         },
-        "clouds": {
-            "all": 40
+        "rain": {
+            "1h": 0.12
         },
-        "dt": 1725414342,
+        "clouds": {
+            "all": 75
+        },
+        "dt": 1725495618,
         "sys": {
             "type": 1,
             "id": 2453,
             "country": "ET",
-            "sunrise": 1725419778,
-            "sunset": 1725463926
+            "sunrise": 1725506172,
+            "sunset": 1725550291
         },
         "timezone": 10800,
         "id": 344979,
@@ -653,30 +652,30 @@
         ],
         "base": "stations",
         "main": {
-            "temp": 22.14,
-            "feels_like": 21.04,
-            "temp_min": 20.43,
-            "temp_max": 23.66,
-            "pressure": 1016,
-            "humidity": 24,
-            "sea_level": 1016,
-            "grnd_level": 1001
+            "temp": 22.69,
+            "feels_like": 21.8,
+            "temp_min": 21.71,
+            "temp_max": 23.45,
+            "pressure": 1012,
+            "humidity": 30,
+            "sea_level": 1012,
+            "grnd_level": 997
         },
         "visibility": 10000,
         "wind": {
-            "speed": 11.83,
-            "deg": 360
+            "speed": 4.63,
+            "deg": 50
         },
         "clouds": {
             "all": 0
         },
-        "dt": 1725414344,
+        "dt": 1725495505,
         "sys": {
             "type": 2,
             "id": 2001763,
             "country": "AU",
-            "sunrise": 1725397256,
-            "sunset": 1725438529
+            "sunrise": 1725483573,
+            "sunset": 1725524972
         },
         "timezone": 34200,
         "id": 2078025,
@@ -690,37 +689,37 @@
         },
         "weather": [
             {
-                "id": 800,
-                "main": "Clear",
-                "description": "cielo claro",
-                "icon": "01n"
+                "id": 804,
+                "main": "Clouds",
+                "description": "nubes",
+                "icon": "04n"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 29.11,
-            "feels_like": 34.39,
-            "temp_min": 29.11,
-            "temp_max": 29.11,
-            "pressure": 1002,
-            "humidity": 77,
-            "sea_level": 1002,
+            "temp": 29.31,
+            "feels_like": 36.1,
+            "temp_min": 29.31,
+            "temp_max": 29.31,
+            "pressure": 1003,
+            "humidity": 82,
+            "sea_level": 1003,
             "grnd_level": 1001
         },
         "visibility": 10000,
         "wind": {
-            "speed": 0.82,
-            "deg": 291,
-            "gust": 1.73
+            "speed": 4.59,
+            "deg": 245,
+            "gust": 7.76
         },
         "clouds": {
-            "all": 3
+            "all": 91
         },
-        "dt": 1725414345,
+        "dt": 1725495621,
         "sys": {
             "country": "YE",
-            "sunrise": 1725418150,
-            "sunset": 1725462535
+            "sunrise": 1725504550,
+            "sunset": 1725548894
         },
         "timezone": 10800,
         "id": 415189,
@@ -734,405 +733,42 @@
         },
         "weather": [
             {
-                "id": 801,
-                "main": "Clouds",
-                "description": "algo de nubes",
-                "icon": "02n"
+                "id": 800,
+                "main": "Clear",
+                "description": "cielo claro",
+                "icon": "01n"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 21.09,
-            "feels_like": 21.55,
-            "temp_min": 21.09,
-            "temp_max": 21.09,
-            "pressure": 1011,
+            "temp": 22.09,
+            "feels_like": 22.65,
+            "temp_min": 22.09,
+            "temp_max": 22.09,
+            "pressure": 1012,
             "humidity": 88,
-            "sea_level": 1011,
-            "grnd_level": 1006
+            "sea_level": 1012,
+            "grnd_level": 1007
         },
         "visibility": 10000,
         "wind": {
             "speed": 2,
-            "deg": 340
+            "deg": 60
         },
         "clouds": {
-            "all": 21
+            "all": 2
         },
-        "dt": 1725414347,
+        "dt": 1725495623,
         "sys": {
             "type": 1,
             "id": 8972,
             "country": "RU",
-            "sunrise": 1725418075,
-            "sunset": 1725465066
+            "sunrise": 1725504541,
+            "sunset": 1725551359
         },
         "timezone": 10800,
         "id": 584243,
         "name": "Adler",
-        "cod": 200
-    },
-    {
-        "coord": {
-            "lon": -9.5982,
-            "lat": 30.4202
-        },
-        "weather": [
-            {
-                "id": 801,
-                "main": "Clouds",
-                "description": "algo de nubes",
-                "icon": "02n"
-            }
-        ],
-        "base": "stations",
-        "main": {
-            "temp": 21.25,
-            "feels_like": 21.47,
-            "temp_min": 21.25,
-            "temp_max": 21.25,
-            "pressure": 1011,
-            "humidity": 78,
-            "sea_level": 1011,
-            "grnd_level": 994
-        },
-        "visibility": 10000,
-        "wind": {
-            "speed": 2.14,
-            "deg": 125,
-            "gust": 2.92
-        },
-        "clouds": {
-            "all": 19
-        },
-        "dt": 1725414348,
-        "sys": {
-            "type": 1,
-            "id": 2393,
-            "country": "MA",
-            "sunrise": 1725430624,
-            "sunset": 1725476279
-        },
-        "timezone": 3600,
-        "id": 2561668,
-        "name": "Agadir",
-        "cod": 200
-    },
-    {
-        "coord": {
-            "lon": 72.6167,
-            "lat": 23.0333
-        },
-        "weather": [
-            {
-                "id": 802,
-                "main": "Clouds",
-                "description": "nubes dispersas",
-                "icon": "03d"
-            }
-        ],
-        "base": "stations",
-        "main": {
-            "temp": 26.02,
-            "feels_like": 26.02,
-            "temp_min": 26.02,
-            "temp_max": 26.02,
-            "pressure": 1006,
-            "humidity": 89,
-            "sea_level": 1006,
-            "grnd_level": 1001
-        },
-        "visibility": 2500,
-        "wind": {
-            "speed": 2.57,
-            "deg": 210
-        },
-        "clouds": {
-            "all": 40
-        },
-        "dt": 1725414351,
-        "sys": {
-            "type": 1,
-            "id": 9049,
-            "country": "IN",
-            "sunrise": 1725411178,
-            "sunset": 1725456272
-        },
-        "timezone": 19800,
-        "id": 1279233,
-        "name": "Ahmedabad",
-        "cod": 200
-    },
-    {
-        "coord": {
-            "lon": 8.9167,
-            "lat": 42
-        },
-        "weather": [
-            {
-                "id": 800,
-                "main": "Clear",
-                "description": "cielo claro",
-                "icon": "01n"
-            }
-        ],
-        "base": "stations",
-        "main": {
-            "temp": 21.66,
-            "feels_like": 21.53,
-            "temp_min": 21.5,
-            "temp_max": 21.66,
-            "pressure": 1014,
-            "humidity": 63,
-            "sea_level": 1014,
-            "grnd_level": 944
-        },
-        "visibility": 10000,
-        "wind": {
-            "speed": 3.17,
-            "deg": 77,
-            "gust": 2.39
-        },
-        "clouds": {
-            "all": 7
-        },
-        "dt": 1725414352,
-        "sys": {
-            "type": 2,
-            "id": 2091329,
-            "country": "FR",
-            "sunrise": 1725425607,
-            "sunset": 1725472412
-        },
-        "timezone": 7200,
-        "id": 3038333,
-        "name": "Arrondissement d'Ajaccio",
-        "cod": 200
-    },
-    {
-        "coord": {
-            "lon": -161.4389,
-            "lat": 60.9107
-        },
-        "weather": [
-            {
-                "id": 800,
-                "main": "Clear",
-                "description": "cielo claro",
-                "icon": "01d"
-            }
-        ],
-        "base": "stations",
-        "main": {
-            "temp": 14.18,
-            "feels_like": 13.01,
-            "temp_min": 14.18,
-            "temp_max": 14.18,
-            "pressure": 1011,
-            "humidity": 52,
-            "sea_level": 1011,
-            "grnd_level": 1011
-        },
-        "visibility": 10000,
-        "wind": {
-            "speed": 4.09,
-            "deg": 209,
-            "gust": 5.13
-        },
-        "clouds": {
-            "all": 3
-        },
-        "dt": 1725414354,
-        "sys": {
-            "type": 1,
-            "id": 7640,
-            "country": "US",
-            "sunrise": 1725378317,
-            "sunset": 1725428693
-        },
-        "timezone": -28800,
-        "id": 5880568,
-        "name": "Akiachak",
-        "cod": 200
-    },
-    {
-        "coord": {
-            "lon": -161.2217,
-            "lat": 60.9118
-        },
-        "weather": [
-            {
-                "id": 800,
-                "main": "Clear",
-                "description": "cielo claro",
-                "icon": "01d"
-            }
-        ],
-        "base": "stations",
-        "main": {
-            "temp": 15.87,
-            "feels_like": 14.92,
-            "temp_min": 15.87,
-            "temp_max": 15.87,
-            "pressure": 1011,
-            "humidity": 54,
-            "sea_level": 1011,
-            "grnd_level": 1011
-        },
-        "visibility": 10000,
-        "wind": {
-            "speed": 3.42,
-            "deg": 203,
-            "gust": 4.53
-        },
-        "clouds": {
-            "all": 0
-        },
-        "dt": 1725414355,
-        "sys": {
-            "country": "US",
-            "sunrise": 1725378265,
-            "sunset": 1725428641
-        },
-        "timezone": -28800,
-        "id": 5880568,
-        "name": "Akiak",
-        "cod": 200
-    },
-    {
-        "coord": {
-            "lon": 140.1167,
-            "lat": 39.7167
-        },
-        "weather": [
-            {
-                "id": 801,
-                "main": "Clouds",
-                "description": "algo de nubes",
-                "icon": "02d"
-            }
-        ],
-        "base": "stations",
-        "main": {
-            "temp": 27.52,
-            "feels_like": 28.25,
-            "temp_min": 27.52,
-            "temp_max": 27.52,
-            "pressure": 1012,
-            "humidity": 54,
-            "sea_level": 1012,
-            "grnd_level": 1006
-        },
-        "visibility": 10000,
-        "wind": {
-            "speed": 3.09,
-            "deg": 120
-        },
-        "clouds": {
-            "all": 20
-        },
-        "dt": 1725414356,
-        "sys": {
-            "type": 1,
-            "id": 8048,
-            "country": "JP",
-            "sunrise": 1725394227,
-            "sunset": 1725440830
-        },
-        "timezone": 32400,
-        "id": 2113126,
-        "name": "Akita",
-        "cod": 200
-    },
-    {
-        "coord": {
-            "lon": -73.9662,
-            "lat": 42.6001
-        },
-        "weather": [
-            {
-                "id": 800,
-                "main": "Clear",
-                "description": "cielo claro",
-                "icon": "01n"
-            }
-        ],
-        "base": "stations",
-        "main": {
-            "temp": 14.21,
-            "feels_like": 13.23,
-            "temp_min": 12.37,
-            "temp_max": 15.45,
-            "pressure": 1028,
-            "humidity": 59,
-            "sea_level": 1028,
-            "grnd_level": 1000
-        },
-        "visibility": 10000,
-        "wind": {
-            "speed": 0.45,
-            "deg": 295,
-            "gust": 1.34
-        },
-        "clouds": {
-            "all": 0
-        },
-        "dt": 1725414362,
-        "sys": {
-            "type": 2,
-            "id": 2080873,
-            "country": "US",
-            "sunrise": 1725359014,
-            "sunset": 1725406019
-        },
-        "timezone": -14400,
-        "id": 5106841,
-        "name": "Albany",
-        "cod": 200
-    },
-    {
-        "coord": {
-            "lon": -106.6511,
-            "lat": 35.0845
-        },
-        "weather": [
-            {
-                "id": 801,
-                "main": "Clouds",
-                "description": "algo de nubes",
-                "icon": "02n"
-            }
-        ],
-        "base": "stations",
-        "main": {
-            "temp": 27.89,
-            "feels_like": 27.06,
-            "temp_min": 26.83,
-            "temp_max": 28.99,
-            "pressure": 1014,
-            "humidity": 31,
-            "sea_level": 1014,
-            "grnd_level": 835
-        },
-        "visibility": 10000,
-        "wind": {
-            "speed": 3.09,
-            "deg": 240
-        },
-        "clouds": {
-            "all": 20
-        },
-        "dt": 1725414363,
-        "sys": {
-            "type": 2,
-            "id": 2003694,
-            "country": "US",
-            "sunrise": 1725367276,
-            "sunset": 1725413442
-        },
-        "timezone": -21600,
-        "id": 5454711,
-        "name": "Albuquerque",
         "cod": 200
     }
 ]

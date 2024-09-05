@@ -24,7 +24,7 @@ def revise(user_ubication):
     for x in column:
         coincidence_index  = lev.ratio(ubication, x)
         #Filtro para considerar unicamente a las palabras en un rango de coincidencia especifico
-        if coincidence_index >= 0.5:
+        if coincidence_index >= 0.9:
             if coincidence_index not in coincidences:
                 #creamos una nueva llave en el diccionario
                 coincidences[coincidence_index] = set()
