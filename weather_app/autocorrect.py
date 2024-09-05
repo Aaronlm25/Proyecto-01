@@ -2,7 +2,7 @@ import Levenshtein as lev
 import csv
 import unidecode as ucode
 
-def extract_column(file_path, ubication):
+def extract_column(file_path : str, ubication : str):
     """Funcion para extraer una columna del .csv
 
     Args:
@@ -25,7 +25,7 @@ def extract_column(file_path, ubication):
             return []
     return column
 
-def organize(similar_locations):
+def organize(similar_locations : dict):
     """
     Funcion para organize los elementos en el diccionario
     Args:
@@ -38,7 +38,7 @@ def organize(similar_locations):
     
     return ordered_locations
 
-def first_n(similar, n):
+def first_n(similar : dict, n : int):
     """
     Funcion para obtener los primeros n elementos de un diccionario
     Args:
@@ -57,7 +57,7 @@ def first_n(similar, n):
                 
     return first_n
 
-def revise(user_ubication, coincidence_index):
+def revise(user_ubication : str, coincidence_index : int):
     """
     Funcion para correguir la entrada del usuario
     Args:

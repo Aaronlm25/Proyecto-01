@@ -12,7 +12,7 @@ class InvalidCacheFileException(Exception):
     Clase de excepcion del archivo de cache dado,
     se lanza cuando el archivo no es .json
     """
-    def __init__(self, message):
+    def __init__(self, message : str):
         super().__init__(message)
 
 class Cache:
@@ -25,18 +25,37 @@ class Cache:
     """
     def __init__(self, path : str):
         self.path = path
-        self.existance_insurer()
+        self.__existance_insurer()
         # Todos los climas de las ciudades registradas
         self.weather_records = dict()
         # Permite detener el hilo donde se calcula el clima
         self.STOP_FLAG = threading.Event() 
+
+    def get_weather(self, city : str):
+        """
+        Obtiene el clima de una ciudad previamente calculado si este no ha cadudado,
+        esto es no han pasado mas de 3hrs desde que se consulto.
+
+        Returns:
+            weather: El clima asociado a la llave.
+            None: Si el clima no se ha calculado aun o ha caducado.
+        """
+        city = city.lower()
+        weather = None
+        try:
+            weather = self.weather_records[city]
+        except KeyError as e:
+            return None
+        
+    def __is_data_expired(self, name : str):
+        pass
 
     def get_data(self):
         """
         Obtiene el cache como un diccionario cuyas llaves son los nombres de las 
         ciudades y los valores son objetos json
 
-        Returns
+        Returns:
             self.weather_records: Un diccionario con todos los climas de las ciudades registradas
         """
         self.existance_insurer()
@@ -47,21 +66,21 @@ class Cache:
                 if os.path.getsize(self.path) != 0:
                     raw_data = json.load(file)
             for weather in raw_data:
-                name = weather['name']
+                name = weather['name'].lower()
                 self.weather_records[name] = weather
         return self.weather_records
 
-    def update(self, weather):
+    def update(self, weather : dict):
         """
         Actualiza el clima de una sola ciudad
 
         Args:
             weather : objeto json que contiene informacion del clima de una ciudad
         """
-        name = weather['name']
+        name = weather['name'].lower()
         self.weather_records[name] = weather
         
-    def update_weather(self, destiny_data):
+    def update_weather(self, destiny_data : str):
         """
         Proceso en segundo plano que hace las peticiones de los climas de las 
         distintas ciudades registradas.
@@ -105,7 +124,7 @@ class Cache:
             json.dump(raw_data, file, indent=4)
         self.STOP_FLAG.set()
 
-    def existance_insurer(self):
+    def __existance_insurer(self):
         """
         Se asegura de que la ruta y el archivo existan.
         """

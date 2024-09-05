@@ -8,7 +8,6 @@ app = Flask(__name__)
 def home():
     weather_records = []
     error_message = None
-
     if request.method == 'POST':
         city = request.form.get('city')
         iata_code = request.form.get('iata_code')
@@ -42,13 +41,11 @@ def home():
                     error_message = "No se encontró información para el código IATA proporcionado."
             except Exception as e:
                 error_message = f"Error al buscar el código IATA: {str(e)}"
-
         try:
             for weather in weather_records:
                 weather_cache.update(weather)
         except AttributeError as e:
             error_message = f"Error al actualizar la caché: {str(e)}"
-
     return render_template('index.html', weather_data=weather_records[0] if weather_records else {}, error=error_message)
 
 if __name__ == '__main__':
