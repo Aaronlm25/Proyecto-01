@@ -24,7 +24,7 @@ Clone el repositorio de la aplicación desde el control de versiones, en este ca
 ```bash
 git clone <URL_DEL_REPOSITORIO>
 cd <NOMBRE_DEL_REPOSITORIO>
-
+```
 
 ### 2. Crear un Entorno Virtual (opcional, pero recomendado)
 
@@ -32,12 +32,13 @@ cd <NOMBRE_DEL_REPOSITORIO>
 Crear un entorno virtual ayuda a mantener las dependencias seguras.
 ```bash
 python3 -m venv venv
+```
 
 Activar el entorno virtual:
 
-    En Ubuntu y Fedora:
+    ```En Ubuntu y Fedora:
     source venv/bin/activate
-
+    ```
 
 ### 3. Instalar Dependencias
 
@@ -48,12 +49,13 @@ En el se encuentra todas las dependencias necesarias para el uso de la pagina we
 ```Instale las dependencias con:
 
 pip install -r requirements.txt
+```
 
 ### 4.Configuración de Archivos
 
 Asegúrese de que los archivos necesarios para el funcionamiento de la aplicación estén en los directorios correctos.
 Debe tener la siguiente estructura:
-
+```
 weather_app/
 
     static/
@@ -68,12 +70,14 @@ weather_app/
     app.py (archivo con el código de la aplicación Flask)
     weather_manager.py (archivo con la lógica del manejo del clima)
     cache.py (archivo con la clase Cache)
-
+```
 ###  5. Ejecutar la Aplicación
 
 Ejecute la pagina web con el siguiente comando:
 
+```
 python3 weather_app/index.py
+```
 
 La aplicación estará disponible en http://127.0.0.1:5000/ por defecto.
 Puede acceder a esta URL en su navegador para utilizar la aplicación.
