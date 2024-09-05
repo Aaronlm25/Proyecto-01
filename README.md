@@ -15,11 +15,11 @@ Esta aplicación permite consultar el clima de una ciudad, un código IATA o un 
 
 ## Instalación
 
-Siga estos pasos para instalar y ejecutar la aplicación:
+Sige estos pasos para instalar y ejecutar la aplicación:
 
 ### 1. Clonar el Repositorio
 
-Clone el repositorio de la aplicación desde el control de versiones (por ejemplo, GitHub):
+Clone el repositorio de la aplicación desde el control de versiones, en este caso GitHub:
 
 ```bash
 git clone <URL_DEL_REPOSITORIO>
