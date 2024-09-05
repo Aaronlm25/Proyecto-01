@@ -16,6 +16,9 @@ def revise(user_ubication, coincidence_index):
     
     with open(file_path, mode='r') as cities_file:
             reader = csv.DictReader(cities_file)
+            first_row = next(reader)
+            if len(ubication)== 0 or ubication[0] not in first_row:
+                return []
             column = [row[ubication[0]] for row in reader]
     
     coincidences = {}
