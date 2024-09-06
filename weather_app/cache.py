@@ -42,7 +42,6 @@ class Cache:
         Returns:
             self.weather_records: Un diccionario con todos los climas de las ciudades registradas
         """
-        self.existance_insurer()
         raw_data = []
         # Si weather_records es vacio intenta ver si hay datos en el archivo .json
         if len(self.weather_records) == 0:

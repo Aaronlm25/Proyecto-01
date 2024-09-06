@@ -3,7 +3,8 @@ import csv
 import unidecode as ucode
 
 def extract_column(file_path : str, ubication : str):
-    """Funcion para extraer una columna del .csv
+    """
+    Funcion para extraer una columna del .csv
 
     Args:
         file_path (str): ruta hacia el .csv
@@ -35,7 +36,6 @@ def organize(similar_locations : dict):
         dict: Ubicaciones ordenadas
     """
     ordered_locations = dict(sorted(similar_locations.items(), reverse = True))
-    
     return ordered_locations
 
 def first_n(similar : dict, n : int):
@@ -43,18 +43,16 @@ def first_n(similar : dict, n : int):
     Funcion para obtener los primeros n elementos de un diccionario
     Args:
         similar (dict) : Diccionario con las palabras parecidas
-        n int : cantidad de palabras similares deseadas
+        int : cantidad de palabras similares deseadas
 
     Returns:
         list: Lista de n palabras similares con la ubicacion deseada
     """
     first_n = []
-    
     for key in similar:
         for item in similar.get(key):
             if len(first_n) < n:
                 first_n.append(item)
-                
     return first_n
 
 def revise(user_ubication : str, coincidence_index : int):
@@ -69,11 +67,8 @@ def revise(user_ubication : str, coincidence_index : int):
     """
     ubication = ucode.unidecode(user_ubication).lower()
     file_path = './weather_app/static/datalist/ciudades.csv'    
-    
     column = extract_column(file_path, ubication)
-    
     coincidences = {}
-    
     for x in column:
         levenshtein_index  = lev.ratio(ubication, x)
         if levenshtein_index >= coincidence_index:
@@ -81,5 +76,4 @@ def revise(user_ubication : str, coincidence_index : int):
                coincidences[levenshtein_index] = set()
             coincidences[levenshtein_index].add(x)
     ordered_coincidences = organize(coincidences)
-    
     return first_n(ordered_coincidences, 5)

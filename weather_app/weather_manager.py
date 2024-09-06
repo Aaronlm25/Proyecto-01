@@ -27,6 +27,8 @@ def determine_icon(json_data : dict): # faltan implementar los svg
     Args:
         json_data (dict) : Informacion del clima de una ubicacion.
     """
+    if not json_data:
+        raise ValueError('El objeto json es None')
     icon_map = {
         range(200, 233): "storm_icon.svg",         # Tormenta
         range(300, 322): "light_rain_icon.svg",    # Lluvia ligera
@@ -49,9 +51,9 @@ def determine_icon(json_data : dict): # faltan implementar los svg
                 break
         json_data['weather'][0]['icon'] = icon
     except KeyError as e:
-        print(f"Error: Faltan claves en los datos del clima: {e}")
+        raise ValueError('El objeto json es invalido')
 
-def search_by_iata(iata_code : str):
+def search_by_iata(iata_code : str, weather_records : dict):
     """
     Hace una peticion a la API segun un codigo IATA.
 
@@ -64,13 +66,11 @@ def search_by_iata(iata_code : str):
     city = data_collector.get_city(iata_code)
     if not city:
         return None
-    
     weather = get_weather(city)
-    if weather:
-        determine_icon(weather)
+    determine_icon(weather)
     return weather
         
-def search_by_city(city : str):
+def search_by_city(city : str, weather_records : dict):
     """
     Hace una petición a la API según una ciudad.
 
@@ -83,13 +83,11 @@ def search_by_city(city : str):
     similar = revise(city, 0.7)
     if not similar:
         similar = [city]
-    
     weather = get_weather(similar[0])
-    if weather:
-        determine_icon(weather)
+    determine_icon(weather)
     return weather
 
-def search_by_id(flight_number : str):
+def search_by_id(flight_number : str, weather_records : dict):
     """
     Realiza una búsqueda del clima para una ciudad en función del número de vuelo.
 
@@ -108,8 +106,6 @@ def search_by_id(flight_number : str):
     if not departure or not arrival:
         return ()
     flight_weather = (get_weather(departure), get_weather(arrival))
-    if flight_weather[0]:
-        determine_icon(flight_weather[0])
-    if flight_weather[1]:
-        determine_icon(flight_weather[1])
+    determine_icon(flight_weather[0])
+    determine_icon(flight_weather[1])
     return flight_weather

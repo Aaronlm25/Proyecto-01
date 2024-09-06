@@ -24,7 +24,7 @@ def home():
                 error_message = f"Error al buscar el vuelo: {str(e)}"
         elif city:
             try:
-                city_weather = weather_manager.search_by_city(city, weather_cache, weather_cache.get_data())
+                city_weather = weather_manager.search_by_city(city, weather_cache.get_data())
                 if city_weather:
                     weather_results.append(city_weather)
                 else:
@@ -33,7 +33,7 @@ def home():
                 error_message = f"Error al buscar la ciudad: {str(e)}"
         elif iata_code:
             try:
-                iata_weather = weather_manager.search_by_iata(iata_code, weather_cache, weather_cache.get_data())
+                iata_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
                 if iata_weather:
                     weather_results.append(iata_weather)
                 else:
@@ -45,6 +45,7 @@ def home():
                 weather_cache.update(weather)
         except AttributeError as e:
             error_message = f"Error al actualizar la caché: {str(e)}"
+    print(error_message)
     return render_template('index.html', weather_data=weather_results[0] if weather_results else {}, error=error_message)
 
 if __name__ == '__main__':
