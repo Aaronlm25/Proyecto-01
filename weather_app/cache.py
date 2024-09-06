@@ -30,22 +30,6 @@ class Cache:
         self.weather_records = dict()
         # Permite detener el hilo donde se calcula el clima
         self.STOP_FLAG = threading.Event() 
-
-    def get_weather(self, city : str):
-        """
-        Obtiene el clima de una ciudad previamente calculado si este no ha cadudado,
-        esto es no han pasado mas de 3hrs desde que se consulto.
-
-        Returns:
-            weather: El clima asociado a la llave.
-            None: Si el clima no se ha calculado aun o ha caducado.
-        """
-        city = city.lower()
-        weather = None
-        try:
-            weather = self.weather_records[city]
-        except KeyError as e:
-            return None
         
     def __is_data_expired(self, name : str):
         pass
@@ -66,7 +50,7 @@ class Cache:
                 if os.path.getsize(self.path) != 0:
                     raw_data = json.load(file)
             for weather in raw_data:
-                name = weather['name'].lower()
+                name = weather['name']
                 self.weather_records[name] = weather
         return self.weather_records
 
@@ -77,30 +61,34 @@ class Cache:
         Args:
             weather : objeto json que contiene informacion del clima de una ciudad
         """
-        name = weather['name'].lower()
+        name = weather['name']
         self.weather_records[name] = weather
         
-    def update_weather(self, destiny_data : str):
+    def update_weather(self, destiny_data : list):
         """
         Proceso en segundo plano que hace las peticiones de los climas de las 
         distintas ciudades registradas.
 
-        Returns:
+        Args:
             destiny_data: lista de las ciudades registradas cada elemento es una lista
                           de tamano 3 que contiene:
                           [0] : Nombre de la ciudad
                           [1] : IATA
                           [2] : Codigo de aeroopuerto
         """
-        for data in destiny_data:
-            if self.STOP_FLAG.is_set():
-                break
+        i = 0
+        while not self.STOP_FLAG.is_set():
+            data = destiny_data[i]
             # Evita baneos pues la api solo deja hacer request 60 veces por minuto 
             time.sleep(1.2)
             # Weather puede ser None si ocurrio un error al hacer el request
             weather = weather_manager.get_weather(data[0])
             if weather:
                 self.update(weather)
+            i+=1
+            if i == len(destiny_data):
+                i = 0
+                time.sleep(10800)
 
     def start(self):
         """

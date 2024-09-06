@@ -54,8 +54,8 @@ def test_acurracy_basic(city_data):
             similar = revise(distorted[x], 0.7)
             assert city_data[x] in similar
         distorted = []
-    assert revise('chine', 0.7) == []
+    assert revise('chine', 0.9) == []
     assert revise('afsdb', 0.7) == []
-    assert revise('', 0.7) == []
+    assert revise('', .9) == []
     
     

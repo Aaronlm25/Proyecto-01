@@ -2,7 +2,6 @@ import requests
 import threading
 import static.python.gather as data_collector
 from autocorrect import revise
-from cache import Cache
 
 KEY = 'a3117bc0d7c113aba1f25b2fb28748e1'
 LOCK = threading.Lock()
@@ -52,7 +51,7 @@ def determine_icon(json_data : dict): # faltan implementar los svg
     except KeyError as e:
         print(f"Error: Faltan claves en los datos del clima: {e}")
 
-def search_by_iata(iata_code : str, weather_cache : Cache):
+def search_by_iata(iata_code : str):
     """
     Hace una peticion a la API segun un codigo IATA.
 
@@ -60,7 +59,7 @@ def search_by_iata(iata_code : str, weather_cache : Cache):
         iata_code (str): Código IATA del aeropuerto.
 
     Returns:
-        weather: Informacion del clima.
+        weather (dict): Informacion del clima.
     """
     city = data_collector.get_city(iata_code)
     if not city:
@@ -71,7 +70,7 @@ def search_by_iata(iata_code : str, weather_cache : Cache):
         determine_icon(weather)
     return weather
         
-def search_by_city(city : str, weather_cache : Cache):
+def search_by_city(city : str):
     """
     Hace una petición a la API según una ciudad.
 
@@ -90,7 +89,7 @@ def search_by_city(city : str, weather_cache : Cache):
         determine_icon(weather)
     return weather
 
-def search_by_id(flight_number : str, weather_cache : Cache):
+def search_by_id(flight_number : str):
     """
     Realiza una búsqueda del clima para una ciudad en función del número de vuelo.
 

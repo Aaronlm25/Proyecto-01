@@ -59,7 +59,6 @@ def test_update_empty_file(clean, sample_cache):
     sample_cache.stop()
     assert json_file() == to_json(sample_cache.weather_records)
 
-
 def test_update_large(clean, sample_cache):
     size = random.randint(100, 1000)
     data_types = (sample_data_adjoint(size) , sample_data_disjoint(size))
