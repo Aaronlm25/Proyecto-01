@@ -1,12 +1,19 @@
-import os
+import csv
 import json
 import time
 import threading
-import weather_manager
-import csv
-from static.python.data_manager import DataCollector, DataManager
-from threading import Thread
 from pathlib import Path
+from threading import Thread
+
+from requests import HTTPError, RequestException
+from weather_manager import get_weather
+from static.python.data_manager import DataCollector, DataManager
+
+FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
+IATA_DATA_PATH= './weather_app/static/datalist/datos_destinos.csv'
+
+data_colector = DataCollector(FLIGHT_DATA_PATH,IATA_DATA_PATH)
+data_manager = DataManager(data_colector)
 
 class InvalidCacheFileException(Exception):
     """
@@ -24,7 +31,13 @@ class Cache:
     path : str
         La ruta del archivo de cache
     """
-    
+    def __init__(self, path : str):
+        self.__existance_insurer(path)
+        # Todos los climas de las ciudades registradas
+        self.weather_records = dict()
+        # Permite detener el hilo donde se calcula el clima
+        self.STOP_FLAG = threading.Event() 
+
     def get_destiny_data(self, path):
 
         """
@@ -45,17 +58,6 @@ class Cache:
             next(reader)  # Salta el encabezado si existe
             destiny_data = list(reader)
         return destiny_data
-    
-    def __init__(self, path : str):
-        self.path = path
-        self.__existance_insurer()
-        # Todos los climas de las ciudades registradas
-        self.weather_records = dict()
-        # Permite detener el hilo donde se calcula el clima
-        self.STOP_FLAG = threading.Event() 
-        
-    def __is_data_expired(self, name : str):
-        pass
 
     def get_data(self):
         """
@@ -68,8 +70,8 @@ class Cache:
         raw_data = []
         # Si weather_records es vacio intenta ver si hay datos en el archivo .json
         if len(self.weather_records) == 0:
-            with open(self.path, 'r') as file:
-                if os.path.getsize(self.path) != 0:
+            with self.path.open('r') as file:
+                if self.path.stat().st_size != 0:
                     raw_data = json.load(file)
             for weather in raw_data:
                 name = weather['name']
@@ -98,19 +100,22 @@ class Cache:
                           [1] : IATA
                           [2] : Codigo de aeroopuerto
         """
+        REQUEST_INTERVAL = 1.2
+        THREE_HOUR_INTERVAL = 10800
         i = 0
         while not self.STOP_FLAG.is_set():
             data = destiny_data[i]
-            # Evita baneos pues la api solo deja hacer request 60 veces por minuto 
-            time.sleep(1.2)
-            # Weather puede ser None si ocurrio un error al hacer el request
-            weather = weather_manager.get_weather(data[0])
+            time.sleep(REQUEST_INTERVAL)
+            try:
+                weather = get_weather(data[0], self.weather_records)
+            except (RequestException, HTTPError):
+                weather = None
             if weather:
                 self.update(weather)
-            i+=1
+            i += 1
             if i == len(destiny_data):
                 i = 0
-                time.sleep(10800)
+                time.sleep(THREE_HOUR_INTERVAL)
 
     def start(self):
         """
@@ -130,19 +135,19 @@ class Cache:
         raw_data = []
         for weather in self.weather_records.values():
             raw_data.append(weather)
-        with open(self.path, 'w') as file:
+        with self.path.open('w') as file:
             json.dump(raw_data, file, indent=4)
         self.STOP_FLAG.set()
 
-    def __existance_insurer(self):
+    def __existance_insurer(self, path):
         """
         Se asegura de que la ruta y el archivo existan.
         """
-        file = Path(self.path)
-        if file.suffix != '.json':
+        self.path = Path(path)
+        if self.path.suffix != '.json':
             raise InvalidCacheFileException('El archivo cache deber ser .json')
         # Asegúrate de que el directorio exista
-        file.parent.mkdir(parents=True, exist_ok=True)
-        file.touch(exist_ok=True)
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.path.touch(exist_ok=True)
         
     

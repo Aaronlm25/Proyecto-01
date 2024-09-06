@@ -1,7 +1,8 @@
 import weather_manager
 from cache import Cache
 from flask import Flask, render_template, request
-
+from requests.exceptions import RequestException
+from requests.exceptions import HTTPError
 weather_cache = Cache('./weather_app/static/json/cache.json')
 app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
@@ -23,13 +24,16 @@ def home():
             elif iata_code:
                 iata_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
                 weather_results.append(iata_weather)
-        except ValueError as e:
-            print(e)
-        try:
             for weather in weather_results:
                 weather_cache.update(weather)
+        except ValueError as e:
+            error_message = str(e)
+        except RequestException as e:
+            error_message = str(e)
         except AttributeError as e:
-            print(f"Error al actualizar la caché: {str(e)}")
+            print(f"Error al actualizar la caché:")
+        except HTTPError as e:
+            print('No se encontro el url')
     return render_template('index.html', weather_data=weather_results[0] if weather_results else {}, error=error_message)
 
 if __name__ == '__main__':
