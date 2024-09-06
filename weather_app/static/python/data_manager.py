@@ -40,6 +40,16 @@ class DataCollector:
     def load_iata_data(path):
         """
         Carga los datos de ciudades e IATA desde un archivo CSV.
+
+        El archivo CSV debe tener el siguiente formato:
+        Ciudades,IATA,Aeropuerto
+
+        Args:
+            path (str): Ruta del archivo CSV que contiene los datos.
+
+        Returns:
+            dict: Un diccionario donde las claves son los códigos IATA del aeropuerto,
+                y los valores son diccionarios con la información de la ciudad y el aeropuerto.
         """
         iata_data = {}
         try:
@@ -50,10 +60,12 @@ class DataCollector:
                     city = row[0]
                     iata_code = row[1]
                     airport = row[2]
-                    iata_data[iata_code] = {'city': city, 'airport': airport}
+                    # Aquí se sigue indexando por el código IATA del aeropuerto
+                    iata_data[airport] = {'city': city, 'iata': iata_code, 'airport': airport}
         except FileNotFoundError:
             print(f"Error: El archivo {path} no se encuentra.")
         return iata_data
+
 
 
 class DataManager:
@@ -66,17 +78,21 @@ class DataManager:
         """
         self.data_collector = data_collector
     
-    def get_city(self, iata):
+    def get_city(self, iata_airport):
         """
         Obtiene el nombre de la ciudad basado en el código IATA del aeropuerto.
-        
+
         Args:
-            iata (str): Código IATA del aeropuerto.
-        
+        iata_airport (str): Código IATA del aeropuerto.
+
         Returns:
-            str: Nombre de la ciudad correspondiente al código IATA o None si no se encuentra.
+            str: Nombre de la ciudad correspondiente al código IATA del aeropuerto, o None si no se encuentra.
         """
-        return self.data_collector._iata_data.get(iata, {}).get('city', None)
+        airport_info = self.data_collector._iata_data.get(iata_airport)
+        if airport_info:
+            return airport_info['city']
+        return None
+
 
     def search_flight(self, ticket):
         """
