@@ -1,5 +1,3 @@
-console.log("Conetsion etsitosa")
-
 function saveElection() {
     let selection = document.getElementById("menu").value;
     sessionStorage.setItem("menuElection", selection);
@@ -7,7 +5,7 @@ function saveElection() {
 }
 
 function showContent(){
-    let electionSaved = sessionStorage.getItem("menuElection");
+    electionSaved = sessionStorage.getItem("menuElection");
     let contents = document.querySelectorAll(".content");
     contents.forEach(function (content) {
         content.style.display = "none";

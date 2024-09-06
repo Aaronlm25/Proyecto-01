@@ -97,6 +97,7 @@ body {
   align-items: center;
   height: 550px;
   width: 300px;
+  margin-bottom: 60px;
 }
 
 .temperature {
