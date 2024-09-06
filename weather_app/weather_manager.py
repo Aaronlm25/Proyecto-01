@@ -101,8 +101,8 @@ def search_by_id(flight_number : str, weather_records : dict):
     flight_info = data_collector.search_flight(flight_number)
     if not isinstance(flight_info, dict):
         return ()
-    departure = data_collector.get_city(flight_info.get('departure', ''))
-    arrival = data_collector.get_city(flight_info.get('arrival', ''))
+    departure = data_collector.get_city(flight_info['departure'])
+    arrival = data_collector.get_city(flight_info['arrival'])
     if not departure or not arrival:
         return ()
     flight_weather = (get_weather(departure), get_weather(arrival))
