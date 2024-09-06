@@ -1,12 +1,18 @@
 import requests
 import threading
-import static.python.gather as data_collector
+from static.python.data_manager import DataCollector, DataManager
 from autocorrect import revise
 
 KEY = 'a3117bc0d7c113aba1f25b2fb28748e1'
 LOCK = threading.Lock()
 
-def get_weather(city : str):
+FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
+IATA_DATA_PATH= './weather_app/static/datalist/datos_destinos.csv'
+
+data_colector=DataCollector(FLIGHT_DATA_PATH,IATA_DATA_PATH)
+data_manager=DataManager(data_colector)
+
+def get_weather(city):
     # Evita que se hagan dos peticiones al mismo tiempo pues esto es motivo de baneo
     with LOCK:
         try:
@@ -63,7 +69,10 @@ def search_by_iata(iata_code : str, weather_records : dict):
     Returns:
         weather (dict): Informacion del clima.
     """
-    city = data_collector.get_city(iata_code)
+    if not isinstance(iata_code, str):
+        return None
+    
+    city = data_manager.get_city(iata_code)
     if not city:
         return None
     weather = get_weather(city)
@@ -98,11 +107,11 @@ def search_by_id(flight_number : str, weather_records : dict):
         flight_weather (tuple): Contiene la informacion del clima del lugar de destino y de partida 
                                 de un vuelo.
     """
-    flight_info = data_collector.search_flight(flight_number)
+    flight_info = data_manager.search_flight(flight_number)
     if not isinstance(flight_info, dict):
         return ()
-    departure = data_collector.get_city(flight_info['departure'])
-    arrival = data_collector.get_city(flight_info['arrival'])
+    departure = data_manager.get_city(flight_info.get('departure', ''))
+    arrival = data_manager.get_city(flight_info.get('arrival', ''))
     if not departure or not arrival:
         return ()
     flight_weather = (get_weather(departure), get_weather(arrival))

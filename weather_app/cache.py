@@ -3,7 +3,8 @@ import json
 import time
 import threading
 import weather_manager
-import static.python.gather as data_collector
+import csv
+from static.python.data_manager import DataCollector, DataManager
 from threading import Thread
 from pathlib import Path
 
@@ -23,6 +24,28 @@ class Cache:
     path : str
         La ruta del archivo de cache
     """
+    
+    def get_destiny_data(self, path):
+
+        """
+        Lee los datos de destinos desde un archivo CSV y los carga en una lista.
+
+        El archivo CSV debe tener los datos en el siguiente formato:
+        city_name, iata_code, airport_name
+
+        Args:
+            path (str): Ruta del archivo CSV que contiene los datos de destinos.
+
+        Returns:
+            list: Una lista de listas, donde cada sublista contiene la información de una ciudad.
+        """
+        destiny_data = []
+        with open(path, mode='r') as file:
+            reader = csv.reader(file)
+            next(reader)  # Salta el encabezado si existe
+            destiny_data = list(reader)
+        return destiny_data
+    
     def __init__(self, path : str):
         self.path = path
         self.__existance_insurer()
@@ -94,7 +117,7 @@ class Cache:
         Comienza el proceso del cache y las peticiones de los climas.
         """
         # lista de las ciudades registradas
-        data = data_collector.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
+        data = self.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
         thread = Thread(target=self.update_weather, args=[data])
         thread.start()
 
@@ -121,4 +144,5 @@ class Cache:
         # Asegúrate de que el directorio exista
         file.parent.mkdir(parents=True, exist_ok=True)
         file.touch(exist_ok=True)
+        
     
