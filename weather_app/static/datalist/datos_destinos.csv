@@ -1,3 +1,4 @@
+Ciudades,IATA,Aeropuerto
 Aalborg,AAL,AAL
 Aarhus,AAR,AAR
 Abadan,ABD,ABD
@@ -5,9 +6,9 @@ Abakan,ABA,ABA
 Aberdeen,ABR,ABR
 Aberdeen,ABZ,ABZ
 Abha,AHB,AHB
-Abu Dhabi,AUH,AUH
 Abidjan,ABJ,ABJ
 Abilene,ABI,ABI
+Abu Dhabi,AUH,AUH
 Abuja,ABV,ABV
 Acapulco,ACA,ACA
 Acarigua,AGV,AGV
@@ -48,6 +49,50 @@ Amman,AMM,AMM
 Amritsar,ATQ,ATQ
 Amsterdam,AMS,AMS
 "Amsterdam, Schiphol Airport",AMS,SPL
+"Anchorage, Merrill Field",ANC,MRI
+Ancona,AOI,AOI
+Andahuaylas,ANS,ANS
+Anguilla,AZA,AZA
+Aniak,ANI,ANI
+Ankang,AKA,AKA
+Ankara,ANK,ANK
+"Ankara, Esenboga",ANK,ESB
+Annecy,NCY,NCY
+Antalya,AYT,AYT
+Antananarivo,TNR,TNR
+Antigua,ANU,ANU
+Antofagasta,ANF,ANF
+Antwerp,ANR,ANR
+Anvik,ANV,ANV
+Aomori,AOJ,AOJ
+Apia,APW,APW
+Appleton,ATW,ATW
+Aqaba,AQJ,AQJ
+"Arcata, Eureka",ACV,ACV
+Arctic Village,ARC,ARC
+Arecibo,ARE,ARE
+Arequipa,AQP,AQP
+Arica,ARI,ARI
+Aruba,AUA,AUA
+Ascension,ASC,ASC
+Asheville,AVL,AVL
+Ashikawa,AKJ,AKJ
+"Ashland, Huntington",HTS,HTS
+Asmara,ASM,ASM
+Asturias,OVD,OVD
+Asuncion,ASU,ASU
+Aswan,ASW,ASW
+Athens,ATH,ATH
+Atlanta,ATL,ATL
+"Atlanta, Beaver Ruin",ATL,JAO
+"Atlanta, Perimeter",ATL,JAJ
+Atlantic City,AIY,AIY
+"Atlantic City, Pomona Field",AIY,ACY
+Atmautluak,ATT,ATT
+Auckland,AKL,AKL
+Augusta,AGS,AGS
+Austin,AUS,AUS
+Ayacucho,AYP,AYP
 "Baghdad, Al Muthana",BGW,BGW
 "Baghdad, Saddam International",BGW,SDA
 Bahrain,BAH,BAH
@@ -107,6 +152,59 @@ Bermuda,BDA,BDA
 Bern,BRN,BRN
 Bethel,BET,BET
 Bettles,BTT,BTT
+Biak,BIK,BIK
+Biarritz,BIQ,BIQ
+Bilbao,BIO,BIO
+Billings,BIL,BIL
+Billund,BLL,BLL
+Binghamton,BGM,BGM
+Bintulu,BTU,BTU
+Birmingham,BHM,BHM
+Birmingham,BHX,BHX
+Bissau,BXO,BXO
+Blantyre,BLZ,BLZ
+Bloemfontein,BFN,BFN
+Bloomington,BMI,BMI
+Boa Vista,BVB,BVB
+Bodo,BOO,BOO
+Bogota,BOG,BOG
+Boise,BOI,BOI
+Bologna,BLQ,BLQ
+Bombay,BOM,BOM
+Bonaire,BON,BON
+Bordeaux,BOD,BOD
+Boston,BOS,BOS
+Boulder,WBU,WBU
+Bourlamaq/Val D’or,YVO,YVO
+Bournemouth,BOH,BOH
+Bozeman,BZN,BZN
+Bradley,BDL,BDL
+Brainerd,BRD,BRD
+Brasilia,BSB,BSB
+Bratislava,BTS,BTS
+Brazzaville,BZV,BZV
+Bremen,BRE,BRE
+Brest,BES,BES
+Bridgeport,BDR,BDR
+Brisbane,BNE,BNE
+Bristol,BRS,BRS
+Brownsville,BRO,BRO
+Brussels,BRU,BRU
+Bucaramanga,BGA,BGA
+Bucharest,BUH,BUH
+"Bucharest, Baneasa",BUH,BBU
+"Bucharest, Otopeni",BUH,OTP
+Budapest,BUD,BUD
+Buenos Aires,BUE,BUE
+"Buenos Aires, Jorge Newbery",BUE,AEP
+"Buenos Aires, Ministro Pistarini",BUE,EZE
+Bujumbura,BJM,BJM
+Bulawayo,BUQ,BUQ
+"Bundaberg, Blanding",BDG,BDG
+Burbank,BUR,BUR
+Burlington,BTV,BTV
+Bushehr,BUZ,BUZ
+Butte,BTM,BTM
 Cairns,CNS,CNS
 Cairo,CAI,CAI
 Cajamarca,CJA,CJA
@@ -128,8 +226,8 @@ Carlsbad,CNM,CNM
 Cartagena,CTG,CTG
 Carupano,CUP,CUP
 Casablanca,CAS,AAA
-"Casablanca, Mohamed V",CAS,CMN
 "Casablanca, Anfa",CAS,CAS
+"Casablanca, Mohamed V",CAS,CMN
 Casper,CPR,CPR
 Catania,CTA,CTA
 Cayenne,CAY,CAY
@@ -161,11 +259,59 @@ Chignik,KCL,KCL
 Chihuahua,CUU,CUU
 Chisholm,HIB,HIB
 Chittagong,CGP,CGP
+Chongqing,CKG,CKG
+Christchurch,CHC,CHC
+Chuathbaluk,CHU,CHU
+Cincinnati,CVG,CVG
+Ciudad Del Carmen,CME,CME
+Ciudad Juarez,CJS,CJS
+Ciudad Obregon,CEN,CEN
+Cleveland,CLE,CLE
+"Cleveland, Burke Lakefront",CLE,BKL
+Cochabamba,CBB,CBB
+Cochin,COK,COK
+Coeur D’Alene,COE,COE
+Cold Bay,CDB,CDB
+Colima,CLQ,CLQ
+College Station,CLL,CLL
+Cologne,CGN,CGN
+Colombo,CMB,CMB
+Colorado Springs,COS,COS
+Columbia,CAE,CAE
+Columbia,COU,COU
+Columbus,CMH,CMH
+Columbus,CSG,CSG
+Columbus,UBS,UBS
+Conakry,CKY,CKY
+Concepcion,CCP,CCP
+Copenhagen,CPH,CPH
+"Copenhagen, Roskilde",CPH,RKE
+Copiapo,CPO,CPO
+Cordova,CDV,CDV
+Cork,ORK,ORK
+"Corning, Elmira",ELM,ELM
+Coro,CZE,CZE
+Corpus Christie,CRP,CRP
+"Corpus Christie, Cabaniss Field",CRP,NGW
+"Corpus Christie, Cuddihy Field",CRP,CUX
+Cotonou,COO,COO
+Coyhaique,GXQ,GXQ
+Cozumel,CZM,CZM
+Crokked Creek,CKD,CKD
+Cruzeiro Do Sul,CZS,CZS
+Cuenca,CUE,CUE
+Cuiaba,CGB,CGB
+Culebra,CPX,CPX
+Culiacan,CUL,CUL
+Cumana,CUM,CUM
+Curacao,CUR,CUR
+Curitiba,CWB,CWB
+Cusco,CUZ,CUZ
 Dakar,DKR,DKR
 Dalaman,DLM,DLM
 Dalian,DLC,DLC
-Dallas/Ft. Worth,DFW,DFW
 "Dallas, Love Field",DAL,DAL
+Dallas/Ft. Worth,DFW,DFW
 Damascus,DAM,DAM
 Danville,DNV,DNV
 Dar Es Salaam,DAR,DAR
@@ -181,9 +327,31 @@ Denver,DEN,DEN
 Des Moines,DSM,DSM
 Detroit,DTT,DTT
 Detroit,DTT,DTW
+Detroit,DTT,DTW
+Detroit City,DTT,DET
 Detroit City,DTT,DET
 "Detroit, Willow Run",DTT,YIP
+"Detroit, Willow Run",DTT,YIP
 Dhahran,DHA,DHA
+Dhahran,DHA,DHA
+Dhaka,DAC,DAC
+Dillingham,DLG,DLG
+Djerba,DJE,DJE
+Djibouti,JIB,JIB
+Doha,DOH,DOH
+"Dominica, Cane Field",DOM,DCF
+"Dominica, Melville Hall",DOM,DOM
+Dothan,DHN,DHN
+Douala,DLA,DLA
+Dresden,DRS,DRS
+Dubai,DXB,DXB
+Dublin,DUB,DUB
+Duluth,DLH,DLH
+Durango,DGO,DGO
+Durango,DRO,DRO
+Durban,DUR,DUR
+Dusseldorf,DUS,DUS
+Dutch Harbor,DUT,DUT
 East London,ELS,ELS
 East Midlands,EMA,EMA
 Easter Island,IPC,IPC
@@ -200,6 +368,16 @@ El Salvador,ESR,ESR
 Elat,ETH,ETH
 Elko,EKO,EKO
 Ely,ELY,ELY
+Enschede,ENS,ENS
+Entebbe,EBB,EBB
+Ercan,ECN,ECN
+Erevan,EVN,EVN
+Erfurt,ERF,ERF
+Erie,ERI,ERI
+Eugene,EUG,EUG
+Evansville,EVV,EVV
+Evenes,EVE,EVE
+Exeter,EXT,EXT
 Fairbanks,FAI,FAI
 "Fall River, New Bedford",EWB,EWB
 False Pass,KFP,KFP
@@ -219,6 +397,22 @@ Fort Myers,FMY,FMY
 Fort Nelson,YYE,YYE
 Fort St. John,YXJ,YXJ
 Fortaleza,FOR,FOR
+Frankfurt,FRA,FRA
+Fredericton,YFC,YFC
+Freeport,FPO,FPO
+Freetown,FNA,FNA
+"Freetown, Hastings",FNA,HGS
+Fresno,FAT,FAT
+Friedrichshafen,FDH,FDH
+Ft Pierce,FPR,FPR
+Ft Simpson,YFS,YFS
+Ft Smith,FSM,FSM
+Ft Wayne,FWA,FWA
+Ft Yukon,FYU,FYU
+Ft de France,FDF,FDF
+Fukuoka,FUK,FUK
+Funchal,FNC,FNC
+Fuzhou,FOC,FOC
 Gainesvile,GNV,GNV
 Galena,GAL,GAL
 Garoua,GOU,GOU
@@ -243,6 +437,25 @@ Grand Turk,GDT,GDT
 Grande Prairie,YQU,YQU
 Grayling,KGX,KGX
 Graz,GRZ,GRZ
+Great Falls,GTF,GTF
+Green Bay,GRB,GRB
+Greensboro,GSO,GSO
+Greenville,GLH,GLH
+Greenville,GSP,GSP
+Greenville,PGV,PGV
+Grenada,GND,GND
+Grenoble,GNB,GNB
+Groningen,GRQ,GRQ
+Guadalajara,GDL,GDL
+Guam,GUM,GUM
+Guangzhou,CAN,CAN
+Guatemala City,GUA,GUA
+Guayaquil,GYE,GYE
+Guernsey,GCI,GCI
+Guilin,KWL,KWL
+Guiyang,KWE,KWE
+Gulfport,GPT,GPT
+Gunnison,GUC,GUC
 Hagen,HAG,HAG
 Haikou,HAK,HAK
 Hail,HAS,HAS
@@ -272,6 +485,26 @@ Helsingborg,AGH,AGH
 Helsinki,HEL,HEL
 Heraklion,HER,HER
 Hermosillo,HMO,HMO
+Hilo,ITO,ITO
+Hiroshima,HIJ,HIJ
+Ho Chi Minh City,SGN,SGN
+Hohhot,HET,HET
+Holy Cross,HCR,HCR
+Homer,HOM,HOM
+Hong Kong,HKG,HKG
+Honolulu,HNL,HNL
+Hoolehua,MKK,MKK
+Hooper Bay,HPB,HPB
+Hoskins,HKN,HKN
+Houston,HOU,HOU
+"Houston, Hull Field",HOU,SGR
+"Houston, Intercontinental",HOU,IAH
+Hughes,HUS,HUS
+Humberside,HUY,HUY
+Huntsville,HSV,HSV
+Huslia,HSL,HSL
+Hyannis,HYA,HYA
+Hyderabad,HYD,HYD
 Iguassu Falls,IGU,IGU
 Iliamna,ILI,ILI
 Indianapolis,IND,IND
@@ -286,6 +519,13 @@ Isiro,IRP,IRP
 Islamabad,ISB,ISB
 "Isles of Scil, St. Mary’s",ISC,ISC
 "Isles of Scil, Tresco",ISC,TSO
+"Islip, Long Island Macarthur",ISP,ISP
+Istanbul,IST,IST
+Ithaca,ITH,ITH
+Ivanoff Bay,KIB,KIB
+Izmir,IZM,IZM
+"Izmir, Adnan Menderes",IZM,ADB
+"Izmir, Cigli Military",IZM,IGL
 Jackson,JAC,JAC
 Jackson,JAN,JAN
 Jacksonville,JAX,JAX
@@ -296,6 +536,15 @@ Jakarta,JKT,JKT
 Janesville,JVL,JVL
 Jeddah,JED,JED
 Jersey,JER,JER
+Jinan,TNA,TNA
+Johannesburg,JNB,JNB
+Johnston Island,JON,JON
+Johor Bahru,JHB,JHB
+Jonkoping,JKG,JKG
+Juanjui,JJI,JJI
+Juba,JUB,JUB
+Juliaca,JUL,JUL
+Juneau,JNU,JNU
 Kabul,KBL,KBL
 Kaduna,KAD,KAD
 Kagoshima,KOJ,KOJ
@@ -329,6 +578,39 @@ Kilimanjaro,JRO,JRO
 Killeen,ILE,ILE
 Kimberley,KIM,KIM
 Kindu,KND,KND
+King Cover,KVC,KVC
+King Salm,AKN,AKN
+Kingston,KIN,KIN
+"Kingston, Tinson",KIN,KTP
+Kinshasa,FIH,FIH
+Kipnuk,KPN,KPN
+Kiruna,KRN,KRN
+Kisangani,FKI,FKI
+Klagenfurt,KLU,KLU
+Knoxville,TYS,TYS
+Kochi,KCZ,KCZ
+Kodiak,ADQ,ADQ
+Komatsu,KMQ,KMQ
+Kongiganak,KKH,KKH
+Koror,ROR,ROR
+Kosrae,KSA,KSA
+Kota Kinabalu,BKI,BKI
+Kotzebue,OTZ,OTZ
+Koyukuk,KYU,KYU
+Krasnoyarsk,KJA,KJA
+Kristiansand,KRS,KRS
+Kuala Lumpur,KUL,KUL
+Kuching,KCH,KCH
+Kumamoto,KMJ,KMJ
+Kunming,KMG,KMG
+Kuopio,KUO,KUO
+Kushiro,KUH,KUH
+Kuujjuarap,YGW,YGW
+Kuwait,KWI,KWI
+Kwajalein,KWA,KWA
+Kwangju,KWJ,KWJ
+Kwethluk,KWT,KWT
+Kwigillingok,KWK,KWK
 La Ceiba,LCE,LCE
 La Crosse,LSE,LSE
 La Grande,YGL,YGL
@@ -367,6 +649,39 @@ Lima,LIM,LIM
 Limoges,LIG,LIG
 Lincoln,LNK,LNK
 Linz,LNZ,LNZ
+Lisbon,LIS,LIS
+Little Rock,LIT,LIT
+Liverpool,LPL,LPL
+Livingstone,LVI,LVI
+Ljubljana,LJU,LJU
+Lobito,LOB,LOB
+Lome,LFW,LFW
+London,LON,LON
+London,YXU,YXU
+"London, City Airport",LON,LCY
+"London, Gatwick",LON,LGW
+"London, Heathrow",LON,LHR
+"London, Luton",LON,LTN
+"London, Stansted",LON,STN
+Long Beach,LGB,LGB
+Loreto,LTO,LTO
+Los Angeles,LAX,LAX
+Los Angeles,LAX,VNY
+Los Mochis,LMM,LMM
+Louisville,SDF,SDF
+Lourdes/Tarbes,LDE,LDE
+Luanda,LAD,LAD
+Lubbock,LBB,LBB
+Lubumbashi,FBM,FBM
+Lucknow,LKO,LKO
+Ludwigshafen,LUD,LUD
+Lugano,LUG,LUG
+Lulea,LLA,LLA
+Lumid Pau,LUB,LUB
+Lusaka,LUN,LUN
+Luxembourg,LUX,LUX
+Luxor,LXR,LXR
+Lyon,LYS,LYS
 Maastricht,MST,MST
 Macon,MCN,MCN
 Madison,MSN,MSN
@@ -425,7 +740,55 @@ Merida,MID,MID
 Merida,MRD,MRD
 Meridian,MEI,MEI
 Mexico City,MEX,MEX
-N’djamena,NDJ,NDJ
+Mezquite de Chavez,BJX,BJX
+Miami,MIA,MIA
+"Miami, Downtown Heliport",MIA,JDM
+"Miami, Sea Plane Base",MIA,MPB
+Midland,MAF,MAF
+Milan,MIL,MIL
+"Milan, Linate",MIL,LIN
+"Milan, Malpensa",MIL,MXP
+"Milan, Orio al Serio",MIL,BGY
+"Milan, Segrate",MIL,SWK
+Milford,MLF,MLF
+Milwaukee,MKE,MKE
+Minatitlan,MTT,MTT
+Mineralnye,MRV,MRV
+Minneapolis,MSP,MSP
+Minot,MOT,MOT
+Minsk,MSQ,MSQ
+Miri,MYY,MYY
+Missoula,MSO,MSO
+Miyazaki,KMI,KMI
+Mobile,MOB,MOB
+Moline,MLI,MLI
+Mombasa,MBA,MBA
+Moncton,YQM,YQM
+Monroe,MLU,MLU
+Monrovia,MLW,MLW
+"Monrovia, Roberts International",MLW,ROB
+Montego Bay,MBJ,MBJ
+Monterrey,MTY,MTY
+Montevideo,MVD,MVD
+Montgomery,MGM,MGM
+Montpellier,MPL,MPL
+Montreal,YMQ,YMQ
+"Montreal, Dorval International",YMQ,YUL
+"Montreal, Mirabel International",YMQ,YMX
+Morelia,MLM,MLM
+Moroni,YVA,YVA
+"Moroni, Hahaya International",YVA,HAH
+Moscow,MOW,MOW
+"Moscow, Domodedovo",MOW,DME
+"Moscow, Sheremetyevo",MOW,SVO
+"Moscow, Vnukovo",MOW,VKO
+Mount Hagen,HGU,HGU
+Muenster,FMO,FMO
+Mulhouse,MLH,MLH
+Munich,MUC,MUC
+Muscat,MCT,MCT
+Muskegon,MKG,MKG
+Myrtle Beach,MYR,MYR
 Nadi,NAN,NAN
 Nagasaki,NGS,NGS
 Nagoya,NGO,NGO
@@ -455,6 +818,29 @@ New York,NYC,NYC
 Newburgh,SWF,SWF
 Newcastle,NCL,NCL
 Newtok,WWT,WWT
+Niagara Falls,IAG,IAG
+Niamey,NIM,NIM
+Nice,NCE,NCE
+Nightmute,NME,NME
+Niigata,KIJ,KIJ
+Nimes,FNI,FNI
+Ningbo,NGB,NGB
+Nis,INI,INI
+Nome,OME,OME
+Norfolk,ORF,ORF
+Norilsk,NSK,NSK
+Norman Wells,YVQ,YVQ
+Norrkoping,NRK,NRK
+Norwich,NWI,NWI
+Nouakchott,NKC,NKC
+Noumea,NOU,NOU
+"Noumea, Magenta",NOU,GEA
+Novosibirsk,OVB,OVB
+Nuevo Laredo,NLD,NLD
+Nulato,NUL,NUL
+Nunapitchuk,NUP,NUP
+Nuremberg,NUE,NUE
+N’djamena,NDJ,NDJ
 Oakland,OAK,OAK
 Oaxaca,OAX,OAX
 Oita,OIT,OIT
@@ -468,6 +854,17 @@ Orebro,ORB,ORB
 Orlando,ORL,MCO
 Osaka,OSA,OSA
 "Osaka, Itami",OSA,ITM
+"Osaka, Kansai International",OSA,KIX
+Oshkosh,OSH,OSH
+Osijek,OSI,OSI
+Oslo,OSL,OSL
+"Oslo, Fornebu Airport",OSL,FBU
+"Oslo, Gardermoen",OSL,GEN
+Osorno,ZOS,ZOS
+Ostend,OST,OST
+Ottawa,YOW,YOW
+Ouagadougou,OUA,OUA
+Oxnard/Ventura,OXR,OXR
 Pago Pago,PPG,PPG
 Palembang,PLM,PLM
 Palermo,PMO,PMO
@@ -512,9 +909,51 @@ Pocatello,PIH,PIH
 Pohnpei,PNI,PNI
 Point à Pitre,PTP,PTP
 Pointe Noire,PNR,PNR
+Ponce,PSE,PSE
+Ponta Delgada,PDL,PDL
+Pori,POR,POR
+Porlamar,PMV,PMV
+Port Elizabeth,PLZ,PLZ
+Port Gentil,POG,POG
+Port Graham,PGM,PGM
+Port Harcourt,PHC,PHC
+Port Hedland,PHE,PHE
+Port Heiden,PTH,PTH
+Port Moresby,POM,POM
+Port Velho,PVH,PVH
+Port Vila,VLI,VLI
+Port au Prince,PAP,PAP
+"Port of Spain, Trinidad",POS,POS
+Portland,PDX,PDX
+Portland,PWM,PWM
+Porto,OPO,OPO
+Porto Alegre,POA,POA
+Prague,PRG,PRG
+Presque Isle,PQI,PQI
+Prince George,YXS,YXS
+Prince Rupert,YPR,YPR
+Providence,PVD,PVD
+Providenciales,PLS,PLS
+Prudhoe Bay / Deadhorse,SCC,SCC
+Pucallpa,PCL,PCL
+Puebla,PBC,PBC
+Puerto Ayachucho,PYH,PYH
+Puerto Cabello,PBL,PBL
+Puerto Escondido,PXM,PXM
+Puerto Maldonado,PEM,PEM
+Puerto Montt,PMC,PMC
+Puerto Ordaz,PZO,PZO
+Puerto Plata,POP,POP
+Puerto Vallarta,PVR,PVR
+Punta Arenas,PUQ,PUQ
+Pusan,PUS,PUS
+Pyongyang,FNJ,FNJ
 Qingdao,TAO,TAO
 Quebec,YQB,YQB
+Queretaro,QRO,QRO
 Quetta,UET,UET
+Quinhagak,KWN,KWN
+Quito,UIO,UIO
 Rabat,RBA,RBA
 Rabaul,RAB,RAB
 Raleigh/Durham,RDU,RDU
@@ -532,12 +971,28 @@ Richmond,RIC,RIC
 Riga,RIX,RIX
 "Riga, Skulte",RIX,RSC
 Rimini,RMI,RMI
+Rio Gallegos,RGL,RGL
 Rio de Janeiro,RIO,RIO
 "Rio de Janeiro, Internacional",RIO,GIG
 "Rio de Janeiro, Santos Dumont",RIO,SDU
-Rio Gallegos,RGL,RGL
 Rioja,RIJ,RIJ
 Riyadh,RUH,RUH
+Roanoke,ROA,ROA
+Roatan,RTB,RTB
+Rochester,ROC,ROC
+Rochester,RST,RST
+Rockford,RFD,RFD
+Rocky Mount/Wilson,RWI,RWI
+Rome,ROM,ROM
+"Rome, Clampino",ROM,CIA
+"Rome, Fiumicino",ROM,FCO
+Roosevelt,ROL,ROL
+Roswell,ROW,ROW
+Rota,ROP,ROP
+Rotterdam,RTM,RTM
+Rouen,URO,URO
+Ruby,RBY,RBY
+Russian Mission,RSH,RSH
 Saarbruecken,SCN,SCN
 Sacramento,SAC,SMF
 Saipan,SPN,SPN
@@ -598,534 +1053,6 @@ Seville,SVQ,SVQ
 Seward,SWD,SWD
 Shageluk,SHX,SHX
 Shanghai,SHA,SHA
-Tabriz,TBZ,TBZ
-Tabuk,TUU,TUU
-Tacna,TCQ,TCQ
-"Taegu, Korea",TAE,TAE
-Taichung,TXG,TXG
-Taif,TIF,TIF
-Taipei,TPE,TPE
-"Taipei, Shung Shan",TPE,TSA
-Taiyuan,TYN,TYN
-Takamatsu,TAK,TAK
-Talara,TYL,TYL
-Tallahassee,TLH,TLH
-Tallinn,TLL,TLL
-Tamanrasset,TMR,TMR
-Tampa,TPA,TPA
-Tampere,TMP,TMP
-Tanana,TAL,TAL
-Tangier,TNG,TNG
-Tarapoto,TPP,TPP
-Tashkent,TAS,TAS
-Tawau,TWU,TWU
-Teesside,MME,MME
-Tegucigalpa,TGU,TGU
-Tehran,THR,THR
-"Tel Aviv Yafo, Sde Dov",TLV,SDV
-"Tel Aviv Yafo, Tel Aviv",TLV,TLV
-Temuco,ZCO,ZCO
-Tenerife,TCI,TCI
-"Tenerife, Norte Los Rodeos",TCI,TFN
-"Tenerife, Sur Reine Sofia",TCI,TFS
-Terceira,TER,TER
-Terrace,YXT,YXT
-Texarkana,TXK,TXK
-Thessaloniki,SKG,SKG
-Thunder Bay,YQT,YQT
-Tianjin,TSN,TSN
-Tijuana,TIJ,TIJ
-Timisoara,TSR,TSR
-Tingo Maria,TGI,TGI
-Ube,UBJ,UBJ
-Ukiah,UKI,UKI
-Ulan Bator,ULN,ULN
-Vaasa,VAA,VAA
-Valdosta,VLD,VLD
-Valencia,VLC,VLC
-Valencia,VLN,VLN
-Valera,VLV,VLV
-Valladolid,VLL,VLL
-Vancouver,YVR,YVR
-Vasteras,VST,VST
-Vaxjo,VXO,VXO
-Venetie,VEE,VEE
-Venice,VCE,VCE
-"Venice, Treviso",VCE,TSF
-Wabush,YWK,YWK
-Waco,ACT,ACT
-Warsaw,WAW,WAW
-Washington,WAS,WAS
-"Washington, Dulles International",WAS,IAD
-"Washington, National",WAS,DCA
-Watson Lake,YQH,YQH
-Wausau,AUW,AUW
-Wellington,WLG,WLG
-Wenatchee,EAT,EAT
-West Palm Beach,PBI,PBI
-Westchester,HPN,HPN
-Xiamen,XMN,XMN
-Yakima,YKM,YKM
-Yakutat,YAK,YAK
-Yamagata,GAJ,GAJ
-Yantai,YNT,YNT
-Yap Caroline Island,YAP,YAP
-Zacatecas,ZCL,ZCL
-Zagreb,ZAG,ZAG
-Zahedan,ZAH,ZAH
-Zanzibar,ZNZ,ZNZ
-Zaragoza,ZAZ,ZAZ
-Zaragoza,ZAZ,ZAZ
-"Anchorage, Merrill Field",ANC,MRI
-Ancona,AOI,AOI
-Andahuaylas,ANS,ANS
-Anguilla,AZA,AZA
-Aniak,ANI,ANI
-Ankang,AKA,AKA
-Ankara,ANK,ANK
-"Ankara, Esenboga",ANK,ESB
-Annecy,NCY,NCY
-Antalya,AYT,AYT
-Antananarivo,TNR,TNR
-Antigua,ANU,ANU
-Antofagasta,ANF,ANF
-Antwerp,ANR,ANR
-Anvik,ANV,ANV
-Aomori,AOJ,AOJ
-Apia,APW,APW
-Appleton,ATW,ATW
-Aqaba,AQJ,AQJ
-"Arcata, Eureka",ACV,ACV
-Arctic Village,ARC,ARC
-Arecibo,ARE,ARE
-Arequipa,AQP,AQP
-Arica,ARI,ARI
-Aruba,AUA,AUA
-Ascension,ASC,ASC
-Asheville,AVL,AVL
-Ashikawa,AKJ,AKJ
-"Ashland, Huntington",HTS,HTS
-Asmara,ASM,ASM
-Asturias,OVD,OVD
-Asuncion,ASU,ASU
-Aswan,ASW,ASW
-Athens,ATH,ATH
-Atlanta,ATL,ATL
-"Atlanta, Beaver Ruin",ATL,JAO
-"Atlanta, Perimeter",ATL,JAJ
-Atlantic City,AIY,AIY
-"Atlantic City, Pomona Field",AIY,ACY
-Atmautluak,ATT,ATT
-Auckland,AKL,AKL
-Augusta,AGS,AGS
-Austin,AUS,AUS
-Ayacucho,AYP,AYP
-Biak,BIK,BIK
-Biarritz,BIQ,BIQ
-Bilbao,BIO,BIO
-Billings,BIL,BIL
-Billund,BLL,BLL
-Binghamton,BGM,BGM
-Bintulu,BTU,BTU
-Birmingham,BHM,BHM
-Birmingham,BHX,BHX
-Bissau,BXO,BXO
-Blantyre,BLZ,BLZ
-Bloemfontein,BFN,BFN
-Bloomington,BMI,BMI
-Boa Vista,BVB,BVB
-Bodo,BOO,BOO
-Bogota,BOG,BOG
-Boise,BOI,BOI
-Bologna,BLQ,BLQ
-Bombay,BOM,BOM
-Bonaire,BON,BON
-Bordeaux,BOD,BOD
-Boston,BOS,BOS
-Boulder,WBU,WBU
-Bourlamaq/Val D’or,YVO,YVO
-Bournemouth,BOH,BOH
-Bozeman,BZN,BZN
-Bradley,BDL,BDL
-Brainerd,BRD,BRD
-Brasilia,BSB,BSB
-Bratislava,BTS,BTS
-Brazzaville,BZV,BZV
-Bremen,BRE,BRE
-Brest,BES,BES
-Bridgeport,BDR,BDR
-Brisbane,BNE,BNE
-Bristol,BRS,BRS
-Brownsville,BRO,BRO
-Brussels,BRU,BRU
-Bucaramanga,BGA,BGA
-Bucharest,BUH,BUH
-"Bucharest, Baneasa",BUH,BBU
-"Bucharest, Otopeni",BUH,OTP
-Budapest,BUD,BUD
-Buenos Aires,BUE,BUE
-"Buenos Aires, Ministro Pistarini",BUE,EZE
-"Buenos Aires, Jorge Newbery",BUE,AEP
-Bujumbura,BJM,BJM
-Bulawayo,BUQ,BUQ
-"Bundaberg, Blanding",BDG,BDG
-Burbank,BUR,BUR
-Burlington,BTV,BTV
-Bushehr,BUZ,BUZ
-Butte,BTM,BTM
-Chongqing,CKG,CKG
-Christchurch,CHC,CHC
-Chuathbaluk,CHU,CHU
-Cincinnati,CVG,CVG
-Ciudad Del Carmen,CME,CME
-Cleveland,CLE,CLE
-"Cleveland, Burke Lakefront",CLE,BKL
-Cochabamba,CBB,CBB
-Cochin,COK,COK
-Coeur D’Alene,COE,COE
-Cold Bay,CDB,CDB
-Colima,CLQ,CLQ
-College Station,CLL,CLL
-Cologne,CGN,CGN
-Colombo,CMB,CMB
-Colorado Springs,COS,COS
-Columbia,CAE,CAE
-Columbia,COU,COU
-Columbus,CMH,CMH
-Columbus,CSG,CSG
-Columbus,UBS,UBS
-Conakry,CKY,CKY
-Concepcion,CCP,CCP
-Copenhagen,CPH,CPH
-"Copenhagen, Roskilde",CPH,RKE
-Copiapo,CPO,CPO
-Cordova,CDV,CDV
-Cork,ORK,ORK
-"Corning, Elmira",ELM,ELM
-Coro,CZE,CZE
-Corpus Christie,CRP,CRP
-"Corpus Christie, Cabaniss Field",CRP,NGW
-"Corpus Christie, Cuddihy Field",CRP,CUX
-Cotonou,COO,COO
-Coyhaique,GXQ,GXQ
-Cozumel,CZM,CZM
-Crokked Creek,CKD,CKD
-Cruzeiro Do Sul,CZS,CZS
-Cuenca,CUE,CUE
-Cuiaba,CGB,CGB
-Culebra,CPX,CPX
-Culiacan,CUL,CUL
-Cumana,CUM,CUM
-Curacao,CUR,CUR
-Curitiba,CWB,CWB
-Cusco,CUZ,CUZ
-Detroit,DTT,DTW
-Detroit City,DTT,DET
-"Detroit, Willow Run",DTT,YIP
-Dhahran,DHA,DHA
-Dhaka,DAC,DAC
-Dillingham,DLG,DLG
-Djerba,DJE,DJE
-Djibouti,JIB,JIB
-Doha,DOH,DOH
-"Dominica, Cane Field",DOM,DCF
-"Dominica, Melville Hall",DOM,DOM
-Dothan,DHN,DHN
-Douala,DLA,DLA
-Dresden,DRS,DRS
-Dubai,DXB,DXB
-Dublin,DUB,DUB
-Duluth,DLH,DLH
-Durango,DGO,DGO
-Durango,DRO,DRO
-Durban,DUR,DUR
-Dusseldorf,DUS,DUS
-Dutch Harbor,DUT,DUT
-Enschede,ENS,ENS
-Entebbe,EBB,EBB
-Ercan,ECN,ECN
-Erevan,EVN,EVN
-Erfurt,ERF,ERF
-Erie,ERI,ERI
-Eugene,EUG,EUG
-Evansville,EVV,EVV
-Evenes,EVE,EVE
-Exeter,EXT,EXT
-Frankfurt,FRA,FRA
-Fredericton,YFC,YFC
-Freeport,FPO,FPO
-Freetown,FNA,FNA
-"Freetown, Hastings",FNA,HGS
-Fresno,FAT,FAT
-Friedrichshafen,FDH,FDH
-Ft de France,FDF,FDF
-Ft Pierce,FPR,FPR
-Ft Simpson,YFS,YFS
-Ft Smith,FSM,FSM
-Ft Wayne,FWA,FWA
-Ft Yukon,FYU,FYU
-Fukuoka,FUK,FUK
-Funchal,FNC,FNC
-Fuzhou,FOC,FOC
-Great Falls,GTF,GTF
-Green Bay,GRB,GRB
-Greensboro,GSO,GSO
-Greenville,GLH,GLH
-Greenville,GSP,GSP
-Greenville,PGV,PGV
-Grenada,GND,GND
-Grenoble,GNB,GNB
-Groningen,GRQ,GRQ
-Guadalajara,GDL,GDL
-Guam,GUM,GUM
-Guangzhou,CAN,CAN
-Guatemala City,GUA,GUA
-Guayaquil,GYE,GYE
-Guernsey,GCI,GCI
-Guilin,KWL,KWL
-Guiyang,KWE,KWE
-Gulfport,GPT,GPT
-Gunnison,GUC,GUC
-Hilo,ITO,ITO
-Hiroshima,HIJ,HIJ
-Ho Chi Minh City,SGN,SGN
-Hohhot,HET,HET
-Holy Cross,HCR,HCR
-Homer,HOM,HOM
-Hong Kong,HKG,HKG
-Honolulu,HNL,HNL
-Hoolehua,MKK,MKK
-Hooper Bay,HPB,HPB
-Hoskins,HKN,HKN
-Houston,HOU,HOU
-"Houston, Intercontinental",HOU,IAH
-"Houston, Hull Field",HOU,SGR
-Hughes,HUS,HUS
-Humberside,HUY,HUY
-Huntsville,HSV,HSV
-Huslia,HSL,HSL
-Hyannis,HYA,HYA
-Hyderabad,HYD,HYD
-Istanbul,IST,IST
-"Islip, Long Island Macarthur",ISP,ISP
-Ithaca,ITH,ITH
-Ivanoff Bay,KIB,KIB
-Izmir,IZM,IZM
-"Izmir, Adnan Menderes",IZM,ADB
-"Izmir, Cigli Military",IZM,IGL
-Jinan,TNA,TNA
-Johannesburg,JNB,JNB
-Johnston Island,JON,JON
-Johor Bahru,JHB,JHB
-Jonkoping,JKG,JKG
-Juanjui,JJI,JJI
-Juba,JUB,JUB
-Juliaca,JUL,JUL
-Juneau,JNU,JNU
-King Cover,KVC,KVC
-King Salm,AKN,AKN
-Kingston,KIN,KIN
-"Kingston, Tinson",KIN,KTP
-Kinshasa,FIH,FIH
-Kipnuk,KPN,KPN
-Kiruna,KRN,KRN
-Kisangani,FKI,FKI
-Klagenfurt,KLU,KLU
-Knoxville,TYS,TYS
-Kochi,KCZ,KCZ
-Kodiak,ADQ,ADQ
-Komatsu,KMQ,KMQ
-Kongiganak,KKH,KKH
-Koror,ROR,ROR
-Kosrae,KSA,KSA
-Kota Kinabalu,BKI,BKI
-Kotzebue,OTZ,OTZ
-Koyukuk,KYU,KYU
-Krasnoyarsk,KJA,KJA
-Kristiansand,KRS,KRS
-Kuala Lumpur,KUL,KUL
-Kuching,KCH,KCH
-Kumamoto,KMJ,KMJ
-Kunming,KMG,KMG
-Kuopio,KUO,KUO
-Kushiro,KUH,KUH
-Kuujjuarap,YGW,YGW
-Kuwait,KWI,KWI
-Kwajalein,KWA,KWA
-Kwangju,KWJ,KWJ
-Kwethluk,KWT,KWT
-Kwigillingok,KWK,KWK
-Lisbon,LIS,LIS
-Little Rock,LIT,LIT
-Liverpool,LPL,LPL
-Livingstone,LVI,LVI
-Ljubljana,LJU,LJU
-Lobito,LOB,LOB
-Lome,LFW,LFW
-London,LON,LON
-London,YXU,YXU
-"London, Gatwick",LON,LGW
-"London, Heathrow",LON,LHR
-"London, City Airport",LON,LCY
-"London, Luton",LON,LTN
-"London, Stansted",LON,STN
-Long Beach,LGB,LGB
-Loreto,LTO,LTO
-Los Angeles,LAX,LAX
-Los Angeles,LAX,VNY
-Los Mochis,LMM,LMM
-Louisville,SDF,SDF
-Lourdes/Tarbes,LDE,LDE
-Luanda,LAD,LAD
-Lubbock,LBB,LBB
-Lubumbashi,FBM,FBM
-Lucknow,LKO,LKO
-Ludwigshafen,LUD,LUD
-Lugano,LUG,LUG
-Lulea,LLA,LLA
-Lumid Pau,LUB,LUB
-Lusaka,LUN,LUN
-Luxembourg,LUX,LUX
-Luxor,LXR,LXR
-Lyon,LYS,LYS
-Miami,MIA,MIA
-"Miami, Downtown Heliport",MIA,JDM
-"Miami, Sea Plane Base",MIA,MPB
-Midland,MAF,MAF
-Milan,MIL,MIL
-"Milan, Linate",MIL,LIN
-"Milan, Malpensa",MIL,MXP
-"Milan, Orio al Serio",MIL,BGY
-"Milan, Segrate",MIL,SWK
-Milford,MLF,MLF
-Milwaukee,MKE,MKE
-Minatitlan,MTT,MTT
-Mineralnye,MRV,MRV
-Minneapolis,MSP,MSP
-Minot,MOT,MOT
-Minsk,MSQ,MSQ
-Miri,MYY,MYY
-Missoula,MSO,MSO
-Miyazaki,KMI,KMI
-Mobile,MOB,MOB
-Moline,MLI,MLI
-Mombasa,MBA,MBA
-Moncton,YQM,YQM
-Monroe,MLU,MLU
-Monrovia,MLW,MLW
-"Monrovia, Roberts International",MLW,ROB
-Montego Bay,MBJ,MBJ
-Monterrey,MTY,MTY
-Montevideo,MVD,MVD
-Montgomery,MGM,MGM
-Montpellier,MPL,MPL
-Montreal,YMQ,YMQ
-"Montreal, Dorval International",YMQ,YUL
-"Montreal, Mirabel International",YMQ,YMX
-Morelia,MLM,MLM
-Moroni,YVA,YVA
-"Moroni, Hahaya International",YVA,HAH
-Moscow,MOW,MOW
-"Moscow, Domodedovo",MOW,DME
-"Moscow, Sheremetyevo",MOW,SVO
-"Moscow, Vnukovo",MOW,VKO
-Mount Hagen,HGU,HGU
-Muenster,FMO,FMO
-Mulhouse,MLH,MLH
-Munich,MUC,MUC
-Muscat,MCT,MCT
-Muskegon,MKG,MKG
-Myrtle Beach,MYR,MYR
-Niagara Falls,IAG,IAG
-Niamey,NIM,NIM
-Nice,NCE,NCE
-Nightmute,NME,NME
-Niigata,KIJ,KIJ
-Nimes,FNI,FNI
-Ningbo,NGB,NGB
-Nis,INI,INI
-Nome,OME,OME
-Norfolk,ORF,ORF
-Norilsk,NSK,NSK
-Norman Wells,YVQ,YVQ
-Norrkoping,NRK,NRK
-Norwich,NWI,NWI
-Nouakchott,NKC,NKC
-Noumea,NOU,NOU
-"Noumea, Magenta",NOU,GEA
-Novosibirsk,OVB,OVB
-Nuevo Laredo,NLD,NLD
-Nulato,NUL,NUL
-Nunapitchuk,NUP,NUP
-Nuremberg,NUE,NUE
-"Osaka, Kansai International",OSA,KIX
-Oshkosh,OSH,OSH
-Osijek,OSI,OSI
-Oslo,OSL,OSL
-"Oslo, Fornebu Airport",OSL,FBU
-"Oslo, Gardermoen",OSL,GEN
-Osorno,ZOS,ZOS
-Ostend,OST,OST
-Ottawa,YOW,YOW
-Ouagadougou,OUA,OUA
-Oxnard/Ventura,OXR,OXR
-Ponce,PSE,PSE
-Ponta Delgada,PDL,PDL
-Pori,POR,POR
-Porlamar,PMV,PMV
-Port au Prince,PAP,PAP
-Port Elizabeth,PLZ,PLZ
-Port Gentil,POG,POG
-Port Graham,PGM,PGM
-Port Harcourt,PHC,PHC
-Port Hedland,PHE,PHE
-Port Heiden,PTH,PTH
-Port Moresby,POM,POM
-"Port of Spain, Trinidad",POS,POS
-Port Velho,PVH,PVH
-Port Vila,VLI,VLI
-Portland,PDX,PDX
-Portland,PWM,PWM
-Porto,OPO,OPO
-Porto Alegre,POA,POA
-Prague,PRG,PRG
-Presque Isle,PQI,PQI
-Prince George,YXS,YXS
-Prince Rupert,YPR,YPR
-Providence,PVD,PVD
-Providenciales,PLS,PLS
-Prudhoe Bay / Deadhorse,SCC,SCC
-Pucallpa,PCL,PCL
-Puebla,PBC,PBC
-Puerto Ayachucho,PYH,PYH
-Puerto Cabello,PBL,PBL
-Puerto Escondido,PXM,PXM
-Puerto Maldonado,PEM,PEM
-Puerto Montt,PMC,PMC
-Puerto Ordaz,PZO,PZO
-Puerto Plata,POP,POP
-Puerto Vallarta,PVR,PVR
-Punta Arenas,PUQ,PUQ
-Pusan,PUS,PUS
-Pyongyang,FNJ,FNJ
-Quinhagak,KWN,KWN
-Quito,UIO,UIO
-Roanoke,ROA,ROA
-Roatan,RTB,RTB
-Rochester,ROC,ROC
-Rochester,RST,RST
-Rockford,RFD,RFD
-Rocky Mount/Wilson,RWI,RWI
-Rome,ROM,ROM
-"Rome, Clampino",ROM,CIA
-"Rome, Fiumicino",ROM,FCO
-Roosevelt,ROL,ROL
-Roswell,ROW,ROW
-Rota,ROP,ROP
-Rotterdam,RTM,RTM
-Rouen,URO,URO
-Ruby,RBY,RBY
-Russian Mission,RSH,RSH
 Shannon,SNN,SNN
 Shantou/Swatow,SWA,SWA
 Sharjah,SHJ,SHJ
@@ -1187,6 +1114,46 @@ Suva,SUV,SUV
 "Sverdlovsk, Ekaterinburg",SVX,SVX
 Sydney,SYD,SYD
 Syracuse,SYR,SYR
+Tabriz,TBZ,TBZ
+Tabuk,TUU,TUU
+Tacna,TCQ,TCQ
+"Taegu, Korea",TAE,TAE
+Taichung,TXG,TXG
+Taif,TIF,TIF
+Taipei,TPE,TPE
+"Taipei, Shung Shan",TPE,TSA
+Taiyuan,TYN,TYN
+Takamatsu,TAK,TAK
+Talara,TYL,TYL
+Tallahassee,TLH,TLH
+Tallinn,TLL,TLL
+Tamanrasset,TMR,TMR
+Tampa,TPA,TPA
+Tampere,TMP,TMP
+Tampico,TAM,TAM
+Tanana,TAL,TAL
+Tangier,TNG,TNG
+Tarapoto,TPP,TPP
+Tashkent,TAS,TAS
+Tawau,TWU,TWU
+Teesside,MME,MME
+Tegucigalpa,TGU,TGU
+Tehran,THR,THR
+"Tel Aviv Yafo, Sde Dov",TLV,SDV
+"Tel Aviv Yafo, Tel Aviv",TLV,TLV
+Temuco,ZCO,ZCO
+Tenerife,TCI,TCI
+"Tenerife, Norte Los Rodeos",TCI,TFN
+"Tenerife, Sur Reine Sofia",TCI,TFS
+Terceira,TER,TER
+Terrace,YXT,YXT
+Texarkana,TXK,TXK
+Thessaloniki,SKG,SKG
+Thunder Bay,YQT,YQT
+Tianjin,TSN,TSN
+Tijuana,TIJ,TIJ
+Timisoara,TSR,TSR
+Tingo Maria,TGI,TGI
 Tobago,TAB,TAB
 Toksook Bay,OOK,OOK
 Tokushima,TKS,TKS
@@ -1194,6 +1161,7 @@ Tokyo,TYO,TYO
 "Tokyo, Haneda",TYO,HND
 "Tokyo, Narita Airport",TYO,NRT
 Toledo,TOL,TOL
+Toluca,TLC,TLC
 Tongatapu,TBU,TBU
 Topeka,TOP,TOP
 Toronto,YTO,YTO
@@ -1228,9 +1196,24 @@ Tuscaloosa,TCL,TCL
 Tuxtla Gutierrez,TGZ,TGZ
 Twin Falls,TWF,TWF
 Tyler,TYR,TYR
+Ube,UBJ,UBJ
+Ukiah,UKI,UKI
+Ulan Bator,ULN,ULN
 Umea,UME,UME
 Unalakleet,UNK,UNK
 Urumqi,URC,URC
+Vaasa,VAA,VAA
+Valdosta,VLD,VLD
+Valencia,VLC,VLC
+Valencia,VLN,VLN
+Valera,VLV,VLV
+Valladolid,VLL,VLL
+Vancouver,YVR,YVR
+Vasteras,VST,VST
+Vaxjo,VXO,VXO
+Venetie,VEE,VEE
+Venice,VCE,VCE
+"Venice, Treviso",VCE,TSF
 Veracruz,VER,VER
 Vernal,VEL,VEL
 Verona,VRN,VRN
@@ -1242,6 +1225,18 @@ Villahermosa,VSA,VSA
 Vilnius,VNO,VNO
 Vitoria,VIT,VIT
 Vladivostok,VVO,VVO
+Wabush,YWK,YWK
+Waco,ACT,ACT
+Warsaw,WAW,WAW
+Washington,WAS,WAS
+"Washington, Dulles International",WAS,IAD
+"Washington, National",WAS,DCA
+Watson Lake,YQH,YQH
+Wausau,AUW,AUW
+Wellington,WLG,WLG
+Wenatchee,EAT,EAT
+West Palm Beach,PBI,PBI
+Westchester,HPN,HPN
 White River,LEB,LEB
 Whitehorse,YXY,YXY
 Wichita,ICT,ICT
@@ -1253,11 +1248,23 @@ Windsor,YQG,YQG
 Winnipeg,YWG,YWG
 Wrangell,WRG,WRG
 Wuhan,WUH,WUH
+Xiamen,XMN,XMN
 Xian,SIA,SIA
+Yakima,YKM,YKM
+Yakutat,YAK,YAK
+Yamagata,GAJ,GAJ
+Yantai,YNT,YNT
+Yap Caroline Island,YAP,YAP
 Yellowknife,YZF,YZF
 Yinchuang,INC,INC
 Yurimaguas,YMS,YMS
 Yuzhno -Sakhalinsk,UUS,UUS
+Zacatecas,ZCL,ZCL
+Zagreb,ZAG,ZAG
+Zahedan,ZAH,ZAH
+Zanzibar,ZNZ,ZNZ
+Zaragoza,ZAZ,ZAZ
+Zaragoza,ZAZ,ZAZ
 Zhanjiang,ZHA,ZHA
 Zhengzhou,CGO,CGO
 Zihuatanejo,ZIH,ZIH
