@@ -30,17 +30,17 @@ def determine_icon(json_data): # faltan implementar los svg
         json_data (dict) : Informacion del clima de una ubicacion.
     """
     icon_map = {
-        range(200, 233): "storm_icon.svg",         # Tormenta
+        range(200, 233): "img/Storm.png",         # Tormenta
         range(300, 322): "light_rain_icon.svg",    # Lluvia ligera
         range(500, 505): "rain_icon.svg",          # Lluvia
-        511: "snow_icon.svg",                      # Nieve
+        511: "img/Snow.png",                      # Nieve
         range(520, 532): "rain_icon.svg",          # Lluvia
-        range(600, 623): "snow_icon.svg",          # Nieve
+        range(600, 623): "img/Snow.png",          # Nieve
         range(701, 782): "fog_icon.svg",           # Neblina
-        800: "clear_icon.svg",                     # Despejado
-        801: "partly_cloudy_icon.svg",             # Algunas nubes
-        802: "clouds_icon.svg",                    # Nubes
-        range(803, 805): "cloudy_icon.svg"         # Nublado
+        800: "img/Sunny.png",                     # Despejado
+        801: "img/Parcialmente nublado.png",             # Algunas nubes
+        802: "img/Nublado.png",                    # Nubes
+        range(803, 805): "img/Nublado.png"         # Nublado
     }
     if not isinstance(json_data, dict):
         return
