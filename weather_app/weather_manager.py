@@ -12,10 +12,11 @@ FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
 IATA_DATA_PATH = './weather_app/static/datalist/datos_destinos.csv'
 LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
 CITIES_DATA_PATH = './weather_app/static/datalist/ciudades.csv'
+CITY_LOCATION_DATA_PATH='./weather_app/static/datalist/ciudad_coordenadas.csv'
 REQUEST_INTERVAL = 1.2
 LONG_SLEEP_INTERVAL = 10800
 # Data Managers
-data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
+data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH,CITY_LOCATION_DATA_PATH)
 data_manager = DataManager(data_collector)
 
 def get_weather(city: str, weather_records: dict):
