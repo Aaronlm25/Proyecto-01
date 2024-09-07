@@ -21,7 +21,7 @@
             "pressure": 1024,
             "humidity": 77,
             "sea_level": 1024,
-            "grnd_level": 1021
+            "grnd_level": 1022
         },
         "visibility": 10000,
         "wind": {
@@ -38,6 +38,8 @@
             "country": "DK",
             "sunrise": 1725597203,
             "sunset": 1725645853
+            "sunrise": 1725597203,
+            "sunset": 1725645853
         },
         "timezone": 7200,
         "id": 2624886,
@@ -51,6 +53,10 @@
         },
         "weather": [
             {
+                "id": 803,
+                "main": "Clouds",
+                "description": "muy nuboso",
+                "icon": "04n"
                 "id": 803,
                 "main": "Clouds",
                 "description": "muy nuboso",
@@ -82,6 +88,8 @@
             "type": 2,
             "id": 2001568,
             "country": "DK",
+            "sunrise": 1725597221,
+            "sunset": 1725645694
             "sunrise": 1725597221,
             "sunset": 1725645694
         },
@@ -129,6 +137,8 @@
             "country": "IR",
             "sunrise": 1725589591,
             "sunset": 1725635044
+            "sunrise": 1725589591,
+            "sunset": 1725635044
         },
         "timezone": 12600,
         "id": 145459,
@@ -150,6 +160,14 @@
         ],
         "base": "stations",
         "main": {
+            "temp": 13.01,
+            "feels_like": 12.82,
+            "temp_min": 13.01,
+            "temp_max": 13.01,
+            "pressure": 1007,
+            "humidity": 94,
+            "sea_level": 1007,
+            "grnd_level": 978
             "temp": 13.01,
             "feels_like": 12.82,
             "temp_min": 13.01,
@@ -187,15 +205,16 @@
         },
         "weather": [
             {
-                "id": 701,
-                "main": "Mist",
-                "description": "niebla",
-                "icon": "50n"
+                "id": 804,
+                "main": "Clouds",
+                "description": "nubes",
+                "icon": "04n"
             }
         ],
         "base": "stations",
         "main": {
             "temp": 13.12,
+            "feels_like": 13.1,
             "feels_like": 13.1,
             "temp_min": 12.52,
             "temp_max": 13.27,
@@ -232,10 +251,10 @@
         },
         "weather": [
             {
-                "id": 800,
-                "main": "Clear",
-                "description": "cielo claro",
-                "icon": "01n"
+                "id": 500,
+                "main": "Rain",
+                "description": "lluvia ligera",
+                "icon": "10n"
             }
         ],
         "base": "stations",
@@ -254,6 +273,9 @@
             "speed": 0,
             "deg": 0
         },
+        "rain": {
+            "1h": 0.11
+        },
         "clouds": {
             "all": 0
         },
@@ -262,6 +284,8 @@
             "type": 1,
             "id": 7396,
             "country": "SA",
+            "sunrise": 1725591396,
+            "sunset": 1725636022
             "sunrise": 1725591396,
             "sunset": 1725636022
         },
@@ -309,6 +333,8 @@
             "country": "AE",
             "sunrise": 1725588347,
             "sunset": 1725633379
+            "sunrise": 1725588347,
+            "sunset": 1725633379
         },
         "timezone": 14400,
         "id": 292968,
@@ -322,9 +348,9 @@
         },
         "weather": [
             {
-                "id": 804,
+                "id": 803,
                 "main": "Clouds",
-                "description": "nubes",
+                "description": "muy nuboso",
                 "icon": "04n"
             }
         ],
@@ -340,12 +366,13 @@
             "grnd_level": 1013
         },
         "visibility": 10000,
+        "visibility": 10000,
         "wind": {
             "speed": 3.09,
             "deg": 210
         },
         "clouds": {
-            "all": 100
+            "all": 75
         },
         "dt": 1725586766,
         "sys": {

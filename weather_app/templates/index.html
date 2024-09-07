@@ -7,11 +7,13 @@
   </head>
   <body>
     <section class="container">
-      <div class="info">
 
-        <h1>Buscar por...</h1>
+      <h1>Buscar por...</h1>
+      
+      <div class="info card">
 
         <select id="menu" onchange="saveElection()">
+          <option></option>
           <option value="cityInput">Nombre de la ciudad</option>
           <option value="IATA_codeInput">Código IATA</option>
           <option value="flight_numberInput">Número de vuelo</option>
@@ -20,27 +22,51 @@
         <!-- Formulario para ingresar datos -->
         <form class="input" method="POST" action="/">
           <div id="cityInput" class="content">
-          <label for="city">Ciudad:</label>
+          <label for="city"></label>
           <input type="text" id="city" name="city" placeholder="Ej. Ciudad de México" />
           </div>
 
           <div id="IATA_codeInput" class="content">
-          <label for="iata_code">Código IATA:</label>
+          <label for="iata_code"></label>
           <input type="text" id="iata_code" name="iata_code" placeholder="Ej. JFK" />
           </div>
 
           <div id="flight_numberInput" class="content">
-          <label for="flight_number">Número de vuelo:</label>
+          <label for="flight_number"></label>
           <input type="text" id="flight_number" name="flight_number" placeholder="Ej. AA123" />
           </div>
 
-          <button type="submit">Obtener clima</button>
+          <button  type="submit"> <img src="static/svg/search.svg"> </button>
         </form>
       </div>
       
       <!-- Verifica si se ha recibido la información del clima -->
       <div class="cards">
       {% if weather_data %} 
+      <div class="card weather-card second_card" id="second_card">
+        <h2 class="city-name">Ciudad de salida: {{ weather_data['name'] }}</h2>
+        <h1 class="temperature">{{ weather_data['main']['temp'] }}°C</h1>
+        <div class="weather-info">
+          <img
+            class="weather-icon"
+            src="https://img.icons8.com/3d-fluency/94/storm.png"
+            alt="Weather Icon"
+          />
+          <p class="weather-description">{{ weather_data['weather'][0]['description'] | capitalize }}</p>
+        </div>
+        <div class="stats">
+          <article class="stat">
+            <img class="stat-icon" src="{{ url_for('static', filename='svg/humedad.svg') }}" alt="IMG-Humedad" />
+            <p class="stat-value">{{ weather_data['main']['humidity'] }}%</p>
+            <p class="stat-label">Humedad</p>
+          </article>
+          <article class="stat">
+            <img class="stat-icon" src="{{ url_for('static', filename='svg/viento.svg') }}" alt="IMG-Viento" />
+            <p class="stat-value">{{ weather_data['wind']['speed'] }} m/s</p>
+            <p class="stat-label">Velocidad de viento</p>
+          </article>
+        </div>
+      </div>
         <div class="card weather-card">
           <h2 class="city-name">Ciudad: {{ weather_data['name'] }}</h2>
           <h1 class="temperature">{{ weather_data['main']['temp'] }}°C</h1>

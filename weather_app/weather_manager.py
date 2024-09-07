@@ -53,17 +53,17 @@ def determine_icon(json_data: dict):
     if not json_data:
         raise ValueError('The JSON object is None')
     icon_map = {
-        range(200, 233): "storm_icon.svg",         # Storm
-        range(300, 322): "light_rain_icon.svg",    # Light rain
-        range(500, 505): "rain_icon.svg",          # Rain
-        511: "snow_icon.svg",                      # Snow
-        range(520, 532): "rain_icon.svg",          # Rain
-        range(600, 623): "snow_icon.svg",          # Snow
-        range(701, 782): "fog_icon.svg",           # Fog
-        800: "clear_icon.svg",                     # Clear
-        801: "partly_cloudy_icon.svg",             # Partly cloudy
-        802: "clouds_icon.svg",                    # Clouds
-        range(803, 805): "cloudy_icon.svg"         # Cloudy
+        range(200, 233): "img/Storm.png",         # Tormenta
+        range(300, 322): "light_rain_icon.svg",    # Lluvia ligera
+        range(500, 505): "rain_icon.svg",          # Lluvia
+        511: "img/Snow.png",                      # Nieve
+        range(520, 532): "rain_icon.svg",          # Lluvia
+        range(600, 623): "img/Snow.png",          # Nieve
+        range(701, 782): "fog_icon.svg",           # Neblina
+        800: "img/Sunny.png",                     # Despejado
+        801: "img/Parcialmente nublado.png",             # Algunas nubes
+        802: "img/Nublado.png",                    # Nubes
+        range(803, 805): "img/Nublado.png"         # Nublado
     }
     try:
         weather_id = json_data['weather'][0]['id']
