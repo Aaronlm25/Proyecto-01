@@ -120,11 +120,14 @@ def search_by_id(flight_number: str, weather_records: dict):
     Returns:
         flight_weather (tuple): Contiene la informacion del clima de llegada y de salida.
     """
-    flight_info = data_manager.search_flight(flight_number)
+    try:
+        flight_info = data_manager.search_flight(flight_number)
+    except TypeError as e:
+        raise ValueError('Vuelo no encontrado.')
     departure = data_manager.get_city(flight_info['departure'])
     arrival = data_manager.get_city(flight_info['arrival'])
     if not departure or not arrival:
-        raise ValueError('Vuelo no encontrado.')
+        raise ValueError('Ticket invalido.')
     flight_weather = (get_weather(departure, weather_records), get_weather(arrival, weather_records))
     determine_icon(flight_weather[0])
     determine_icon(flight_weather[1])

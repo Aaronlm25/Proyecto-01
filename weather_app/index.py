@@ -34,6 +34,8 @@ def home():
             print(f"Error al actualizar la caché:")
         except HTTPError as e:
             print('No se encontro el url')
+        except TypeError as e:
+            error_message = str(e)
     return render_template('index.html', weather_data=weather_results[0] if weather_results else {}, error=error_message)
 
 if __name__ == '__main__':
