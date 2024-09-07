@@ -65,7 +65,46 @@ class DataCollector:
         except FileNotFoundError:
             print(f"Error: El archivo {path} no se encuentra.")
         return iata_data
+    
+    @staticmethod
+    def load_location_data(path):
+        """
+        Carga los datos de latitud y longitud de origen y destino desde un archivo CSV.
 
+        El archivo CSV debe tener el siguiente formato:
+        origin,destination,origin_latitude,origin_longitude,destination_latitude,destination_longitude
+
+        Args:
+            path (str): Ruta del archivo CSV que contiene los datos de ubicaciones.
+
+        Returns:
+            dict: Un diccionario donde las claves son los códigos IATA de las ciudades,
+                y los valores son diccionarios con la latitud y longitud.
+        """
+        location_data = {}
+        try:
+            with open(path, mode='r') as file:
+                reader = csv.reader(file)
+                next(reader)  # Omitir la fila de encabezado si está presente
+                for row in reader:
+                    origin = row[0]
+                    destination = row[1]
+                    origin_latitude = float(row[2])
+                    origin_longitude = float(row[3])
+                    destination_latitude = float(row[4])
+                    destination_longitude = float(row[5])
+                    
+                    # Agregar origen al diccionario
+                    if origin not in location_data:
+                        location_data[origin] = {'latitude': origin_latitude, 'longitude': origin_longitude}
+                    
+                    # Agregar destino al diccionario
+                    if destination not in location_data:
+                        location_data[destination] = {'latitude': destination_latitude, 'longitude': destination_longitude}
+
+        except FileNotFoundError:
+            print(f"Error: El archivo {path} no se encuentra.")
+        return location_data
 
 
 class DataManager:
