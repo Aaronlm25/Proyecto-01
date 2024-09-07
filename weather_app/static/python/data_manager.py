@@ -3,7 +3,7 @@ import csv
 class DataCollector:
     _instance = None
 
-    def __new__(cls, flight_path, iata_path):
+    def __new__(cls, flight_path, iata_path,location_path,cities_path):
         """
         Implementación del patrón Singleton. Carga los archivos de vuelo e IATA solo una vez.
         
@@ -15,6 +15,8 @@ class DataCollector:
             cls._instance = super().__new__(cls)
             cls._instance._flight_data = cls.load_flight_data(flight_path)
             cls._instance._iata_data = cls.load_iata_data(iata_path)
+            cls._instance._location_data = cls.load_location_data(location_path)
+            cls._instance._cities = cls.load_cities(cities_path)
         return cls._instance
 
     @staticmethod
@@ -105,6 +107,32 @@ class DataCollector:
         except FileNotFoundError:
             print(f"Error: El archivo {path} no se encuentra.")
         return location_data
+    
+    @staticmethod
+    def load_cities(path):
+        """
+        Carga los datos de las ciudades
+
+        Args:
+            path (str): Ruta del archivo CSV que contiene los datos de ciudades.
+
+        Returns:
+            list: lista con las ciudades ordenadas
+        """
+        ciudades = []
+        
+        # Leer el archivo CSV
+        with open(path, 'r') as file:
+            reader = csv.reader(file)
+            next(reader)  # Saltar la primera fila que contiene los encabezados
+            for row in reader:
+                # Agregar solo los valores no vacíos
+                ciudades.extend([ciudad for ciudad in row if ciudad.strip()])
+        
+        # Ordenar las ciudades alfabéticamente
+        cities = sorted(ciudades, key=lambda x: x.lower())  # Ordenar ignorando mayúsculas/minúsculas
+        
+        return cities
 
 
 class DataManager:

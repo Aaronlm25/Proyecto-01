@@ -10,10 +10,12 @@ from weather_manager import get_weather
 from static.python.data_manager import DataCollector, DataManager
 
 FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
-IATA_DATA_PATH= './weather_app/static/datalist/datos_destinos.csv'
+IATA_DATA_PATH = './weather_app/static/datalist/datos_destinos.csv'
+LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
+CITIES_DATA_PATH = './weather_app/static/datalist/ciudades.csv'
 
-data_colector = DataCollector(FLIGHT_DATA_PATH,IATA_DATA_PATH)
-data_manager = DataManager(data_colector)
+data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
+data_manager = DataManager(data_collector)
 
 class InvalidCacheFileException(Exception):
     """
