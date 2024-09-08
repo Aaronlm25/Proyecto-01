@@ -72,7 +72,7 @@ class Cache:
         raw_data = []
         # Si weather_records es vacio intenta ver si hay datos en el archivo .json
         if len(self.weather_records) == 0:
-            with self.path.open('r') as file:
+            with self.path.open('r', encoding='utf-8') as file:
                 if self.path.stat().st_size != 0:
                     raw_data = json.load(file)
             for weather in raw_data:
