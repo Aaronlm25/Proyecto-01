@@ -11,16 +11,16 @@ LOCK = threading.Lock()
 FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
 IATA_DATA_PATH = './weather_app/static/datalist/datos_destinos.csv'
 LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
-CITIES_DATA_PATH = './weather_app/static/datalist/ciudades.csv'
-CITY_LOCATION_DATA_PATH='./weather_app/static/datalist/ciudad_coordenadas.csv'
-REQUEST_INTERVAL = 1.2
+CITIES_DATA_PATH = './weather_app/static/datalist/cities_2.csv'
+REQUEST_INTERVAL = 1.1
 LONG_SLEEP_INTERVAL = 10800
 # Data Managers
-data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH,CITY_LOCATION_DATA_PATH)
+data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
 data_manager = DataManager(data_collector)
 
 def get_weather(city: str, weather_records: dict):
     if not is_weather_valid(city, weather_records):
+        print(city)
         with LOCK:
             try:
                 url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
@@ -33,7 +33,7 @@ def get_weather(city: str, weather_records: dict):
         return weather_records[city]
 
 def is_weather_valid(city: str, weather_records: dict):
-    if city not in weather_records:
+    if city not in weather_records.keys():
         return False
     weather = weather_records[city]
     requested_time = weather['dt']
@@ -105,7 +105,7 @@ def search_by_city(city: str, weather_records: dict):
     """
     similar = revise(city, 0.7)
     if not similar:
-        similar = [city]
+        raise ValueError('Ciudad invalida')
     weather = get_weather(similar[0], weather_records)
     determine_icon(weather)
     return weather

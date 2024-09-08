@@ -8,7 +8,7 @@ from autocorrect import revise
 
 @pytest.fixture
 def city_data():
-    path = './weather_app/static/datalist/ciudades.csv'
+    path = './weather_app/static/datalist/cities_2.csv'
     data = set()
     with open(path, 'r') as file:
         csv_file = csv.reader(file)

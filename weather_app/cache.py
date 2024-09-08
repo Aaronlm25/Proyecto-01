@@ -12,10 +12,8 @@ from static.python.data_manager import DataCollector, DataManager
 FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
 IATA_DATA_PATH = './weather_app/static/datalist/datos_destinos.csv'
 LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
-CITIES_DATA_PATH = './weather_app/static/datalist/ciudades.csv'
-CITY_LOCATION_DATA_PATH='./weather_app/static/datalist/ciudad_coordenadas.csv'
-
-data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH,CITY_LOCATION_DATA_PATH)
+CITIES_DATA_PATH = './weather_app/static/datalist/cities_2.csv'
+data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
 data_manager = DataManager(data_collector)
 
 class InvalidCacheFileException(Exception):
@@ -40,6 +38,7 @@ class Cache:
         self.weather_records = dict()
         # Permite detener el hilo donde se calcula el clima
         self.STOP_FLAG = threading.Event() 
+        self.get_data()
 
     def get_destiny_data(self, path):
 
@@ -59,7 +58,7 @@ class Cache:
         with open(path, mode='r') as file:
             reader = csv.reader(file)
             next(reader)  # Salta el encabezado si existe
-            destiny_data = list(reader)
+            destiny_data = [row[0] for row in list(reader)]
         return destiny_data
 
     def get_data(self):
@@ -91,7 +90,7 @@ class Cache:
         name = weather['name']
         self.weather_records[name] = weather
         
-    def update_weather(self, destiny_data : list):
+    def update_weather_records(self, destiny_data : list):
         """
         Proceso en segundo plano que hace las peticiones de los climas de las 
         distintas ciudades registradas.
@@ -110,7 +109,7 @@ class Cache:
             data = destiny_data[i]
             time.sleep(REQUEST_INTERVAL)
             try:
-                weather = get_weather(data[0], self.weather_records)
+                weather = get_weather(data, self.weather_records)
             except (RequestException, HTTPError):
                 weather = None
             if weather:
@@ -126,7 +125,7 @@ class Cache:
         """
         # lista de las ciudades registradas
         data = self.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
-        thread = Thread(target=self.update_weather, args=[data])
+        thread = Thread(target=self.update_weather_records, args=[data])
         thread.start()
 
     def stop(self):
@@ -138,8 +137,8 @@ class Cache:
         raw_data = []
         for weather in self.weather_records.values():
             raw_data.append(weather)
-        with self.path.open('w') as file:
-            json.dump(raw_data, file, indent=4)
+        with self.path.open('w', encoding='utf-8') as file:
+            json.dump(raw_data, file, indent=4, ensure_ascii=False)
         self.STOP_FLAG.set()
 
     def __existance_insurer(self, path):
