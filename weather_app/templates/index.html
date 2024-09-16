@@ -13,7 +13,7 @@
       <div class="info card">
 
         <select id="menu" onchange="saveElection()">
-          <option></option>
+          <option>  Seleccione  </option>
           <option value="cityInput">Nombre de la ciudad</option>
           <option value="IATA_codeInput">Código IATA</option>
           <option value="flight_numberInput">Número de vuelo</option>
@@ -49,7 +49,7 @@
         <div class="weather-info">
           <img
             class="weather-icon"
-            src="https://img.icons8.com/3d-fluency/94/storm.png"
+            src="static/img/Storm.png"
             alt="Weather Icon"
           />
           <p class="weather-description">{{ departure_weather['weather'][0]['description'] | capitalize }}</p>
