@@ -1,133 +1,134 @@
 import requests
 import threading
-import static.python.gather as data_collector
+import time
+from static.python.data_manager import DataCollector, DataManager
 from autocorrect import revise
+from requests.exceptions import RequestException, HTTPError
 
+# Constantes
 KEY = 'a3117bc0d7c113aba1f25b2fb28748e1'
 LOCK = threading.Lock()
+FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
+IATA_DATA_PATH = './weather_app/static/datalist/datos_destinos.csv'
+LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
+CITIES_DATA_PATH = './weather_app/static/datalist/cities_2.csv'
+REQUEST_INTERVAL = 1.1
+LONG_SLEEP_INTERVAL = 10800
+# Data Managers
+data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
+data_manager = DataManager(data_collector)
 
-def get_weather(city):
-    # Evita que se hagan dos peticiones al mismo tiempo pues esto es motivo de baneo
-    with LOCK:
-        if not isinstance(city, str):
-            return None
-        try:
-            url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
-            response = requests.get(url)
-            response.raise_for_status()
-            return response.json()
-        except requests.exceptions.RequestException as e:
-            print(f"Error al obtener datos: {e}")
-            return None
-        
-def determine_icon(json_data): # faltan implementar los svg
+def get_weather(city: str, weather_records: dict):
+    if not is_weather_valid(city, weather_records):
+        print(city)
+        with LOCK:
+            try:
+                url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
+                response = requests.get(url)
+                response.raise_for_status()
+                return response.json()
+            except (RequestException, HTTPError) as e:
+                raise RequestException('Error al hacer el request') from e
+    else:
+        return weather_records[city]
+
+def is_weather_valid(city: str, weather_records: dict):
+    if city not in weather_records.keys():
+        return False
+    weather = weather_records[city]
+    requested_time = weather['dt']
+    if time.time() - requested_time >= LONG_SLEEP_INTERVAL:
+        return False
+    return True
+
+def determine_icon(json_data: dict):
     """
-    Determina el icono basado en el ID del clima.
+    Determina el icono de acuerdo al ID.
 
-    Utiliza un diccionario que mapea los IDs de clima a los nombres de archivo de iconos correspondientes.
+    Usa un diccionario que mapea los IDs a los respectivos iconos.
 
     Args:
-        json_data (dict) : Informacion del clima de una ubicacion.
+        json_data (dict): Informacion del clima de una ubicacion.
     """
+    if not json_data:
+        raise ValueError('The JSON object is None')
     icon_map = {
-        range(200, 233): "img/Storm.png",         # Tormenta
-        range(300, 322): "light_rain_icon.svg",    # Lluvia ligera
-        range(500, 505): "rain_icon.svg",          # Lluvia
-        511: "img/Snow.png",                      # Nieve
-        range(520, 532): "rain_icon.svg",          # Lluvia
-        range(600, 623): "img/Snow.png",          # Nieve
-        range(701, 782): "fog_icon.svg",           # Neblina
-        800: "img/Sunny.png",                     # Despejado
-        801: "img/Parcialmente nublado.png",             # Algunas nubes
-        802: "img/Nublado.png",                    # Nubes
-        range(803, 805): "img/Nublado.png"         # Nublado
+        range(200, 233): "static/img/storm.gif",         # Tormenta
+        range(300, 322): "static/img/light-rain.gif",    # Lluvia ligera
+        range(500, 505): "static/img/rain.gif",          # Lluvia
+        511: "static/img/snow.gif",                      # Nieve
+        range(520, 532): "static/img/rain.gif",          # Lluvia
+        range(600, 623): "static/img/snow.gif",          # Nieve
+        range(701, 782): "static/img/clouds.png",           # Neblina
+        800: "static/img/sunny.png",                     # Despejado
+        801: "static/img/cloud_sun.png",             # Algunas nubes
+        802: "static/img/clouds.png",                    # Nubes
+        range(803, 805): "static/img/clouds.png"         # Nublado
     }
-    if not isinstance(json_data, dict):
-        return
-    
     try:
         weather_id = json_data['weather'][0]['id']
         icon = 'default_icon.svg'
-        for key in icon_map.keys():
+        for key in icon_map:
             if weather_id == key or (isinstance(key, range) and weather_id in key):
                 icon = icon_map[key]
                 break
         json_data['weather'][0]['icon'] = icon
     except KeyError as e:
-        print(f"Error: Faltan claves en los datos del clima: {e}")
+        raise ValueError('El json es invalido') from e
 
-def search_by_iata(iata_code, weather_cache):
+def search_by_iata(iata_code: str, weather_records: dict):
     """
-    Hace una peticion a la API segun un codigo IATA.
+    Hace el request del clima a la API de acuerdo al codigo IATA
 
     Args:
-        iata_code (str): Código IATA del aeropuerto.
+        iata_code (str): codigo IATA.
 
     Returns:
-        weather: Informacion del clima.
+        weather (dict): Informacion del clima.
     """
-    if not isinstance(iata_code, str):
-        return None
-    
-    city = data_collector.get_city(iata_code)
+    city = data_manager.get_city(iata_code)
     if not city:
-        return None
-    
-    weather = get_weather(city)
-    if weather:
-        determine_icon(weather)
+        raise ValueError('Ciudad invalida')
+    weather = get_weather(city, weather_records)
+    determine_icon(weather)
     return weather
-        
-def search_by_city(city, weather_cache):
+
+def search_by_city(city: str, weather_records: dict):
     """
-    Hace una petición a la API según una ciudad.
+    Hace el request del clima a la API de acuerdo al nombre de una ciudad
 
     Args:
-        city (str): Nombre de la ciudad.
+        city (str): nombre de la ciudad
 
     Returns:
-        weather: Informacion del clima.
+        weather (dict): Informacion del clima.
     """
-    if not isinstance(city, str):
-        return None
-    
     similar = revise(city, 0.7)
     if not similar:
-        similar = [city]
-    
-    weather = get_weather(similar[0])
-    if weather:
-        determine_icon(weather)
+        raise ValueError('Ciudad invalida')
+    weather = get_weather(similar[0], weather_records)
+    determine_icon(weather)
     return weather
 
-def search_by_id(flight_number, weather_cache):
+def search_by_id(flight_number: str, weather_records: dict):
     """
-    Realiza una búsqueda del clima para una ciudad en función del número de vuelo.
+    Hace el request del clima a la API de acuerdo con un numero de ticket
 
     Args:
-        flight_number (str): Número de vuelo que se utilizará para buscar la información.
+        flight_number (str): Ticket del vuelo.
 
     Returns:
-        flight_weather (tuple): Contiene la informacion del clima del lugar de destino y de partida 
-                                de un vuelo.
+        flight_weather (tuple): Contiene la informacion del clima de llegada y de salida.
     """
-    if not isinstance(flight_number, str):
-        return ()
-
-    flight_info = data_collector.search_flight(flight_number)
-    if not isinstance(flight_info, dict):
-        return ()
-    
-    departure = data_collector.get_city(flight_info.get('departure', ''))
-    arrival = data_collector.get_city(flight_info.get('arrival', ''))
-    
+    try:
+        flight_info = data_manager.search_flight(flight_number)
+    except TypeError as e:
+        raise ValueError('Vuelo no encontrado.')
+    departure = data_manager.get_city(flight_info['departure'])
+    arrival = data_manager.get_city(flight_info['arrival'])
     if not departure or not arrival:
-        return ()
-    
-    flight_weather = (get_weather(departure), get_weather(arrival))
-    if flight_weather[0]:
-        determine_icon(flight_weather[0])
-    if flight_weather[1]:
-        determine_icon(flight_weather[1])
-    
+        raise ValueError('Ticket invalido.')
+    flight_weather = (get_weather(departure, weather_records), get_weather(arrival, weather_records))
+    determine_icon(flight_weather[0])
+    determine_icon(flight_weather[1])
     return flight_weather

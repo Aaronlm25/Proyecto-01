@@ -42,6 +42,7 @@
       
       <!-- Verifica si se ha recibido la información del clima -->
       <div class="cards">
+        <img src="departure_weather.icon" alt="">
       {% if departure_weather %}
       <div class="card weather-card" id="departure_card">
         <h2 class="city-name">Ciudad de salida: {{ departure_weather['name'] }}</h2>
@@ -49,8 +50,8 @@
         <div class="weather-info">
           <img
             class="weather-icon"
-            src="static/img/Storm.png"
-            alt="Weather Icon"
+            src="{{ departure_weather['weather'][0]['icon'] }}" 
+            alt="Weather icon"
           />
           <p class="weather-description">{{ departure_weather['weather'][0]['description'] | capitalize }}</p>
         </div>
@@ -75,7 +76,7 @@
         <div class="weather-info">
           <img
             class="weather-icon"
-            src="https://img.icons8.com/3d-fluency/94/storm.png"
+            src="{{ arrival_weather['weather'][0]['icon'] }}"
             alt="Weather Icon"
           />
           <p class="weather-description">{{ arrival_weather['weather'][0]['description'] | capitalize }}</p>
