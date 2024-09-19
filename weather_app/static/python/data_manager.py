@@ -97,7 +97,6 @@ class DataCollector:
                         location_data[origin] = {'latitude': origin_latitude, 'longitude': origin_longitude}
                     if destination not in location_data:
                         location_data[destination] = {'latitude': destination_latitude, 'longitude': destination_longitude}
-
         except FileNotFoundError:
             print(f"Error: El archivo {path} no se encuentra.")
         return location_data
@@ -120,7 +119,6 @@ class DataCollector:
             for row in reader:
                 ciudades.extend([ciudad for ciudad in row if ciudad.strip()])
         cities = sorted(ciudades, key=lambda x: x.lower())
-        
         return cities
 
 

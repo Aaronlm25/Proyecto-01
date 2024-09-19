@@ -14,7 +14,6 @@ LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
 CITIES_DATA_PATH = './weather_app/static/datalist/cities_2.csv'
 data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
 data_manager = DataManager(data_collector)
-
 class InvalidCacheFileException(Exception):
     """
     Clase de excepcion del archivo de cache dado,
@@ -37,6 +36,7 @@ class Cache:
         self.STOP_FLAG = threading.Event() 
         self.get_data()
         self.thread = None
+        self.LOCK = threading.Lock()
 
     def get_destiny_data(self, path):
 
@@ -87,10 +87,11 @@ class Cache:
         Args:
             weather : objeto json que contiene informacion del clima de una ciudad
         """
-        name = weather['name']
-        self.weather_records[name] = weather
+        with self.LOCK:
+            name = weather['name']
+            self.weather_records[name] = weather
         
-    def update_weather_records(self, destiny_data : list):
+    def __update_weather_records(self, destiny_data : list):
         """
         Proceso en segundo plano que hace las peticiones de los climas de las 
         distintas ciudades registradas.
@@ -108,6 +109,7 @@ class Cache:
         while not self.STOP_FLAG.is_set():
             data = destiny_data[i]
             time.sleep(REQUEST_INTERVAL)
+            weather = None
             try:
                 weather = get_weather(data, self.weather_records)
             except (RequestException, HTTPError):
@@ -123,9 +125,10 @@ class Cache:
         """
         Comienza el proceso del cache y las peticiones de los climas.
         """
-        data = self.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
-        self.thread = Thread(target=self.update_weather_records, args=[data], name='cache')
-        self.thread.start()
+        if not self.thread:
+            data = self.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
+            self.thread = Thread(target=self.__update_weather_records, args=[data], name='cache')
+            self.thread.start()
 
     def stop(self):
         """

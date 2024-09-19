@@ -6,6 +6,7 @@ from flask import Flask, render_template, request
 from requests.exceptions import RequestException, HTTPError
 
 app = Flask(__name__)
+weather_cache = Cache('./weather_app/static/json/cache.json')
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -44,10 +45,9 @@ def home():
     return render_template('index.html', departure_weather=departure_weather, arrival_weather=arrival_weather, error=error_message)
 
 if __name__ == '__main__':
-    weather_cache = Cache('./weather_app/static/json/cache.json')
     safe_stop = lambda signal, frame: (weather_cache.stop(), sys.exit(0))
     signal.signal(signal.SIGINT, safe_stop)
     weather_cache.start()
-    app.run(debug=True)
+    app.run()
     weather_cache.stop()
 
