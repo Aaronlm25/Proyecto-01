@@ -1,9 +1,10 @@
 import weather_manager
+import sys
+import signal
 from cache import Cache
 from flask import Flask, render_template, request
 from requests.exceptions import RequestException, HTTPError
 
-weather_cache = Cache('./weather_app/static/json/cache.json')
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -26,7 +27,6 @@ def home():
             elif iata_code:
                 iata_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
                 departure_weather = iata_weather
-
             if departure_weather:
                 weather_cache.update(departure_weather)
             if arrival_weather:
@@ -44,6 +44,9 @@ def home():
     return render_template('index.html', departure_weather=departure_weather, arrival_weather=arrival_weather, error=error_message)
 
 if __name__ == '__main__':
+    weather_cache = Cache('./weather_app/static/json/cache.json')
+    safe_stop = lambda signal, frame: (weather_cache.stop(), sys.exit(0))
+    signal.signal(signal.SIGINT, safe_stop)
     weather_cache.start()
     app.run(debug=True)
     weather_cache.stop()

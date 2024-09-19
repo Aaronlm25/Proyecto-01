@@ -36,6 +36,7 @@ class Cache:
         self.weather_records = dict()
         self.STOP_FLAG = threading.Event() 
         self.get_data()
+        self.thread = None
 
     def get_destiny_data(self, path):
 
@@ -68,9 +69,12 @@ class Cache:
         """
         raw_data = []
         if len(self.weather_records) == 0:
-            with self.path.open('r', encoding='utf-8') as file:
-                if self.path.stat().st_size != 0:
-                    raw_data = json.load(file)
+            try:
+                with self.path.open('r', encoding='utf-8') as file:
+                    if self.path.stat().st_size != 0:
+                        raw_data = json.load(file)
+            except json.JSONDecodeError:
+                raise InvalidCacheFileException('El formato del cache es invalido.')
             for weather in raw_data:
                 name = weather['name']
                 self.weather_records[name] = weather
@@ -120,21 +124,23 @@ class Cache:
         Comienza el proceso del cache y las peticiones de los climas.
         """
         data = self.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
-        thread = Thread(target=self.update_weather_records, args=[data])
-        thread.start()
+        self.thread = Thread(target=self.update_weather_records, args=[data], name='cache')
+        self.thread.start()
 
     def stop(self):
         """
         Detiene el proceso del cache y las peticiones de los climas.
         Guarda la informacion recolectada por weather_records en el archivo
-        indicado por path, esto es se guardan los objetos json.
+        cache.json.
         """
         raw_data = []
+        self.STOP_FLAG.set()
+        if self.thread:
+            self.thread.join()
         for weather in self.weather_records.values():
             raw_data.append(weather)
         with self.path.open('w', encoding='utf-8') as file:
             json.dump(raw_data, file, indent=4, ensure_ascii=False)
-        self.STOP_FLAG.set()
 
     def __existance_insurer(self, path):
         """

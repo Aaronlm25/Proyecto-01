@@ -11,8 +11,6 @@ FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
 IATA_DATA_PATH = './weather_app/static/datalist/datos_destinos.csv'
 LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
 CITIES_DATA_PATH = './weather_app/static/datalist/cities_2.csv'
-REQUEST_INTERVAL = 1.1
-LONG_SLEEP_INTERVAL = 10800
 data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
 data_manager = DataManager(data_collector)
 
@@ -30,11 +28,12 @@ def get_weather(city: str, weather_records: dict):
         return weather_records[city]
 
 def is_weather_valid(city: str, weather_records: dict):
+    THREE_HOUR_INTERVAL = 10800
     if city not in weather_records.keys():
         return False
     weather = weather_records[city]
     requested_time = weather['dt']
-    if time.time() - requested_time >= LONG_SLEEP_INTERVAL:
+    if time.time() - requested_time >= THREE_HOUR_INTERVAL:
         return False
     return True
 
@@ -70,8 +69,8 @@ def determine_icon(json_data: dict):
                 icon = icon_map[key]
                 break
         json_data['weather'][0]['icon'] = icon
-    except KeyError as e:
-        raise ValueError('El json es invalido') from e
+    except KeyError:
+        raise ValueError('El json es invalido')
 
 def search_by_iata(iata_code: str, weather_records: dict):
     """
