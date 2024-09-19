@@ -28,7 +28,7 @@ class DataCollector:
         try:
             with open(path, mode='r') as file:
                 reader = csv.reader(file)
-                next(reader)  # Omitir la fila de encabezado si está presente
+                next(reader)
                 for row in reader:
                     flight_number = row[0]
                     departure_iata = row[1]
@@ -57,7 +57,7 @@ class DataCollector:
         try:
             with open(path, mode='r') as file:
                 reader = csv.reader(file)
-                next(reader)  # Omitir la fila de encabezado si está presente
+                next(reader)
                 for row in reader:
                     city = row[0]
                     iata_code = row[1]
@@ -85,7 +85,7 @@ class DataCollector:
         try:
             with open(path, mode='r') as file:
                 reader = csv.reader(file)
-                next(reader)  # Omitir la fila de encabezado si está presente
+                next(reader)
                 for row in reader:
                     origin = row[0]
                     destination = row[1]
@@ -93,12 +93,8 @@ class DataCollector:
                     origin_longitude = float(row[3])
                     destination_latitude = float(row[4])
                     destination_longitude = float(row[5])
-                    
-                    # Agregar origen al diccionario
                     if origin not in location_data:
                         location_data[origin] = {'latitude': origin_latitude, 'longitude': origin_longitude}
-                    
-                    # Agregar destino al diccionario
                     if destination not in location_data:
                         location_data[destination] = {'latitude': destination_latitude, 'longitude': destination_longitude}
 
@@ -118,17 +114,12 @@ class DataCollector:
             list: lista con las ciudades ordenadas
         """
         ciudades = []
-        
-        # Leer el archivo CSV
         with open(path, 'r') as file:
             reader = csv.reader(file)
-            next(reader)  # Saltar la primera fila que contiene los encabezados
+            next(reader)
             for row in reader:
-                # Agregar solo los valores no vacíos
                 ciudades.extend([ciudad for ciudad in row if ciudad.strip()])
-        
-        # Ordenar las ciudades alfabéticamente
-        cities = sorted(ciudades, key=lambda x: x.lower())  # Ordenar ignorando mayúsculas/minúsculas
+        cities = sorted(ciudades, key=lambda x: x.lower())
         
         return cities
 
@@ -153,7 +144,7 @@ class DataManager:
         Returns:
             str: Nombre de la ciudad correspondiente al código IATA del aeropuerto, o None si no se encuentra.
         """
-        try: # 60 wtf/min
+        try:
             return self.data_collector.iata_data[iata_airport]
         except KeyError:
             return None

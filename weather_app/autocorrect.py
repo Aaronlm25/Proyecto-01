@@ -45,7 +45,7 @@ def revise(user_ubication: str, coincidence_index: int):
     cities = []
     with open(file_path, mode='r') as file:
         reader = csv.reader(file)
-        next(reader)  # Omitir la fila de encabezado si está presente
+        next(reader)
         for row in reader:
             cities.append(row[0])
     coincidences = {}

@@ -41,7 +41,6 @@ def home():
             print('No se encontró el URL')
         except TypeError as e:
             error_message = str(e)
-
     return render_template('index.html', departure_weather=departure_weather, arrival_weather=arrival_weather, error=error_message)
 
 if __name__ == '__main__':

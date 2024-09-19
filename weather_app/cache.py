@@ -4,7 +4,6 @@ import time
 import threading
 from pathlib import Path
 from threading import Thread
-
 from requests import HTTPError, RequestException
 from weather_manager import get_weather
 from static.python.data_manager import DataCollector, DataManager
@@ -34,9 +33,7 @@ class Cache:
     """
     def __init__(self, path : str):
         self.__existance_insurer(path)
-        # Todos los climas de las ciudades registradas
         self.weather_records = dict()
-        # Permite detener el hilo donde se calcula el clima
         self.STOP_FLAG = threading.Event() 
         self.get_data()
 
@@ -57,7 +54,7 @@ class Cache:
         destiny_data = []
         with open(path, mode='r') as file:
             reader = csv.reader(file)
-            next(reader)  # Salta el encabezado si existe
+            next(reader)
             destiny_data = [row[0] for row in list(reader)]
         return destiny_data
 
@@ -70,7 +67,6 @@ class Cache:
             self.weather_records: Un diccionario con todos los climas de las ciudades registradas
         """
         raw_data = []
-        # Si weather_records es vacio intenta ver si hay datos en el archivo .json
         if len(self.weather_records) == 0:
             with self.path.open('r', encoding='utf-8') as file:
                 if self.path.stat().st_size != 0:
@@ -123,7 +119,6 @@ class Cache:
         """
         Comienza el proceso del cache y las peticiones de los climas.
         """
-        # lista de las ciudades registradas
         data = self.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
         thread = Thread(target=self.update_weather_records, args=[data])
         thread.start()
@@ -148,7 +143,6 @@ class Cache:
         self.path = Path(path)
         if self.path.suffix != '.json':
             raise InvalidCacheFileException('El archivo cache deber ser .json')
-        # Asegúrate de que el directorio exista
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.touch(exist_ok=True)
         
