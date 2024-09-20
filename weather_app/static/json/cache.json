@@ -1,0 +1,275 @@
+[
+    {
+        "coord": {
+            "lon": 9.9187,
+            "lat": 57.048
+        },
+        "weather": [
+            {
+                "id": 741,
+                "main": "Fog",
+                "description": "bruma",
+                "icon": "50n"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 10.96,
+            "feels_like": 10.54,
+            "temp_min": 10.96,
+            "temp_max": 10.96,
+            "pressure": 1032,
+            "humidity": 93,
+            "sea_level": 1032,
+            "grnd_level": 1029
+        },
+        "visibility": 100,
+        "wind": {
+            "speed": 1.54,
+            "deg": 70
+        },
+        "clouds": {
+            "all": 100
+        },
+        "dt": 1726789679,
+        "sys": {
+            "type": 1,
+            "id": 1600,
+            "country": "DK",
+            "sunrise": 1726808509,
+            "sunset": 1726853137
+        },
+        "timezone": 7200,
+        "id": 2624886,
+        "name": "Aalborg",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": 44.4009,
+            "lat": 33.3406
+        },
+        "weather": [
+            {
+                "id": 800,
+                "main": "Clear",
+                "description": "cielo claro",
+                "icon": "01n"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 23.95,
+            "feels_like": 23.47,
+            "temp_min": 23.95,
+            "temp_max": 23.95,
+            "pressure": 1007,
+            "humidity": 41,
+            "sea_level": 1007,
+            "grnd_level": 1002
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 1.03,
+            "deg": 220
+        },
+        "clouds": {
+            "all": 0
+        },
+        "dt": 1726789685,
+        "sys": {
+            "type": 1,
+            "id": 7597,
+            "country": "IQ",
+            "sunrise": 1726800557,
+            "sunset": 1726844542
+        },
+        "timezone": 10800,
+        "id": 98182,
+        "name": "Baghdad",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": 145.7667,
+            "lat": -16.9167
+        },
+        "weather": [
+            {
+                "id": 803,
+                "main": "Clouds",
+                "description": "muy nuboso",
+                "icon": "04d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 26.97,
+            "feels_like": 28.41,
+            "temp_min": 26.97,
+            "temp_max": 28.39,
+            "pressure": 1015,
+            "humidity": 65,
+            "sea_level": 1015,
+            "grnd_level": 996
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 3.09,
+            "deg": 40
+        },
+        "clouds": {
+            "all": 75
+        },
+        "dt": 1726789493,
+        "sys": {
+            "type": 1,
+            "id": 9490,
+            "country": "AU",
+            "sunrise": 1726776498,
+            "sunset": 1726819957
+        },
+        "timezone": 36000,
+        "id": 2172797,
+        "name": "Cairns",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": 90.4074,
+            "lat": 23.7104
+        },
+        "weather": [
+            {
+                "id": 721,
+                "main": "Haze",
+                "description": "niebla",
+                "icon": "50d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 29.99,
+            "feels_like": 36.99,
+            "temp_min": 29.99,
+            "temp_max": 29.99,
+            "pressure": 1003,
+            "humidity": 89,
+            "sea_level": 1003,
+            "grnd_level": 1002
+        },
+        "visibility": 4000,
+        "wind": {
+            "speed": 1.54,
+            "deg": 340
+        },
+        "clouds": {
+            "all": 40
+        },
+        "dt": 1726789634,
+        "sys": {
+            "type": 1,
+            "id": 9145,
+            "country": "BD",
+            "sunrise": 1726789585,
+            "sunset": 1726833436
+        },
+        "timezone": 21600,
+        "id": 1185241,
+        "name": "Dhaka",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": -3.1965,
+            "lat": 55.9521
+        },
+        "weather": [
+            {
+                "id": 804,
+                "main": "Clouds",
+                "description": "nubes",
+                "icon": "04n"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 10.82,
+            "feels_like": 10.33,
+            "temp_min": 10.01,
+            "temp_max": 11.71,
+            "pressure": 1030,
+            "humidity": 91,
+            "sea_level": 1030,
+            "grnd_level": 1018
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 4.12,
+            "deg": 70
+        },
+        "clouds": {
+            "all": 100
+        },
+        "dt": 1726789714,
+        "sys": {
+            "type": 2,
+            "id": 2010172,
+            "country": "GB",
+            "sunrise": 1726811685,
+            "sunset": 1726856254
+        },
+        "timezone": 3600,
+        "id": 2650225,
+        "name": "Edinburgh",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": -147.7164,
+            "lat": 64.8378
+        },
+        "weather": [
+            {
+                "id": 500,
+                "main": "Rain",
+                "description": "lluvia ligera",
+                "icon": "10d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 6.59,
+            "feels_like": 3.49,
+            "temp_min": 5.27,
+            "temp_max": 7.27,
+            "pressure": 1015,
+            "humidity": 84,
+            "sea_level": 1015,
+            "grnd_level": 998
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 4.63,
+            "deg": 280
+        },
+        "rain": {
+            "1h": 0.11
+        },
+        "clouds": {
+            "all": 100
+        },
+        "dt": 1726789531,
+        "sys": {
+            "type": 1,
+            "id": 7684,
+            "country": "US",
+            "sunrise": 1726759607,
+            "sunset": 1726804928
+        },
+        "timezone": -28800,
+        "id": 5861897,
+        "name": "Fairbanks",
+        "cod": 200
+    }
+]

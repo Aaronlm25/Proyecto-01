@@ -119,6 +119,7 @@ class Cache:
             i += 1
             if i == len(destiny_data):
                 i = 0
+                self.__save()
                 time.sleep(THREE_HOUR_INTERVAL)
 
     def start(self):
@@ -136,10 +137,13 @@ class Cache:
         Guarda la informacion recolectada por weather_records en el archivo
         cache.json.
         """
-        raw_data = []
         self.STOP_FLAG.set()
         if self.thread:
             self.thread.join()
+        self.__save()
+
+    def __save(self):
+        raw_data = []
         for weather in self.weather_records.values():
             raw_data.append(weather)
         with self.path.open('w', encoding='utf-8') as file:
