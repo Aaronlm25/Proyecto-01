@@ -1,22 +1,32 @@
 import csv
+from static.python.path_manager import FileManager
 
 class DataCollector:
     _instance = None
 
-    def __new__(cls, flight_path, iata_path,location_path,cities_path):
+    def __new__(cls, file_manager: FileManager):
         """
-        Implementación del patrón Singleton. Carga los archivos de vuelo e IATA solo una vez.
-        
+        Implementación del patrón Singleton. Carga los archivos solo una vez.
+
         Args:
-            flight_path (str): Ruta del archivo CSV con los datos de vuelos.
-            iata_path (str): Ruta del archivo CSV con los datos de IATA y ciudades.
+            file_manager (FileManager): Instancia de FileManager para obtener las rutas de los archivos.
         """
         if cls._instance is None:
             cls._instance = super().__new__(cls)
+
+            flight_path = file_manager.get_flight_path()
+            iata_path = file_manager.get_iata_path()
+            location_path = file_manager.get_location_path()
+            cities_path = file_manager.get_cities_path()
+            
+            destiny_path=file_manager.get_destiny_path()
+
             cls._instance._flight_data = cls.load_flight_data(flight_path)
             cls._instance.iata_data = cls.load_iata_data(iata_path)
             cls._instance._location_data = cls.load_location_data(location_path)
             cls._instance._cities = cls.load_cities(cities_path)
+            cls._instance._destiny_data=cls.load_destiny_data(destiny_path)
+            
         return cls._instance
 
     @staticmethod
@@ -60,7 +70,7 @@ class DataCollector:
                 next(reader)
                 for row in reader:
                     city = row[0]
-                    iata_code = row[1]
+                    iata_code = row[2]
                     iata_data[iata_code] = city
         except FileNotFoundError:
             print(f"Error: El archivo {path} no se encuentra.")
@@ -120,17 +130,37 @@ class DataCollector:
                 ciudades.extend([ciudad for ciudad in row if ciudad.strip()])
         cities = sorted(ciudades, key=lambda x: x.lower())
         return cities
+    
+    @staticmethod
+    def load_destiny_data(path):
 
-
-class DataManager:
-    def __init__(self, data_collector):
         """
-        Inicializa la clase DataManager con una instancia de DataCollector.
-        
+        Lee los datos de destinos desde un archivo CSV y los carga en una lista.
+
+        El archivo CSV debe tener los datos en el siguiente formato:
+        city_name, iata_code, airport_name
+
         Args:
-            data_collector (DataCollector): Instancia de DataCollector que contiene los datos cargados.
+            path (str): Ruta del archivo CSV que contiene los datos de destinos.
+
+        Returns:
+            list: Una lista de listas, donde cada sublista contiene la información de una ciudad.
         """
-        self.data_collector = data_collector
+        destiny_data = []
+        with open(path, mode='r') as file:
+            reader = csv.reader(file)
+            next(reader)
+            destiny_data = [row[0] for row in list(reader)]
+        return destiny_data
+ 
+    def get_destiny_data(self):
+        """
+        Devuelve los datos de destino cargados.
+
+        Returns:
+            list: Lista de destinos cargados desde el archivo CSV.
+        """
+        return self._destiny_data
     
     def get_city(self, iata_airport):
         """
@@ -143,7 +173,7 @@ class DataManager:
             str: Nombre de la ciudad correspondiente al código IATA del aeropuerto, o None si no se encuentra.
         """
         try:
-            return self.data_collector.iata_data[iata_airport]
+            return self.iata_data[iata_airport]
         except KeyError:
             return None
 
@@ -158,5 +188,5 @@ class DataManager:
             dict or str: Un diccionario con la información del vuelo (salida y llegada)
                          o un mensaje indicando que no se encontró información.
         """
-        return self.data_collector._flight_data.get(ticket, f"No se encontró información para el ticket: {ticket}")
+        return self.flight_data.get(ticket, f"No se encontró información para el ticket: {ticket}")
 
