@@ -14,13 +14,19 @@ LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
 CITIES_DATA_PATH = './weather_app/static/datalist/cities_2.csv'
 REQUEST_INTERVAL = 1.1
 LONG_SLEEP_INTERVAL = 10800
+<<<<<<< HEAD
 # Data Managers
+=======
+>>>>>>> controladores
 data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
 data_manager = DataManager(data_collector)
 
 def get_weather(city: str, weather_records: dict):
     if not is_weather_valid(city, weather_records):
+<<<<<<< HEAD
         print(city)
+=======
+>>>>>>> controladores
         with LOCK:
             try:
                 url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
@@ -53,6 +59,7 @@ def determine_icon(json_data: dict):
     if not json_data:
         raise ValueError('The JSON object is None')
     icon_map = {
+<<<<<<< HEAD
         range(200, 233): "static/img/storm.gif",         # Tormenta
         range(300, 322): "static/img/light-rain.gif",    # Lluvia ligera
         range(500, 505): "static/img/rain.gif",          # Lluvia
@@ -64,6 +71,19 @@ def determine_icon(json_data: dict):
         801: "static/img/cloud_sun.png",             # Algunas nubes
         802: "static/img/clouds.png",                    # Nubes
         range(803, 805): "static/img/clouds.png"         # Nublado
+=======
+        range(200, 233): "img/Storm.png",         
+        range(300, 322): "light_rain_icon.svg",    
+        range(500, 505): "rain_icon.svg",         
+        511: "img/Snow.png",                      
+        range(520, 532): "rain_icon.svg",          
+        range(600, 623): "img/Snow.png",          
+        range(701, 782): "fog_icon.svg",           
+        800: "img/Sunny.png",                     
+        801: "img/Parcialmente nublado.png",            
+        802: "img/Nublado.png",                   
+        range(803, 805): "img/Nublado.png"         
+>>>>>>> controladores
     }
     try:
         weather_id = json_data['weather'][0]['id']
