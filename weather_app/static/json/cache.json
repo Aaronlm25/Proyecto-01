@@ -9,29 +9,29 @@
                 "id": 741,
                 "main": "Fog",
                 "description": "bruma",
-                "icon": "50n"
+                "icon": "fog_icon.svg"
             }
         ],
         "base": "stations",
         "main": {
             "temp": 10.96,
-            "feels_like": 10.54,
+            "feels_like": 10.72,
             "temp_min": 10.96,
             "temp_max": 10.96,
             "pressure": 1032,
-            "humidity": 93,
+            "humidity": 100,
             "sea_level": 1032,
             "grnd_level": 1029
         },
         "visibility": 100,
         "wind": {
-            "speed": 1.54,
+            "speed": 2.06,
             "deg": 70
         },
         "clouds": {
             "all": 100
         },
-        "dt": 1726789679,
+        "dt": 1726792152,
         "sys": {
             "type": 1,
             "id": 1600,
@@ -54,29 +54,29 @@
                 "id": 800,
                 "main": "Clear",
                 "description": "cielo claro",
-                "icon": "01n"
+                "icon": "img/Sunny.png"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 23.95,
-            "feels_like": 23.47,
-            "temp_min": 23.95,
-            "temp_max": 23.95,
+            "temp": 22.95,
+            "feels_like": 22.5,
+            "temp_min": 22.95,
+            "temp_max": 22.95,
             "pressure": 1007,
-            "humidity": 41,
+            "humidity": 46,
             "sea_level": 1007,
             "grnd_level": 1002
         },
         "visibility": 10000,
         "wind": {
             "speed": 1.03,
-            "deg": 220
+            "deg": 270
         },
         "clouds": {
             "all": 0
         },
-        "dt": 1726789685,
+        "dt": 1726792055,
         "sys": {
             "type": 1,
             "id": 7597,
@@ -96,20 +96,20 @@
         },
         "weather": [
             {
-                "id": 803,
+                "id": 802,
                 "main": "Clouds",
-                "description": "muy nuboso",
-                "icon": "04d"
+                "description": "nubes dispersas",
+                "icon": "img/Nublado.png"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 26.97,
-            "feels_like": 28.41,
-            "temp_min": 26.97,
-            "temp_max": 28.39,
+            "temp": 27.97,
+            "feels_like": 29.52,
+            "temp_min": 27.84,
+            "temp_max": 27.97,
             "pressure": 1015,
-            "humidity": 65,
+            "humidity": 61,
             "sea_level": 1015,
             "grnd_level": 996
         },
@@ -119,9 +119,9 @@
             "deg": 40
         },
         "clouds": {
-            "all": 75
+            "all": 33
         },
-        "dt": 1726789493,
+        "dt": 1726792107,
         "sys": {
             "type": 1,
             "id": 9490,
@@ -144,7 +144,7 @@
                 "id": 721,
                 "main": "Haze",
                 "description": "niebla",
-                "icon": "50d"
+                "icon": "fog_icon.svg"
             }
         ],
         "base": "stations",
@@ -154,19 +154,19 @@
             "temp_min": 29.99,
             "temp_max": 29.99,
             "pressure": 1003,
-            "humidity": 89,
+            "humidity": 94,
             "sea_level": 1003,
             "grnd_level": 1002
         },
-        "visibility": 4000,
+        "visibility": 3200,
         "wind": {
-            "speed": 1.54,
-            "deg": 340
+            "speed": 2.06,
+            "deg": 310
         },
         "clouds": {
             "all": 40
         },
-        "dt": 1726789634,
+        "dt": 1726792157,
         "sys": {
             "type": 1,
             "id": 9145,
@@ -189,29 +189,29 @@
                 "id": 804,
                 "main": "Clouds",
                 "description": "nubes",
-                "icon": "04n"
+                "icon": "img/Nublado.png"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 10.82,
-            "feels_like": 10.33,
-            "temp_min": 10.01,
+            "temp": 10.16,
+            "feels_like": 9.48,
+            "temp_min": 8.44,
             "temp_max": 11.71,
             "pressure": 1030,
-            "humidity": 91,
+            "humidity": 86,
             "sea_level": 1030,
             "grnd_level": 1018
         },
         "visibility": 10000,
         "wind": {
-            "speed": 4.12,
-            "deg": 70
+            "speed": 3.09,
+            "deg": 80
         },
         "clouds": {
             "all": 100
         },
-        "dt": 1726789714,
+        "dt": 1726792158,
         "sys": {
             "type": 2,
             "id": 2010172,
@@ -231,35 +231,32 @@
         },
         "weather": [
             {
-                "id": 500,
-                "main": "Rain",
-                "description": "lluvia ligera",
-                "icon": "10d"
+                "id": 804,
+                "main": "Clouds",
+                "description": "nubes",
+                "icon": "img/Nublado.png"
             }
         ],
         "base": "stations",
         "main": {
-            "temp": 6.59,
-            "feels_like": 3.49,
-            "temp_min": 5.27,
-            "temp_max": 7.27,
+            "temp": 7.42,
+            "feels_like": 4.3,
+            "temp_min": 5.66,
+            "temp_max": 8,
             "pressure": 1015,
-            "humidity": 84,
+            "humidity": 82,
             "sea_level": 1015,
-            "grnd_level": 998
+            "grnd_level": 999
         },
         "visibility": 10000,
         "wind": {
-            "speed": 4.63,
-            "deg": 280
-        },
-        "rain": {
-            "1h": 0.11
+            "speed": 5.14,
+            "deg": 230
         },
         "clouds": {
             "all": 100
         },
-        "dt": 1726789531,
+        "dt": 1726792011,
         "sys": {
             "type": 1,
             "id": 7684,

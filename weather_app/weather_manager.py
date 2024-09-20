@@ -21,7 +21,9 @@ def get_weather(city: str, weather_records: dict):
                 url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
                 response = requests.get(url)
                 response.raise_for_status()
-                return response.json()
+                wetaher = response.json()
+                determine_icon(wetaher)
+                return wetaher
             except (RequestException, HTTPError) as e:
                 raise RequestException('Error al hacer el request') from e
     else:
@@ -47,7 +49,7 @@ def determine_icon(json_data: dict):
         json_data (dict): Informacion del clima de una ubicacion.
     """
     if not json_data:
-        raise ValueError('The JSON object is None')
+        raise ValueError('El objeto json es None')
     icon_map = {
         range(200, 233): "img/Storm.png",         
         range(300, 322): "light_rain_icon.svg",    
@@ -69,6 +71,7 @@ def determine_icon(json_data: dict):
                 icon = icon_map[key]
                 break
         json_data['weather'][0]['icon'] = icon
+        print('xd')
     except KeyError:
         raise ValueError('El json es invalido')
 
@@ -86,7 +89,6 @@ def search_by_iata(iata_code: str, weather_records: dict):
     if not city:
         raise ValueError('Ciudad invalida')
     weather = get_weather(city, weather_records)
-    determine_icon(weather)
     return weather
 
 def search_by_city(city: str, weather_records: dict):
@@ -103,7 +105,6 @@ def search_by_city(city: str, weather_records: dict):
     if not similar:
         raise ValueError('Ciudad invalida')
     weather = get_weather(similar[0], weather_records)
-    determine_icon(weather)
     return weather
 
 def search_by_id(flight_number: str, weather_records: dict):
@@ -125,6 +126,4 @@ def search_by_id(flight_number: str, weather_records: dict):
     if not departure or not arrival:
         raise ValueError('Ticket invalido.')
     flight_weather = (get_weather(departure, weather_records), get_weather(arrival, weather_records))
-    determine_icon(flight_weather[0])
-    determine_icon(flight_weather[1])
     return flight_weather

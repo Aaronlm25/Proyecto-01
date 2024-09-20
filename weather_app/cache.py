@@ -143,6 +143,10 @@ class Cache:
         self.__save()
 
     def __save(self):
+        """
+        Guarda la informacion recolectada por weather_records en el archivo
+        cache.json.
+        """
         raw_data = []
         for weather in self.weather_records.values():
             raw_data.append(weather)
