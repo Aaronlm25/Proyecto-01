@@ -188,5 +188,5 @@ class DataCollector:
             dict or str: Un diccionario con la información del vuelo (salida y llegada)
                          o un mensaje indicando que no se encontró información.
         """
-        return self.flight_data.get(ticket, f"No se encontró información para el ticket: {ticket}")
+        return self._flight_data.get(ticket, f"No se encontró información para el ticket: {ticket}")
 

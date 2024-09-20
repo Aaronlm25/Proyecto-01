@@ -1,6 +1,7 @@
 import weather_manager
 import sys
 import signal
+import traceback
 from cache import Cache
 from flask import Flask, render_template, request
 from requests.exceptions import RequestException, HTTPError
@@ -38,6 +39,7 @@ def home():
             error_message = str(e)
         except AttributeError as e:
             print(f"Error al actualizar la caché: {e}")
+            traceback.print_exc()
         except HTTPError as e:
             print('No se encontró el URL')
         except TypeError as e:
