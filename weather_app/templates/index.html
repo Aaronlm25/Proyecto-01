@@ -5,6 +5,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style/styles.css') }}" />
     <script src="static/js/script.js" defer></script>
   </head>
+  <header>
+    <h1>¡Busca el clima de la ciudad que quieras al instante!</h1>
+  </header>
   <body>
     <section class="container">
 
@@ -13,17 +16,16 @@
       <div class="info card">
 
         <select id="menu" onchange="saveElection()">
-          <option>  Seleccione  </option>
-          <option value="cityInput">Nombre de la ciudad</option>
-          <option value="IATA_codeInput">Código IATA</option>
-          <option value="flight_numberInput">Número de vuelo</option>
+          <option class="option">  Seleccione  </option>
+          <option value="cityInput" class="option">Nombre de la ciudad</option>
+          <option value="IATA_codeInput" class="option">Código IATA</option>
+          <option value="flight_numberInput" class="option">Número de vuelo</option>
         </select>
 
-        <!-- Formulario para ingresar datos -->
         <form class="input" method="POST" action="/">
           <div id="cityInput" class="content">
           <label for="city"></label>
-          <input type="text" id="city" name="city" placeholder="Ej. Ciudad de México" autocomplete = "off"/>
+          <input maxlength="20" type="text" id="city" name="city" placeholder="Ej. Ciudad de México" autocomplete = "off"/>
           </div>
 
           <div id="IATA_codeInput" class="content">
@@ -36,11 +38,10 @@
           <input type="text" id="flight_number" name="flight_number" placeholder="Ej. AA123" autocomplete = "off"/>
           </div>
 
-          <button  type="submit"> <img src="static/svg/search.svg"> </button>
+          <button  type="submit"></button>
         </form>
       </div>
       
-      <!-- Verifica si se ha recibido la información del clima -->
       <div class="cards">
         <img src="departure_weather.icon" alt="">
       {% if departure_weather %}
@@ -91,39 +92,6 @@
             <img class="stat-icon" src="{{ url_for('static', filename='svg/viento.svg') }}" alt="IMG-Viento" />
             <p class="stat-value">{{ arrival_weather['wind']['speed'] }} m/s</p>
             <p class="stat-label">Velocidad de viento</p>
-          </article>
-        </div>
-      </div>
-      {% endif %}
-      {% if not departure_weather and not arrival_weather %}
-      <div class="card weather-card">
-        <h1>Esperando datos... </h1>
-        <h2 class="temperature">¿?°C</h2>
-        <div class="weather-info">
-          <img
-            class="weather-icon"
-            src="{{ url_for('static', filename='svg/bx-time-five.svg') }}"
-            alt="Weather Icon"
-          />
-          <p class="weather-description"></p>
-        </div>
-        <div class="stats">
-          <article class="stat">
-            <img class="stat-icon" src="{{ url_for('static', filename='svg/humedad.svg') }}" alt="IMG-Humedad" />
-            <p class="stat-value">¿?%</p>
-            <p class="stat-label">Humedad</p>
-          </article>
-          <article class="stat">
-            <img class="stat-icon" src="{{ url_for('static', filename='svg/viento.svg') }}" alt="IMG-Viento" />
-            <p class="stat-value">¿? m/s</p>
-            <p class="stat-label">
-              Velocidad <br />
-              de viento
-            </p>
-          </article>
-          <article class="stat">
-            <p class="stat-value">¿? m/s</p>
-            <p class="stat-label">otra</p>
           </article>
         </div>
       </div>
