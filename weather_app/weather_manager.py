@@ -5,37 +5,45 @@ from static.python.data_manager import DataCollector, DataManager
 from autocorrect import revise
 from requests.exceptions import RequestException, HTTPError
 
+# Constantes
 KEY = 'a3117bc0d7c113aba1f25b2fb28748e1'
 LOCK = threading.Lock()
 FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
 IATA_DATA_PATH = './weather_app/static/datalist/datos_destinos.csv'
 LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
 CITIES_DATA_PATH = './weather_app/static/datalist/cities_2.csv'
+REQUEST_INTERVAL = 1.1
+LONG_SLEEP_INTERVAL = 10800
+<<<<<<< HEAD
+# Data Managers
+=======
+>>>>>>> controladores
 data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
 data_manager = DataManager(data_collector)
 
 def get_weather(city: str, weather_records: dict):
     if not is_weather_valid(city, weather_records):
+<<<<<<< HEAD
+        print(city)
+=======
+>>>>>>> controladores
         with LOCK:
             try:
                 url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
                 response = requests.get(url)
                 response.raise_for_status()
-                wetaher = response.json()
-                determine_icon(wetaher)
-                return wetaher
+                return response.json()
             except (RequestException, HTTPError) as e:
                 raise RequestException('Error al hacer el request') from e
     else:
         return weather_records[city]
 
 def is_weather_valid(city: str, weather_records: dict):
-    THREE_HOUR_INTERVAL = 10800
     if city not in weather_records.keys():
         return False
     weather = weather_records[city]
     requested_time = weather['dt']
-    if time.time() - requested_time >= THREE_HOUR_INTERVAL:
+    if time.time() - requested_time >= LONG_SLEEP_INTERVAL:
         return False
     return True
 
@@ -49,8 +57,21 @@ def determine_icon(json_data: dict):
         json_data (dict): Informacion del clima de una ubicacion.
     """
     if not json_data:
-        raise ValueError('El objeto json es None')
+        raise ValueError('The JSON object is None')
     icon_map = {
+<<<<<<< HEAD
+        range(200, 233): "static/img/storm.gif",         # Tormenta
+        range(300, 322): "static/img/light-rain.gif",    # Lluvia ligera
+        range(500, 505): "static/img/rain.gif",          # Lluvia
+        511: "static/img/snow.gif",                      # Nieve
+        range(520, 532): "static/img/rain.gif",          # Lluvia
+        range(600, 623): "static/img/snow.gif",          # Nieve
+        range(701, 782): "static/img/clouds.png",           # Neblina
+        800: "static/img/sunny.png",                     # Despejado
+        801: "static/img/cloud_sun.png",             # Algunas nubes
+        802: "static/img/clouds.png",                    # Nubes
+        range(803, 805): "static/img/clouds.png"         # Nublado
+=======
         range(200, 233): "img/Storm.png",         
         range(300, 322): "light_rain_icon.svg",    
         range(500, 505): "rain_icon.svg",         
@@ -62,6 +83,7 @@ def determine_icon(json_data: dict):
         801: "img/Parcialmente nublado.png",            
         802: "img/Nublado.png",                   
         range(803, 805): "img/Nublado.png"         
+>>>>>>> controladores
     }
     try:
         weather_id = json_data['weather'][0]['id']
@@ -71,8 +93,8 @@ def determine_icon(json_data: dict):
                 icon = icon_map[key]
                 break
         json_data['weather'][0]['icon'] = icon
-    except KeyError:
-        raise ValueError('El json es invalido')
+    except KeyError as e:
+        raise ValueError('El json es invalido') from e
 
 def search_by_iata(iata_code: str, weather_records: dict):
     """
@@ -88,6 +110,7 @@ def search_by_iata(iata_code: str, weather_records: dict):
     if not city:
         raise ValueError('Ciudad invalida')
     weather = get_weather(city, weather_records)
+    determine_icon(weather)
     return weather
 
 def search_by_city(city: str, weather_records: dict):
@@ -104,6 +127,7 @@ def search_by_city(city: str, weather_records: dict):
     if not similar:
         raise ValueError('Ciudad invalida')
     weather = get_weather(similar[0], weather_records)
+    determine_icon(weather)
     return weather
 
 def search_by_id(flight_number: str, weather_records: dict):
@@ -125,4 +149,6 @@ def search_by_id(flight_number: str, weather_records: dict):
     if not departure or not arrival:
         raise ValueError('Ticket invalido.')
     flight_weather = (get_weather(departure, weather_records), get_weather(arrival, weather_records))
+    determine_icon(flight_weather[0])
+    determine_icon(flight_weather[1])
     return flight_weather
