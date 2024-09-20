@@ -24,7 +24,9 @@ def get_weather(city: str, weather_records: dict):
                 url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
                 response = requests.get(url)
                 response.raise_for_status()
-                return response.json()
+                weather = response.json()
+                determine_icon(weather)
+                return weather
             except (RequestException, HTTPError) as e:
                 raise RequestException('Error al hacer el request') from e
     else:

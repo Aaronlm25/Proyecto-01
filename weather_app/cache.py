@@ -103,7 +103,7 @@ class Cache:
                           [1] : IATA
                           [2] : Codigo de aeroopuerto
         """
-        REQUEST_INTERVAL = 1.2
+        REQUEST_INTERVAL = 1.1
         THREE_HOUR_INTERVAL = 10800
         i = 0
         while not self.STOP_FLAG.is_set():
@@ -117,10 +117,22 @@ class Cache:
             if weather:
                 self.update(weather)
             i += 1
-            if i == len(destiny_data):
+            if i == len(destiny_data) - 770:
                 i = 0
                 self.__save()
-                time.sleep(THREE_HOUR_INTERVAL)
+                self.__sleep(THREE_HOUR_INTERVAL)
+
+    def __sleep(self, duration : int):
+        """
+        Args:
+            duration (int) : cantidad a esperar en segundos.
+        Permite esperar la canitidad deseada con la caracteristica de poder
+        deterner la espera.
+        """
+        for i in range(duration):
+            if self.STOP_FLAG.is_set():
+                break
+            time.sleep(1)
 
     def start(self):
         """
@@ -147,11 +159,12 @@ class Cache:
         Guarda la informacion recolectada por weather_records en el archivo
         cache.json.
         """
-        raw_data = []
-        for weather in self.weather_records.values():
-            raw_data.append(weather)
-        with self.path.open('w', encoding='utf-8') as file:
-            json.dump(raw_data, file, indent=4, ensure_ascii=False)
+        with self.LOCK:
+            raw_data = []
+            for weather in self.weather_records.values():
+                raw_data.append(weather)
+            with self.path.open('w', encoding='utf-8') as file:
+                json.dump(raw_data, file, indent=4, ensure_ascii=False)
 
     def __existance_insurer(self, path):
         """
