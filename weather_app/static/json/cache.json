@@ -268,5 +268,150 @@
         "id": 5861897,
         "name": "Fairbanks",
         "cod": 200
+    },
+    {
+        "coord": {
+            "lon": -99.1277,
+            "lat": 19.4285
+        },
+        "weather": [
+            {
+                "id": 211,
+                "main": "Thunderstorm",
+                "description": "tormenta",
+                "icon": "img/Storm.png"
+            },
+            {
+                "id": 501,
+                "main": "Rain",
+                "description": "lluvia moderada",
+                "icon": "10d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 19.97,
+            "feels_like": 20.03,
+            "temp_min": 19.5,
+            "temp_max": 19.97,
+            "pressure": 1010,
+            "humidity": 77,
+            "sea_level": 1010,
+            "grnd_level": 761
+        },
+        "visibility": 9656,
+        "wind": {
+            "speed": 2.06,
+            "deg": 40
+        },
+        "rain": {
+            "1h": 2.54
+        },
+        "clouds": {
+            "all": 75
+        },
+        "dt": 1726792024,
+        "sys": {
+            "type": 2,
+            "id": 47729,
+            "country": "MX",
+            "sunrise": 1726748696,
+            "sunset": 1726792523
+        },
+        "timezone": -21600,
+        "id": 3530597,
+        "name": "Mexico City",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": -82.3248,
+            "lat": 29.6516
+        },
+        "weather": [
+            {
+                "id": 803,
+                "main": "Clouds",
+                "description": "muy nuboso",
+                "icon": "img/Nublado.png"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 26.27,
+            "feels_like": 26.27,
+            "temp_min": 25.54,
+            "temp_max": 26.91,
+            "pressure": 1010,
+            "humidity": 76,
+            "sea_level": 1010,
+            "grnd_level": 1006
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 0,
+            "deg": 0
+        },
+        "clouds": {
+            "all": 75
+        },
+        "dt": 1726792231,
+        "sys": {
+            "type": 2,
+            "id": 2044122,
+            "country": "US",
+            "sunrise": 1726744581,
+            "sunset": 1726788575
+        },
+        "timezone": -14400,
+        "id": 4156404,
+        "name": "Gainesville",
+        "cod": 200
+    },
+    {
+        "coord": {
+            "lon": -122.8345,
+            "lat": 42.4165
+        },
+        "weather": [
+            {
+                "id": 800,
+                "main": "Clear",
+                "description": "cielo claro",
+                "icon": "img/Sunny.png"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 27.9,
+            "feels_like": 27.22,
+            "temp_min": 27.14,
+            "temp_max": 28.93,
+            "pressure": 1010,
+            "humidity": 34,
+            "sea_level": 1010,
+            "grnd_level": 949
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 5.66,
+            "deg": 310,
+            "gust": 7.72
+        },
+        "clouds": {
+            "all": 0
+        },
+        "dt": 1726792233,
+        "sys": {
+            "type": 2,
+            "id": 2095431,
+            "country": "US",
+            "sunrise": 1726754168,
+            "sunset": 1726798427
+        },
+        "timezone": -25200,
+        "id": 5733351,
+        "name": "Jackson",
+        "cod": 200
     }
 ]

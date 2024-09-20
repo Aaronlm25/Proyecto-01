@@ -71,7 +71,6 @@ def determine_icon(json_data: dict):
                 icon = icon_map[key]
                 break
         json_data['weather'][0]['icon'] = icon
-        print('xd')
     except KeyError:
         raise ValueError('El json es invalido')
 
