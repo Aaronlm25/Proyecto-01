@@ -37,12 +37,12 @@ header h1{
 }
 
 .input button {
-  margin-left: 20px;
   background: none;
   border: none;
 }
 
 .input input{
+  margin-left: 20px;
   width: 300px;
   height: 30px;
   border-radius: 10px;
@@ -163,4 +163,9 @@ header h1{
 
 .stat-label {
   text-align: center;
+}
+
+.error {
+  color: red;
+  font-size: 20px;
 }

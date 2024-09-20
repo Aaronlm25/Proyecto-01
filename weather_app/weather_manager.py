@@ -86,7 +86,7 @@ def search_by_iata(iata_code: str, weather_records: dict):
     """
     city = data_manager.get_city(iata_code)
     if not city:
-        raise ValueError('Ciudad invalida')
+        raise ValueError('Verifica que escribiste correctamente')
     weather = get_weather(city, weather_records)
     determine_icon(weather)
     return weather
@@ -103,7 +103,7 @@ def search_by_city(city: str, weather_records: dict):
     """
     similar = revise(city, 0.7)
     if not similar:
-        raise ValueError('Ciudad invalida')
+        raise ValueError('Verifica que escribiste correctamente')
     weather = get_weather(similar[0], weather_records)
     determine_icon(weather)
     return weather
