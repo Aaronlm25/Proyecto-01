@@ -117,7 +117,7 @@ class Cache:
             if weather:
                 self.update(weather)
             i += 1
-            if i == len(destiny_data) - 770:
+            if i == len(destiny_data):
                 i = 0
                 self.__save()
                 self.__sleep(THREE_HOUR_INTERVAL)
