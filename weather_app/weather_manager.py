@@ -1,23 +1,41 @@
 import requests
 import threading
 import time
-from static.python.data_manager import DataCollector, DataManager
+from static.python.data_manager import DataCollector
+from static.python.path_manager import FileManager, FileNotFound
 from autocorrect import revise
 from requests.exceptions import RequestException, HTTPError
 
-# Constantes
 KEY = 'a3117bc0d7c113aba1f25b2fb28748e1'
 LOCK = threading.Lock()
-FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
-IATA_DATA_PATH = './weather_app/static/datalist/datos_destinos.csv'
-LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
-CITIES_DATA_PATH = './weather_app/static/datalist/cities_2.csv'
-REQUEST_INTERVAL = 1.1
 LONG_SLEEP_INTERVAL = 10800
-data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
-data_manager = DataManager(data_collector)
+
+FILE_MANAGER=FileManager()
+
+try:
+   
+    DATA_MANAGER = DataCollector(FILE_MANAGER)
+
+except FileNotFound as e:
+    print(f"Error: {e}")
 
 def get_weather(city: str, weather_records: dict):
+    """
+    Obtiene los datos meteorológicos para una ciudad específica.
+
+    Si los datos meteorológicos ya están en los registros y son válidos, se devuelve esa información. 
+    Si no, se realiza una solicitud a la API de OpenWeather para obtener la información actualizada.
+
+    Args:
+        city (str): El nombre de la ciudad para la que se desea obtener el clima.
+        weather_records (dict): Un diccionario que contiene los registros meteorológicos por ciudad.
+
+    Returns:
+        dict: Un diccionario con la información meteorológica actual de la ciudad.
+
+    Raises:
+        RequestException: Si ocurre un error al realizar la solicitud a la API.
+    """
     if not is_weather_valid(city, weather_records):
         with LOCK:
             try:
@@ -33,6 +51,19 @@ def get_weather(city: str, weather_records: dict):
         return weather_records[city]
 
 def is_weather_valid(city: str, weather_records: dict):
+    """
+    Verifica si los registros meteorológicos para una ciudad son válidos.
+
+    Los registros se consideran válidos si la ciudad está presente en el diccionario
+    de registros y si la información no ha expirado.
+
+    Args:
+        city (str): El nombre de la ciudad que se va a verificar.
+        weather_records (dict): Un diccionario que contiene los registros meteorológicos por ciudad.
+
+    Returns:
+        bool: True si los registros meteorológicos son válidos, False en caso contrario.
+    """
     if city not in weather_records.keys():
         return False
     weather = weather_records[city]
@@ -86,7 +117,7 @@ def search_by_iata(iata_code: str, weather_records: dict):
     Returns:
         weather (dict): Informacion del clima.
     """
-    city = data_manager.get_city(iata_code)
+    city = DATA_MANAGER.get_city(iata_code)
     if not city:
         raise ValueError('Ciudad invalida')
     weather = get_weather(city, weather_records)
@@ -121,11 +152,11 @@ def search_by_id(flight_number: str, weather_records: dict):
         flight_weather (tuple): Contiene la informacion del clima de llegada y de salida.
     """
     try:
-        flight_info = data_manager.search_flight(flight_number)
+        flight_info = DATA_MANAGER.search_flight(flight_number)
     except TypeError as e:
         raise ValueError('Vuelo no encontrado.')
-    departure = data_manager.get_city(flight_info['departure'])
-    arrival = data_manager.get_city(flight_info['arrival'])
+    departure = DATA_MANAGER.get_city(flight_info['departure'])
+    arrival = DATA_MANAGER.get_city(flight_info['arrival'])
     if not departure or not arrival:
         raise ValueError('Ticket invalido.')
     flight_weather = (get_weather(departure, weather_records), get_weather(arrival, weather_records))

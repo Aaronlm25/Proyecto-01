@@ -1,0 +1,41 @@
+from pathlib import Path
+
+class FileNotFound(Exception):
+    """Excepción personalizada cuando un archivo no se encuentra."""
+    def __init__(self, archivo):
+        super().__init__(f"File {archivo} does not exist.")
+
+class FileManager:
+    def __init__(self, base_dir='./weather_app/static/datalist'):
+        self.base_dir = Path(base_dir)
+    
+    def get_path(self, file_name):
+        """Devuelve la ruta completa del archivo en el directorio base."""
+        return self.base_dir / file_name
+
+    def check_existence(self, file_name):
+        """Verifica si el archivo existe. Lanza una excepción si no existe."""
+        file_path = self.get_path(file_name)
+        if not file_path.exists():
+            raise FileNotFound(file_path)
+        return file_path
+
+    def get_flight_path(self):
+        """Devuelve la ruta de vuelos.csv y verifica su existencia."""
+        return self.check_existence('vuelos.csv')
+
+    def get_destiny_path(self):
+        """Devuelve la ruta de datos_destinos.csv y verifica su existencia."""
+        return self.check_existence('datos_destinos.csv')
+    
+    def get_iata_path(self):
+        """Devuelve la ruta de datos_destinos2.csv y verifica su existencia."""
+        return self.check_existence('datos_destinos2.csv')
+
+    def get_location_path(self):
+        """Devuelve la ruta de datos_destinos_viajes.csv y verifica su existencia."""
+        return self.check_existence('datos_destinos_viajes.csv')
+
+    def get_cities_path(self):
+        """Devuelve la ruta de cities_2.csv y verifica su existencia."""
+        return self.check_existence('cities_2.csv')

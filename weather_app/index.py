@@ -50,4 +50,3 @@ if __name__ == '__main__':
     weather_cache.start()
     app.run()
     weather_cache.stop()
-

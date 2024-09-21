@@ -1,4 +1,3 @@
-import csv
 import json
 import time
 import threading
@@ -6,14 +5,18 @@ from pathlib import Path
 from threading import Thread
 from requests import HTTPError, RequestException
 from weather_manager import get_weather
-from static.python.data_manager import DataCollector, DataManager
+from static.python.data_manager import DataCollector
+from static.python.path_manager import FileManager, FileNotFound
 
-FLIGHT_DATA_PATH = './weather_app/static/datalist/vuelos.csv'
-IATA_DATA_PATH = './weather_app/static/datalist/datos_destinos.csv'
-LOCATION_DATA_PATH = './weather_app/static/datalist/datos_destinos_viajes.csv'
-CITIES_DATA_PATH = './weather_app/static/datalist/cities_2.csv'
-data_collector = DataCollector(FLIGHT_DATA_PATH, IATA_DATA_PATH, LOCATION_DATA_PATH, CITIES_DATA_PATH)
-data_manager = DataManager(data_collector)
+FILE_MANAGER=FileManager()
+
+try:
+   
+    DATA_MANAGER = DataCollector(FILE_MANAGER)
+
+except FileNotFound as e:
+    print(f"Error: {e}")
+    
 class InvalidCacheFileException(Exception):
     """
     Clase de excepcion del archivo de cache dado,
@@ -38,26 +41,6 @@ class Cache:
         self.thread = None
         self.LOCK = threading.Lock()
 
-    def get_destiny_data(self, path):
-
-        """
-        Lee los datos de destinos desde un archivo CSV y los carga en una lista.
-
-        El archivo CSV debe tener los datos en el siguiente formato:
-        city_name, iata_code, airport_name
-
-        Args:
-            path (str): Ruta del archivo CSV que contiene los datos de destinos.
-
-        Returns:
-            list: Una lista de listas, donde cada sublista contiene la información de una ciudad.
-        """
-        destiny_data = []
-        with open(path, mode='r') as file:
-            reader = csv.reader(file)
-            next(reader)
-            destiny_data = [row[0] for row in list(reader)]
-        return destiny_data
 
     def get_data(self):
         """
@@ -139,7 +122,7 @@ class Cache:
         Comienza el proceso del cache y las peticiones de los climas.
         """
         if not self.thread:
-            data = self.get_destiny_data('./weather_app/static/datalist/datos_destinos.csv')
+            data = DATA_MANAGER.get_destiny_data()
             self.thread = Thread(target=self.__update_weather_records, args=[data], name='cache')
             self.thread.start()
 
