@@ -25,7 +25,12 @@
         <form class="input" method="POST" action="/">
           <div id="cityInput" class="content">
           <label for="city"></label>
-          <input maxlength="20" type="text" id="city" name="city" placeholder="Ej. Ciudad de México" autocomplete = "off"/>
+          <input maxlength="20" type="text" id="city" name="city" placeholder="Ej. Ciudad de México" autocomplete = "off" list = "cities_datalist" />
+          <datalist id="cities_datalist">
+            {% for city in cities_datalist %}
+                <option value="{{ city }}">
+            {% endfor %}
+          </datalist>
           </div>
 
           <div id="IATA_codeInput" class="content">

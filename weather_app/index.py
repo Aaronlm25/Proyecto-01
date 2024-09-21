@@ -4,7 +4,7 @@ import signal
 from cache import Cache
 from flask import Flask, render_template, request
 from requests.exceptions import RequestException, HTTPError
-
+from autocorrect import read
 app = Flask(__name__)
 weather_cache = Cache('./weather_app/static/json/cache.json')
 
@@ -13,6 +13,7 @@ def home():
     departure_weather = None
     arrival_weather = None
     error_message = None
+    cities_datalist = read()
     if request.method == 'POST':
         city = request.form.get('city')
         iata_code = request.form.get('iata_code')
@@ -42,7 +43,7 @@ def home():
             print('No se encontró el URL')
         except TypeError as e:
             error_message = str(e)
-    return render_template('index.html', departure_weather=departure_weather, arrival_weather=arrival_weather, error=error_message)
+    return render_template('index.html', departure_weather=departure_weather, arrival_weather=arrival_weather, error=error_message, cities_datalist = cities_datalist)
 
 if __name__ == '__main__':
     safe_stop = lambda signal, frame: (weather_cache.stop(), sys.exit(0))
@@ -50,4 +51,3 @@ if __name__ == '__main__':
     weather_cache.start()
     app.run()
     weather_cache.stop()
-

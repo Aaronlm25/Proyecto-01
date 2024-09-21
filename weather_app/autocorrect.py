@@ -31,6 +31,16 @@ def first_n(similar: dict, n: int):
                 first_n.append(item)
     return first_n
 
+def read():
+    file_path = './weather_app/static/datalist/cities_2.csv'
+    cities = []
+    with open(file_path, mode='r') as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in reader:
+            cities.append(row[0])
+    return cities
+
 def revise(user_ubication: str, coincidence_index: int):
     """
     Funcion para correguir la entrada del usuario
@@ -41,13 +51,7 @@ def revise(user_ubication: str, coincidence_index: int):
     Returns:
         list: contiene las 5 palabras con mayor indice de coincidencia
     """
-    file_path = './weather_app/static/datalist/cities_2.csv'
-    cities = []
-    with open(file_path, mode='r') as file:
-        reader = csv.reader(file)
-        next(reader)
-        for row in reader:
-            cities.append(row[0])
+    cities = read()
     coincidences = {}
     for x in cities:
         levenshtein_index = lev.ratio(user_ubication, x)
