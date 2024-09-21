@@ -8,14 +8,13 @@ from autocorrect import revise
 
 @pytest.fixture
 def city_data():
-    path = './weather_app/static/datalist/cities_2.csv'
+    path = './weather_app/static/datalist/datos_destinos.csv'
     data = set()
     with open(path, 'r') as file:
         csv_file = csv.reader(file)
         next(csv_file)
         for row in csv_file:
-            for word in row:
-                data.add(word)
+                data.add(row[0])
     return random.sample(sorted(data), 5)
 
 def test_order(city_data):
