@@ -162,6 +162,15 @@ class DataCollector:
         """
         return self._destiny_data
     
+    def get_cities(self):
+        """
+        Devuelve las ciudades cargadas.
+
+        Returns:
+            list: Lista de ciudades cargadas desde el archivo CSV.
+        """
+        return self._cities
+    
     def get_city(self, iata_airport):
         """
         Obtiene el nombre de la ciudad basado en el código IATA del aeropuerto.

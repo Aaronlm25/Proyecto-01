@@ -2,6 +2,26 @@ import Levenshtein as lev
 import csv
 import unidecode as ucode
 
+from static.python.data_manager import DataCollector
+from static.python.path_manager import FileManager, FileNotFound
+
+FILE_MANAGER=FileManager()
+
+try:
+   
+    DATA_MANAGER = DataCollector(FILE_MANAGER)
+
+except FileNotFound as e:
+    print(f"Error: {e}")
+    
+class InvalidCacheFileException(Exception):
+    """
+    Clase de excepcion del archivo de cache dado,
+    se lanza cuando el archivo no es .json
+    """
+    def __init__(self, message : str):
+        super().__init__(message)
+
 def organize(similar_locations: dict):
     """
     Funcion para organize los elementos en el diccionario
@@ -41,13 +61,7 @@ def revise(user_ubication: str, coincidence_index: int):
     Returns:
         list: contiene las 5 palabras con mayor indice de coincidencia
     """
-    file_path = './weather_app/static/datalist/cities_2.csv'
-    cities = []
-    with open(file_path, mode='r') as file:
-        reader = csv.reader(file)
-        next(reader)
-        for row in reader:
-            cities.append(row[0])
+    cities = DATA_MANAGER.get_cities()
     coincidences = {}
     for x in cities:
         levenshtein_index = lev.ratio(user_ubication, x)
