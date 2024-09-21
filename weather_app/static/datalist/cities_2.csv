@@ -1,9 +1,9 @@
-name
+nombre
 Aalborg
-Baghdad
+Bagdad
 Cairns
-Dhaka
-Edinburgh
+Daca
+Edimburgo
 Fairbanks
 Gainesville
 Hagen
@@ -11,7 +11,7 @@ Jackson
 Kabul
 La Ceiba
 Maastricht
-N'Djamena
+Yamena
 Oakland
 Pago Pago
 Qingdao
@@ -25,20 +25,20 @@ Amoy
 Yakima
 Zacatecas
 Aarhus
-Baghdad
+Bagdad
 Cajamarca
 Dakar
 Edmonton
 Fargo
 Galena
 Haikou
-Indianapolis
+Indianápolis
 Jackson
 Kaduna
 La Crosse
 Macon
 Nadi
-Oaxaca City
+Ciudad de Oaxaca
 Palembang
 Québec
 Rabaul
@@ -50,7 +50,7 @@ Waco
 Xi'an
 Yakutat
 Donji grad
-Ābādān
+Abadán
 Calama
 Dalaman
 Faro
@@ -63,7 +63,7 @@ La Grande
 Madison
 Nagasaki
 Ōita
-Province of Palermo
+Provincia de Palermo
 Quetta
 Raleigh
 Tacna
@@ -72,7 +72,7 @@ Washington
 Yamagata
 Abakan
 Bakersfield
-Kolkata
+Calcuta
 Dalian
 Eilat
 Fayetteville
@@ -80,11 +80,11 @@ Hakodate
 Inuvik
 Jaipur
 Kahului
-Havana
+La Habana
 Nagoya
 Okayama
 Palm Springs
-Yangon
+Yangón
 Daegu
 Umeå
 Valencia
@@ -94,7 +94,7 @@ Aberdeen
 Balmaceda
 Calgary
 Dallas
-Gemeente Eindhoven
+Municipio de Eindhoven
 Fayetteville
 Guwahati
 Halifax
@@ -119,7 +119,7 @@ Baltimore
 Santiago de Cali
 Dallas
 El Paso
-Fes
+Fez
 Gemena
 Hall Beach
 Iqaluit
@@ -140,11 +140,11 @@ Zaragoza
 Abhā
 Baltimore
 Kozhikode
-Damascus
+Damasco
 El Salvador
 Fillmore
 Provincia di Genova
-Hamburg
+Hamburgo
 Iquique
 Jinan
 Kalispell
@@ -156,7 +156,7 @@ Paphos
 Quintana Roo
 Recife
 Saltillo
-Ouagadougou
+Uagadugú
 Vancouver
 Wausau
 Yurimaguas
@@ -166,16 +166,16 @@ Bamako
 Calvi
 Danville
 Elko
-Florence
-Geneva
+Florencia
+Ginebra
 Hamilton
 Iron Mountain
-Johannesburg
+Johannesburgo
 Lae
 Majuro
 Arrondissement de Nancy
-Oran
-Distrikt Paramaribo
+Orán
+Distrito de Paramaribo
 El Salvador
 Västerås
 Wellington
@@ -184,24 +184,24 @@ Cambarão
 Cambridge Bay
 Dar es Salaam
 Ely
-Florence
+Florencia
 Gladewater
 Hampton
-Isfahan
+Isfahán
 Johor Bahru
 Lafayette
 Málaga
 Nanisivik
 Örebro
-Distrikt Paramaribo
+Distrito de Paramaribo
 Redding
-Salzburg
+Salzburgo
 Taiyuan
-Vaxjo
+Vaxjö
 Wenatchee
 Zihuatanejo
-Abu Dhabi
-Brunei Town
+Abu Dabi
+Ciudad de Brunei
 Campo Grande
 Darwin
 Enschede
@@ -213,9 +213,9 @@ Jönköping
 Kanab
 Lagos
 Malé
-Nanjing
+Nankín
 Orlando
-Paris
+París
 Regina
 San Angelo
 Takamatsu
@@ -225,14 +225,14 @@ Bengaluru
 Canaima
 Entebbe
 Glasgow
-Hanoi
+Hanói
 Juanjuí
 Kananga
 Laguna Beach
 Malmo
 Nanning
 Osaka
-Paris
+París
 San Antonio
 Talara
 Venecia
@@ -241,9 +241,9 @@ Acapulco de Juárez
 Bangkok
 Cancún
 Dayton
-Ft. Pierce
+Fort Pierce
 Goma
-Hanover
+Hannover
 Islamabad
 Juba
 Kano
@@ -251,7 +251,7 @@ Lahad Datu
 Malongo
 Arrondissement de Nantes
 Osaka
-Paris
+París
 Reno
 San Antonio
 Tallahassee
@@ -268,12 +268,12 @@ Lahore
 Malta
 Nantucket
 Osaka
-Paris
+París
 Resolute
 San Diego
 Veracruz
 Wichita
-Accra
+Acra
 Bangui
 Caracas
 Decatur
@@ -294,8 +294,8 @@ Tamanghasset
 Vernal
 Wichita Falls
 Yucatán
-Adana Province
-City of Banjul
+Provincia de Adana
+Ciudad de Banjul
 Cardiff
 Deer Lake
 Erie
@@ -304,34 +304,34 @@ Goroka
 Harlingen
 Islip
 Jalisco
-Kaohsiung City
-Lanai City
+Ciudad de Kaohsiung
+Ciudad de Lanai
 Managua
 Napaskiak
 Osijek
 Richmond
 San Francisco
 Tampa
-Provincia di Verona
+Provincia de Verona
 Wilmington
-Adelaide
+Adelaida
 Baotou
 Carlsbad
 Delhi
 Fort Yukon
-Gothenburg
+Gotemburgo
 Harrisburg
 Ithaca
 Karachi
-Naples
+Nápoles
 Oslo
 Arrondissement de Pau
 Rīga
-San Jose
+San José
 Tampere
 Hong Kong
 Windhoek
-Aden
+Adén
 Barbados
 Cartagena
 Delta
@@ -342,16 +342,16 @@ Hartford
 Karaganda
 Lansing
 Manchester
-Naples
+Nápoles
 Oslo
 Pedernal
 Rīga
 San Juan
-Vienna
+Viena
 Windhoek
-Addis Ababa
+Adís Abeba
 Barcelona
-Carupano
+Carúpano
 Denver
 Evansville
 Hartford
@@ -364,7 +364,7 @@ Oslo
 George Town
 Rimini
 San Juan
-Vientiane
+Vientián
 Windsor
 Adler
 Barcelona
@@ -394,10 +394,10 @@ Kassel
 Larnaca
 Maputo
 Natal
-Ostend
+Ostende
 Peoria
 San Pedro Sula
-Tashkent
+Taskent
 Villahermosa
 Wrangell
 Aguascalientes
@@ -407,15 +407,15 @@ El Cairo
 Friedrichshafen
 Grand Forks
 Haugesund
-Kathmandu
+Katmandú
 Las Piedras
 Maracaibo
-Canton of Neuchâtel
+Cantón de Neuchâtel
 Ottawa
 Pereira
-Saint Petersburg
+San Petersburgo
 Tawao
-Vilnius
+Vilna
 Wuhan
 Ahmedabad
 Bari
@@ -435,7 +435,7 @@ Arrondissement d'Ajaccio
 Barinas
 Catania
 Detroit
-Stockholm
+Estocolmo
 Grande Prairie
 Hefei
 Kerman
@@ -451,7 +451,7 @@ Akiachak
 Barquisimeto
 Cayena
 Detroit
-Strasbourg
+Estrasburgo
 Grayling
 Helena
 Ketchikan
@@ -461,8 +461,8 @@ Newcastle
 Perth
 La Rioja
 Sanaa
-Tehran
-Warsaw
+Teherán
+Varsovia
 Akiak
 Barranquilla
 Graz
@@ -480,23 +480,25 @@ Great Falls
 Helsinki
 Kyiv
 Le Havre
-Marrakesh
+Marrakech
 Niamey
 Peshawar
 Sandakan
 Akron
-Basel
+Basilea
 Cedar Rapids
 Dhahran
 Fukuoka
 Green Bay
-Kyiv
+-
+
+ Kyiv
 Leeds
-Marseille
+Marsella
 Nightmute
 Petersburg
 Rochester
-Santa Barbara
+Santa Bárbara
 Temuco
 Chachapoyas
 Dhahran
@@ -514,7 +516,7 @@ Tenerife
 Albany
 Arrondissement de Bastia
 Dillingham
-Philadelphia
+Filadelfia
 Greenville
 Hilo
 Kilimanjaro
@@ -533,7 +535,7 @@ Greenville
 Hiroshima
 Killeen
 Lethbridge
-Muscat
+Mascate
 Ningbo
 Phoenix
 Rocky Mount
@@ -550,7 +552,7 @@ Lhasa
 Mashhad
 Niš
 Phuket
-Rome
+Roma
 Santa Lucía
 Battle Creek
 Changsha
@@ -559,22 +561,22 @@ Arrondissement de Grenoble
 Holy Cross
 Kindu
 Libreville
-Nice
+Niza
 Pierre
-Rome
+Roma
 Santa María
 Terrace
 Alejandría
 Bay City
 Charleston
 Dominica
-Province of Groningen
+Provincia de Groningen
 Homer
 Liège
 Matamoros
 Nome
 Pisa
-Rome
+Roma
 Santiago
 Beaumont
 Charlotte
@@ -588,15 +590,15 @@ Pittsburgh
 Roosevelt
 Santiago de Compostela
 Texarkana
-Aleppo
+Alepo
 Beaver
 Chattanooga
-Dresden
+Dresde
 Guam
 Honolulu
 Kingston
-Lilongwe
-Maturin
+Lilongüe
+Maturín
 Noril'sk
 Piura
 Roswell
@@ -607,7 +609,7 @@ Douala
 Guayaquil
 Kingston
 Lima
-Mauritius
+Mauricio
 Norman Wells
 Rota
 Santo Domingo
@@ -625,7 +627,7 @@ Santo Tomé
 Tijuana
 Beirut
 Chengdu
-Dublin
+Dublín
 Guilin
 Hoskins
 Kipnuk
@@ -646,7 +648,7 @@ Kiruna
 Linz
 Mbandaka
 Novosibirsk
-State of Pohnpei
+Estado de Pohnpei
 Ruby
 São Luís
 Tingo María
@@ -656,8 +658,8 @@ Durango
 Gulfport
 Houston
 Kisangani
-Lisbon
-Russian Mission
+Lisboa
+Misión rusa
 São Paulo
 Tobago
 Alor Star
@@ -671,9 +673,9 @@ Little Rock
 McAllen
 Río Blanco
 São Paulo
-Tokyo
+Tokio
 Altoona
-Belgrade
+Belgrado
 Chicago
 Durban
 Gwangju
@@ -684,9 +686,9 @@ McGrath
 Nueva York
 Ponce
 São Paulo
-Tokyo
-Amarillo
-Belize
+Tokio
+Amberes
+Belice
 Chicago
 Düsseldorf
 Guerrero
@@ -696,14 +698,14 @@ Medan
 Nueva York
 Ponta Delgada
 São Paulo
-Tokyo
-Amberes
-Belize
+Tokio
+Ámsterdam
+Belice
 Chicago
-Dutch Harbor
-Guanajuato City
+Puerto de Dutch Harbor
+Ciudad de Guanajuato
 Huntsville
-Saint Paul Harbor
+Puerto de San Pablo
 Ljubljana
 Medellín
 Nueva York
@@ -712,7 +714,7 @@ Sapporo
 Toksook Bay
 Bellingham
 Chicago
-Guatemala City
+Ciudad de Guatemala
 Huslia
 Komatsu
 Lobito
@@ -721,7 +723,7 @@ Nueva York
 Porlamar
 Sapporo
 Tokushima
-Amman
+Amán
 Belo Horizonte
 Hyannis
 Lomé
@@ -731,35 +733,35 @@ Port-Vila
 Sapporo
 Toledo
 Amritsar
-Benghazi
+Trípoli
 Chiclayo
 Hyderabad
 Koror
-London
+Londres
 Meekatharra
 Portland
 Sarasota
 Tongatapu
 Bergen
 Chico
-State of Kosrae
+Estado de Kosrae
 Long Beach
 Mekoryuk
-Noumea
+Nouméa
 Portland
 Sault Ste. Marie
 Topeka
-Berlin
+Berlín
 Chignik
 Kota Kinabalu
 Loreto
 Melbourne
-Noumea
+Nouméa
 Porto
 Savannah
 Toronto
 Anchorage
-Berlin
+Berlín
 Chihuahua
 Kotzebue
 Los Ángeles
@@ -767,25 +769,25 @@ Melbourne
 Porto Alegre
 Toronto
 Provincia di Ancona
-Berlin
+Berlín
 Chisholm
 Los Ángeles
 Melbourne
-Nuremberg
+Núremberg
 Porto Velho
 Scranton
 Torreón
 Andahuaylas
-Berlin
+Berlín
 Chittagong
 Krasnoyarsk
 Los Mochis
 Melbourne
-Prague
+Praga
 Seattle
 Tottori-shi
-Anguilla
-Bermuda
+Anguila
+Bermudas
 Chongqing
 Kristiansand
 Louisville
@@ -793,7 +795,7 @@ Memphis
 Presque Isle
 Sedona
 Toulon
-Bern
+Berna
 Christchurch
 Kuala Lumpur
 Lourdes
@@ -823,7 +825,7 @@ Ciudad del Cabo
 Kunming
 Lubumbashi
 Meridian
-Seoul
+Seúl
 Trenton
 Annecy
 Biarritz
@@ -832,8 +834,8 @@ Kuopio
 Lucknow
 Miami
 Prudhoe Bay
-Seville
-Antalya Province
+Sevilla
+Provincia de Antalya
 Bilbao
 Cleveland
 Kushiro
@@ -843,17 +845,17 @@ Pucallpa
 Seward
 Trieste
 Antananarivo
-Billings Metropolitan Area
+Área metropolitana de Billings
 Cleveland
 Kuujjuarapik
 Lugano
 Miami
 Puebla
-Tripoli
+Trípoli
 Antigua Guatemala
 Billund
 Cochabamba
-Kuwait City
+Ciudad de Kuwait
 Luleå
 Midland
 Puerto Ayacucho
@@ -874,10 +876,10 @@ Tromsø
 Aomori
 Birmingham
 Cold Bay
-Luxembourg Province
+Provincia de Luxemburgo
 Milán
 Puerto Escondido
-Sharjah city
+Ciudad Sharjah
 Trondheim
 Apia
 Birmingham
@@ -900,8 +902,8 @@ Shijiazhuang
 Tucson
 Arcata
 Bloemfontein
-Cologne
-Milford
+Colonia
+Milagro
 Shiraz
 Tulsa
 Arecibo
@@ -915,13 +917,13 @@ Columbia
 Minatitlán
 Sibu
 Tumbes
-Algiers
+Argel
 Bodø
 Columbia
 Mineralnye Vody
 Puerto Libre
 Arica
-Bogota
+Bogotá
 Columbus
 Minneapolis
 Puerto Maldonado
@@ -930,20 +932,20 @@ Aruba
 Boise
 Columbus
 Minot
-Port Montt
-Singapore
+Puerto Montt
+Singapur
 Tununak
 Ascensión
-Bologna
+Bolonia
 Columbus
 Minsk
-Singapore
-Turin
+Singapur
+Turín
 Asheville
 Mumbai
-Marabu
+Marabú
 Puerto Ordaz
-Singapore
+Singapur
 Turku
 "Bonaire, Saint Eustatius, and Saba"
 Concepción
@@ -953,19 +955,19 @@ Sint Maarten
 Tuscaloosa
 Ashland
 Boston
-Copenhagen
+Copenhague
 Miyazaki
 Puerto Príncipe
 Sioux Falls
 Tuxtla Gutiérrez
 Asmara
 Boulder
-Copenhagen
-Mobile
+Copenhague
+Móvil
 Puerto Vallarta
 Sitka
 Twin Falls
-Principality of Asturias
+Principado de Asturias
 Bourlamaque
 Copiapó
 Moline
@@ -976,7 +978,9 @@ Bournemouth
 Córdoba
 Mombasa
 Busan
-Sofia
+Sof
+
+ía
 Tabasco
 Asunción
 Bozeman
@@ -985,7 +989,7 @@ Moncton
 Pyongyang
 Sokoto
 Tamaulipas
-Athens
+Atenas
 Bradley
 Corning
 Monroe
@@ -998,10 +1002,10 @@ Monrovia
 Sønderborg
 Toluca
 Atlanta
-Brasília
+Brasilia
 Corpus Christi
 Monrovia
-Philadelphia
+Filadelfia
 Atlanta
 Bratislava
 Corpus Christi
@@ -1034,7 +1038,7 @@ Austin
 Bristol
 Cruzeiro do Sul
 Montreal
-St Louis
+St. Louis
 Ayacucho
 Brownsville
 Cuenca
@@ -1047,14 +1051,14 @@ Arizona
 Bucaramanga
 Culebra
 Moroni
-Bucharest
+Bucarest
 Culiacán
 Moroni
 Stavanger
-Bucharest
+Bucarest
 Cumana
 Steamboat Springs
-Bucharest
+Bucarest
 Curazao
 Stevens Village
 Budapest
@@ -1067,7 +1071,7 @@ Guangzhou
 Mount Hagen
 Stuttgart
 Buenos Aires
-Guatemala City
+Ciudad de Guatemala
 Arrondissement de Mulhouse
 Greater Sudbury
 Bulawayo
@@ -1076,7 +1080,7 @@ Bundaberg
 Münster
 Sundsvall
 Burbank
-Mexico City
+Ciudad de México
 Muskegon
 Surabaya
 Burdeos
@@ -1086,7 +1090,7 @@ Burlington
 Mezquite de Chávez
 Sverdlovs'k
 Bushehr
-Panama
+Panamá
 Syracuse
 Butte
 California
