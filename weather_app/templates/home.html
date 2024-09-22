@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Weather Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/styles.css') }}" />
+    <script src="static/js/script.js" defer></script>
+  </head>
+  <header>
+    <h1>Título</h1>
+    <a href="city.html">ciudad</a>
+    <a href="flight.html">vuelo</a>
+  </header>
+  <body>
+    <section class="container">
+
+      <h1>Buscar por...</h1>
+  
+      <div class="info card">
+
+        <select id="menu" onchange="saveElection()">
+          <option class="option">  Seleccione  </option>
+          <option value="cityInput" class="option">Nombre de la ciudad</option>
+          <option value="IATA_codeInput" class="option">Código IATA</option>
+          <option value="flight_numberInput" class="option">Número de vuelo</option>
+        </select>
+      </div>
+
+      <div class="error">
+        {% if error %}
+          <p>{{ error }}</p>
+        {% endif %}
+    </section>
+  </body>
+</html>
