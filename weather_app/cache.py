@@ -9,11 +9,8 @@ from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
 
 FILE_MANAGER=FileManager()
-
 try:
-   
     DATA_MANAGER = DataCollector(FILE_MANAGER)
-
 except FileNotFound as e:
     print(f"Error: {e}")
     

@@ -1,11 +1,17 @@
 import weather_manager
 import sys
 import signal
-from autocorrect import read
 from cache import Cache
 from flask import Flask, render_template, request
 from requests.exceptions import RequestException, HTTPError
+from static.python.data_manager import DataCollector
+from static.python.path_manager import FileManager, FileNotFound
 
+FILE_MANAGER = FileManager()
+try:
+    DATA_MANAGER = DataCollector(FILE_MANAGER)
+except FileNotFound as e:
+    print(f"Error: {e}")
 app = Flask(__name__)
 weather_cache = Cache('./weather_app/static/json/cache.json')
 
@@ -14,7 +20,7 @@ def home():
     departure_weather = None
     arrival_weather = None
     error_message = None
-    datalist_options = read()
+    datalist_options = DATA_MANAGER.get_cities()
     if request.method == 'POST':
         city = request.form.get('city')
         iata_code = request.form.get('iata_code')

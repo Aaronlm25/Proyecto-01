@@ -1,16 +1,12 @@
 import Levenshtein as lev
 import csv
 import unidecode as ucode
-
 from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
 
 FILE_MANAGER=FileManager()
-
 try:
-   
     DATA_MANAGER = DataCollector(FILE_MANAGER)
-
 except FileNotFound as e:
     print(f"Error: {e}")
     
@@ -51,9 +47,6 @@ def first_n(similar: dict, n: int):
                 first_n.append(item)
     return first_n
 
-def read():
-    return (DATA_MANAGER.get_cities())
-
 def revise(user_ubication: str, coincidence_index: int):
     """
     Funcion para correguir la entrada del usuario
@@ -64,7 +57,7 @@ def revise(user_ubication: str, coincidence_index: int):
     Returns:
         list: contiene las 5 palabras con mayor indice de coincidencia
     """
-    cities = read()
+    cities = DATA_MANAGER.get_cities()
     coincidences = {}
     for x in cities:
         levenshtein_index = lev.ratio(user_ubication, x)

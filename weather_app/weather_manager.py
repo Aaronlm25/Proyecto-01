@@ -4,26 +4,19 @@ import time
 import os
 from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
-from autocorrect import revise, read
+from autocorrect import revise
 from requests.exceptions import RequestException, HTTPError
 from dotenv import load_dotenv
 
-
+load_dotenv()
 KEY = os.getenv('KEY')
 LOCK = threading.Lock()
 LONG_SLEEP_INTERVAL = 10800
-
-FILE_MANAGER=FileManager()
-
+FILE_MANAGER = FileManager()
 try:
-   
     DATA_MANAGER = DataCollector(FILE_MANAGER)
-
 except FileNotFound as e:
     print(f"Error: {e}")
-
-load_dotenv()
-
 
 def get_weather(city: str, weather_records: dict):
     """
@@ -141,7 +134,7 @@ def search_by_city(city: str, weather_records: dict):
         weather (dict): Informacion del clima.
     """
     suggestion = revise(city, 0.7)[0]
-    if city not in read():
+    if city not in DATA_MANAGER.get_cities():
         raise ValueError (f'Quizas quisiste decir: {suggestion}')
     weather = get_weather(suggestion, weather_records)
     determine_icon(weather)
