@@ -4,7 +4,7 @@ import time
 import os
 from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
-from autocorrect import revise
+from autocorrect import revise, read
 from requests.exceptions import RequestException, HTTPError
 from dotenv import load_dotenv
 
@@ -140,10 +140,10 @@ def search_by_city(city: str, weather_records: dict):
     Returns:
         weather (dict): Informacion del clima.
     """
-    similar = revise(city, 0.7)
-    if not similar:
-        raise ValueError('Ciudad invalida')
-    weather = get_weather(similar[0], weather_records)
+    suggestion = revise(city, 0.7)[0]
+    if city not in read():
+        raise ValueError (f'Quizas quisiste decir: {suggestion}')
+    weather = get_weather(suggestion, weather_records)
     determine_icon(weather)
     return weather
 

@@ -51,6 +51,9 @@ def first_n(similar: dict, n: int):
                 first_n.append(item)
     return first_n
 
+def read():
+    return (DATA_MANAGER.get_cities())
+
 def revise(user_ubication: str, coincidence_index: int):
     """
     Funcion para correguir la entrada del usuario
@@ -61,7 +64,7 @@ def revise(user_ubication: str, coincidence_index: int):
     Returns:
         list: contiene las 5 palabras con mayor indice de coincidencia
     """
-    cities = DATA_MANAGER.get_cities()
+    cities = read()
     coincidences = {}
     for x in cities:
         levenshtein_index = lev.ratio(user_ubication, x)
