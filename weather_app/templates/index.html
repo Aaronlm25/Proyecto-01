@@ -24,6 +24,7 @@
 
         <form class="input" method="POST" action="/">
           <div id="cityInput" class="content">
+<<<<<<< HEAD
           <label for="city"></label>
           <input maxlength="20" type="text" id="city" name="city" placeholder="Ej. Ciudad de México" autocomplete = "off" list = "cities_datalist" />
           <datalist id="cities_datalist">
@@ -32,6 +33,16 @@
             {% endfor %}
           </datalist>
           </div>
+=======
+            <label for="city"></label>
+            <input maxlength="20" type="text" id="city" name="city" placeholder="Ej. Ciudad de México" autocomplete = "off" list = "datalist_options" />
+            <datalist id="datalist_options">
+              {% for city in datalist_options %}
+                  <option value="{{ city }}">
+              {% endfor %}
+            </datalist>
+            </div>
+>>>>>>> controladores
 
           <div id="IATA_codeInput" class="content">
           <label for="iata_code"></label>
