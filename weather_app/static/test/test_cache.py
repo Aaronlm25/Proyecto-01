@@ -3,8 +3,10 @@ import sys
 import json
 import pytest
 import random
+import threading
+import time
 sys.path.append(os.path.abspath("./weather_app"))
-from cache import Cache
+from cache import Cache, InvalidCacheFileException
 
 path = './weather_app/static/test/temp/cache.json'
 
@@ -43,6 +45,36 @@ def sample_data_disjoint(size):
        data.append({"name": x})
     return data
 
+@pytest.mark.dependency()
+def test_stop(clean, sample_cache):
+    sample_cache.start()
+    time.sleep(3)
+    sample_cache.stop()
+    assert threading.active_count() == 1
+
+@pytest.mark.dependency(depends=["test_stop"])
+def test_start(clean, sample_cache):
+    sample_cache.start()
+    assert sample_cache.is_active()
+    assert threading.active_count() == 2
+    sample_cache.start()
+    assert sample_cache.is_active()
+    assert threading.active_count() == 2
+    names = [thread.name for thread in threading.enumerate()]
+    assert 'cache' in names
+    sample_cache.stop()
+
+def test_invalid_cache(clean):
+    with pytest.raises(InvalidCacheFileException):
+        invalid_cache = Cache('./weather_app/static/test/temp/cachegads')
+    with pytest.raises(InvalidCacheFileException):
+        invalid_cache = Cache('./weather_app/static/test/temp/cache.xd')
+    clean
+    os.mkdir('./weather_app/static/test/temp')
+    with open(path, 'x') as invalid_cache_file:
+        invalid_cache_file.write(
+            
+        )
 def test_get_data_empty_file(clean, sample_cache):
     sample_cache.stop()
     assert sample_cache.weather_records == {}
@@ -72,7 +104,3 @@ def test_update_large(clean, sample_cache):
 
 def test_directory_creation(clean, sample_cache):
     assert os.path.exists(path)
-
-
-    
-    

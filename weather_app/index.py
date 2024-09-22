@@ -13,7 +13,6 @@ try:
 except FileNotFound as e:
     print(f"Error: {e}")
 app = Flask(__name__)
-weather_cache = Cache('./weather_app/static/json/cache.json')
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -50,11 +49,19 @@ def home():
             print('No se encontró el URL')
         except TypeError as e:
             error_message = str(e)
-    return render_template('index.html', departure_weather=departure_weather, arrival_weather=arrival_weather, error=error_message, datalist_options = datalist_options)
+    return render_template(
+        'index.html',
+        departure_weather=departure_weather,
+        arrival_weather=arrival_weather,
+        error=error_message,
+        datalist_options=datalist_options
+    )
 
 if __name__ == '__main__':
-    safe_stop = lambda signal, frame: (weather_cache.stop(), sys.exit(0))
-    signal.signal(signal.SIGINT, safe_stop)
+    weather_cache = Cache('./weather_app/static/json/cache.json')
     weather_cache.start()
+    safe_stop = lambda signal, frame: (weather_cache.stop(),sys.exit(0))
+    signal.signal(signal.SIGINT, safe_stop)
     app.run()
-    weather_cache.stop()
+    if weather_cache.is_active():
+        weather_cache.stop()
