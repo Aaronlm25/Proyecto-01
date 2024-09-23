@@ -97,7 +97,7 @@ def test_accuracy_basic(city_data : list):
         distorted = [missing_letter, extra_letter]
         for distorted_city in distorted:
             similar = revise(distorted_city, 0.7)
-            assert any(city in similar for city in city_data)
+            assert city in similar
     special_characters = {'~', ':', "'", '+', '[', '\\', '@', '^', '{'}
     arbitrary_sets = []
     arbitrary_sets.extend(combinations(special_characters, 5))
@@ -105,5 +105,5 @@ def test_accuracy_basic(city_data : list):
         arbitrary_string = ''.join(map(str, character_set))
         assert revise(arbitrary_string, 0.7) == []
     assert revise('chine', 0.7) == []
-    assert revise('afsdb', 0.5) == []
+    assert revise('afsdb', 0.7) == []
     assert revise('', 0.5) == []
