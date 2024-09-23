@@ -4,9 +4,9 @@ import threading
 from pathlib import Path
 from threading import Thread
 from requests import HTTPError, RequestException
-from weather_manager import get_weather
 from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
+from weather_manager import get_weather
 
 FILE_MANAGER=FileManager()
 try:
@@ -38,13 +38,13 @@ class Cache:
         self.__thread = None
         self.__LOCK = threading.Lock()
 
-    def get_data(self):
+    def get_data(self) -> dict:
         """
         Obtiene el cache como un diccionario cuyas llaves son los nombres de las 
         ciudades y los valores son objetos json
 
         Returns:
-            self.weather_records: Un diccionario con todos los climas de las ciudades registradas
+            self.weather_records (dict): Un diccionario con todos los climas de las ciudades registradas
         """
         raw_data = []
         if len(self.weather_records) == 0:
@@ -140,7 +140,7 @@ class Cache:
             self.__thread.join()
         self.__save()
 
-    def is_active(self):
+    def is_active(self) -> bool:
         """
         Permite saber si se estan haciendo las peticiones de clima.
 

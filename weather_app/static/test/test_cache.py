@@ -31,7 +31,7 @@ def clean():
         if os.path.isfile(file_path):
             os.remove(file_path)
 
-def json_file():
+def json_file() -> json:
     """
     Permite obtener la lista de objetos json del archivo en el path especificado.
 
@@ -44,7 +44,7 @@ def json_file():
             json_file = json.load(file)
     return json_file
 
-def to_json(weather_records : dict):
+def to_json(weather_records : dict) -> json:
     """
     Permite obtener una lista de objetos json dado un diccionario cuyos valores son
     objetos json.
@@ -57,7 +57,7 @@ def to_json(weather_records : dict):
         json.append(value)
     return json
 
-def sample_data_adjoint(size : int):
+def sample_data_adjoint(size : int) -> list:
     """
     Permite obtener un ejemplo de una lista de objetos json con duplicados
     dado un tamano.
@@ -76,7 +76,7 @@ def sample_data_adjoint(size : int):
        data.append({"name": x})
     return data
 
-def sample_data_disjoint(size : int):
+def sample_data_disjoint(size : int) -> list:
     """
     Permite obtener un ejemplo de una lista de objetos json sin duplicados
     dado un tamano.
@@ -127,6 +127,7 @@ def test_start(clean, sample_cache : Cache):
     names = [thread.name for thread in threading.enumerate()]
     assert 'cache' in names
     sample_cache.stop()
+    assert json_file() == to_json(sample_cache.weather_records)
 
 def test_invalid_cache(clean):
     """
@@ -141,7 +142,7 @@ def test_invalid_cache(clean):
     with pytest.raises(InvalidCacheFileException):
         invalid_cache = Cache('./weather_app/static/test/temp/cache.xd')
 
-def test_get_data_empty_file(clean, sample_cache):
+def test_get_data_empty_file(clean, sample_cache : Cache):
     """
     Test para ver que no se esta escribiendo nada extra.
 
@@ -153,7 +154,7 @@ def test_get_data_empty_file(clean, sample_cache):
     assert sample_cache.weather_records == {}
     assert json_file() == [] 
 
-def test_update_empty_file(clean, sample_cache):
+def test_update_empty_file(clean, sample_cache : Cache):
     """
     Test para ver que un archivo json vacio se llena correctamente aun con
     datos repetidos.
@@ -172,7 +173,7 @@ def test_update_empty_file(clean, sample_cache):
     sample_cache.stop()
     assert json_file() == to_json(sample_cache.weather_records)
 
-def test_update_large(clean, sample_cache):
+def test_update_large(clean, sample_cache : Cache):
     """
     Test para ver que un archivo json vacio se llena correctamente aun con
     datos repetidos y en gran cantidad.
@@ -191,7 +192,7 @@ def test_update_large(clean, sample_cache):
     sample_cache.stop()
     assert json_file() == to_json(sample_cache.weather_records)
 
-def test_directory_creation(clean, sample_cache):
+def test_directory_creation(clean, sample_cache : Cache):
     """   
     Test para ver que un objeto json crea su archivo en el directorio especificado.
         

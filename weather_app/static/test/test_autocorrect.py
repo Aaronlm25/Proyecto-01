@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath("./weather_app"))
 from autocorrect import revise
 
 @pytest.fixture
-def city_data():
+def city_data() -> set:
     """
     Fixture que regresa los nombres de las ciudades.
 
@@ -30,7 +30,7 @@ def test_order(city_data : set):
     tenga como primer elemento a la ciudad escrita correctamente.
     
     Args:
-        city_data (list) set con los nombres de las ciudades. 
+        city_data (set) set con los nombres de las ciudades. 
     """
     for city in city_data:
         similar_cities = revise(city)
@@ -43,7 +43,7 @@ def test_upper_case(city_data : set):
     tenga como primer elemento a la ciudad sin modificar.
 
     Args:
-        city_data (list) set con los nombres de las ciudades.
+        city_data (set) set con los nombres de las ciudades.
     """
     for city in city_data:
         similar_cities = revise(city.upper())
@@ -56,7 +56,7 @@ def test_lower_case(city_data : set):
     tenga como primer elemento a la ciudad sin modificar.
 
     Args:
-        city_data (list) set con los nombres de las ciudades.
+        city_data (set) set con los nombres de las ciudades.
     """
     for city in city_data:
         similar_cities = revise(city.lower())
@@ -69,7 +69,7 @@ def test_mixed_upper_lower_case(city_data : set):
     con las 5 ciudades mas similares tenga como primer elemento a la ciudad sin modificar.
 
     Args:
-        city_data (list) set con los nombres de las ciudades.
+        city_data (set) set con los nombres de las ciudades.
     """
     for city in city_data:
         mixed = ''.join(
@@ -88,7 +88,7 @@ def test_accuracy_basic(city_data : set):
     ninguna ciuadad similar.
 
     Args:
-        city_data (list) set con los nombres de las ciudades.
+        city_data (set) set con los nombres de las ciudades.
     """
     for city in city_data:
         i = random.randint(1, len(city) - 2)

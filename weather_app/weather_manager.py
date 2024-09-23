@@ -4,9 +4,9 @@ import time
 import os
 from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
-from autocorrect import revise
 from requests.exceptions import RequestException, HTTPError
 from dotenv import load_dotenv
+from autocorrect import revise
 
 load_dotenv()
 KEY = os.getenv('KEY')
@@ -17,7 +17,7 @@ try:
 except FileNotFound as e:
     print(f"Error: {e}")
 
-def get_weather(city: str, weather_records: dict):
+def get_weather(city: str, weather_records: dict) -> dict:
     """
     Obtiene los datos meteorológicos para una ciudad específica.
     Si los datos meteorológicos ya están en los registros y son válidos, se devuelve esa información. 
@@ -47,7 +47,7 @@ def get_weather(city: str, weather_records: dict):
     else:
         return weather_records[city]
 
-def is_weather_valid(city: str, weather_records: dict):
+def is_weather_valid(city: str, weather_records: dict) -> bool:
     """
     Verifica si los registros meteorológicos para una ciudad son válidos.
 
@@ -59,7 +59,7 @@ def is_weather_valid(city: str, weather_records: dict):
         weather_records (dict): Un diccionario que contiene los registros meteorológicos por ciudad.
 
     Returns:
-        bool: True si los registros meteorológicos son válidos, False en caso contrario.
+        (bool): True si los registros meteorológicos son válidos, False en caso contrario.
     """
     THREE_HOUR_INTERVAL = 10800
     if city not in weather_records.keys():
@@ -104,7 +104,7 @@ def determine_icon(json_data: dict):
     except KeyError as e:
         raise ValueError('El json es invalido') from e
 
-def search_by_iata(iata_code: str, weather_records: dict):
+def search_by_iata(iata_code: str, weather_records: dict) -> dict:
     """
     Hace el request del clima a la API de acuerdo al codigo IATA
 
@@ -121,7 +121,7 @@ def search_by_iata(iata_code: str, weather_records: dict):
     determine_icon(weather)
     return weather
 
-def search_by_city(city: str, weather_records: dict):
+def search_by_city(city: str, weather_records: dict) -> dict:
     """
     Hace el request del clima a la API de acuerdo al nombre de una ciudad
 
@@ -141,7 +141,7 @@ def search_by_city(city: str, weather_records: dict):
     determine_icon(weather)
     return weather
 
-def search_by_id(flight_number: str, weather_records: dict):
+def search_by_id(flight_number: str, weather_records: dict) -> tuple:
     """
     Hace el request del clima a la API de acuerdo con un numero de ticket
 

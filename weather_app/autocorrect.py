@@ -1,6 +1,4 @@
 import Levenshtein as lev
-import csv
-import unidecode as ucode
 from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
 
@@ -9,28 +7,20 @@ try:
     DATA_MANAGER = DataCollector(FILE_MANAGER)
 except FileNotFound as e:
     print(f"Error: {e}")
-    
-class InvalidCacheFileException(Exception):
-    """
-    Clase de excepcion del archivo de cache dado,
-    se lanza cuando el archivo no es .json
-    """
-    def __init__(self, message : str):
-        super().__init__(message)
 
-def organize(similar_locations: dict):
+def organize(similar_locations: dict) -> dict:
     """
     Funcion para organize los elementos en el diccionario
     Args:
         similar_locations (dict): ciudades similares a la ubicacion del usuario
 
     Returns:
-        dict: Ubicaciones ordenadas
+        ordered_locations (dict) : ubicaciones ordenadas
     """
     ordered_locations = dict(sorted(similar_locations.items(), reverse=True))
     return ordered_locations
 
-def first_n(similar: dict, n: int):
+def first_n(similar: dict, n: int) -> list:
     """
     Funcion para obtener los primeros n elementos de un diccionario
     Args:
@@ -38,7 +28,7 @@ def first_n(similar: dict, n: int):
         int: cantidad de palabras similares deseadas
 
     Returns:
-        list: Lista de n palabras similares con la ubicacion deseada
+        first_n (list): lista de n palabras similares con la ubicacion deseada
     """
     first_n = []
     for key in similar:
@@ -47,7 +37,7 @@ def first_n(similar: dict, n: int):
                 first_n.append(item)
     return first_n
 
-def revise(ubication: str):
+def revise(ubication: str) -> list:
     """
     Funcion para correguir la entrada del usuario
     Args:
@@ -55,7 +45,7 @@ def revise(ubication: str):
         coincidence_index (int): Indice que se desea poner como condicion para las comparaciones 
 
     Returns:
-        list: contiene las 5 palabras con mayor indice de coincidencia
+        (list): contiene las 5 palabras con mayor indice de coincidencia
     """
     if not ubication:
         return []

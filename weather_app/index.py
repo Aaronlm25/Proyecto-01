@@ -60,6 +60,7 @@ def home():
         error=error_message,
         datalist_options=datalist_options
     )
+
 if __name__ == '__main__':
     weather_cache = Cache('./weather_app/static/json/cache.json')
     weather_cache.start()
