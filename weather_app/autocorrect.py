@@ -47,7 +47,7 @@ def first_n(similar: dict, n: int):
                 first_n.append(item)
     return first_n
 
-def revise(user_ubication: str, coincidence_index: int):
+def revise(ubication: str):
     """
     Funcion para correguir la entrada del usuario
     Args:
@@ -57,13 +57,21 @@ def revise(user_ubication: str, coincidence_index: int):
     Returns:
         list: contiene las 5 palabras con mayor indice de coincidencia
     """
+    if len(ubication) == 0:
+        return []
+    user_ubication = ubication.lower()
+    pre_index = len(user_ubication)/10
+    if pre_index >= 0.5:
+        coincidence_index = 0.7
+    coincidence_index = 0.4
     cities = DATA_MANAGER.get_cities()
     coincidences = {}
     for x in cities:
-        levenshtein_index = lev.ratio(user_ubication, x)
-        if levenshtein_index >= coincidence_index:
-            if levenshtein_index not in coincidences:
-                coincidences[levenshtein_index] = set()
-            coincidences[levenshtein_index].add(x)
+        if x[0].lower() == user_ubication[0]:
+            levenshtein_index = lev.ratio(user_ubication, x)
+            if levenshtein_index >= coincidence_index:
+                if levenshtein_index not in coincidences:
+                    coincidences[levenshtein_index] = set()
+                coincidences[levenshtein_index].add(x)
     ordered_coincidences = organize(coincidences)
     return first_n(ordered_coincidences, 5)
