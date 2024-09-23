@@ -21,34 +21,38 @@ def home():
     error_message = None
     datalist_options = DATA_MANAGER.get_cities()
     if request.method == 'POST':
-        city = request.form.get('city')
-        iata_code = request.form.get('iata_code')
-        flight_number = request.form.get('flight_number')
+        city = str(request.form.get('city', '')).strip()
+        iata_code = str(request.form.get('iata_code', '')).strip()
+        flight_number = str(request.form.get('flight_number', '')).strip()
+        
         try:
-            if flight_number:
-                flight_weather = weather_manager.search_by_id(flight_number, weather_cache.get_data())
-                departure_weather = flight_weather[0]
-                arrival_weather = flight_weather[1]
-            elif city:
-                city_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-                departure_weather = city_weather
-            elif iata_code:
-                iata_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
-                departure_weather = iata_weather
-            if departure_weather:
-                weather_cache.update(departure_weather)
-            if arrival_weather:
-                weather_cache.update(arrival_weather)
-        except ValueError as e:
-            error_message = str(e)
-        except RequestException as e:
-            error_message = str(e)
-        except AttributeError as e:
-            print(f"Error al actualizar la caché: {e}")
-        except HTTPError as e:
-            print('No se encontró el URL')
-        except TypeError as e:
-            error_message = str(e)
+            if city and not city.replace(" ", "").isalpha():
+                error_message = 'El nombre de la ciudad debe contener solo letras.'
+            elif iata_code and not iata_code.isalpha():
+                error_message = 'El código IATA debe contener solo letras.'
+            elif flight_number and not flight_number.replace(" ", "").isalnum():
+                error_message = 'El número de vuelo debe contener solo letras y números, sin símbolos.'
+            else:
+                if flight_number:
+                    flight_weather = weather_manager.search_by_id(flight_number, weather_cache.get_data())
+                    departure_weather = flight_weather[0]
+                    arrival_weather = flight_weather[1]
+                elif city:
+                    departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
+                elif iata_code:
+                    departure_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
+                if departure_weather:
+                    weather_cache.update(departure_weather)
+                if arrival_weather:
+                    weather_cache.update(arrival_weather)
+
+        except (ValueError, AttributeError, HTTPError):
+            error_message = "Error al actualizar y/o datos, una disculpa."
+        except RequestException:
+            error_message = "No se encontraron los datos esperados, una disculpa."
+        except TypeError:
+            error_message = "No se pudo obtener los datos esperados, una disculpa."
+    
     return render_template(
         'index.html',
         departure_weather=departure_weather,
@@ -56,7 +60,6 @@ def home():
         error=error_message,
         datalist_options=datalist_options
     )
-
 if __name__ == '__main__':
     weather_cache = Cache('./weather_app/static/json/cache.json')
     weather_cache.start()

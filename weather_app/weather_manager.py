@@ -131,6 +131,9 @@ def search_by_city(city: str, weather_records: dict):
     Returns:
         weather (dict): Informacion del clima.
     """
+    matches = revise(city)
+    if len(matches) == 0:
+        raise ValueError('No se encontraron datos de la ciudad, una disculpa.')
     suggestion = revise(city)[0]
     if city not in DATA_MANAGER.get_cities():
         raise ValueError (f'Quizas quisiste decir: {suggestion}')
