@@ -60,7 +60,7 @@ def home():
 if __name__ == '__main__':
     weather_cache = Cache('./weather_app/static/json/cache.json')
     weather_cache.start()
-    safe_stop = lambda signal, frame: (weather_cache.stop(),sys.exit(0))
+    safe_stop = lambda signal, frame: (weather_cache.stop(), sys.exit(0))
     signal.signal(signal.SIGINT, safe_stop)
     app.run()
     if weather_cache.is_active():
