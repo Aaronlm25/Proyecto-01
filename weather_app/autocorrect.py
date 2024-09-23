@@ -57,12 +57,9 @@ def revise(ubication: str):
     Returns:
         list: contiene las 5 palabras con mayor indice de coincidencia
     """
-    if len(ubication) == 0:
+    if not ubication:
         return []
     user_ubication = ubication.lower()
-    pre_index = len(user_ubication)/10
-    if pre_index >= 0.5:
-        coincidence_index = 0.7
     coincidence_index = 0.4
     cities = DATA_MANAGER.get_cities()
     coincidences = {}
