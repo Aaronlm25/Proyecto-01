@@ -148,7 +148,7 @@ class Cache:
             self.__STOP_FLAG.is_set() (bool) : el estado de la actividad de las peticiones de clima.
         """
         return not self.__STOP_FLAG.is_set()
-
+    
     def __save(self):
         """
         Guarda la informacion recolectada por weather_records en el archivo
