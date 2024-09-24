@@ -89,7 +89,7 @@ class DataCollector:
             for row in reader:
                 ciudades.extend([ciudad for ciudad in row if ciudad.strip()])
         cities = sorted(ciudades, key=lambda x: x.lower())
-        return cities
+        return set(cities)
     
     @staticmethod
     def load_destiny_data(path):

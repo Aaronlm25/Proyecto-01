@@ -6,7 +6,6 @@ from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
 from requests.exceptions import RequestException, HTTPError
 from dotenv import load_dotenv
-from autocorrect import revise
 
 load_dotenv()
 KEY = os.getenv('KEY')
@@ -131,13 +130,7 @@ def search_by_city(city: str, weather_records: dict) -> dict:
     Returns:
         weather (dict): Informacion del clima.
     """
-    matches = revise(city)
-    if len(matches) == 0:
-        raise ValueError('No se encontraron datos de la ciudad, una disculpa.')
-    suggestion = revise(city)[0]
-    if city not in DATA_MANAGER.get_cities():
-        raise ValueError (f'Quizas quisiste decir: {suggestion}')
-    weather = get_weather(suggestion, weather_records)
+    weather = get_weather(city, weather_records)
     determine_icon(weather)
     return weather
 

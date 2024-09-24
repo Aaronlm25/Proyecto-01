@@ -6,7 +6,7 @@ from flask import Flask, render_template, request
 from requests.exceptions import RequestException, HTTPError
 from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
-
+from autocorrect import revise
 FILE_MANAGER = FileManager()
 try:
     DATA_MANAGER = DataCollector(FILE_MANAGER)
@@ -20,6 +20,8 @@ def home():
     arrival_weather = None
     error_message = None
     datalist_options = DATA_MANAGER.get_cities()
+    suggestion = ''
+    city = ''
     if request.method == 'POST':
         city = str(request.form.get('city', '')).strip()
         iata_code = str(request.form.get('iata_code', '')).strip()
@@ -38,7 +40,9 @@ def home():
                     departure_weather = flight_weather[0]
                     arrival_weather = flight_weather[1]
                 elif city:
-                    departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
+                    suggestion = revise(city)[0]
+                    if suggestion.lower() == city.lower():
+                        departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
                 elif iata_code:
                     departure_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
                 if departure_weather:
@@ -58,7 +62,9 @@ def home():
         departure_weather=departure_weather,
         arrival_weather=arrival_weather,
         error=error_message,
-        datalist_options=datalist_options
+        datalist_options=datalist_options,
+        suggestion = suggestion,
+        city = city
     )
 
 if __name__ == '__main__':
