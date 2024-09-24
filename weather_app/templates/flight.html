@@ -1,96 +1,79 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <title>Weather Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/styles.css') }}" />
-  </head>
-  <header>
-      <h1>Estás buscando por número de vuelo</h1>
-  </header>
-  <body>
-    <section class="container">
+{% extends "index.html" %}
 
-      <h1>Buscar por...</h1>
-  
-      <div class="info card">
+{% block title %}Flight Weather{% endblock %}
 
-        <form id="template" method="POST" action="/">
-          <select name="option" id="menu" onchange="this.form.submit()">
-            <option class="option">  Seleccione  </option>
+{% block header %}Estás buscando por número de vuelo{% endblock %}
+
+{% block content %}
+<h1>Buscar por...</h1>
+
+<div class="info card">
+    <form id="template" method="POST" action="/">
+        <select name="option" id="menu" onchange="this.form.submit()">
+            <option class="option">Seleccione</option>
             <option value="city" class="option">Nombre de la ciudad</option>
             <option value="iata_code" class="option">Código IATA</option>
             <option value="flight_number" class="option">Número de vuelo</option>
-          </select>
-        </form>
-  
-          <form class="input" method="POST" action="/">
-            <div id="flight_numberInput" class="content">
-            <label for="flight_number"></label>
-            <input type="text" id="flight_number" name="flight_number" placeholder="Ej. AA123" autocomplete = "off"/>
-            </div>
-  
-            <button type="submit"></button>
-          </form>
-      </div>
+        </select>
+    </form>
 
-      <div class="error">
-        {% if error %}
-          <p>{{ error }}</p>
-        {% endif %}
-      </div>
-      
-      <div class="cards">
-        <img src="departure_weather.icon" alt="">
-      {% if departure_weather %}
-      <div class="card weather-card" id="departure_card">
+    <form class="input" method="POST" action="/">
+        <div id="flight_numberInput" class="content">
+            <label for="flight_number"></label>
+            <input type="text" id="flight_number" name="flight_number" placeholder="Ej. AA123" autocomplete="off" />
+        </div>
+        <button type="submit"></button>
+    </form>
+</div>
+
+<div class="error">
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+</div>
+
+<div class="cards">
+    {% if departure_weather %}
+    <div class="card weather-card" id="departure_card">
         <h2 class="city-name">Ciudad de salida: {{ departure_weather['name'] }}</h2>
         <h1 class="temperature">{{ departure_weather['main']['temp'] }}°C</h1>
         <div class="weather-info">
-          <img
-            class="weather-icon"
-            src="{{ departure_weather['weather'][0]['icon'] }}" 
-            alt="Weather icon"
-          />
-          <p class="weather-description">{{ departure_weather['weather'][0]['description'] | capitalize }}</p>
+            <img class="weather-icon" src="{{ departure_weather['weather'][0]['icon'] }}" alt="Weather icon" />
+            <p class="weather-description">{{ departure_weather['weather'][0]['description'] | capitalize }}</p>
         </div>
         <div class="stats">
-          <article class="stat">
-            <img class="stat-icon" src="{{ url_for('static', filename='svg/humedad.svg') }}" alt="IMG-Humedad" />
-            <p class="stat-value">{{ departure_weather['main']['humidity'] }}%</p>
-            <p class="stat-label">Humedad</p>
-          </article>
-          <article class="stat">
-            <img class="stat-icon" src="{{ url_for('static', filename='svg/viento.svg') }}" alt="IMG-Viento" />
-            <p class="stat-value">{{ departure_weather['wind']['speed'] }} m/s</p>
-            <p class="stat-label">Velocidad de viento</p>
-          </article>
+            <article class="stat">
+                <img class="stat-icon" src="{{ url_for('static', filename='svg/humedad.svg') }}" alt="IMG-Humedad" />
+                <p class="stat-value">{{ departure_weather['main']['humidity'] }}%</p>
+                <p class="stat-label">Humedad</p>
+            </article>
+            <article class="stat">
+                <img class="stat-icon" src="{{ url_for('static', filename='svg/viento.svg') }}" alt="IMG-Viento" />
+                <p class="stat-value">{{ departure_weather['wind']['speed'] }} m/s</p>
+                <p class="stat-label">Velocidad de viento</p>
+            </article>
         </div>
-      </div>
-      <div class="card weather-card" id="arrival_card">
+    </div>
+    <div class="card weather-card" id="arrival_card">
         <h2 class="city-name">Ciudad de llegada: {{ arrival_weather['name'] }}</h2>
         <h1 class="temperature">{{ arrival_weather['main']['temp'] }}°C</h1>
         <div class="weather-info">
-          <img
-            class="weather-icon"
-            src="{{ arrival_weather['weather'][0]['icon'] }}"
-            alt="Weather Icon"
-          />
-          <p class="weather-description">{{ arrival_weather['weather'][0]['description'] | capitalize }}</p>
+            <img class="weather-icon" src="{{ arrival_weather['weather'][0]['icon'] }}" alt="Weather Icon" />
+            <p class="weather-description">{{ arrival_weather['weather'][0]['description'] | capitalize }}</p>
         </div>
         <div class="stats">
-          <article class="stat">
-            <img class="stat-icon" src="{{ url_for('static', filename='svg/humedad.svg') }}" alt="IMG-Humedad" />
-            <p class="stat-value">{{ arrival_weather['main']['humidity'] }}%</p>
-            <p class="stat-label">Humedad</p>
-          </article>
-          <article class="stat">
-            <img class="stat-icon" src="{{ url_for('static', filename='svg/viento.svg') }}" alt="IMG-Viento" />
-            <p class="stat-value">{{ arrival_weather['wind']['speed'] }} m/s</p>
-            <p class="stat-label">Velocidad de viento</p>
-          </article>
+            <article class="stat">
+                <img class="stat-icon" src="{{ url_for('static', filename='svg/humedad.svg') }}" alt="IMG-Humedad" />
+                <p class="stat-value">{{ arrival_weather['main']['humidity'] }}%</p>
+                <p class="stat-label">Humedad</p>
+            </article>
+            <article class="stat">
+                <img class="stat-icon" src="{{ url_for('static', filename='svg/viento.svg') }}" alt="IMG-Viento" />
+                <p class="stat-value">{{ arrival_weather['wind']['speed'] }} m/s</p>
+                <p class="stat-label">Velocidad de viento</p>
+            </article>
         </div>
-      </div>
-      {% endif %}
-    </section>
-  </body>
-</html>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
