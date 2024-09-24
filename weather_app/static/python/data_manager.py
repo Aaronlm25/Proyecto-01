@@ -1,26 +1,24 @@
 import csv
-from static.python.path_manager import FileManager
+from static.python.path_manager import FileManager, FileNotFound
 
 class DataCollector:
-    _instance = None
-
-    def __new__(cls, file_manager: FileManager):
+    
+    def __init__(self, file_manager: FileManager):
         """
-        Implementación del patrón Singleton. Carga los archivos solo una vez.
+        Inicializa la clase DataCollector cargando los datos desde los archivos.
 
         Args:
             file_manager (FileManager): Instancia de FileManager para obtener las rutas de los archivos.
         """
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            flight_path = file_manager.get_flight_path()
-            location_path = file_manager.get_location_path()
-            destiny_path=file_manager.get_destiny_path()
-            cls._instance._flight_data = cls.load_flight_data(flight_path)
-            cls._instance._iata_data = cls.load_iata_data(destiny_path)
-            cls._instance._cities = cls.load_cities(destiny_path)
-            cls._instance._destiny_data=cls.load_destiny_data(destiny_path)
-        return cls._instance
+        flight_path = file_manager.get_flight_path()
+        location_path = file_manager.get_location_path()
+        destiny_path = file_manager.get_destiny_path()
+        
+        self._flight_data = self.load_flight_data(flight_path)
+        self._iata_data = self.load_iata_data(destiny_path)
+        self._cities = self.load_cities(destiny_path)
+        self._destiny_data = self.load_destiny_data(destiny_path)
+
 
     @staticmethod
     def load_flight_data(path):
@@ -152,3 +150,40 @@ class DataCollector:
                          o un mensaje indicando que no se encontró información.
         """
         return self._flight_data.get(ticket, f"No se encontró información para el ticket: {ticket}")
+
+class DataManager:
+    _instance = None
+
+    def __new__(cls):
+        """
+        Implementa el patrón Singleton para asegurarse de que sólo exista una instancia de AppManager.
+        """
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance._initialize_managers()
+        return cls._instance
+
+    def _initialize_managers(self):
+        """
+        Inicializa los objetos de FileManager y DataCollector.
+        Maneja excepciones si los archivos no son encontrados.
+        """
+        self.file_manager = FileManager()
+        try:
+            self.data_manager = DataCollector(self.file_manager)
+        except FileNotFound as e:
+            print(f"Error: {e}")
+            self.data_manager = None
+
+    def get_file_manager(self):
+        """
+        Retorna la instancia de FileManager.
+        """
+        return self.file_manager
+
+    def get_data_collector(self):
+        """
+        Retorna la instancia de DataCollector.
+        """
+        return self.data_manager
+    

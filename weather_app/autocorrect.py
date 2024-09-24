@@ -1,12 +1,8 @@
 import Levenshtein as lev
-from static.python.data_manager import DataCollector
-from static.python.path_manager import FileManager, FileNotFound
+from static.python.data_manager import DataManager
 
-FILE_MANAGER=FileManager()
-try:
-    DATA_MANAGER = DataCollector(FILE_MANAGER)
-except FileNotFound as e:
-    print(f"Error: {e}")
+DATA_MANAGER = DataManager()
+DATA_COLLECTOR = DATA_MANAGER.get_data_collector()
 
 def organize(similar_locations: dict) -> dict:
     """
@@ -51,7 +47,7 @@ def revise(ubication: str) -> list:
         return []
     user_ubication = ubication.lower()
     coincidence_index = 0.4
-    cities = DATA_MANAGER.get_cities()
+    cities = DATA_COLLECTOR.get_cities()
     coincidences = {}
     for x in cities:
         if x[0].lower() == user_ubication[0]:

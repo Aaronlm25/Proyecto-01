@@ -4,14 +4,12 @@ import signal
 from cache import Cache
 from flask import Flask, render_template, request
 from requests.exceptions import RequestException, HTTPError
-from static.python.data_manager import DataCollector
-from static.python.path_manager import FileManager, FileNotFound
+from static.python.data_manager import DataManager
 from autocorrect import revise
-FILE_MANAGER = FileManager()
-try:
-    DATA_MANAGER = DataCollector(FILE_MANAGER)
-except FileNotFound as e:
-    print(f"Error: {e}")
+
+DATA_MANAGER = DataManager()
+DATA_COLLECTOR=DATA_MANAGER.get_data_collector()
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -19,7 +17,7 @@ def home():
     departure_weather = None
     arrival_weather = None
     error_message = None
-    datalist_options = DATA_MANAGER.get_cities()
+    datalist_options = DATA_COLLECTOR.get_cities()
     suggestion = ''
     city = ''
     if request.method == 'POST':
