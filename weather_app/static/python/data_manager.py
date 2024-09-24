@@ -19,7 +19,6 @@ class DataCollector:
         self._cities = self.load_cities(destiny_path)
         self._destiny_data = self.load_destiny_data(destiny_path)
 
-
     @staticmethod
     def load_flight_data(path):
         """

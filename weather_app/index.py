@@ -8,7 +8,7 @@ from static.python.data_manager import DataManager
 from autocorrect import revise
 
 DATA_MANAGER = DataManager()
-DATA_COLLECTOR=DATA_MANAGER.get_data_collector()
+DATA_COLLECTOR = DATA_MANAGER.get_data_collector()
 
 app = Flask(__name__)
 
@@ -18,6 +18,8 @@ def home():
     arrival_weather = None
     error_message = None
     datalist_options = DATA_COLLECTOR.get_cities()
+    suggestion = ''
+    city = ''
     if request.method == 'POST':
         city = str(request.form.get('city', '')).strip()
         iata_code = str(request.form.get('iata_code', '')).strip()
@@ -37,11 +39,12 @@ def home():
                     arrival_weather = flight_weather[1]
                 elif city:
                     suggestions = revise(city)
-                    if len(suggestions):
+                    if len(suggestions) == 0:
                         error_message = 'Asegurate de que has escrito bien el nombre.'
+                    elif suggestions[0] == city:
+                        departure_weather = weather_manager.search_by_city(suggestions[0], weather_cache.get_data())
                     else:
-                        similar = suggestions[0]
-                        departure_weather = weather_manager.search_by_city(similar, weather_cache.get_data())
+                        suggestion = suggestions[0]
                 elif iata_code:
                     departure_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
                 if departure_weather:
