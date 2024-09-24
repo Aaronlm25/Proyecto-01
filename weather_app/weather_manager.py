@@ -4,24 +4,21 @@ import time
 import os
 from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
-from autocorrect import revise
 from requests.exceptions import RequestException, HTTPError
 from dotenv import load_dotenv
 
 load_dotenv()
 KEY = os.getenv('KEY')
 LOCK = threading.Lock()
-LONG_SLEEP_INTERVAL = 10800
 FILE_MANAGER = FileManager()
 try:
     DATA_MANAGER = DataCollector(FILE_MANAGER)
 except FileNotFound as e:
     print(f"Error: {e}")
 
-def get_weather(city: str, weather_records: dict):
+def get_weather(city: str, weather_records: dict) -> dict:
     """
     Obtiene los datos meteorológicos para una ciudad específica.
-
     Si los datos meteorológicos ya están en los registros y son válidos, se devuelve esa información. 
     Si no, se realiza una solicitud a la API de OpenWeather para obtener la información actualizada.
 
@@ -30,7 +27,7 @@ def get_weather(city: str, weather_records: dict):
         weather_records (dict): Un diccionario que contiene los registros meteorológicos por ciudad.
 
     Returns:
-        dict: Un diccionario con la información meteorológica actual de la ciudad.
+        weather (dict): Un diccionario con la información meteorológica actual de la ciudad.
 
     Raises:
         RequestException: Si ocurre un error al realizar la solicitud a la API.
@@ -49,7 +46,7 @@ def get_weather(city: str, weather_records: dict):
     else:
         return weather_records[city]
 
-def is_weather_valid(city: str, weather_records: dict):
+def is_weather_valid(city: str, weather_records: dict) -> bool:
     """
     Verifica si los registros meteorológicos para una ciudad son válidos.
 
@@ -61,20 +58,20 @@ def is_weather_valid(city: str, weather_records: dict):
         weather_records (dict): Un diccionario que contiene los registros meteorológicos por ciudad.
 
     Returns:
-        bool: True si los registros meteorológicos son válidos, False en caso contrario.
+        (bool): True si los registros meteorológicos son válidos, False en caso contrario.
     """
+    THREE_HOUR_INTERVAL = 10800
     if city not in weather_records.keys():
         return False
     weather = weather_records[city]
     requested_time = weather['dt']
-    if time.time() - requested_time >= LONG_SLEEP_INTERVAL:
+    if time.time() - requested_time >= THREE_HOUR_INTERVAL:
         return False
     return True
 
 def determine_icon(json_data: dict):
     """
     Determina el icono de acuerdo al ID.
-
     Usa un diccionario que mapea los IDs a los respectivos iconos.
 
     Args:
@@ -83,17 +80,17 @@ def determine_icon(json_data: dict):
     if not json_data:
         raise ValueError('The JSON object is None')
     icon_map = {
-        range(200, 233): "static/img/storm.gif",         # Tormenta
-        range(300, 322): "static/img/light-rain.gif",    # Lluvia ligera
-        range(500, 505): "static/img/rain.gif",          # Lluvia
-        511: "static/img/snow.gif",                      # Nieve
-        range(520, 532): "static/img/rain.gif",          # Lluvia
-        range(600, 623): "static/img/snow.gif",          # Nieve
-        range(701, 782): "static/img/clouds.png",           # Neblina
-        800: "static/img/sunny.png",                     # Despejado
-        801: "static/img/cloud_sun.png",             # Algunas nubes
-        802: "static/img/clouds.png",                    # Nubes
-        range(803, 805): "static/img/clouds.png"         # Nublado
+        range(200, 233): "static/img/storm.gif",         
+        range(300, 322): "static/img/light-rain.gif",    
+        range(500, 505): "static/img/rain.gif",          
+        511: "static/img/snow.gif",                     
+        range(520, 532): "static/img/rain.gif",          
+        range(600, 623): "static/img/snow.gif",          
+        range(701, 782): "static/img/clouds.png",           
+        800: "static/img/sunny.png",                     
+        801: "static/img/cloud_sun.png",             
+        802: "static/img/clouds.png",                    
+        range(803, 805): "static/img/clouds.png"         
     }
     try:
         weather_id = json_data['weather'][0]['id']
@@ -106,7 +103,7 @@ def determine_icon(json_data: dict):
     except KeyError as e:
         raise ValueError('El json es invalido') from e
 
-def search_by_iata(iata_code: str, weather_records: dict):
+def search_by_iata(iata_code: str, weather_records: dict) -> dict:
     """
     Hace el request del clima a la API de acuerdo al codigo IATA
 
@@ -123,7 +120,7 @@ def search_by_iata(iata_code: str, weather_records: dict):
     determine_icon(weather)
     return weather
 
-def search_by_city(city: str, weather_records: dict):
+def search_by_city(city: str, weather_records: dict) -> dict:
     """
     Hace el request del clima a la API de acuerdo al nombre de una ciudad
 
@@ -133,14 +130,11 @@ def search_by_city(city: str, weather_records: dict):
     Returns:
         weather (dict): Informacion del clima.
     """
-    suggestion = revise(city, 0.7)[0]
-    if city not in DATA_MANAGER.get_cities():
-        raise ValueError (f'Quizas quisiste decir: {suggestion}')
-    weather = get_weather(suggestion, weather_records)
+    weather = get_weather(city, weather_records)
     determine_icon(weather)
     return weather
 
-def search_by_id(flight_number: str, weather_records: dict):
+def search_by_id(flight_number: str, weather_records: dict) -> tuple:
     """
     Hace el request del clima a la API de acuerdo con un numero de ticket
 

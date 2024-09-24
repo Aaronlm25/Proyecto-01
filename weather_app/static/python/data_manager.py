@@ -13,20 +13,15 @@ class DataCollector:
         """
         if cls._instance is None:
             cls._instance = super().__new__(cls)
-
             flight_path = file_manager.get_flight_path()
             iata_path = file_manager.get_iata_path()
             location_path = file_manager.get_location_path()
             cities_path = file_manager.get_cities_path()
-            
             destiny_path=file_manager.get_destiny_path()
-
             cls._instance._flight_data = cls.load_flight_data(flight_path)
-            cls._instance.iata_data = cls.load_iata_data(iata_path)
-            cls._instance._location_data = cls.load_location_data(location_path)
+            cls._instance._iata_data = cls.load_iata_data(iata_path)
             cls._instance._cities = cls.load_cities(cities_path)
             cls._instance._destiny_data=cls.load_destiny_data(destiny_path)
-            
         return cls._instance
 
     @staticmethod
@@ -75,41 +70,6 @@ class DataCollector:
         except FileNotFoundError:
             print(f"Error: El archivo {path} no se encuentra.")
         return iata_data
-    
-    @staticmethod
-    def load_location_data(path):
-        """
-        Carga los datos de latitud y longitud de origen y destino desde un archivo CSV.
-
-        El archivo CSV debe tener el siguiente formato:
-        origin,destination,origin_latitude,origin_longitude,destination_latitude,destination_longitude
-
-        Args:
-            path (str): Ruta del archivo CSV que contiene los datos de ubicaciones.
-
-        Returns:
-            dict: Un diccionario donde las claves son los códigos IATA de las ciudades,
-                y los valores son diccionarios con la latitud y longitud.
-        """
-        location_data = {}
-        try:
-            with open(path, mode='r') as file:
-                reader = csv.reader(file)
-                next(reader)
-                for row in reader:
-                    origin = row[0]
-                    destination = row[1]
-                    origin_latitude = float(row[2])
-                    origin_longitude = float(row[3])
-                    destination_latitude = float(row[4])
-                    destination_longitude = float(row[5])
-                    if origin not in location_data:
-                        location_data[origin] = {'latitude': origin_latitude, 'longitude': origin_longitude}
-                    if destination not in location_data:
-                        location_data[destination] = {'latitude': destination_latitude, 'longitude': destination_longitude}
-        except FileNotFoundError:
-            print(f"Error: El archivo {path} no se encuentra.")
-        return location_data
 
     @staticmethod
     def load_cities(path):
@@ -129,11 +89,10 @@ class DataCollector:
             for row in reader:
                 ciudades.extend([ciudad for ciudad in row if ciudad.strip()])
         cities = sorted(ciudades, key=lambda x: x.lower())
-        return cities
+        return set(cities)
     
     @staticmethod
     def load_destiny_data(path):
-
         """
         Lee los datos de destinos desde un archivo CSV y los carga en una lista.
 
@@ -181,10 +140,7 @@ class DataCollector:
         Returns:
             str: Nombre de la ciudad correspondiente al código IATA del aeropuerto, o None si no se encuentra.
         """
-        try:
-            return self.iata_data[iata_airport]
-        except KeyError:
-            return None
+        return self._iata_data[iata_airport]
 
     def search_flight(self, ticket):
         """
@@ -198,4 +154,3 @@ class DataCollector:
                          o un mensaje indicando que no se encontró información.
         """
         return self._flight_data.get(ticket, f"No se encontró información para el ticket: {ticket}")
-

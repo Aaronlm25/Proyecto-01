@@ -2,4 +2,4 @@ weather_app/.env
 weather_app/__pycache__/
 weather_app/static/json/cache.json
 weather_app/static/python/__pycache__/
-weather_app/test/__pycache__/
+weather_app/static/test/__pycache__/
