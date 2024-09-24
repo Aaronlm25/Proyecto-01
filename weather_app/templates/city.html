@@ -1,10 +1,6 @@
 {% extends "index.html" %}
-
-{% block title %}City Weather{% endblock %}
-
-{% block header %}City Weather{% endblock %}
-
 {% block content %}
+
 <h1>Buscar por...</h1>
 
 <div class="info card">
@@ -18,11 +14,16 @@
     </form>
 
     <form class="input" method="POST" action="/">
-        <div id="cityInput" class="content">
-            <label for="city"></label>
-            <input type="text" id="city" name="city" placeholder="Ej. Ciudad de México" autocomplete="on" />
-        </div>
-        <button type="submit">Buscar</button>
+      <div id="cityInput" class="content">
+        <label for="city"></label>
+        <input maxlength="20" type="text" id="city" name="city" placeholder="Ej. Ciudad de México" autocomplete = "off" list = "datalist_options" />
+        <datalist id="datalist_options">
+          {% for city in datalist_options %}
+              <option value="{{ city }}">
+          {% endfor %}
+        </datalist>
+      </div>
+      <button  type="submit"></button>
     </form>
 </div>
 
@@ -33,14 +34,11 @@
 </div>
 
 {% if departure_weather %}
-<div class="debug-message">
-  <p>Entered the if block for departure weather.</p>
-</div>
 <div class="card weather-card" id="departure_card">
   <h2 class="city-name">Ciudad de salida: {{ departure_weather['name'] }}</h2>
   <h1 class="temperature">{{ departure_weather['main']['temp'] }}°C</h1>
   <div class="weather-info">
-    <img class="weather-icon" src="http://openweathermap.org/img/wn/{{ departure_weather['weather'][0]['icon'] }}@2x.png" alt="Weather icon" />
+    <img class="weather-icon" src="{{ departure_weather['weather'][0]['icon'] }}" alt="Weather icon" />
     <p class="weather-description">{{ departure_weather['weather'][0]['description'] | capitalize }}</p>
   </div>
   <div class="stats">
@@ -56,8 +54,6 @@
     </article>
   </div>
 </div>
-{% else %}
-<p>No weather data available.</p>
 {% endif %}
 
 {% endblock %}
