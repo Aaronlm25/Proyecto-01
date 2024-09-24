@@ -135,7 +135,7 @@ class DataCollector:
         Returns:
             str: Nombre de la ciudad correspondiente al código IATA del aeropuerto, o None si no se encuentra.
         """
-        return self._iata_data[iata_airport]
+        return self._iata_data.get(iata_airport)
 
     def search_flight(self, ticket):
         """
