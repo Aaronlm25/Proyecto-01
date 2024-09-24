@@ -25,17 +25,9 @@ class FileManager:
         return self.check_existence('vuelos.csv')
 
     def get_destiny_path(self):
-        """Devuelve la ruta de datos_destinos.csv y verifica su existencia."""
-        return self.check_existence('datos_destinos.csv')
-    
-    def get_iata_path(self):
-        """Devuelve la ruta de datos_destinos2.csv y verifica su existencia."""
-        return self.check_existence('datos_destinos2.csv')
+        """Devuelve la ruta de destiny_data.csv y verifica su existencia."""
+        return self.check_existence('destiny_data.csv')
 
     def get_location_path(self):
         """Devuelve la ruta de datos_destinos_viajes.csv y verifica su existencia."""
         return self.check_existence('datos_destinos_viajes.csv')
-
-    def get_cities_path(self):
-        """Devuelve la ruta de cities_2.csv y verifica su existencia."""
-        return self.check_existence('cities_2.csv')

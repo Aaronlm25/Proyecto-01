@@ -14,13 +14,11 @@ class DataCollector:
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             flight_path = file_manager.get_flight_path()
-            iata_path = file_manager.get_iata_path()
             location_path = file_manager.get_location_path()
-            cities_path = file_manager.get_cities_path()
             destiny_path=file_manager.get_destiny_path()
             cls._instance._flight_data = cls.load_flight_data(flight_path)
-            cls._instance._iata_data = cls.load_iata_data(iata_path)
-            cls._instance._cities = cls.load_cities(cities_path)
+            cls._instance._iata_data = cls.load_iata_data(destiny_path)
+            cls._instance._cities = cls.load_cities(destiny_path)
             cls._instance._destiny_data=cls.load_destiny_data(destiny_path)
         return cls._instance
 
