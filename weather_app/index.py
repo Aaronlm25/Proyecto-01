@@ -18,8 +18,6 @@ def home():
     arrival_weather = None
     error_message = None
     datalist_options = DATA_COLLECTOR.get_cities()
-    suggestion = ''
-    city = ''
     if request.method == 'POST':
         city = str(request.form.get('city', '')).strip()
         iata_code = str(request.form.get('iata_code', '')).strip()
@@ -38,9 +36,12 @@ def home():
                     departure_weather = flight_weather[0]
                     arrival_weather = flight_weather[1]
                 elif city:
-                    suggestion = revise(city)[0]
-                    if suggestion.lower() == city.lower():
-                        departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
+                    suggestions = revise(city)
+                    if len(suggestions):
+                        error_message = 'Asegurate de que has escrito bien el nombre.'
+                    else:
+                        similar = suggestions[0]
+                        departure_weather = weather_manager.search_by_city(similar, weather_cache.get_data())
                 elif iata_code:
                     departure_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
                 if departure_weather:

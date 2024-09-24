@@ -114,7 +114,6 @@ def search_by_iata(iata_code: str, weather_records: dict) -> dict:
     if not city:
         raise ValueError('Ciudad invalida')
     weather = get_weather(city, weather_records)
-    determine_icon(weather)
     return weather
 
 def search_by_city(city: str, weather_records: dict) -> dict:
@@ -128,7 +127,6 @@ def search_by_city(city: str, weather_records: dict) -> dict:
         weather (dict): Informacion del clima.
     """
     weather = get_weather(city, weather_records)
-    determine_icon(weather)
     return weather
 
 def search_by_id(flight_number: str, weather_records: dict) -> tuple:
@@ -150,6 +148,4 @@ def search_by_id(flight_number: str, weather_records: dict) -> tuple:
     if not departure or not arrival:
         raise ValueError('Ticket invalido.')
     flight_weather = (get_weather(departure, weather_records), get_weather(arrival, weather_records))
-    determine_icon(flight_weather[0])
-    determine_icon(flight_weather[1])
     return flight_weather
