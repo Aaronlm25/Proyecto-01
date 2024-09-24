@@ -3,11 +3,9 @@
   <head>
     <title>Weather Page</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style/styles.css') }}" />
-    <script src="static/js/script.js" defer></script>
   </head>
   <header>
       <h1>Estás buscando por número de vuelo</h1>
-      <a href="home.html">Principal</a>
   </header>
   <body>
     <section class="container">
@@ -16,19 +14,22 @@
   
       <div class="info card">
 
-        <select id="menu" onchange="saveElection()">
+        <form id="template" method="POST" action="/">
+          <select name="option" id="menu" onchange="this.form.submit()">
             <option class="option">  Seleccione  </option>
-            <option value="cityInput" class="option">Nombre de la ciudad</option>
-            <option value="IATA_codeInput" class="option">Código IATA</option>
-            <option value="flight_numberInput" class="option">Número de vuelo</option>
+            <option value="city" class="option">Nombre de la ciudad</option>
+            <option value="iata_code" class="option">Código IATA</option>
+            <option value="flight_number" class="option">Número de vuelo</option>
           </select>
+        </form>
   
           <form class="input" method="POST" action="/">
             <div id="flight_numberInput" class="content">
             <label for="flight_number"></label>
             <input type="text" id="flight_number" name="flight_number" placeholder="Ej. AA123" autocomplete = "off"/>
             </div>
-            <button  type="submit"></button>
+  
+            <button type="submit"></button>
           </form>
       </div>
 
@@ -65,8 +66,6 @@
           </article>
         </div>
       </div>
-      {% endif %}
-      {% if arrival_weather %}
       <div class="card weather-card" id="arrival_card">
         <h2 class="city-name">Ciudad de llegada: {{ arrival_weather['name'] }}</h2>
         <h1 class="temperature">{{ arrival_weather['main']['temp'] }}°C</h1>
