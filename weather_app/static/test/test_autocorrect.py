@@ -15,7 +15,7 @@ def city_data() -> set:
     Returns:
         data (set) : Coleccion con los nomrbes de las ciudades/
     """
-    path = './weather_app/static/datalist/datos_destinos.csv'
+    path = './weather_app/static/datalist/destiny_data.csv'
     data = set()
     with open(path, 'r') as file:
         csv_file = csv.reader(file)
