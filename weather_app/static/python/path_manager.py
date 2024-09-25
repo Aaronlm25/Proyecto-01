@@ -14,7 +14,11 @@ class FileManager:
         return self.base_dir / file_name
 
     def check_existence(self, file_name):
-        """Verifica si el archivo existe. Lanza una excepción si no existe."""
+        """
+        Verifica si el archivo existe. Lanza una excepción si no existe.
+        Raises:
+            FileNotFound: Si el archivo no existe
+        """
         file_path = self.get_path(file_name)
         if not file_path.exists():
             raise FileNotFound(file_path)

@@ -166,6 +166,9 @@ class DataManager:
         """
         Inicializa los objetos de FileManager y DataCollector.
         Maneja excepciones si los archivos no son encontrados.
+        Raises:
+            FileNotFound: Si el archivo no existe
+            
         """
         self.file_manager = FileManager()
         try:

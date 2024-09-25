@@ -73,6 +73,9 @@ def determine_icon(json_data: dict):
 
     Args:
         json_data (dict): Informacion del clima de una ubicacion.
+    Raises:
+        ValueError : Si el objeto .json no existe
+        ValueError : Si el objeto .json no es valido
     """
     if not json_data:
         raise ValueError('The JSON object is None')
@@ -109,6 +112,8 @@ def search_by_iata(iata_code: str, weather_records: dict) -> dict:
 
     Returns:
         weather (dict): Informacion del clima.
+    Raises:
+        ValueError : Si la ciudad no tiene un IATA asociado
     """
     city = DATA_COLLECTOR.get_city(iata_code)
     if not city:
@@ -138,6 +143,9 @@ def search_by_id(flight_number: str, weather_records: dict) -> tuple:
 
     Returns:
         flight_weather (tuple): Contiene la informacion del clima de llegada y de salida.
+    Raises:
+        ValueError : Si el vuelo no tiene datos asociados
+        ValueError : Si alguno de los datos del ticket no es validos
     """
     try:
         flight_info = DATA_COLLECTOR.search_flight(flight_number)

@@ -42,6 +42,8 @@ class Cache:
 
         Returns:
             self.weather_records (dict): Un diccionario con todos los climas de las ciudades registradas
+        Raises:
+            InvalidCacheFileException : Si el formato del cache es invalido.
         """
         raw_data = []
         if len(self.weather_records) == 0:
@@ -163,6 +165,8 @@ class Cache:
         Se asegura de que la ruta y el archivo existan.
         Args : 
             path (str): la ruta del archivo.
+        Raises:
+            InvalidCacheFileException : Si el formato del cache es invalido.
         """
         self.path = Path(path)
         if self.path.suffix != '.json':
