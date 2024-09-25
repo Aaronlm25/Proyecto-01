@@ -16,12 +16,16 @@
     <form class="input" method="POST" action="/">
       <div id="cityInput" class="content">
         <label for="city"></label>
-        <input maxlength="20" type="text" id="city" name="city" placeholder="Ej. Ciudad de México" autocomplete = "off" list = "datalist_options" />
+        <input maxlength="20" type="text" id="city" name="city" placeholder="Ej. Ciudad de México" autocomplete = "off" list = "datalist_options" value="{{ city }}"/>
         <datalist id="datalist_options">
           {% for city in datalist_options %}
-              <option value="{{ city }}">
+            <option value="{{ city }}">
           {% endfor %}
         </datalist>
+        {% set lower_options = datalist_options | map('lower') %}
+        {% if city and city.lower() not in lower_options %}
+          <p>Quizá quisiste decir: <a href="http://127.0.0.1:5000" class="custom-link">{{ suggestion }}</a></p>
+        {% endif %}
       </div>
       <button  type="submit"></button>
     </form>

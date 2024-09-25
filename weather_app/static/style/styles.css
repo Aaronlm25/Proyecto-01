@@ -157,14 +157,10 @@ header h1{
 .stat-label {
   text-align: center;
 }
-<<<<<<< HEAD
-
+.custom-link {
+  color: rgb(217, 223, 217);
+}
 .error {
   color: red;
   font-size: 20px;
 }
-=======
-.custom-link {
-  color: rgb(217, 223, 217);
-}
->>>>>>> controladores

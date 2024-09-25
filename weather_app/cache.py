@@ -4,16 +4,12 @@ import threading
 from pathlib import Path
 from threading import Thread
 from requests import HTTPError, RequestException
-from static.python.data_manager import DataCollector
-from static.python.path_manager import FileManager, FileNotFound
+from static.python.data_manager import DataManager
 from weather_manager import get_weather
 
-FILE_MANAGER=FileManager()
-try:
-    DATA_MANAGER = DataCollector(FILE_MANAGER)
-except FileNotFound as e:
-    print(f"Error: {e}")
-    
+DATA_MANAGER = DataManager()
+DATA_COLLECTOR = DATA_MANAGER.get_data_collector()
+
 class InvalidCacheFileException(Exception):
     """
     Clase de excepcion del archivo de cache dado,
@@ -121,7 +117,7 @@ class Cache:
         if self.__STOP_FLAG.is_set():
             self.__STOP_FLAG.clear()
             if not self.__thread:
-                data = DATA_MANAGER.get_destiny_data()
+                data = DATA_COLLECTOR.get_destiny_data()
                 self.__thread = Thread(
                     target=self.__update_weather_records,
                     args=[data],

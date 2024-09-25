@@ -2,19 +2,16 @@ import requests
 import threading
 import time
 import os
-from static.python.data_manager import DataCollector
-from static.python.path_manager import FileManager, FileNotFound
+from static.python.data_manager import DataManager
 from requests.exceptions import RequestException, HTTPError
 from dotenv import load_dotenv
 
 load_dotenv()
 KEY = os.getenv('KEY')
 LOCK = threading.Lock()
-FILE_MANAGER = FileManager()
-try:
-    DATA_MANAGER = DataCollector(FILE_MANAGER)
-except FileNotFound as e:
-    print(f"Error: {e}")
+
+DATA_MANAGER = DataManager()
+DATA_COLLECTOR = DATA_MANAGER.get_data_collector()
 
 def get_weather(city: str, weather_records: dict) -> dict:
     """
@@ -113,11 +110,10 @@ def search_by_iata(iata_code: str, weather_records: dict) -> dict:
     Returns:
         weather (dict): Informacion del clima.
     """
-    city = DATA_MANAGER.get_city(iata_code)
+    city = DATA_COLLECTOR.get_city(iata_code)
     if not city:
         raise ValueError('Ciudad invalida')
     weather = get_weather(city, weather_records)
-    determine_icon(weather)
     return weather
 
 def search_by_city(city: str, weather_records: dict) -> dict:
@@ -131,7 +127,6 @@ def search_by_city(city: str, weather_records: dict) -> dict:
         weather (dict): Informacion del clima.
     """
     weather = get_weather(city, weather_records)
-    determine_icon(weather)
     return weather
 
 def search_by_id(flight_number: str, weather_records: dict) -> tuple:
@@ -145,14 +140,12 @@ def search_by_id(flight_number: str, weather_records: dict) -> tuple:
         flight_weather (tuple): Contiene la informacion del clima de llegada y de salida.
     """
     try:
-        flight_info = DATA_MANAGER.search_flight(flight_number)
+        flight_info = DATA_COLLECTOR.search_flight(flight_number)
     except TypeError as e:
         raise ValueError('Vuelo no encontrado.')
-    departure = DATA_MANAGER.get_city(flight_info['departure'])
-    arrival = DATA_MANAGER.get_city(flight_info['arrival'])
+    departure = DATA_COLLECTOR.get_city(flight_info['departure'])
+    arrival = DATA_COLLECTOR.get_city(flight_info['arrival'])
     if not departure or not arrival:
         raise ValueError('Ticket invalido.')
     flight_weather = (get_weather(departure, weather_records), get_weather(arrival, weather_records))
-    determine_icon(flight_weather[0])
-    determine_icon(flight_weather[1])
     return flight_weather

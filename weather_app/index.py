@@ -6,13 +6,12 @@ from flask import Flask, render_template, request
 from requests.exceptions import RequestException, HTTPError
 from static.python.data_manager import DataCollector
 from static.python.path_manager import FileManager, FileNotFound
-
-FILE_MANAGER=FileManager()
+from autocorrect import revise
+FILE_MANAGER = FileManager()
 try:
     DATA_MANAGER = DataCollector(FILE_MANAGER)
 except FileNotFound as e:
     print(f"Error: {e}")
-
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -24,6 +23,7 @@ def home():
     datalist_options = DATA_MANAGER.get_cities()
     suggestion = ''
     city = ''
+    template = 'home.html'
     if request.method == 'POST':
         city = str(request.form.get('city', '')).strip()
         iata_code = str(request.form.get('iata_code', '')).strip()
@@ -50,18 +50,23 @@ def home():
                     suggestion = revise(city)[0]
                     if suggestion.lower() == city.lower():
                         departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-                    template = 'city.html' 
+                    template = 'city.html'
                 elif iata_code:
                     departure_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
                     template = 'city.html'
                 if departure_weather:
-                        weather_cache.update(departure_weather)
+                    weather_cache.update(departure_weather)
                 if arrival_weather:
                     weather_cache.update(arrival_weather)
-        
         except ValueError as e:
             error_message = str(e)
         except RequestException as e:
+            error_message = str(e)
+        except AttributeError as e:
+            print(f"Error al actualizar la caché: {e}")
+        except HTTPError as e:
+            print('No se encontró el URL')
+        except TypeError as e:
             error_message = str(e)
         except (ValueError, AttributeError, HTTPError):
             error_message = "Error al actualizar y/o datos, una disculpa."
@@ -70,8 +75,15 @@ def home():
         except TypeError:
             error_message = "No se pudo obtener los datos esperados, una disculpa."
     
-    return render_template(template, departure_weather=departure_weather, arrival_weather=arrival_weather, error=error_message, datalist_options=datalist_options,suggestion = suggestion,
-        city = city)
+    return render_template(
+        template,
+        departure_weather=departure_weather,
+        arrival_weather=arrival_weather,
+        error=error_message,
+        datalist_options=datalist_options,
+        suggestion = suggestion,
+        city = city
+    )
 
 if __name__ == '__main__':
     weather_cache = Cache('./weather_app/static/json/cache.json')
