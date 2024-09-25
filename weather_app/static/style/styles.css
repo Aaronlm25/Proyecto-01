@@ -157,9 +157,7 @@ header h1{
 .stat-label {
   text-align: center;
 }
-.custom-link {
-  color: rgb(217, 223, 217);
-}
+
 .error {
   color: red;
   font-size: 20px;

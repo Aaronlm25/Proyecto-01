@@ -4,36 +4,28 @@ import signal
 from cache import Cache
 from flask import Flask, render_template, request
 from requests.exceptions import RequestException, HTTPError
-from static.python.data_manager import DataCollector
-from static.python.path_manager import FileManager, FileNotFound
+from static.python.data_manager import DataManager
 from autocorrect import revise
-FILE_MANAGER = FileManager()
-try:
-    DATA_MANAGER = DataCollector(FILE_MANAGER)
-except FileNotFound as e:
-    print(f"Error: {e}")
+
+DATA_MANAGER = DataManager()
+DATA_COLLECTOR = DATA_MANAGER.get_data_collector()
+
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    template = 'home.html'
     departure_weather = None
     arrival_weather = None
     error_message = None
-    datalist_options = DATA_MANAGER.get_cities()
+    datalist_options = DATA_COLLECTOR.get_cities()
     suggestion = ''
     city = ''
-    template = 'home.html'
     if request.method == 'POST':
         city = str(request.form.get('city', '')).strip()
         iata_code = str(request.form.get('iata_code', '')).strip()
         flight_number = str(request.form.get('flight_number', '')).strip()
-        option = request.form.get('option')
+        
         try:
-            if option == 'flight_number':
-                template = 'flight.html'
-            elif option in ['city', 'iata_code']:
-                template = 'city.html'
             if city and not city.replace(" ", "").isalpha():
                 error_message = 'El nombre de la ciudad debe contener solo letras.'
             elif iata_code and not iata_code.isalpha():
@@ -45,29 +37,21 @@ def home():
                     flight_weather = weather_manager.search_by_id(flight_number, weather_cache.get_data())
                     departure_weather = flight_weather[0]
                     arrival_weather = flight_weather[1]
-                    template = 'flight.html'
                 elif city:
-                    suggestion = revise(city)[0]
-                    if suggestion.lower() == city.lower():
-                        departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-                    template = 'city.html'
+                    suggestions = revise(city)
+                    if len(suggestions) == 0:
+                        error_message = 'Asegurate de que has escrito bien el nombre.'
+                    elif suggestions[0] == city:
+                        departure_weather = weather_manager.search_by_city(suggestions[0], weather_cache.get_data())
+                    else:
+                        suggestion = suggestions[0]
                 elif iata_code:
                     departure_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
-                    template = 'city.html'
                 if departure_weather:
                     weather_cache.update(departure_weather)
                 if arrival_weather:
                     weather_cache.update(arrival_weather)
-        except ValueError as e:
-            error_message = str(e)
-        except RequestException as e:
-            error_message = str(e)
-        except AttributeError as e:
-            print(f"Error al actualizar la caché: {e}")
-        except HTTPError as e:
-            print('No se encontró el URL')
-        except TypeError as e:
-            error_message = str(e)
+
         except (ValueError, AttributeError, HTTPError):
             error_message = "Error al actualizar y/o datos, una disculpa."
         except RequestException:
@@ -76,7 +60,7 @@ def home():
             error_message = "No se pudo obtener los datos esperados, una disculpa."
     
     return render_template(
-        template,
+        'index.html',
         departure_weather=departure_weather,
         arrival_weather=arrival_weather,
         error=error_message,
