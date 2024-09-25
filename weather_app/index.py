@@ -20,7 +20,7 @@ def home():
     error_message = None
     datalist_options = DATA_COLLECTOR.get_cities()
     city = ''
-    
+    suggestion= ''
     if request.method == 'POST':
         city = request.form.get('city')
         iata_code = request.form.get('iata_code')
@@ -29,23 +29,26 @@ def home():
         try:
             if option == 'flight_number':
                 template = 'flight.html'
-            elif option in ['city', 'iata_code']:
+            elif option in ['city']:
                 template = 'city.html'
-            
             if flight_number:
                 flight_weather = weather_manager.search_by_id(flight_number, weather_cache.get_data())
                 departure_weather = flight_weather[0]
                 arrival_weather = flight_weather[1]
                 template = 'flight.html'
             elif city:
-                city_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-                departure_weather = city_weather
-                template = 'city.html' 
+                suggestions = revise(city)[0]
+                if suggestion == []:
+                    error_message = 'Asegúrate de que todas las palabras estén escritas correctamente.'
+                elif suggestions.lower() == city.lower():
+                    departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
+                else:
+                    suggestion = suggestions
+                template = 'city.html'
             elif iata_code:
                 iata_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
                 departure_weather = iata_weather
-                template = 'city.html' 
-            
+                template = 'city.html'
             if departure_weather:
                 weather_cache.update(departure_weather)
             if arrival_weather:
@@ -54,7 +57,7 @@ def home():
         except ValueError as e:
             error_message = str(e)
         except RequestException as e:
-            error_message = str(e)
+            error_message = 'Esperando datos'
         except AttributeError as e:
             print(f"Error al actualizar la caché: {e}")
         except HTTPError as e:
@@ -68,7 +71,7 @@ def home():
         arrival_weather=arrival_weather,
         error=error_message,
         datalist_options=datalist_options,
-        suggestion= '',
+        suggestion=suggestion,
         city = city
     )
 

@@ -162,3 +162,11 @@ header h1{
   color: red;
   font-size: 20px;
 }
+
+.custom-link {
+  color: rgb(217, 223, 217);
+}
+
+.link-size{
+  font-size: 16px;
+}

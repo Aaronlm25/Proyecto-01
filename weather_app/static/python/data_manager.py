@@ -78,11 +78,11 @@ class DataCollector:
             list: lista con las ciudades ordenadas
         """
         ciudades = []
-        with open(path, 'r') as file:
+        with open(path, 'r',newline='') as file:
             reader = csv.reader(file)
             next(reader)
             for row in reader:
-                ciudades.extend([ciudad for ciudad in row if ciudad.strip()])
+                ciudades.extend([ciudad for ciudad in row[:1] if ciudad.strip()])
         cities = sorted(ciudades, key=lambda x: x.lower())
         return set(cities)
     
