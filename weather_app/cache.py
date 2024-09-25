@@ -33,6 +33,7 @@ class Cache:
         self.__STOP_FLAG.set()
         self.__thread = None
         self.__LOCK = threading.Lock()
+        self.get_data()
 
     def get_data(self) -> dict:
         """
@@ -83,7 +84,6 @@ class Cache:
         i = 0
         while not self.__STOP_FLAG.is_set():
             data = destiny_data[i]
-            time.sleep(REQUEST_INTERVAL)
             weather = None
             try:
                 weather = get_weather(data, self.weather_records)
@@ -91,6 +91,7 @@ class Cache:
                 weather = None
             if weather:
                 self.update(weather)
+                time.sleep(REQUEST_INTERVAL)
             i += 1
             if i == len(destiny_data):
                 i = 0

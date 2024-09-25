@@ -1,0 +1,12 @@
+[
+    {
+        "name": "x",
+        "temp": 20,
+        "humidity": 50
+    },
+    {
+        "name": "y",
+        "temp": 25,
+        "humidity": 60
+    }
+]

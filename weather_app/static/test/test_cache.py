@@ -201,3 +201,25 @@ def test_directory_creation(clean, sample_cache : Cache):
         sample_cache (Cache)
     """
     assert os.path.exists(path)
+
+def test_get_data_reading(clean):
+    """
+    Test para ver que los datos se leen correctamente desde el archivo json.
+
+    Args:
+        clean : borra todos los archivos en el directorio temp
+        sample_cache (Cache)
+    """
+    sample_data = [
+        {"name": "x", "temp": 20, "humidity": 50},
+        {"name": "y", "temp": 25, "humidity": 60}
+    ]
+    with open(path, 'w', encoding='utf-8') as file:
+        json.dump(sample_data, file, indent=4, ensure_ascii=False)
+    sample_cache = Cache(path)
+    weather_records = sample_cache.weather_records
+    assert len(weather_records) == 2
+    assert weather_records["x"]["temp"] == 20
+    assert weather_records["x"]["humidity"] == 50
+    assert weather_records["y"]["temp"] == 25
+    assert weather_records["y"]["humidity"] == 60
