@@ -16,7 +16,7 @@ def home():
     departure_weather = None
     arrival_weather = None
     error_message = None
-    datalist_options = DATA_COLLECTOR.get_cities()
+    datalist_options = set(DATA_COLLECTOR.get_cities())
     city = ''
     suggestion= ''
     if request.method == 'POST':
