@@ -2,6 +2,7 @@ import os
 import sys 
 import json
 import pytest
+import csv
 import random
 import threading
 import time
@@ -9,23 +10,40 @@ sys.path.append(os.path.abspath("./weather_app"))
 from cache import Cache, InvalidCacheFileException
 
 path = './weather_app/static/test/temp/cache.json'
-dir = './weather_app/static/test/temp/'
+
+@pytest.fixture(scope='session')
+def city_data() -> list:
+    """
+    Fixture para obtener la lista de ciudades.
+    
+    Returns:
+        data (list) : lista de ciudades.
+    """
+    path = './weather_app/static/datalist/destiny_data.csv'
+    data = []
+    with open(path, 'r') as file:
+        csv_file = csv.reader(file)
+        next(csv_file)
+        for row in csv_file:
+            data.append(row[0])
+    return data
 
 @pytest.fixture
-def sample_cache():
+def sample_cache(city_data : list) -> Cache:
     """
     Fixture para obtener un objeto cache.
     
     Returns:
         (Cache) : Un objeto cache.
     """
-    return Cache(path)
+    return Cache(path, city_data)
 
 @pytest.fixture
 def clean():
     """
     Fixture para quitar todos los archivos del directorio temp.
     """
+    dir = './weather_app/static/test/temp/'
     for file in os.listdir(dir):
         file_path = os.path.join(dir, file)
         if os.path.isfile(file_path):
@@ -84,10 +102,10 @@ def sample_data_disjoint(size : int) -> list:
     0 a size - 1.
 
     Args:
-        size (int) : el tamano de la lista
+        size (int) : el tamano de la lista.
 
     Returns:
-        data (list) : lista de objetos json
+        data (list) : lista de objetos json.
     """
     data = []
     for x in range(size):
@@ -100,7 +118,7 @@ def test_stop(clean, sample_cache : Cache):
     Test para ver que el hilo de ejecucion del cache se detine correctamente.
 
     Args:
-        clean : borra todos los archivos en el directorio temp
+        clean : borra todos los archivos en el directorio temp.
         sample_cache (Cache)
     """
     sample_cache.start()
@@ -115,7 +133,7 @@ def test_start(clean, sample_cache : Cache):
     correctamente.
     
     Args:
-        clean : borra todos los archivos en el directorio temp
+        clean : borra todos los archivos en el directorio temp.
         sample_cache (Cache)
     """
     sample_cache.start()
@@ -129,18 +147,19 @@ def test_start(clean, sample_cache : Cache):
     sample_cache.stop()
     assert json_file() == to_json(sample_cache.weather_records)
 
-def test_invalid_cache(clean):
+def test_invalid_cache(clean, city_data : list):
     """
     Test para ver que se lanza la excepcion apropiada
     para un archivo cache con extension invalida.
 
     Args:
-        clean : borra todos los archivos en el directorio temp
+        clean : borra todos los archivos en el directorio temp.
+        city_data (list) : lista de ciudades.
     """
     with pytest.raises(InvalidCacheFileException):
-        invalid_cache = Cache('./weather_app/static/test/temp/cache')
+        invalid_cache = Cache('./weather_app/static/test/temp/cache', city_data)
     with pytest.raises(InvalidCacheFileException):
-        invalid_cache = Cache('./weather_app/static/test/temp/cache.xd')
+        invalid_cache = Cache('./weather_app/static/test/temp/cache.xd', city_data)
 
 def test_get_data_empty_file(clean, sample_cache : Cache):
     """
@@ -202,13 +221,14 @@ def test_directory_creation(clean, sample_cache : Cache):
     """
     assert os.path.exists(path)
 
-def test_get_data_reading(clean):
+def test_get_data_reading(clean, city_data : list):
     """
     Test para ver que los datos se leen correctamente desde el archivo json.
 
     Args:
         clean : borra todos los archivos en el directorio temp
         sample_cache (Cache)
+        city_data (list) : lista de ciudades.
     """
     sample_data = [
         {"name": "x", "temp": 20, "humidity": 50},
@@ -216,7 +236,7 @@ def test_get_data_reading(clean):
     ]
     with open(path, 'w', encoding='utf-8') as file:
         json.dump(sample_data, file, indent=4, ensure_ascii=False)
-    sample_cache = Cache(path)
+    sample_cache = Cache(path, city_data)
     weather_records = sample_cache.weather_records
     assert len(weather_records) == 2
     assert weather_records["x"]["temp"] == 20

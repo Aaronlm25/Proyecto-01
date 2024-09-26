@@ -7,9 +7,7 @@ from requests.exceptions import RequestException, HTTPError
 from static.python.data_manager import DataManager
 from autocorrect import revise
 
-DATA_MANAGER = DataManager()
-DATA_COLLECTOR = DATA_MANAGER.get_data_collector()
-
+DATA_COLLECTOR = DataManager().get_data_collector()
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -37,7 +35,7 @@ def home():
                 arrival_weather = flight_weather[1]
                 template = 'flight.html'
             elif city:
-                suggestions = revise(city)[0]
+                suggestions = revise(city, DATA_COLLECTOR.get_cities())[0]
                 if suggestion == []:
                     error_message = 'Asegúrate de que todas las palabras estén escritas correctamente.'
                 elif suggestions.lower() == city.lower():
@@ -81,10 +79,10 @@ def search():
         city=city,
         departure_weather=departure_weather,
         datalist_options=datalist_options
-        )
+    )
 
 if __name__ == '__main__':
-    weather_cache = Cache('./weather_app/static/json/cache.json')
+    weather_cache = Cache('./weather_app/static/json/cache.json', DATA_COLLECTOR.get_cities())
     weather_cache.start()
     safe_stop = lambda signal, frame: (weather_cache.stop(), sys.exit(0))
     signal.signal(signal.SIGINT, safe_stop)

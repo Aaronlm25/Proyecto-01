@@ -1,30 +1,28 @@
 import Levenshtein as lev
-from static.python.data_manager import DataManager
-
-DATA_MANAGER = DataManager()
-DATA_COLLECTOR = DATA_MANAGER.get_data_collector()
 
 def organize(similar_locations: dict) -> dict:
     """
-    Funcion para organize los elementos en el diccionario
+    Funcion para organize los elementos en el diccionario.
+
     Args:
-        similar_locations (dict): ciudades similares a la ubicacion del usuario
+        similar_locations (dict): ciudades similares a la ubicacion del usuario.
 
     Returns:
-        ordered_locations (dict) : ubicaciones ordenadas
+        ordered_locations (dict) : ubicaciones ordenadas.
     """
     ordered_locations = dict(sorted(similar_locations.items(), reverse=True))
     return ordered_locations
 
 def first_n(similar: dict, n: int) -> list:
     """
-    Funcion para obtener los primeros n elementos de un diccionario
+    Funcion para obtener los primeros n elementos de un diccionario.
+
     Args:
-        similar (dict): Diccionario con las palabras parecidas
-        int: cantidad de palabras similares deseadas
+        similar (dict): diccionario con las palabras parecidas.
+        int: cantidad de palabras similares deseadas.
 
     Returns:
-        first_n (list): lista de n palabras similares con la ubicacion deseada
+        first_n (list): lista de n palabras similares con la ubicacion deseada.
     """
     first_n = []
     for key in similar:
@@ -33,21 +31,21 @@ def first_n(similar: dict, n: int) -> list:
                 first_n.append(item)
     return first_n
 
-def revise(ubication: str) -> list:
+def revise(ubication: str, cities : list) -> list:
     """
-    Funcion para correguir la entrada del usuario
+    Funcion para correguir la entrada del usuario.
+
     Args:
-        user_ubication (String): Ubicacion de la cual se desea conocer el clima
-        coincidence_index (int): Indice que se desea poner como condicion para las comparaciones 
+        ubication (str): ubicacion de la cual se desea conocer el clima.
+        cities (list) : lisa con los nombres de las ciudades.
 
     Returns:
-        (list): contiene las 5 palabras con mayor indice de coincidencia
+        (list): contiene las 5 palabras con mayor indice de coincidencia.
     """
     if not ubication:
         return []
     user_ubication = ubication.lower()
     coincidence_index = 0.4
-    cities = DATA_COLLECTOR.get_cities()
     coincidences = {}
     for x in cities:
         if x[0].lower() == user_ubication[0]:

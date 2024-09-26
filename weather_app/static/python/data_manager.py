@@ -17,9 +17,7 @@ class DataCollector:
             file_manager (FileManager): Instancia de FileManager para obtener las rutas de los archivos.
         """
         flight_path = file_manager.get_flight_path()
-        location_path = file_manager.get_location_path()
         destiny_path = file_manager.get_destiny_path()
-        
         self._flight_data = self.load_flight_data(flight_path)
         self._iata_data = self.load_iata_data(destiny_path)
         self._cities = self.load_cities(destiny_path)
@@ -79,7 +77,7 @@ class DataCollector:
         return iata_data
 
     @staticmethod
-    def load_cities(path: str) -> set:
+    def load_cities(path: str) -> list:
         """
         Carga los datos de las ciudades desde un archivo CSV.
 
@@ -87,16 +85,16 @@ class DataCollector:
             path (str): Ruta del archivo CSV que contiene los datos de ciudades.
 
         Returns:
-            set: Un conjunto con las ciudades ordenadas.
+            ciudades (list): lista de las ciudades ordenada.
         """
-        ciudades = []
+        cities = []
         with open(path, 'r', newline='') as file:
             reader = csv.reader(file)
             next(reader)
             for row in reader:
-                ciudades.extend([ciudad for ciudad in row[:1] if ciudad.strip()])
-        cities = sorted(ciudades, key=lambda x: x.lower())
-        return set(cities)
+                cities.append(row[0])
+        cities = sorted(cities, key=lambda city: city.lower())
+        return cities
     
     @staticmethod
     def load_destiny_data(path: str) -> list:
@@ -124,16 +122,16 @@ class DataCollector:
         Devuelve los datos de destino cargados.
 
         Returns:
-            list: Lista de destinos cargados desde el archivo CSV.
+            list: lista de destinos cargados desde el archivo CSV.
         """
         return self._destiny_data
     
-    def get_cities(self) -> set:
+    def get_cities(self) -> list:
         """
         Devuelve las ciudades cargadas.
 
         Returns:
-            set: Conjunto de ciudades cargadas desde el archivo CSV.
+            list: lista de ciudades cargadas desde el archivo CSV.
         """
         return self._cities
     
