@@ -72,9 +72,6 @@ class Cache:
         """
         Proceso en segundo plano que hace las peticiones de los climas de las 
         distintas ciudades registradas.
-
-        Args:
-            cities (list): lista de ciudades.
         """
         REQUEST_INTERVAL = 1.1
         THREE_HOUR_INTERVAL = 10800
