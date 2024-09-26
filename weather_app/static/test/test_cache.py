@@ -6,10 +6,12 @@ import csv
 import random
 import threading
 import time
+import shutil
 sys.path.append(os.path.abspath("./weather_app"))
 from cache import Cache, InvalidCacheFileException
 
 path = './weather_app/static/test/temp/cache.json'
+dir = './weather_app/static/test/temp/'
 
 @pytest.fixture(scope='session')
 def city_data() -> list:
@@ -43,11 +45,9 @@ def clean():
     """
     Fixture para quitar todos los archivos del directorio temp.
     """
-    dir = './weather_app/static/test/temp/'
-    for file in os.listdir(dir):
-        file_path = os.path.join(dir, file)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
+    if os.path.exists(dir):
+        shutil.rmtree(dir)
+    os.makedirs(dir)
 
 def json_file() -> json:
     """
@@ -112,6 +112,18 @@ def sample_data_disjoint(size : int) -> list:
        data.append({"name": x})
     return data
 
+def test_directory_creation(clean, city_data):
+    """   
+    Test para ver que un objeto json crea su archivo en el directorio especificado.
+        
+    Args:
+        clean : borra todos los archivos en el directorio temp
+        sample_cache (Cache)
+    """
+    os.rmdir(dir)
+    sample_cache = Cache(path, city_data)
+    assert os.path.exists(path)
+
 @pytest.mark.dependency()
 def test_stop(clean, sample_cache : Cache):
     """
@@ -146,6 +158,11 @@ def test_start(clean, sample_cache : Cache):
     assert 'cache' in names
     sample_cache.stop()
     assert json_file() == to_json(sample_cache.weather_records)
+    sample_cache.start()
+    names = [thread.name for thread in threading.enumerate()]
+    assert threading.active_count() == 2
+    assert 'cache' in names
+    sample_cache.stop()
 
 def test_invalid_cache(clean, city_data : list):
     """
@@ -210,16 +227,6 @@ def test_update_large(clean, sample_cache : Cache):
         assert len(written_data) == size
     sample_cache.stop()
     assert json_file() == to_json(sample_cache.weather_records)
-
-def test_directory_creation(clean, sample_cache : Cache):
-    """   
-    Test para ver que un objeto json crea su archivo en el directorio especificado.
-        
-    Args:
-        clean : borra todos los archivos en el directorio temp
-        sample_cache (Cache)
-    """
-    assert os.path.exists(path)
 
 def test_get_data_reading(clean, city_data : list):
     """

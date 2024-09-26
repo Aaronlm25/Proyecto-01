@@ -4,7 +4,6 @@ import threading
 from pathlib import Path
 from threading import Thread
 from requests import HTTPError, RequestException
-from static.python.data_manager import DataManager
 from weather_manager import get_weather
 
 class InvalidCacheFileException(Exception):
@@ -22,6 +21,8 @@ class Cache:
     Args:
         path : str
             La ruta del archivo de cache.
+        cities : list
+            Lista de ciudades a considerar.
     """
     def __init__(self, path : str, cities : list):
         self.__existance_insurer(path)
@@ -73,7 +74,6 @@ class Cache:
         Proceso en segundo plano que hace las peticiones de los climas de las 
         distintas ciudades registradas.
         """
-        REQUEST_INTERVAL = 1.1
         THREE_HOUR_INTERVAL = 10800
         i = 0
         while not self.__STOP_FLAG.is_set():
@@ -85,7 +85,6 @@ class Cache:
                 weather = None
             if weather:
                 self.update(weather)
-                time.sleep(REQUEST_INTERVAL)
             i += 1
             if i == len(self.__cities):
                 i = 0
@@ -116,7 +115,7 @@ class Cache:
                     target=self.__update_weather_records,
                     name='cache'
                 )
-            self.__thread.start()
+                self.__thread.start()
 
     def stop(self):
         """
@@ -127,6 +126,7 @@ class Cache:
         self.__STOP_FLAG.set()
         if self.__thread:
             self.__thread.join()
+            self.__thread = None
         self.__save()
 
     def is_active(self) -> bool:

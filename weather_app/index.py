@@ -35,13 +35,14 @@ def home():
                 arrival_weather = flight_weather[1]
                 template = 'flight.html'
             elif city:
-                suggestions = revise(city, DATA_COLLECTOR.get_cities())[0]
-                if suggestion == []:
+                suggestions = revise(city, DATA_COLLECTOR.get_cities())
+                if suggestions == []:
                     error_message = 'Asegúrate de que todas las palabras estén escritas correctamente.'
-                elif suggestions.lower() == city.lower():
-                    departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
                 else:
-                    suggestion = suggestions
+                    if suggestions[0].lower() == city.lower():
+                        departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
+                    else:
+                        suggestion = suggestions[0]
                 template = 'city.html'
             elif iata_code:
                 iata_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())

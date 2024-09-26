@@ -27,8 +27,8 @@ def get_weather(city: str, weather_records: dict) -> dict:
     Raises:
         RequestException: Si ocurre un error al realizar la solicitud a la API.
     """
+    REQUEST_INTERVAL = 1.1
     if not is_weather_valid(city, weather_records):
-        print(city)
         with LOCK:
             try:
                 url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
@@ -36,6 +36,8 @@ def get_weather(city: str, weather_records: dict) -> dict:
                 response.raise_for_status()
                 weather = response.json()
                 determine_icon(weather)
+                weather['name'] = city
+                time.sleep(REQUEST_INTERVAL)
                 return weather
             except (RequestException, HTTPError) as e:
                 raise RequestException('Error al hacer el request') from e
