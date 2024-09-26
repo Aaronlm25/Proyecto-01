@@ -23,8 +23,8 @@ class Cache:
     Clase para manejar el cache de los climas
 
     Args:
-    path : str
-        La ruta del archivo de cache
+        path : str
+            La ruta del archivo de cache
     """
     def __init__(self, path : str):
         self.__existance_insurer(path)
@@ -42,6 +42,9 @@ class Cache:
 
         Returns:
             self.weather_records (dict): Un diccionario con todos los climas de las ciudades registradas
+        
+        Raises:
+            InvalidCacheFileException : Si el formato del cache es invalido.
         """
         raw_data = []
         if len(self.weather_records) == 0:
@@ -163,6 +166,9 @@ class Cache:
         Se asegura de que la ruta y el archivo existan.
         Args : 
             path (str): la ruta del archivo.
+            
+        Raises:
+            InvalidCacheFileException : Si el formato del cache es invalido.
         """
         self.path = Path(path)
         if self.path.suffix != '.json':
