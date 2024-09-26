@@ -2,7 +2,6 @@
 {% block content %}
 
 <h1>Buscar por...</h1>
-
 <div class="info card">
     <form id="template" method="POST" action="/">
         <select name="option" id="menu" onchange="this.form.submit()">
@@ -29,20 +28,7 @@
         <p id="txt_suggestion" class="link-size">Quizá quisiste decir: <a href="http://127.0.0.1:5000/search?city={{suggestion}}" class="custom-link">{{ suggestion }}</a></p>
       {% endif %}
       </div>
-      <script>
-        var search = document.querySelector('#city');
-        var results = document.querySelector('#listprod');
-        var templateContent = document.querySelector('#listtemplate').content;
-        search.addEventListener('keyup', function handler(event) {
-            while (results.children.length) results.removeChild(results.firstChild);
-            var inputVal = new RegExp(search.value.trim(), 'i');
-            var set = Array.prototype.reduce.call(templateContent.cloneNode(true).children, function searchFilter(frag, item, i) {
-                if (inputVal.test(item.value) && frag.children.length < 5) frag.appendChild(item);
-                return frag;
-            }, document.createDocumentFragment());
-            results.appendChild(set);
-        });
-      </script>
+      <script src="static/js/scripts.js" defer></script>
       <button  type="submit"></button>
       
     </form>
