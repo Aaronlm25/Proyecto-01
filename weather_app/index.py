@@ -29,6 +29,8 @@ def home():
                 template = 'flight.html'
             elif option in ['city']:
                 template = 'city.html'
+            elif option == 'iata_code':
+                template = 'iata.html'
             if flight_number:
                 flight_weather = weather_manager.search_by_id(flight_number, weather_cache.get_data())
                 departure_weather = flight_weather[0]
@@ -40,13 +42,14 @@ def home():
                     error_message = 'Asegúrate de que todas las palabras estén escritas correctamente.'
                 elif suggestions.lower() == city.lower():
                     departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
+                    city = ''
                 else:
                     suggestion = suggestions
                 template = 'city.html'
             elif iata_code:
-                iata_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
-                departure_weather = iata_weather
-                template = 'city.html'
+                iata_upper = iata_code.upper()
+                departure_weather = weather_manager.search_by_iata(iata_upper, weather_cache.get_data())
+                template = 'iata.html'
             if departure_weather:
                 weather_cache.update(departure_weather)
             if arrival_weather:
@@ -74,6 +77,7 @@ def search():
     city = request.args.get('city')
     datalist_options = DATA_COLLECTOR.get_cities()
     departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
+    city = ''
     return render_template(
         'city.html',
         city=city,
