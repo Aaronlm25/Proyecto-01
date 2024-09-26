@@ -22,9 +22,9 @@ def home():
     city = ''
     
     if request.method == 'POST':
-        city = request.form.get('city')
-        iata_code = request.form.get('iata_code')
-        flight_number = request.form.get('flight_number')
+        city = str(request.form.get('city', '')).strip()
+        iata_code = str(request.form.get('iata_code', '')).strip()
+        flight_number = str(request.form.get('flight_number', '')).strip()
         option = request.form.get('option')
         try:
             if option == 'flight_number':
