@@ -38,9 +38,7 @@ def home():
                 template = 'flight.html'
             elif city:
                 suggestions = revise(city, DATA_COLLECTOR.get_cities())[0]
-                if suggestion == []:
-                    error_message = 'Asegúrate de que todas las palabras estén escritas correctamente.'
-                elif suggestions.lower() == city.lower():
+                if suggestions.lower() == city.lower():
                     departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
                     city = ''
                 else:
@@ -61,6 +59,8 @@ def home():
             error_message = "No se encontraron los datos esperados, una disculpa."
         except TypeError:
             error_message = "No se pudo obtener los datos esperados, una disculpa."
+        except IndexError:
+            error_message = 'Asegúrate de que todas las palabras estén escritas correctamente.'
             
     return render_template(
         template,
