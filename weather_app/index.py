@@ -56,17 +56,13 @@ def home():
             if arrival_weather:
                 weather_cache.update(arrival_weather)
         
-        except ValueError as e:
-            error_message = str(e)
-        except RequestException as e:
-            error_message = 'Esperando datos'
-        except AttributeError as e:
-            print(f"Error al actualizar la caché: {e}")
-        except HTTPError as e:
-            print('No se encontró el URL')
-        except TypeError as e:
-            error_message = str(e)
-    
+        except (ValueError, AttributeError, HTTPError):
+            error_message = "Error al actualizar datos, una disculpa."
+        except RequestException:
+            error_message = "No se encontraron los datos esperados, una disculpa."
+        except TypeError:
+            error_message = "No se pudo obtener los datos esperados, una disculpa."
+            
     return render_template(
         template,
         departure_weather=departure_weather,
