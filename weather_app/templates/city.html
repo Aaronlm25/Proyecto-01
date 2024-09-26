@@ -26,7 +26,7 @@
       </datalist>
       {% set lower_options = datalist_options | map('lower') %}
       {% if city and city.lower() not in lower_options %}
-        <p class="link-size">Quizá quisiste decir: <a href="http://127.0.0.1:5000" class="custom-link">{{ suggestion }}</a></p>
+        <p id="txt_suggestion" class="link-size">Quizá quisiste decir: <a href="http://127.0.0.1:5000/search?city={{suggestion}}" class="custom-link">{{ suggestion }}</a></p>
       {% endif %}
       </div>
       <script>
@@ -44,6 +44,7 @@
         });
       </script>
       <button  type="submit"></button>
+      
     </form>
 </div>
 

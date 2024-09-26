@@ -23,6 +23,8 @@ def home():
     suggestion= ''
     if request.method == 'POST':
         city = request.form.get('city')
+        if city == None:
+            city = ''
         iata_code = request.form.get('iata_code')
         flight_number = request.form.get('flight_number')
         option = request.form.get('option')
@@ -74,6 +76,13 @@ def home():
         suggestion=suggestion,
         city = city
     )
+
+@app.route('/search', methods=['GET'])
+def search():
+    city = request.args.get('city')
+    datalist_options = DATA_COLLECTOR.get_cities()
+    departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
+    return render_template('city.html', city=city, departure_weather=departure_weather, datalist_options=datalist_options)
 
 if __name__ == '__main__':
     weather_cache = Cache('./weather_app/static/json/cache.json')
