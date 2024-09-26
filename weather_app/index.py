@@ -82,7 +82,12 @@ def search():
     city = request.args.get('city')
     datalist_options = DATA_COLLECTOR.get_cities()
     departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-    return render_template('city.html', city=city, departure_weather=departure_weather, datalist_options=datalist_options)
+    return render_template(
+        'city.html',
+        city=city,
+        departure_weather=departure_weather,
+        datalist_options=datalist_options
+        )
 
 if __name__ == '__main__':
     weather_cache = Cache('./weather_app/static/json/cache.json')
