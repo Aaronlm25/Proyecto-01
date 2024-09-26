@@ -16,7 +16,7 @@ def home():
     departure_weather = None
     arrival_weather = None
     error_message = None
-    datalist_options = DATA_COLLECTOR.get_cities()
+    datalist_options = set(DATA_COLLECTOR.get_cities())
     city = ''
     suggestion= ''
     if request.method == 'POST':
@@ -29,6 +29,8 @@ def home():
                 template = 'flight.html'
             elif option in ['city']:
                 template = 'city.html'
+            elif option == 'iata_code':
+                template = 'iata.html'
             if flight_number:
                 flight_weather = weather_manager.search_by_id(flight_number, weather_cache.get_data())
                 departure_weather = flight_weather[0]
@@ -45,9 +47,9 @@ def home():
                         suggestion = suggestions[0]
                 template = 'city.html'
             elif iata_code:
-                iata_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
-                departure_weather = iata_weather
-                template = 'city.html'
+                iata_upper = iata_code.upper()
+                departure_weather = weather_manager.search_by_iata(iata_upper, weather_cache.get_data())
+                template = 'iata.html'
             if departure_weather:
                 weather_cache.update(departure_weather)
             if arrival_weather:
@@ -59,6 +61,8 @@ def home():
             error_message = "No se encontraron los datos esperados, una disculpa."
         except TypeError:
             error_message = "No se pudo obtener los datos esperados, una disculpa."
+        except IndexError:
+            error_message = 'Asegúrate de que todas las palabras estén escritas correctamente.'
             
     return render_template(
         template,
@@ -75,6 +79,7 @@ def search():
     city = request.args.get('city')
     datalist_options = DATA_COLLECTOR.get_cities()
     departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
+    city = ''
     return render_template(
         'city.html',
         city=city,

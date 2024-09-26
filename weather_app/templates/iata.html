@@ -14,37 +14,11 @@
     </form>
 
     <form class="input" method="POST" action="/">
-      <div id="cityInput" class="content">
-        <label for="city"></label>
-        <template id="listtemplate"> 
-          {% for city in datalist_options %}
-          <option value="{{ city }}">
-          {% endfor %}
-      </template>
-      <input type="text" id="city" name="city" list="listprod" class="form-control " placeholder="Ej. Ciudad de México" autocomplete="off" value="{{ city }}" maxlength="20" autofocus>
-      <datalist id="listprod">
-      </datalist>
-      {% set lower_options = datalist_options | map('lower') %}
-      {% if city and city.lower() not in lower_options %}
-        <p id="txt_suggestion" class="link-size">Quizá quisiste decir: <a href="http://127.0.0.1:5000/search?city={{suggestion}}" class="custom-link">{{ suggestion }}</a></p>
-      {% endif %}
+      <div id="IATA_codeInput" class="content">
+        <label for="iata_code"></label>
+        <input type="text" id="iata_code" name="iata_code" placeholder="Ej. MEX" autocomplete = "off" maxlength="5" autofocus/>
       </div>
-      <script>
-        var search = document.querySelector('#city');
-        var results = document.querySelector('#listprod');
-        var templateContent = document.querySelector('#listtemplate').content;
-        search.addEventListener('keyup', function handler(event) {
-            while (results.children.length) results.removeChild(results.firstChild);
-            var inputVal = new RegExp(search.value.trim(), 'i');
-            var set = Array.prototype.reduce.call(templateContent.cloneNode(true).children, function searchFilter(frag, item, i) {
-                if (inputVal.test(item.value) && frag.children.length < 5) frag.appendChild(item);
-                return frag;
-            }, document.createDocumentFragment());
-            results.appendChild(set);
-        });
-      </script>
       <button  type="submit"></button>
-      
     </form>
 </div>
 
