@@ -170,3 +170,67 @@ header h1{
 .link-size{
   font-size: 16px;
 }
+
+.see_more {
+  display: flex;
+  flex-direction: column;
+  height: 75%;
+  width: 40%;
+  justify-content: center;
+  box-shadow: 0 0.1rem 1rem rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  margin-bottom: 50px;
+}
+
+.row {
+  margin-right: 30px;
+  margin-left: 30px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual tamaño */
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.row p {
+  margin-right: 30px;
+}
+
+.see_more img {
+  height: 40px;
+  width: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+
+.weather-card button {
+  font-size: medium;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  size: 40px;
+  border: none;
+  background: none;
+  color: #87CEEB;
+}
+
+.weather-card button:hover {
+  cursor: pointer;
+}
+
+.see_more_both {
+  display: flex;
+  flex-direction: row;
+  margin: 50px;
+}
+
+.see_more_both .see_more {
+  width: 50%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Crea 3 columnas de igual tamaño */
+  gap: 25px;
+}

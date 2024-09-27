@@ -1,8 +1,7 @@
 {% extends "index.html" %}
 {% block content %}
-
+<script src="static/js/show_more.js" defer></script>
 <h1>Buscar por...</h1>
-
 <div class="info card">
     <form id="template" method="POST" action="/">
         <select name="option" id="menu" onchange="this.form.submit()">
@@ -49,6 +48,7 @@
                 <p class="stat-label">Velocidad de viento</p>
             </article>
         </div>
+        <button id="see_more_button" type="submit">Ver más detalles</button>
     </div>
     <div class="card weather-card" id="arrival_card">
         <h2 class="city-name">Ciudad de llegada: {{ arrival_weather['name'] }}</h2>
@@ -69,7 +69,96 @@
                 <p class="stat-label">Velocidad de viento</p>
             </article>
         </div>
+        <button id="see_more_button2" type="submit">Ver más detalles</button>
     </div>
-    {% endif %}
 </div>
+
+<section class="see_more_both">
+  <section id="see_more" class="see_more" style="display: none;">
+    <div class="row">
+      <p>Latitud:</p>
+      <img src="{{ url_for('static', filename='svg/coords.svg') }}"/>
+      <p >{{ departure_weather['coord']['lon'] }}</p>
+    </div>
+    <div class="row">
+      <p>Longitud:</p>
+      <img src="{{ url_for('static', filename='svg/coords.svg') }}"/>
+      <p >{{ departure_weather['coord']['lat'] }}</p>
+    </div>
+    <div class="row">
+      <p>Temperatura mínima:</p>
+      <img src="{{ url_for('static', filename='svg/min.svg') }}"/>
+      <p >{{ departure_weather['main']['temp_min']}}°C</p>
+    </div>
+    <div class="row">
+      <p>Temperatura máxima:</p>
+      <img src="{{ url_for('static', filename='svg/max.svg') }}"/>
+      <p >{{ departure_weather['main']['temp_max'] }}°C</p>
+    </div>
+    <div class="row">
+      <p>Presión a nivel del mar:</p>
+      <img src="{{ url_for('static', filename='svg/pressure.svg') }}"/>
+      <p >{{ departure_weather['main']['pressure']}} hPa</p>
+    </div>
+    <div class="row">
+      <p>Presión al nivel del suelo:</p>
+      <img src="{{ url_for('static', filename='svg/pressure.svg') }}"/>
+      <p>{{ departure_weather['main']['grnd_level'] }} hPa</p>
+    </div>
+    <div class="row">
+      <p>Visibilidad:</p>
+      <img src="{{ url_for('static', filename='svg/visibility.svg') }}"/>
+      <p>{{ departure_weather['visibility'] }} m</p>
+    </div>
+    <div class="row">
+      <p>Zona horaria:</p>
+      <img src="{{ url_for('static', filename='svg/timezone.svg') }}"/>
+      <p>{{ departure_weather['timezone'] }} UTC</p>
+    </div>
+  </section>
+
+  <section id="see_more2" class="see_more" style="display: none;">
+    <div class="row">
+      <p>Latitud:</p>
+      <img src="{{ url_for('static', filename='svg/coords.svg') }}"/>
+      <p >{{ arrival_weather['coord']['lon'] }}</p>
+    </div>
+    <div class="row">
+      <p>Longitud:</p>
+      <img src="{{ url_for('static', filename='svg/coords.svg') }}"/>
+      <p >{{ arrival_weather['coord']['lat'] }}</p>
+    </div>
+    <div class="row">
+      <p>Temperatura mínima:</p>
+      <img src="{{ url_for('static', filename='svg/min.svg') }}"/>
+      <p >{{ arrival_weather['main']['temp_min']}}°C</p>
+    </div>
+    <div class="row">
+      <p>Temperatura máxima:</p>
+      <img src="{{ url_for('static', filename='svg/max.svg') }}"/>
+      <p >{{ arrival_weather['main']['temp_max'] }}°C</p>
+    </div>
+    <div class="row">
+      <p>Presión a nivel del mar:</p>
+      <img src="{{ url_for('static', filename='svg/pressure.svg') }}"/>
+      <p >{{ arrival_weather['main']['pressure']}} hPa</p>
+    </div>
+    <div class="row">
+      <p>Presión al nivel del suelo:</p>
+      <img src="{{ url_for('static', filename='svg/pressure.svg') }}"/>
+      <p>{{ arrival_weather['main']['grnd_level'] }} hPa</p>
+    </div>
+    <div class="row">
+      <p>Visibilidad:</p>
+      <img src="{{ url_for('static', filename='svg/visibility.svg') }}"/>
+      <p>{{ arrival_weather['visibility'] }} m</p>
+    </div>
+    <div class="row">
+      <p>Zona horaria:</p>
+      <img src="{{ url_for('static', filename='svg/timezone.svg') }}"/>
+      <p>{{ arrival_weather['timezone'] }} UTC</p>
+    </div>
+  </section>
+</section>
+{% endif %}
 {% endblock %}
