@@ -1,111 +1,150 @@
-{% extends "index.html" %}
-{% block content %}
+{% extends "index.html" %} {% block content %}
 <script src="static/js/show_more.js" defer></script>
-<h1>Buscar por...</h1>
+<h1>Estás bucando por nombre de ciudad</h1>
 <div class="info card">
     <form id="template" method="POST" action="/">
         <select name="option" id="menu" onchange="this.form.submit()">
             <option class="option">Seleccione</option>
             <option value="city" class="option">Nombre de la ciudad</option>
             <option value="iata_code" class="option">Código IATA</option>
-            <option value="flight_number" class="option">Número de vuelo</option>
+            <option value="flight_number" class="option">
+                Número de vuelo
+            </option>
         </select>
     </form>
 
     <form class="input" method="POST" action="/">
-      <div id="cityInput" class="content">
-        <label for="city"></label>
-        <template id="listtemplate"> 
-          {% for city in datalist_options %}
-          <option value="{{ city }}">
-          {% endfor %}
-      </template>
-      <input type="text" id="city" name="city" list="listprod" class="form-control " placeholder="Ej. Ciudad de México" autocomplete="off" value="{{ city }}" maxlength="20" autofocus>
-      <datalist id="listprod">
-      </datalist>
-      {% set lower_options = datalist_options | map('lower') %}
-      {% if suggestion and city and city.lower() not in lower_options %}
-        <p id="txt_suggestion" class="link-size">Quizá quisiste decir: <a href="http://127.0.0.1:5000/search?city={{suggestion}}" class="custom-link">{{ suggestion }}</a></p>
-      {% endif %}
-      </div>
-      <script src="static/js/scripts.js" defer></script>
-      <button  type="submit"></button>
-      
+        <div id="cityInput" class="content">
+            <label for="city"></label>
+            <template id="listtemplate">
+                {% for city in datalist_options %}
+                <option value="{{ city }}">{% endfor %}</option></template
+            >
+
+            <input
+                type="text"
+                id="city"
+                name="city"
+                list="listprod"
+                class="form-control"
+                placeholder="Ej. Ciudad de México"
+                autocomplete="off"
+                value="{{ city }}"
+                maxlength="20"
+                autofocus
+            />
+            <datalist id="listprod"> </datalist>
+            {% set lower_options = datalist_options | map('lower') %} {% if
+            suggestion and city and city.lower() not in lower_options %}
+            <p id="txt_suggestion" class="link-size">
+                Quizá quisiste decir:
+                <a
+                    href="http://127.0.0.1:5000/search?city={{suggestion}}"
+                    class="custom-link"
+                    >{{ suggestion }}</a
+                >
+            </p>
+            {% endif %}
+        </div>
+        <script src="static/js/scripts.js" defer></script>
+        <button type="submit"></button>
     </form>
 </div>
 
 <div class="error">
-  {% if error %}
-      <p>{{ error }}</p>
-  {% endif %}
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
 </div>
 
 {% if departure_weather %}
 <div class="card weather-card" id="departure_card">
-  <h2 class="city-name">Ciudad de salida: {{ departure_weather['name'] }}</h2>
-  <h1 class="temperature">{{ departure_weather['main']['temp'] }}°C</h1>
-  <div class="weather-info">
-    <img class="weather-icon" src="{{ departure_weather['weather'][0]['icon'] }}" alt="Weather icon" />
-    <p class="weather-description">{{ departure_weather['weather'][0]['description'] | capitalize }}</p>
-  </div>
-  <div class="stats">
-    <article class="stat">
-      <img class="stat-icon" src="{{ url_for('static', filename='svg/humedad.svg') }}" alt="IMG-Humedad" />
-      <p class="stat-value">{{ departure_weather['main']['humidity'] }}%</p>
-      <p class="stat-label">Humedad</p>
-    </article>
-    <article class="stat">
-      <img class="stat-icon" src="{{ url_for('static', filename='svg/viento.svg') }}" alt="IMG-Viento" />
-      <p class="stat-value">{{ departure_weather['wind']['speed'] }} m/s</p>
-      <p class="stat-label">Velocidad de viento</p>
-    </article>
-  </div>
-  <button id="see_more_button" type="submit">Ver más detalles</button>
+    <h2 class="city-name">Destino: {{ departure_weather['name'] }}</h2>
+    <h1 class="temperature">{{ departure_weather['main']['temp'] }}°C</h1>
+    <div class="weather-info">
+        <img
+            class="weather-icon"
+            src="{{ departure_weather['weather'][0]['icon'] }}"
+            alt="Weather icon"
+        />
+        <p class="weather-description">
+            {{ departure_weather['weather'][0]['description'] | capitalize }}
+        </p>
+    </div>
+    <div class="stats">
+        <article class="stat">
+            <img
+                class="stat-icon"
+                src="{{ url_for('static', filename='svg/humedad.svg') }}"
+                alt="IMG-Humedad"
+            />
+            <p class="stat-value">
+                {{ departure_weather['main']['humidity'] }}%
+            </p>
+            <p class="stat-label">Humedad</p>
+        </article>
+        <article class="stat">
+            <img
+                class="stat-icon"
+                src="{{ url_for('static', filename='svg/viento.svg') }}"
+                alt="IMG-Viento"
+            />
+            <p class="stat-value">
+                {{ departure_weather['wind']['speed'] }} m/s
+            </p>
+            <p class="stat-label">Velocidad de viento</p>
+        </article>
+    </div>
+    <button
+        id="see_more_button"
+        type="submit"
+        onclick="location.href='#see_more'"
+    >
+        Ver más detalles
+    </button>
 </div>
 
-<section id="see_more" class="see_more" style="display: none;">
-  <div class="row">
-    <p>Latitud:</p>
-    <img src="{{ url_for('static', filename='svg/coords.svg') }}"/>
-    <p >{{ departure_weather['coord']['lon'] }}</p>
-  </div>
-  <div class="row">
-    <p>Longitud:</p>
-    <img src="{{ url_for('static', filename='svg/coords.svg') }}"/>
-    <p >{{ departure_weather['coord']['lat'] }}</p>
-  </div>
-  <div class="row">
-    <p>Temperatura mínima:</p>
-    <img src="{{ url_for('static', filename='svg/min.svg') }}"/>
-    <p >{{ departure_weather['main']['temp_min']}}°C</p>
-  </div>
-  <div class="row">
-    <p>Temperatura máxima:</p>
-    <img src="{{ url_for('static', filename='svg/max.svg') }}"/>
-    <p >{{ departure_weather['main']['temp_max'] }}°C</p>
-  </div>
-  <div class="row">
-    <p>Presión a nivel del mar:</p>
-    <img src="{{ url_for('static', filename='svg/pressure.svg') }}"/>
-    <p >{{ departure_weather['main']['pressure']}} hPa</p>
-  </div>
-  <div class="row">
-    <p>Presión al nivel del suelo:</p>
-    <img src="{{ url_for('static', filename='svg/pressure.svg') }}"/>
-    <p>{{ departure_weather['main']['grnd_level'] }} hPa</p>
-  </div>
-  <div class="row">
-    <p>Visibilidad:</p>
-    <img src="{{ url_for('static', filename='svg/visibility.svg') }}"/>
-    <p>{{ departure_weather['visibility'] }} m</p>
-  </div>
-  <div class="row">
-    <p>Zona horaria:</p>
-    <img src="{{ url_for('static', filename='svg/timezone.svg') }}"/>
-    <p>{{ departure_weather['timezone'] }} UTC</p>
-  </div>
+<section id="see_more" class="see_more" style="display: none">
+    <div class="row">
+        <p>Latitud:</p>
+        <img src="{{ url_for('static', filename='svg/coords.svg') }}" />
+        <p>{{ departure_weather['coord']['lon'] }}</p>
+    </div>
+    <div class="row">
+        <p>Longitud:</p>
+        <img src="{{ url_for('static', filename='svg/coords.svg') }}" />
+        <p>{{ departure_weather['coord']['lat'] }}</p>
+    </div>
+    <div class="row">
+        <p>Temperatura mínima:</p>
+        <img src="{{ url_for('static', filename='svg/min.svg') }}" />
+        <p>{{ departure_weather['main']['temp_min']}}°C</p>
+    </div>
+    <div class="row">
+        <p>Temperatura máxima:</p>
+        <img src="{{ url_for('static', filename='svg/max.svg') }}" />
+        <p>{{ departure_weather['main']['temp_max'] }}°C</p>
+    </div>
+    <div class="row">
+        <p>Presión a nivel del mar:</p>
+        <img src="{{ url_for('static', filename='svg/pressure.svg') }}" />
+        <p>{{ departure_weather['main']['pressure']}} hPa</p>
+    </div>
+    <div class="row">
+        <p>Presión al nivel del suelo:</p>
+        <img src="{{ url_for('static', filename='svg/pressure.svg') }}" />
+        <p>{{ departure_weather['main']['grnd_level'] }} hPa</p>
+    </div>
+    <div class="row">
+        <p>Visibilidad:</p>
+        <img src="{{ url_for('static', filename='svg/visibility.svg') }}" />
+        <p>{{ departure_weather['visibility'] }} m</p>
+    </div>
+    <div class="row">
+        <p>Zona horaria:</p>
+        <img src="{{ url_for('static', filename='svg/timezone.svg') }}" />
+        <p>{{ departure_weather['timezone'] }} UTC</p>
+    </div>
 </section>
 
-{% endif %}
-
-{% endblock %}
+{% endif %} {% endblock %}

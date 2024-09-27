@@ -36,7 +36,7 @@ class DataCollector:
         """
         flight_data = {}
         try:
-            with open(path, mode='r') as file:
+            with open(path, mode='r', encoding="utf-8") as file:
                 reader = csv.reader(file)
                 next(reader)
                 for row in reader:
@@ -65,7 +65,7 @@ class DataCollector:
         """
         iata_data = {}
         try:
-            with open(path, mode='r') as file:
+            with open(path, mode='r', encoding="utf-8") as file:
                 reader = csv.reader(file)
                 next(reader)
                 for row in reader:
@@ -88,7 +88,7 @@ class DataCollector:
             ciudades (list): lista de las ciudades ordenada.
         """
         cities = []
-        with open(path, 'r', newline='') as file:
+        with open(path, 'r', encoding="utf8", newline='') as file:
             reader = csv.reader(file)
             next(reader)
             for row in reader:
@@ -111,7 +111,7 @@ class DataCollector:
             list: Una lista de listas, donde cada sublista contiene la información de una ciudad.
         """
         destiny_data = []
-        with open(path, mode='r') as file:
+        with open(path, mode='r', encoding="utf-8") as file:
             reader = csv.reader(file)
             next(reader)
             destiny_data = [row[0] for row in list(reader)]
