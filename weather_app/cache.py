@@ -108,14 +108,13 @@ class Cache:
         """
         Comienza el proceso del cache y las peticiones de los climas.
         """
-        if self.__STOP_FLAG.is_set():
-            self.__STOP_FLAG.clear()
-            if not self.__thread:
-                self.__thread = Thread(
-                    target=self.__update_weather_records,
-                    name='cache'
-                )
-                self.__thread.start()
+        self.__STOP_FLAG.clear()
+        if not self.__thread:
+            self.__thread = Thread(
+                target=self.__update_weather_records,
+                name='cache'
+            )
+            self.__thread.start()
 
     def stop(self):
         """
