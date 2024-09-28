@@ -2,34 +2,52 @@ import os
 import sys 
 import json
 import pytest
+import csv
 import random
 import threading
 import time
+import shutil
 sys.path.append(os.path.abspath("./weather_app"))
 from cache import Cache, InvalidCacheFileException
 
 path = './weather_app/static/test/temp/cache.json'
 dir = './weather_app/static/test/temp/'
 
+@pytest.fixture(scope='session')
+def city_data() -> list:
+    """
+    Fixture para obtener la lista de ciudades.
+    
+    Returns:
+        data (list) : lista de ciudades.
+    """
+    path = './weather_app/static/datalist/destiny_data.csv'
+    data = []
+    with open(path, 'r') as file:
+        csv_file = csv.reader(file)
+        next(csv_file)
+        for row in csv_file:
+            data.append(row[0])
+    return data
+
 @pytest.fixture
-def sample_cache():
+def sample_cache(city_data : list) -> Cache:
     """
     Fixture para obtener un objeto cache.
     
     Returns:
         (Cache) : Un objeto cache.
     """
-    return Cache(path)
+    return Cache(path, city_data)
 
 @pytest.fixture
 def clean():
     """
     Fixture para quitar todos los archivos del directorio temp.
     """
-    for file in os.listdir(dir):
-        file_path = os.path.join(dir, file)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
+    if os.path.exists(dir):
+        shutil.rmtree(dir)
+    os.makedirs(dir)
 
 def json_file() -> json:
     """
@@ -84,15 +102,27 @@ def sample_data_disjoint(size : int) -> list:
     0 a size - 1.
 
     Args:
-        size (int) : el tamano de la lista
+        size (int) : el tamano de la lista.
 
     Returns:
-        data (list) : lista de objetos json
+        data (list) : lista de objetos json.
     """
     data = []
     for x in range(size):
        data.append({"name": x})
     return data
+
+def test_directory_creation(clean, city_data):
+    """   
+    Test para ver que un objeto json crea su archivo en el directorio especificado.
+        
+    Args:
+        clean : borra todos los archivos en el directorio temp
+        sample_cache (Cache)
+    """
+    os.rmdir(dir)
+    sample_cache = Cache(path, city_data)
+    assert os.path.exists(path)
 
 @pytest.mark.dependency()
 def test_stop(clean, sample_cache : Cache):
@@ -100,7 +130,7 @@ def test_stop(clean, sample_cache : Cache):
     Test para ver que el hilo de ejecucion del cache se detine correctamente.
 
     Args:
-        clean : borra todos los archivos en el directorio temp
+        clean : borra todos los archivos en el directorio temp.
         sample_cache (Cache)
     """
     sample_cache.start()
@@ -115,7 +145,7 @@ def test_start(clean, sample_cache : Cache):
     correctamente.
     
     Args:
-        clean : borra todos los archivos en el directorio temp
+        clean : borra todos los archivos en el directorio temp.
         sample_cache (Cache)
     """
     sample_cache.start()
@@ -128,19 +158,25 @@ def test_start(clean, sample_cache : Cache):
     assert 'cache' in names
     sample_cache.stop()
     assert json_file() == to_json(sample_cache.weather_records)
+    sample_cache.start()
+    names = [thread.name for thread in threading.enumerate()]
+    assert threading.active_count() == 2
+    assert 'cache' in names
+    sample_cache.stop()
 
-def test_invalid_cache(clean):
+def test_invalid_cache(clean, city_data : list):
     """
     Test para ver que se lanza la excepcion apropiada
     para un archivo cache con extension invalida.
 
     Args:
-        clean : borra todos los archivos en el directorio temp
+        clean : borra todos los archivos en el directorio temp.
+        city_data (list) : lista de ciudades.
     """
     with pytest.raises(InvalidCacheFileException):
-        invalid_cache = Cache('./weather_app/static/test/temp/cache')
+        invalid_cache = Cache('./weather_app/static/test/temp/cache', city_data)
     with pytest.raises(InvalidCacheFileException):
-        invalid_cache = Cache('./weather_app/static/test/temp/cache.xd')
+        invalid_cache = Cache('./weather_app/static/test/temp/cache.xd', city_data)
 
 def test_get_data_empty_file(clean, sample_cache : Cache):
     """
@@ -192,12 +228,25 @@ def test_update_large(clean, sample_cache : Cache):
     sample_cache.stop()
     assert json_file() == to_json(sample_cache.weather_records)
 
-def test_directory_creation(clean, sample_cache : Cache):
-    """   
-    Test para ver que un objeto json crea su archivo en el directorio especificado.
-        
+def test_get_data_reading(clean, city_data : list):
+    """
+    Test para ver que los datos se leen correctamente desde el archivo json.
+
     Args:
         clean : borra todos los archivos en el directorio temp
         sample_cache (Cache)
+        city_data (list) : lista de ciudades.
     """
-    assert os.path.exists(path)
+    sample_data = [
+        {"name": "x", "temp": 20, "humidity": 50},
+        {"name": "y", "temp": 25, "humidity": 60}
+    ]
+    with open(path, 'w', encoding='utf-8') as file:
+        json.dump(sample_data, file, indent=4, ensure_ascii=False)
+    sample_cache = Cache(path, city_data)
+    weather_records = sample_cache.weather_records
+    assert len(weather_records) == 2
+    assert weather_records["x"]["temp"] == 20
+    assert weather_records["x"]["humidity"] == 50
+    assert weather_records["y"]["temp"] == 25
+    assert weather_records["y"]["humidity"] == 60

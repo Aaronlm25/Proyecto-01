@@ -9,9 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 KEY = os.getenv('KEY')
 LOCK = threading.Lock()
-
-DATA_MANAGER = DataManager()
-DATA_COLLECTOR = DATA_MANAGER.get_data_collector()
+DATA_COLLECTOR = DataManager().get_data_collector()
 
 def get_weather(city: str, weather_records: dict) -> dict:
     """
@@ -29,6 +27,7 @@ def get_weather(city: str, weather_records: dict) -> dict:
     Raises:
         RequestException: Si ocurre un error al realizar la solicitud a la API.
     """
+    REQUEST_INTERVAL = 1.1
     if not is_weather_valid(city, weather_records):
         with LOCK:
             try:
@@ -37,6 +36,8 @@ def get_weather(city: str, weather_records: dict) -> dict:
                 response.raise_for_status()
                 weather = response.json()
                 determine_icon(weather)
+                weather['name'] = city
+                time.sleep(REQUEST_INTERVAL)
                 return weather
             except (RequestException, HTTPError) as e:
                 raise RequestException('Error al hacer el request') from e
@@ -62,9 +63,7 @@ def is_weather_valid(city: str, weather_records: dict) -> bool:
         return False
     weather = weather_records[city]
     requested_time = weather['dt']
-    if time.time() - requested_time >= THREE_HOUR_INTERVAL:
-        return False
-    return True
+    return time.time() - requested_time < THREE_HOUR_INTERVAL
 
 def determine_icon(json_data: dict):
     """
@@ -73,6 +72,10 @@ def determine_icon(json_data: dict):
 
     Args:
         json_data (dict): Informacion del clima de una ubicacion.
+
+    Raises:
+        ValueError : Si el objeto .json no existe.
+        ValueError : Si el objeto .json no es valido.
     """
     if not json_data:
         raise ValueError('The JSON object is None')
@@ -102,13 +105,16 @@ def determine_icon(json_data: dict):
 
 def search_by_iata(iata_code: str, weather_records: dict) -> dict:
     """
-    Hace el request del clima a la API de acuerdo al codigo IATA
+    Hace el request del clima a la API de acuerdo al codigo IATA.
 
     Args:
         iata_code (str): codigo IATA.
 
     Returns:
         weather (dict): Informacion del clima.
+
+    Raises:
+        ValueError : Si la ciudad no tiene un IATA asociado.
     """
     city = DATA_COLLECTOR.get_city(iata_code)
     if not city:
@@ -118,10 +124,10 @@ def search_by_iata(iata_code: str, weather_records: dict) -> dict:
 
 def search_by_city(city: str, weather_records: dict) -> dict:
     """
-    Hace el request del clima a la API de acuerdo al nombre de una ciudad
+    Hace el request del clima a la API de acuerdo al nombre de una ciudad.
 
     Args:
-        city (str): nombre de la ciudad
+        city (str): nombre de la ciudad.
 
     Returns:
         weather (dict): Informacion del clima.
@@ -131,13 +137,17 @@ def search_by_city(city: str, weather_records: dict) -> dict:
 
 def search_by_id(flight_number: str, weather_records: dict) -> tuple:
     """
-    Hace el request del clima a la API de acuerdo con un numero de ticket
+    Hace el request del clima a la API de acuerdo con un numero de ticket.
 
     Args:
         flight_number (str): Ticket del vuelo.
 
     Returns:
         flight_weather (tuple): Contiene la informacion del clima de llegada y de salida.
+
+    Raises:
+        ValueError : Si el vuelo no tiene datos asociados.
+        ValueError : Si alguno de los datos del ticket no es validos.
     """
     try:
         flight_info = DATA_COLLECTOR.search_flight(flight_number)

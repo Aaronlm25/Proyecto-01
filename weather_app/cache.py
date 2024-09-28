@@ -4,43 +4,46 @@ import threading
 from pathlib import Path
 from threading import Thread
 from requests import HTTPError, RequestException
-from static.python.data_manager import DataManager
 from weather_manager import get_weather
-
-DATA_MANAGER = DataManager()
-DATA_COLLECTOR = DATA_MANAGER.get_data_collector()
 
 class InvalidCacheFileException(Exception):
     """
     Clase de excepcion del archivo de cache dado,
-    se lanza cuando el archivo no es .json
+    se lanza cuando el archivo no es .json.
     """
     def __init__(self, message : str):
         super().__init__(message)
 
 class Cache:
     """
-    Clase para manejar el cache de los climas
+    Clase para manejar el cache de los climas.
 
     Args:
-    path : str
-        La ruta del archivo de cache
+        path : str
+            La ruta del archivo de cache.
+        cities : list
+            Lista de ciudades a considerar.
     """
-    def __init__(self, path : str):
+    def __init__(self, path : str, cities : list):
         self.__existance_insurer(path)
+        self.__cities = cities
         self.weather_records = dict()
         self.__STOP_FLAG = threading.Event() 
         self.__STOP_FLAG.set()
         self.__thread = None
         self.__LOCK = threading.Lock()
+        self.get_data()
 
     def get_data(self) -> dict:
         """
         Obtiene el cache como un diccionario cuyas llaves son los nombres de las 
-        ciudades y los valores son objetos json
+        ciudades y los valores son objetos json.
 
         Returns:
-            self.weather_records (dict): Un diccionario con todos los climas de las ciudades registradas
+            self.weather_records (dict): Un diccionario con todos los climas de las ciudades registradas.
+        
+        Raises:
+            InvalidCacheFileException : Si el formato del cache es invalido.
         """
         raw_data = []
         if len(self.weather_records) == 0:
@@ -66,24 +69,15 @@ class Cache:
             name = weather['name']
             self.weather_records[name] = weather
         
-    def __update_weather_records(self, destiny_data : list):
+    def __update_weather_records(self):
         """
         Proceso en segundo plano que hace las peticiones de los climas de las 
         distintas ciudades registradas.
-
-        Args:
-            destiny_data: lista de las ciudades registradas cada elemento es una lista
-                          de tamano 3 que contiene:
-                          [0] : Nombre de la ciudad
-                          [1] : IATA
-                          [2] : Codigo de aeroopuerto
         """
-        REQUEST_INTERVAL = 1.1
         THREE_HOUR_INTERVAL = 10800
         i = 0
         while not self.__STOP_FLAG.is_set():
-            data = destiny_data[i]
-            time.sleep(REQUEST_INTERVAL)
+            data = self.__cities[i]
             weather = None
             try:
                 weather = get_weather(data, self.weather_records)
@@ -92,7 +86,7 @@ class Cache:
             if weather:
                 self.update(weather)
             i += 1
-            if i == len(destiny_data):
+            if i == len(self.__cities):
                 i = 0
                 self.__save()
                 self.__sleep(THREE_HOUR_INTERVAL)
@@ -114,15 +108,12 @@ class Cache:
         """
         Comienza el proceso del cache y las peticiones de los climas.
         """
-        if self.__STOP_FLAG.is_set():
-            self.__STOP_FLAG.clear()
-            if not self.__thread:
-                data = DATA_COLLECTOR.get_destiny_data()
-                self.__thread = Thread(
-                    target=self.__update_weather_records,
-                    args=[data],
-                    name='cache'
-                )
+        self.__STOP_FLAG.clear()
+        if not self.__thread:
+            self.__thread = Thread(
+                target=self.__update_weather_records,
+                name='cache'
+            )
             self.__thread.start()
 
     def stop(self):
@@ -134,6 +125,7 @@ class Cache:
         self.__STOP_FLAG.set()
         if self.__thread:
             self.__thread.join()
+            self.__thread = None
         self.__save()
 
     def is_active(self) -> bool:
@@ -162,6 +154,9 @@ class Cache:
         Se asegura de que la ruta y el archivo existan.
         Args : 
             path (str): la ruta del archivo.
+
+        Raises:
+            InvalidCacheFileException : Si el formato del cache es invalido.
         """
         self.path = Path(path)
         if self.path.suffix != '.json':
