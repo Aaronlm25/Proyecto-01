@@ -17,7 +17,7 @@ body {
 
 body::before {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -32,9 +32,10 @@ body::before {
 
 .earth {
     position: absolute;
-    height: 500px;
-    top: -200px;
-    left: -500px;
+    height: 400px;
+    top: -100px;
+    left: -100px;
+    z-index: -1;
 }
 
 /* .dark-mode {
@@ -120,7 +121,7 @@ header h1 {
 }
 
 .option {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .information {
@@ -137,7 +138,7 @@ header h1 {
     align-items: center;
     flex-direction: column;
     gap: 16px;
-    min-height: 600px;
+    min-height: calc(100vh - 60px);
 }
 
 .card {
@@ -167,7 +168,7 @@ header h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 550px;
+    height: 570px;
     width: 300px;
     margin-bottom: 60px;
 }
@@ -306,18 +307,19 @@ header h1 {
 }
 
 footer {
+    background-color: rgba(0, 0, 0, 0.3);
     position: static;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
     bottom: 0;
     width: 100%;
-    margin-top: 50px;
+    height: 80px;
+    margin-top: 100px;
 }
 
 footer p {
     font-size: 20px;
     float: right;
     margin-right: 60px;
+    padding-top: 10px;
 }
 
 footer a {

@@ -39,7 +39,7 @@
             <p id="txt_suggestion" class="link-size">
                 Quizá quisiste decir:
                 <a
-                    href="http://127.0.0.1:5000/search?city={{suggestion}}"
+                    href="http://127.0.0.1:5000/search?city={{suggestion}}#departure_card"
                     class="custom-link"
                     >{{ suggestion }}</a
                 >
@@ -47,9 +47,9 @@
             {% endif %}
         </div>
         <script src="static/js/scripts.js" defer></script>
-        <button
-            type="submit"
-            onclick="location.href='#departure_card'"
+        <button 
+            type="submit"  
+            onclick="location.href='departure_card'"
         ></button>
     </form>
 </div>

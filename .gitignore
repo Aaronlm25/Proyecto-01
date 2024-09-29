@@ -3,8 +3,5 @@ weather_app/__pycache__/
 weather_app/static/json/cache.json
 weather_app/static/python/__pycache__/
 weather_app/static/test/__pycache__/
-<<<<<<< HEAD
 venv
-=======
 weather_app/static/js/mode.js
->>>>>>> 6a041a9 (Mejoras esteticas, se añadió contacto en el footer)

@@ -8,9 +8,8 @@
             rel="stylesheet"
             href="{{ url_for('static', filename='style/styles.css') }}"
         />
-        <script src="static/js/mode.js" defer></script>
     </head>
-    <body class="light_mode">
+    <body>
         <header>
             <h1>{% block header %}AeroClima{% endblock %}</h1>
             <img
@@ -20,11 +19,11 @@
             />
         </header>
         <section class="container">{% block content %}{% endblock %}</section>
-        <footer>
-            <div class = "footer">
-                <p>Contacto: <a href="mailto:alopez250405@gmail.com ">alopez250405@gmail.com </a></p>
-            </div>
-        <footer>
     </body>
+    <footer>
+        <div class = "footer">
+            <p>Contacto: <a href="mailto:alopez250405@gmail.com ">alopez250405@gmail.com </a></p>
+        </div>
+    <footer>
 
 </html>
