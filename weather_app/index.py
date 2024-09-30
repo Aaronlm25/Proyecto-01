@@ -7,7 +7,6 @@ from requests.exceptions import RequestException, HTTPError
 from static.python.data_manager import DataManager
 from autocorrect import revise
 
-DATA_COLLECTOR = DataManager().get_data_collector()
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
@@ -16,7 +15,7 @@ def home():
     departure_weather = None
     arrival_weather = None
     error_message = None
-    datalist_options = set(DATA_COLLECTOR.get_cities())
+    datalist_options = data_collector.get_cities()
     city = ''
     suggestion= ''
     if request.method == 'POST':
@@ -27,7 +26,7 @@ def home():
         try:
             if option == 'flight_number':
                 template = 'flight.html'
-            elif option in ['city']:
+            elif option == 'city':
                 template = 'city.html'
             elif option == 'iata_code':
                 template = 'iata.html'
@@ -37,14 +36,11 @@ def home():
                 arrival_weather = flight_weather[1]
                 template = 'flight.html'
             elif city:
-                suggestions = revise(city, DATA_COLLECTOR.get_cities())
-                if suggestions == []:
-                    error_message = 'Asegúrate de que todas las palabras estén escritas correctamente.'
+                suggestions = revise(city, data_collector.get_cities())
+                if suggestions[0].lower() == city.lower():
+                    departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
                 else:
-                    if suggestions[0].lower() == city.lower():
-                        departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-                    else:
-                        suggestion = suggestions[0]
+                    suggestion = suggestions[0]
                 template = 'city.html'
             elif iata_code:
                 iata_upper = iata_code.upper()
@@ -54,16 +50,12 @@ def home():
                 weather_cache.update(departure_weather)
             if arrival_weather:
                 weather_cache.update(arrival_weather)
-        
-        except (ValueError, AttributeError, HTTPError):
-            error_message = "Error al actualizar datos, una disculpa."
-        except RequestException:
-            error_message = "No se encontraron los datos esperados, una disculpa."
-        except TypeError:
-            error_message = "No se pudo obtener los datos esperados, una disculpa."
-        except IndexError:
+        except (ValueError, AttributeError, IndexError):
             error_message = 'Asegúrate de que todas las palabras estén escritas correctamente.'
-            
+        except (RequestException, HTTPError):
+            error_message = 'No se encontraron los datos esperados, una disculpa.'
+        except TypeError:
+            error_message = 'No se pudo obtener los datos esperados, una disculpa.'
     return render_template(
         template,
         departure_weather=departure_weather,
@@ -71,24 +63,18 @@ def home():
         error=error_message,
         datalist_options=datalist_options,
         suggestion=suggestion,
-        city = city
+        city=city
     )
 
-@app.route('/search', methods=['GET'])
-def search():
+@app.route('/correct', methods=['GET'])
+def correct():
     city = request.args.get('city')
-    datalist_options = DATA_COLLECTOR.get_cities()
     departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-    city = ''
-    return render_template(
-        'city.html',
-        city=city,
-        departure_weather=departure_weather,
-        datalist_options=datalist_options
-    )
+    return render_template('city.html', departure_weather=departure_weather)
 
 if __name__ == '__main__':
-    weather_cache = Cache('./weather_app/static/json/cache.json', DATA_COLLECTOR.get_cities())
+    data_collector = DataManager().get_data_collector()
+    weather_cache = Cache('./weather_app/static/json/cache.json', data_collector.get_cities())
     weather_cache.start()
     safe_stop = lambda signal, frame: (weather_cache.stop(), sys.exit(0))
     signal.signal(signal.SIGINT, safe_stop)
