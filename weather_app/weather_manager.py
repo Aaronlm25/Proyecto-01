@@ -7,7 +7,6 @@ from requests.exceptions import RequestException, HTTPError
 from dotenv import load_dotenv
 
 load_dotenv()
-KEY = os.getenv('KEY')
 LOCK = threading.Lock()
 DATA_COLLECTOR = DataManager().get_data_collector()
 
@@ -27,6 +26,7 @@ def get_weather(city: str, weather_records: dict) -> dict:
     Raises:
         RequestException: Si ocurre un error al realizar la solicitud a la API.
     """
+    KEY = os.getenv('KEY')
     REQUEST_INTERVAL = 1.1
     if not is_weather_valid(city, weather_records):
         with LOCK:
