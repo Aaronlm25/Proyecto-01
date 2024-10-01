@@ -2,8 +2,7 @@ import Levenshtein as lev
 
 def organize(similar_locations: dict) -> dict:
     """
-    Funcion para organize los elementos en el diccionario.
-
+    Funcion para organizar los elementos en el diccionario devuelto en el metodo revise, esto se hace en orden descendente.
     Args:
         similar_locations (dict): ciudades similares a la ubicacion del usuario.
 
@@ -15,8 +14,8 @@ def organize(similar_locations: dict) -> dict:
 
 def first_n(similar: dict, n: int) -> list:
     """
-    Funcion para obtener los primeros n elementos de un diccionario.
-
+    Funcion para obtener los primeros n elementos del diccionario con las palabras odenadas devueltas por revise.
+    las primeras 5 palabras del diccionario ordenado son almacenadas en una lista de longitud n.
     Args:
         similar (dict): diccionario con las palabras parecidas.
         int: cantidad de palabras similares deseadas.
@@ -33,7 +32,8 @@ def first_n(similar: dict, n: int) -> list:
 
 def revise(ubication: str, cities : list) -> list:
     """
-    Funcion para correguir la entrada del usuario.
+    Funcion para correguir la entrada del usuario empleando el algoritmo de distancia de Levenshtein.
+    Se emplea un indice de coincidencia de 0.4 por defecto y las coincidencias son almacenadas en un diccionario de acuerdo a su grado de coincidencia
 
     Args:
         ubication (str): ubicacion de la cual se desea conocer el clima.
