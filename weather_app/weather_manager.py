@@ -1,3 +1,10 @@
+""" 
+Modulo Weather Manager para realizar las request hacia la API 
+permite realizar las request segun el tipo de busqueda.
+
+Author: @Gibran-RL @pmoraf @Aaronlm25 @Azakhy @LuisCarri
+Version: 1.0
+"""
 import requests
 import threading
 import time

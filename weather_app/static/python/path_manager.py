@@ -1,3 +1,9 @@
+""" 
+Calse File Manager para el manejo de rutas de archivos en el directorio base.
+
+Author: @Gibran-RL
+Verrsion:1.0
+"""
 from pathlib import Path
 
 class FileManager:

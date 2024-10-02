@@ -1,3 +1,10 @@
+""" 
+Clases Data Collector y Data Manager para recolectar datos desde archivos CSV 
+evita la lectura constante de los archivos con un patron singleton.
+
+Author: @Gibran-RL
+Version: 1.0 
+"""
 import csv
 from static.python.path_manager import FileManager
 
