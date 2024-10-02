@@ -4,6 +4,7 @@ import threading
 from pathlib import Path
 from threading import Thread
 from requests import HTTPError, RequestException
+from json import JSONDecodeError
 from weather_manager import get_weather
 
 class InvalidCacheFileError(Exception):
@@ -53,7 +54,7 @@ class Cache:
                 with self.path.open('r', encoding='utf-8') as file:
                     if self.path.stat().st_size != 0:
                         raw_data = json.load(file)
-            except json.JSONDecodeError:
+            except JSONDecodeError:
                 raise InvalidCacheFileError('El formato del cache es invalido.')
             for weather in raw_data:
                 name = weather['name']
@@ -83,7 +84,7 @@ class Cache:
             weather = None
             try:
                 weather = get_weather(data, self.weather_records)
-            except (RequestException, HTTPError):
+            except (RequestException, HTTPError, ValueError):
                 weather = None
             if weather:
                 self.update(weather)

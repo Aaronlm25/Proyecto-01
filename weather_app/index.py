@@ -58,6 +58,8 @@ def home():
             error_message = 'No se encontraron los datos esperados, una disculpa.'
         except WeatherRequestError:
             error_message = 'No se pudo obtener los datos esperados, una disculpa.'
+        except ValueError:
+            error_message = 'Algo salio, mal intente mas tarde.'
     return render_template(
         template,
         departure_weather=departure_weather,
