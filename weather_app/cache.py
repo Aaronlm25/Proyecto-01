@@ -3,7 +3,7 @@ Clases cache y excepcion de cache, permite la
 recoleccion de datos en segundo plano y 
 evita peticiones redundantes.
 
-Author: @pmoraf
+Author: @Gibran-RL @pamoraf @Aaronlm25 @Azakhy
 Version: 1.0
 """
 import json
