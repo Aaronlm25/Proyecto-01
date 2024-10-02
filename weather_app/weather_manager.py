@@ -26,6 +26,7 @@ def get_weather(city: str, weather_records: dict) -> dict:
 
     Raises:
         WeatherRequestError: Si ocurre un error al realizar la solicitud a la API.
+        ValueError: Si el objeto JSON no existe o no es válido.
     """
     KEY = os.getenv('KEY')
     REQUEST_INTERVAL = 1.1

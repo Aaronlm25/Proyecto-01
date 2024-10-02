@@ -4,6 +4,7 @@ import threading
 from pathlib import Path
 from threading import Thread
 from requests import HTTPError, RequestException
+from weather_exceptions import WeatherRequestError
 from json import JSONDecodeError
 from weather_manager import get_weather
 
@@ -84,7 +85,7 @@ class Cache:
             weather = None
             try:
                 weather = get_weather(data, self.weather_records)
-            except (RequestException, HTTPError, ValueError):
+            except (WeatherRequestError, ValueError):
                 weather = None
             if weather:
                 self.update(weather)
