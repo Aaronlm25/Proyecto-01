@@ -3,7 +3,6 @@ import time
 import threading
 from pathlib import Path
 from threading import Thread
-from requests import HTTPError, RequestException
 from weather_exceptions import WeatherRequestError
 from json import JSONDecodeError
 from weather_manager import get_weather
