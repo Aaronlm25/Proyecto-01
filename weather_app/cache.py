@@ -6,10 +6,12 @@ from threading import Thread
 from requests import HTTPError, RequestException
 from weather_manager import get_weather
 
-class InvalidCacheFileException(Exception):
+class InvalidCacheFileError(Exception):
     """
-    Clase de excepcion del archivo de cache dado,
-    se lanza cuando el archivo no es .json.
+    Clase de excepcion del archivo de cache dado, se lanza cuando el archivo no es .json.
+
+    Args:
+        message (str): Mensaje de error que describe la excepción.
     """
     def __init__(self, message : str):
         super().__init__(message)
@@ -43,7 +45,7 @@ class Cache:
             self.weather_records (dict): Un diccionario con todos los climas de las ciudades registradas.
         
         Raises:
-            InvalidCacheFileException : Si el formato del cache es invalido.
+            InvalidCacheFileError : Si el formato del cache es invalido.
         """
         raw_data = []
         if len(self.weather_records) == 0:
@@ -52,7 +54,7 @@ class Cache:
                     if self.path.stat().st_size != 0:
                         raw_data = json.load(file)
             except json.JSONDecodeError:
-                raise InvalidCacheFileException('El formato del cache es invalido.')
+                raise InvalidCacheFileError('El formato del cache es invalido.')
             for weather in raw_data:
                 name = weather['name']
                 self.weather_records[name] = weather
@@ -156,10 +158,10 @@ class Cache:
             path (str): la ruta del archivo.
 
         Raises:
-            InvalidCacheFileException : Si el formato del cache es invalido.
+            InvalidCacheFileError : Si el formato del cache es invalido.
         """
         self.path = Path(path)
         if self.path.suffix != '.json':
-            raise InvalidCacheFileException('El archivo cache deber ser .json')
+            raise InvalidCacheFileError('El archivo cache deber ser .json')
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.touch(exist_ok=True)

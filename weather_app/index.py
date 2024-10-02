@@ -4,6 +4,7 @@ import signal
 from cache import Cache
 from flask import Flask, render_template, request
 from requests.exceptions import RequestException, HTTPError
+from weather_exceptions import CityNotFoundError, IATANotFoundError, FlightNotFoundError, WeatherRequestError
 from static.python.data_manager import DataManager
 from autocorrect import revise
 
@@ -17,7 +18,8 @@ def home():
     error_message = None
     datalist_options = data_collector.get_cities()
     city = ''
-    suggestion= ''
+    suggestion = ''
+    suggestions = []
     if request.method == 'POST':
         city = str(request.form.get('city', '')).strip()
         iata_code = str(request.form.get('iata_code', '')).strip()
@@ -31,30 +33,32 @@ def home():
             elif option == 'iata_code':
                 template = 'iata.html'
             if flight_number:
+                template = 'flight.html'
                 flight_weather = weather_manager.search_by_id(flight_number, weather_cache.get_data())
                 departure_weather = flight_weather[0]
                 arrival_weather = flight_weather[1]
-                template = 'flight.html'
             elif city:
                 suggestions = revise(city, data_collector.get_cities())
-                if suggestions[0].lower() == city.lower():
-                    departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-                else:
-                    suggestion = suggestions[0]
                 template = 'city.html'
+                departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
             elif iata_code:
                 iata_upper = iata_code.upper()
-                departure_weather = weather_manager.search_by_iata(iata_upper, weather_cache.get_data())
                 template = 'iata.html'
+                departure_weather = weather_manager.search_by_iata(iata_upper, weather_cache.get_data())
             if departure_weather:
                 weather_cache.update(departure_weather)
             if arrival_weather:
                 weather_cache.update(arrival_weather)
-        except (ValueError, AttributeError, IndexError):
-            error_message = 'Asegúrate de que todas las palabras estén escritas correctamente.'
-        except (RequestException, HTTPError):
+        except CityNotFoundError:
+            if len(suggestions) == 0:
+                error_message = 'Asegurate que has escrito la ciudad correctamente.'
+            else:
+                suggestion = suggestions[0]
+        except IATANotFoundError:
+            error_message = 'No se encontró el código IATA especificado.'
+        except FlightNotFoundError:
             error_message = 'No se encontraron los datos esperados, una disculpa.'
-        except TypeError:
+        except WeatherRequestError:
             error_message = 'No se pudo obtener los datos esperados, una disculpa.'
     return render_template(
         template,
@@ -70,7 +74,7 @@ def home():
 def correct():
     city = request.args.get('city')
     departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-    return render_template('city.html', departure_weather=departure_weather)
+    return render_template('city.html', city=city ,departure_weather=departure_weather)
 
 if __name__ == '__main__':
     data_collector = DataManager().get_data_collector()
