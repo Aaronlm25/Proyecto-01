@@ -12,8 +12,14 @@ class DataCollector:
     """
     Clase para recolectar datos desde archivos CSV.
 
-    Args:
+    Atributes:
         file_manager (FileManager): Instancia de FileManager para obtener las rutas de los archivos.
+        flight_path (str): Ruta del archivo CSV que contiene los datos de vuelos.
+        destiny_path (str): Ruta del archivo CSV que contiene los datos de destinos.
+        flight_data (dict): Diccionario con los datos de los vuelos.
+        iata_data (dict): Diccionario con los datos de ciudades e IATA.
+        cities (list): Lista de ciudades.
+        destiny_data (list): Lista de destinos.
     """
     
     def __init__(self, file_manager: FileManager):

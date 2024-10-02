@@ -10,10 +10,16 @@ class FileManager:
     """
     Clase para manejar las rutas de los archivos en el directorio base.
 
-    Args:
-        base_dir (str): Directorio base donde se encuentran los archivos. Por defecto es './weather_app/static/datalist'.
+    Atributes:
+        base_dir (str): Directorio base donde se encuentran los archivos.
     """
     def __init__(self, base_dir='./weather_app/static/datalist'):
+        """
+        Inicializa la clase FileManager con el directorio base.
+        
+        Args:
+            base_dir (str): Directorio base donde se encuentran los archivos.
+        """
         self.base_dir = Path(base_dir)
     
     def get_path(self, file_name : str) -> Path:
