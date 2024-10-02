@@ -34,7 +34,6 @@ def get_weather(city: str, weather_records: dict) -> dict:
     KEY = os.getenv('KEY')
     REQUEST_INTERVAL = 1.1
     if not is_weather_valid(city, weather_records):
-        print(city)
         with LOCK:
             try:
                 url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"
