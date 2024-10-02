@@ -23,9 +23,6 @@ def home():
     suggestion = ''
     suggestions = []
     if request.method == 'POST':
-        city = None
-        iata_code = None
-        flight_number = None
         option = get_option()
         try:
             if option == 'SEARCH_BY_FLIGHT':
