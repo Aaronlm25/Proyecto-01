@@ -26,7 +26,7 @@ body::before {
     background-size: cover;
     background-position: center;
     height: 100%;
-    opacity: 0.2;
+    opacity: 0.3;
     z-index: -1;
 }
 
@@ -37,39 +37,6 @@ body::before {
     left: -100px;
     z-index: -1;
 }
-
-/* .dark-mode {
-    background-color: rgba(255, 255, 255, 0.8);
-    color: black;
-}
-
-#mode_button {
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: black;
-}
-
-.dark-mode #mode_button {
-    background-color: rgba(0, 0, 0, 0.9);
-    color: whitesmoke;
-}
-
-.dark-mode header h1 {
-    color: black;
-}
-
-.dark-mode #menu {
-    color: black;
-}
-
-.dark-mode .option {
-    background-color: rgba(255, 255, 255, 0.8);
-} */
 
 header h1 {
     font-size: 50px;
