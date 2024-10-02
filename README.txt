@@ -5,6 +5,7 @@ requests para realizar solicitudes HTTP
 Flask para el servidor web
 autocorrect para sugerir correcciones en nombres de ciudades
 python-Levenshtein para calcular la similitud entre cadenas
+
 Instalación
 Sige estos pasos para instalar y ejecutar la aplicación:
 
@@ -32,26 +33,26 @@ pip install -r requirements.txt
 Asegúrese de que los archivos necesarios para el funcionamiento de la aplicación estén en los directorios correctos. Debe tener la siguiente estructura:
 
 weather_app/
+    weather_exceptions.py (contiene las excepciones usadas en weather_manager)
     weather_manager.py (archivo con la lógica del manejo del clima)
     index.html (plantilla HTML para la aplicación)
     cache.py (archivo con la clase Cache)
     autocorrect.py (archivo para el autocorrector de la pagina web)
     static/
         js/
-            script.js 
+            scripts.js (Contiene el script para usar el datalist)
+            show_more.js (Contiene el scrpt para mostrar u ocultar contenido del HTML)
         json/
             cache.json (archivo vacío o con datos iniciales)
         datalist/
-            vuelos.csv (archivo CSV con datos de vuelos)
-            datos_destinos.csv (archivo CSV con datos de destinos)
-            ciudades.csv (archivo CSV con datos de ciudades)
-            datos_destinos_viajes.csv ( archivo csv con datos de origen y llegada de viajes)
+            destiny_data.csv (Contiene los nombres de ciudades y el IATA de su aeropuerto)
+            vuelos.csv (Contiene los numeros de vuelo y el IATA del aeropuerto de salida y de llegada)
         python/
-            gather.py
-            __pycache__/
-                    (archivos .pyc)
+            data_manager.py (Recolecta los datos de los archivos en datalist con ayuda de path_manager.py)
+            path_manager.py (Maneja las rutas de los archivos en datalist)
         style/
-            styles.css
+            styles.css (Contiene el diseño de las plantillas HTML)
+            stars.png
         svg/
             (Iconos de clima)
         test/
@@ -61,8 +62,10 @@ weather_app/
                 cache.json
     templates/
             index.html
-            svg/
-                (Iconos de clima)
+            home.html
+            iata.html
+            flight.html
+            city.html
     __pycache__/
             (genera archivos .pyc)
 

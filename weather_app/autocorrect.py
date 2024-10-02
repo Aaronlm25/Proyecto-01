@@ -1,3 +1,9 @@
+"""
+Módulo autocorrect
+Contiene las funciones necesarias para correguir la entrada del usuario
+cuando realiza una busqueda usando el niombre de la ciudad
+"""
+
 import Levenshtein as lev
 from collections import defaultdict
 
