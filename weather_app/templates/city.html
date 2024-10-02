@@ -34,8 +34,7 @@
                 autofocus
             />
             <datalist id="listprod"> </datalist>
-            {% set lower_options = datalist_options | map('lower') %} {% if
-            suggestion and city and city.lower() not in lower_options %}
+            {% if suggestion and city not in datalist_options %}
             <p id="txt_suggestion" class="link-size">
                 Quizá quisiste decir:
                 <a
