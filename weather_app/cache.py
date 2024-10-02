@@ -22,12 +22,21 @@ class Cache:
     Clase para manejar el cache de los climas.
 
     Args:
-        path : str
-            La ruta del archivo de cache.
-        cities : list
-            Lista de ciudades a considerar.
+        path (str): La ruta del archivo de cache.
+        cities (list) : Lista de ciudades a considerar.
     """
     def __init__(self, path : str, cities : list):
+        """
+        Inicializa la clase Cache cargando las ciudades y la ruta del .json.
+
+        Args:
+            path (str) : la ruta del .json.
+            cities (list) : lista de los nombres de las ciudades
+
+        Raises:
+            InvalidCacheFileError : si el nombre de la ruta no coincide con un .json o el json 
+                                    no tiene el formato apropiado (utf-8)
+        """
         self.__existance_insurer(path)
         self.__cities = cities
         self.weather_records = dict()
