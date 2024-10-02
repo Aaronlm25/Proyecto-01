@@ -1,5 +1,5 @@
 import csv
-from static.python.path_manager import FileManager, FileNotFound
+from static.python.path_manager import FileManager
 
 class DataCollector:
     """
@@ -35,17 +35,14 @@ class DataCollector:
             dict: Un diccionario con los datos de los vuelos.
         """
         flight_data = {}
-        try:
-            with open(path, mode='r', encoding="utf-8") as file:
-                reader = csv.reader(file)
-                next(reader)
-                for row in reader:
-                    flight_number = row[0]
-                    departure_iata = row[1]
-                    arrival_iata = row[2]
-                    flight_data[flight_number] = {'departure': departure_iata, 'arrival': arrival_iata}
-        except FileNotFoundError:
-            print(f"Error: El archivo {path} no se encuentra.")
+        with open(path, mode='r', encoding="utf-8") as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                flight_number = row[0]
+                departure_iata = row[1]
+                arrival_iata = row[2]
+                flight_data[flight_number] = {'departure': departure_iata, 'arrival': arrival_iata}
         return flight_data
 
     @staticmethod
@@ -64,16 +61,13 @@ class DataCollector:
                   y los valores son diccionarios con la información de la ciudad y el aeropuerto.
         """
         iata_data = {}
-        try:
-            with open(path, mode='r', encoding="utf-8") as file:
-                reader = csv.reader(file)
-                next(reader)
-                for row in reader:
-                    city = row[0]
-                    iata_code = row[2]
-                    iata_data[iata_code] = city
-        except FileNotFoundError:
-            print(f"Error: El archivo {path} no se encuentra.")
+        with open(path, mode='r', encoding="utf-8") as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                city = row[0]
+                iata_code = row[2]
+                iata_data[iata_code] = city
         return iata_data
 
     @staticmethod
@@ -183,11 +177,7 @@ class DataManager:
             FileNotFound: Si el archivo no existe.
         """
         self.file_manager = FileManager()
-        try:
-            self.data_manager = DataCollector(self.file_manager)
-        except FileNotFound as e:
-            print(f"Error: {e}")
-            self.data_manager = None
+        self.data_manager = DataCollector(self.file_manager)
 
     def get_file_manager(self) -> FileManager:
         """

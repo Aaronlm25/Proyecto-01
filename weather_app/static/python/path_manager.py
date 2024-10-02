@@ -1,15 +1,5 @@
 from pathlib import Path
 
-class FileNotFound(Exception):
-    """
-    Excepción personalizada cuando un archivo no se encuentra.
-
-    Args:
-        archivo (str): Nombre del archivo que no se encuentra.
-    """
-    def __init__(self, archivo : str):
-        super().__init__(f"File {archivo} does not exist.")
-
 class FileManager:
     """
     Clase para manejar las rutas de los archivos en el directorio base.
@@ -47,7 +37,7 @@ class FileManager:
         """
         file_path = self.get_path(file_name)
         if not file_path.exists():
-            raise FileNotFound(file_path)
+            raise FileNotFoundError(file_path)
         return file_path
 
     def get_flight_path(self) -> Path:
