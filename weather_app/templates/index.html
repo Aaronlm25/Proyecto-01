@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Weather Page{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/styles.css') }}">
-</head>
-<body>
-    <header>
-        <h1>{% block header %}AeroClima{% endblock %}</h1>
-    </header>
-    <section class="container">
-        {% block content %}{% endblock %}
-    </section>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}Weather Page{% endblock %}</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='style/styles.css') }}"
+        />
+    </head>
+    <body>
+        <header>
+            <h1>{% block header %}AeroClima{% endblock %}</h1>
+            <img
+                class="earth"
+                src="{{ url_for('static', filename='img/earth.gif') }}"
+                )
+            />
+        </header>
+        <section class="container">{% block content %}{% endblock %}</section>
+    </body>
+    <footer>
+        <div class = "footer">
+            <p>Contacto: <a href="mailto:alopez250405@gmail.com ">alopez250405@gmail.com </a></p>
+        </div>
+    <footer>
+
 </html>

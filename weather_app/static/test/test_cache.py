@@ -8,7 +8,7 @@ import threading
 import time
 import shutil
 sys.path.append(os.path.abspath("./weather_app"))
-from cache import Cache, InvalidCacheFileException
+from cache import Cache, InvalidCacheFileError
 
 path = './weather_app/static/test/temp/cache.json'
 dir = './weather_app/static/test/temp/'
@@ -173,9 +173,9 @@ def test_invalid_cache(clean, city_data : list):
         clean : borra todos los archivos en el directorio temp.
         city_data (list) : lista de ciudades.
     """
-    with pytest.raises(InvalidCacheFileException):
+    with pytest.raises(InvalidCacheFileError):
         invalid_cache = Cache('./weather_app/static/test/temp/cache', city_data)
-    with pytest.raises(InvalidCacheFileException):
+    with pytest.raises(InvalidCacheFileError):
         invalid_cache = Cache('./weather_app/static/test/temp/cache.xd', city_data)
 
 def test_get_data_empty_file(clean, sample_cache : Cache):
