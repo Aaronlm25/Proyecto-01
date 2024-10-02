@@ -3,27 +3,29 @@ from collections import defaultdict
 
 def organize(similar_locations: dict) -> dict:
     """
-    Organize the elements in the dictionary.
+    Organiza los elementos en el diccionario.
 
-    Funcion para organizar los elementos en el diccionario devuelto en el metodo revise, esto se hace en orden descendente.
+    Función para organizar los elementos en el diccionario devuelto en el método revise, esto se hace en orden descendente.
+    
     Args:
-        similar_locations (dict): Cities similar to the user's location.
+        similar_locations (dict): Ciudades similares a la ubicación del usuario.
 
     Returns:
-        dict: Ordered locations.
+        dict: Ubicaciones ordenadas.
     """
     return dict(sorted(similar_locations.items(), reverse=True))
 
 def first_n(similar: dict, n: int) -> list:
     """
-    Funcion para obtener los primeros n elementos del diccionario con las palabras odenadas devueltas por revise.
-    las primeras 5 palabras del diccionario ordenado son almacenadas en una lista de longitud n.
+    Función para obtener los primeros n elementos del diccionario con las palabras ordenadas devueltas por revise.
+    Las primeras n palabras del diccionario ordenado son almacenadas en una lista de longitud n.
+    
     Args:
-        similar (dict): Dictionary with similar words.
-        n (int): Number of desired similar words.
+        similar (dict): Diccionario con palabras similares.
+        n (int): Número de palabras similares deseadas.
 
     Returns:
-        list: List of n similar words to the desired location.
+        list: Lista de n palabras similares a la ubicación deseada.
     """
     first_n_items = []
     for items in similar.values():
@@ -36,15 +38,16 @@ def first_n(similar: dict, n: int) -> list:
 
 def revise(ubication: str, cities: list) -> list:
     """
-    Funcion para correguir la entrada del usuario empleando el algoritmo de distancia de Levenshtein.
-    Se emplea un indice de coincidencia de 0.4 por defecto y las coincidencias son almacenadas en un diccionario de acuerdo a su grado de coincidencia
+    Función para corregir la entrada del usuario empleando el algoritmo de distancia de Levenshtein.
+    Se emplea un índice de coincidencia de 0.4 por defecto y las coincidencias son almacenadas en un diccionario de acuerdo a su grado de coincidencia.
 
     Args:
-        ubication (str): Location for which the weather is desired.
-        cities (list): List with the names of the cities.
+        ubication (str): Ubicación para la cual se desea el clima.
+        cities (list): Lista con los nombres de las ciudades.
 
     Returns:
-        list: Contains the 5 words with the highest coincidence index.
+        list: Lista con las 5 ciudades con el mayor índice de coincidencia ordenadas
+              de mayor a menor.
     """
     if not ubication:
         return []

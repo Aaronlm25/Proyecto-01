@@ -19,7 +19,7 @@ def home():
     y permite que el template acceda a las variables proporcionadas.
     
     Returns:
-        str: nombre del template a renderizar y variables que esttarán disponibles
+        str: Nombre del template a renderizar y variables que esttarán disponibles
         en el template renderizado.
     """
     template = 'home.html'
@@ -30,44 +30,43 @@ def home():
     city = ''
     suggestion = ''
     suggestions = []
-    if request.method == 'POST':
-        option = get_option()
-        try:
-            if option == 'SEARCH_BY_FLIGHT':
-                flight_number = str(request.form.get('flight_number', '')).strip()
-                template = 'flight.html'
-                if flight_number:
-                    flight_weather = weather_manager.search_by_id(flight_number, weather_cache.get_data())
-                    departure_weather = flight_weather[0]
-                    arrival_weather = flight_weather[1]
-            elif option == 'SEARCH_BY_CITY':
-                city = str(request.form.get('city', '')).strip()
-                template = 'city.html'
-                if city:
-                    suggestions = revise(city, data_collector.get_cities())
-                    departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-            elif option == 'SEARCH_BY_IATA':
-                iata_code = str(request.form.get('iata_code', '')).strip().upper()
-                template = 'iata.html'
-                if iata_code:
-                    departure_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
-            if departure_weather:
-                weather_cache.update(departure_weather)
-            if arrival_weather:
-                weather_cache.update(arrival_weather)
-        except CityNotFoundError:
-            if len(suggestions) == 0:
-                error_message = 'Asegurate que has escrito la ciudad correctamente.'
-            else:
-                suggestion = suggestions[0]
-        except IATANotFoundError:
-            error_message = 'No se encontró el código IATA especificado.'
-        except FlightNotFoundError:
-            error_message = 'No se encontraron los datos esperados, una disculpa.'
-        except WeatherRequestError:
-            error_message = 'No se pudieron obtener los datos esperados, una disculpa.'
-        except ValueError:
-            error_message = 'Algo salio, mal intente mas tarde.'
+    option = get_option()
+    try:
+        if option == 'SEARCH_BY_FLIGHT':
+            flight_number = str(request.form.get('flight_number', '')).strip()
+            template = 'flight.html'
+            if flight_number:
+                flight_weather = weather_manager.search_by_id(flight_number, weather_cache.get_data())
+                departure_weather = flight_weather[0]
+                arrival_weather = flight_weather[1]
+        elif option == 'SEARCH_BY_CITY':
+            city = str(request.form.get('city', '')).strip()
+            template = 'city.html'
+            if city:
+                suggestions = revise(city, data_collector.get_cities())
+                departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
+        elif option == 'SEARCH_BY_IATA':
+            iata_code = str(request.form.get('iata_code', '')).strip().upper()
+            template = 'iata.html'
+            if iata_code:
+                departure_weather = weather_manager.search_by_iata(iata_code, weather_cache.get_data())
+        if departure_weather:
+            weather_cache.update(departure_weather)
+        if arrival_weather:
+            weather_cache.update(arrival_weather)
+    except CityNotFoundError:
+        if len(suggestions) == 0:
+            error_message = 'Asegurate que has escrito la ciudad correctamente.'
+        else:
+            suggestion = suggestions[0]
+    except IATANotFoundError:
+        error_message = 'No se encontró el código IATA especificado.'
+    except FlightNotFoundError:
+        error_message = 'No se encontraron los datos esperados, una disculpa.'
+    except WeatherRequestError:
+        error_message = 'No se pudieron obtener los datos esperados, una disculpa.'
+    except ValueError:
+        error_message = 'Algo salio, mal intente mas tarde.'
     return render_template(
         template,
         departure_weather=departure_weather,

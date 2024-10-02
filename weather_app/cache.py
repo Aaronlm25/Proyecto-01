@@ -1,3 +1,11 @@
+"""
+Clases cache y excepcion de cache, permite la 
+recoleccion de datos en segundo plano y 
+evita peticiones redundantes.
+
+Author: @pmoraf
+Version: 1.0
+"""
 import json
 import time
 import threading
@@ -10,28 +18,34 @@ from weather_manager import get_weather
 class InvalidCacheFileError(Exception):
     """
     Clase de excepcion del archivo de cache dado, se lanza cuando el archivo no es .json.
-
-    Args:
-        message (str): Mensaje de error que describe la excepción.
     """
     def __init__(self, message : str):
+        """
+            Args:
+                message (str) : Mensaje de error que describe la excepcion.
+        """
         super().__init__(message)
 
 class Cache:
     """
     Clase para manejar el cache de los climas.
 
-    Args:
+    Attributes:
         path (str): La ruta del archivo de cache.
-        cities (list) : Lista de ciudades a considerar.
+        __cities (list) : Lista de ciudades a considerar.
+        weather_records (dict) : Diccionario que contiene el clima de las ciudades.
+        __STOP_FLAG (Event) : Bandera para que controla el proceso de cache.
+        __thread (Thread) : Hilo de ejecucion destinado ejecutar el metodo __update_cache.
+        __LOCK (Lock) :  Perimte que comportaminto compartido por diferentes hilos,
+                         se ejecute de manera segura.
     """
     def __init__(self, path : str, cities : list):
         """
         Inicializa la clase Cache cargando las ciudades y la ruta del .json.
 
         Args:
-            path (str) : la ruta del .json.
-            cities (list) : lista de los nombres de las ciudades
+            path (str) : La ruta del .json.
+            cities (list) : Lista de los nombres de las ciudades
 
         Raises:
             InvalidCacheFileError : si el nombre de la ruta no coincide con un .json o el json 
@@ -75,7 +89,7 @@ class Cache:
         Actualiza el clima de una sola ciudad.
 
         Args:
-            weather : objeto json que contiene informacion del clima de una ciudad.
+            weather : Objeto json que contiene informacion del clima de una ciudad.
         """
         with self.__LOCK:
             name = weather['name']
@@ -109,7 +123,7 @@ class Cache:
         deterner la espera.
 
         Args:
-            duration (int) : cantidad a esperar en segundos.
+            duration (int) : Cantidad a esperar en segundos.
         """
         for _ in range(duration):
             if self.__STOP_FLAG.is_set():
@@ -145,7 +159,7 @@ class Cache:
         Permite saber si se estan haciendo las peticiones de clima.
 
         Returns:
-            self.__STOP_FLAG.is_set() (bool) : el estado de la actividad de las peticiones de clima.
+            bool : El estado de la actividad de las peticiones de clima.
         """
         return not self.__STOP_FLAG.is_set()
     
@@ -165,7 +179,7 @@ class Cache:
         """
         Se asegura de que la ruta y el archivo existan.
         Args : 
-            path (str): la ruta del archivo.
+            path (str): La ruta del archivo.
 
         Raises:
             InvalidCacheFileError : Si el formato del cache es invalido.
