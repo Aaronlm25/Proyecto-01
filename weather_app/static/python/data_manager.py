@@ -15,6 +15,10 @@ class DataCollector:
 
         Args:
             file_manager (FileManager): Instancia de FileManager para obtener las rutas de los archivos.
+
+        Raises:
+            FileNotFoundError: Si alguno de los archivos no se encuentra.
+            UnicodeDecodeError: Si alguno de los archivos no está codificado en UTF-8.
         """
         flight_path = file_manager.get_flight_path()
         destiny_path = file_manager.get_destiny_path()
@@ -33,6 +37,10 @@ class DataCollector:
 
         Returns:
             dict: Un diccionario con los datos de los vuelos.
+
+        Raises:
+            FileNotFoundError: Si el archivo no se encuentra.
+            UnicodeDecodeError: Si el archivo no está codificado en UTF-8.
         """
         flight_data = {}
         with open(path, mode='r', encoding="utf-8") as file:
@@ -59,6 +67,10 @@ class DataCollector:
         Returns:
             dict: Un diccionario donde las claves son los códigos IATA del aeropuerto,
                   y los valores son diccionarios con la información de la ciudad y el aeropuerto.
+
+        Raises:
+            FileNotFoundError: Si el archivo no se encuentra.
+            UnicodeDecodeError: Si el archivo no está codificado en UTF-8.
         """
         iata_data = {}
         with open(path, mode='r', encoding="utf-8") as file:
@@ -80,6 +92,10 @@ class DataCollector:
 
         Returns:
             ciudades (list): lista de las ciudades ordenada.
+
+        Raises:
+            FileNotFoundError: Si el archivo no se encuentra.
+            UnicodeDecodeError: Si el archivo no está codificado en UTF-8.
         """
         cities = []
         with open(path, 'r', encoding="utf8", newline='') as file:
@@ -103,8 +119,11 @@ class DataCollector:
 
         Returns:
             list: Una lista de listas, donde cada sublista contiene la información de una ciudad.
+
+        Raises:
+            FileNotFoundError: Si el archivo no se encuentra.
+            UnicodeDecodeError: Si el archivo no está codificado en UTF-8.
         """
-        destiny_data = []
         with open(path, mode='r', encoding="utf-8") as file:
             reader = csv.reader(file)
             next(reader)
@@ -162,6 +181,10 @@ class DataManager:
     def __new__(cls):
         """
         Implementa el patrón Singleton para asegurarse de que sólo exista una instancia de DataManager.
+
+        Raises:
+            FileNotFoundError: Si alguno de los archivos necesarios no se encuentra.
+            UnicodeDecodeError: Si alguno de los archivos no está codificado en UTF-8.
         """
         if cls._instance is None:
             cls._instance = super().__new__(cls)
@@ -171,10 +194,11 @@ class DataManager:
     def _initialize_managers(self):
         """
         Inicializa los objetos de FileManager y DataCollector.
-        Maneja excepciones si los archivos no son encontrados.
+        Maneja excepciones si los archivos no son encontrados o no están codificados en UTF-8.
 
         Raises:
-            FileNotFound: Si el archivo no existe.
+            FileNotFoundError: Si el archivo no existe.
+            UnicodeDecodeError: Si el archivo no está codificado en UTF-8.
         """
         self.file_manager = FileManager()
         self.data_manager = DataCollector(self.file_manager)
