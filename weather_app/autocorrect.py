@@ -2,6 +2,9 @@
 Módulo autocorrect
 Contiene las funciones necesarias para correguir la entrada del usuario
 cuando realiza una busqueda usando el niombre de la ciudad
+
+Author: @Azakhy @Gibran-RL @pamoraf
+Version: 1.0
 """
 
 import Levenshtein as lev

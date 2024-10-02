@@ -3,7 +3,6 @@ Python 3.x
 pip para instalar dependencias de Python
 requests para realizar solicitudes HTTP
 Flask para el servidor web
-autocorrect para sugerir correcciones en nombres de ciudades
 python-Levenshtein para calcular la similitud entre cadenas
 
 Instalación
