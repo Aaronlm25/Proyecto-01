@@ -14,6 +14,14 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    """
+    Inicia la página web, determina el template que se renderizará
+    y permite que el template acceda a las variables proporcionadas.
+    
+    Returns:
+        str: nombre del template a renderizar y variables que esttarán disponibles
+        en el template renderizado.
+    """
     template = 'home.html'
     departure_weather = None
     arrival_weather = None
@@ -57,7 +65,7 @@ def home():
         except FlightNotFoundError:
             error_message = 'No se encontraron los datos esperados, una disculpa.'
         except WeatherRequestError:
-            error_message = 'No se pudo obtener los datos esperados, una disculpa.'
+            error_message = 'No se pudieron obtener los datos esperados, una disculpa.'
         except ValueError:
             error_message = 'Algo salio, mal intente mas tarde.'
     return render_template(
@@ -70,7 +78,15 @@ def home():
         city=city
     )
 
+
 def get_option():
+    """
+    Determina la opción que el usuario seleccionó en el formulario para que
+    en base a esto se determine el camino a seguir en la función home.
+    
+    Returns:
+        str: Opción seleccionada por el usuario.
+    """
     option = request.form.get('option')
     if option == 'flight_number' or 'flight_number' in request.form:
         return 'SEARCH_BY_FLIGHT'
@@ -82,6 +98,13 @@ def get_option():
 
 @app.route('/correct', methods=['GET'])
 def correct():
+    """
+    Si el usuario ingresa un nombre de ciudad inválido, se le proporcionará 
+    una sugerencia, la cual es la ciudad más cercana a lo que el usuario ingresó.
+    
+    Returns:
+        str: Template que se renderizará y variables disponibles para este template.
+    """
     city = request.args.get('city')
     departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
     return render_template(
