@@ -5,7 +5,10 @@ import os
 from static.python.data_manager import DataManager
 from requests.exceptions import RequestException, HTTPError
 from dotenv import load_dotenv
-from weather_exceptions import *
+from weather_exceptions import (CityNotFoundError, 
+                                IATANotFoundError, 
+                                FlightNotFoundError, 
+                                WeatherRequestError)
 
 load_dotenv()
 LOCK = threading.Lock()
@@ -31,6 +34,7 @@ def get_weather(city: str, weather_records: dict) -> dict:
     KEY = os.getenv('KEY')
     REQUEST_INTERVAL = 1.1
     if not is_weather_valid(city, weather_records):
+        print(city)
         with LOCK:
             try:
                 url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={KEY}&units=metric&lang=es"

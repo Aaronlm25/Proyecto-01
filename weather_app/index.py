@@ -84,7 +84,12 @@ def get_option():
 def correct():
     city = request.args.get('city')
     departure_weather = weather_manager.search_by_city(city, weather_cache.get_data())
-    return render_template('city.html', city=city ,departure_weather=departure_weather)
+    return render_template(
+        'city.html',
+        city=city,
+        datalist_options=data_collector.get_cities(),
+        departure_weather=departure_weather
+    )
 
 if __name__ == '__main__':
     data_collector = DataManager().get_data_collector()
