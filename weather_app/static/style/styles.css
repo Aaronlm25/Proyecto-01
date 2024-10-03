@@ -15,7 +15,7 @@ body {
     position: relative;
 }
 
-body::before {
+/* body::before {
     content: "";
     position: fixed;
     top: 0;
@@ -37,7 +37,7 @@ body::before {
     left: -100px;
     z-index: -1;
 }
-
+ */
 header h1 {
     font-size: 50px;
     font-family: "Roboto", sans-serif;
@@ -88,7 +88,8 @@ header h1 {
 }
 
 .option {
-    background-color: rgba(0, 0, 0, 0.8);
+    border: none;
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .information {

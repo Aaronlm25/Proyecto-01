@@ -10,13 +10,8 @@
         />
     </head>
     <body>
-        <header>
+        <header class="home">
             <h1>{% block header %}AeroClima{% endblock %}</h1>
-            <img
-                class="earth"
-                src="{{ url_for('static', filename='img/earth.gif') }}"
-                )
-            />
         </header>
         <section class="container">{% block content %}{% endblock %}</section>
     </body>
