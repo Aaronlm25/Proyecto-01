@@ -1,81 +1,72 @@
+"""
+Módulo autocorrect
+Contiene las funciones necesarias para correguir la entrada del usuario
+cuando realiza una busqueda usando el niombre de la ciudad
+
+Author: @Azakhy @Gibran-RL @pamoraf
+Version: 1.0
+"""
+
 import Levenshtein as lev
-import csv
-import unidecode as ucode
+from collections import defaultdict
 
-def extract_column(file_path : str, ubication : str):
+def organize(similar_locations: dict) -> dict:
     """
-    Funcion para extraer una columna del .csv
+    Organiza los elementos en el diccionario.
 
-    Args:
-        file_path (str): ruta hacia el .csv
-        ubication (str): ubicacion de la cual se desea consultar el clima
-
-    Returns:
-        list: columna a la que pertenece la ubicacion
-    """
-    if len(ubication) == 0:
-        return []
-    column = []
-    with open(file_path, mode='r') as cities_file:
-        reader = csv.DictReader(cities_file)
-        headers = reader.fieldnames
-        if ubication[0] in headers:
-            for row in reader:
-                column.append(row[ubication[0]])
-        else:
-            return []
-    return column
-
-def organize(similar_locations : dict):
-    """
-    Funcion para organize los elementos en el diccionario
-    Args:
-        similar_locations (dict): ciudades similares a la ubicacion del usuario
-
-    Returns:
-        dict: Ubicaciones ordenadas
-    """
-    ordered_locations = dict(sorted(similar_locations.items(), reverse = True))
+    Función para organizar los elementos en el diccionario devuelto en el método revise, esto se hace en orden descendente.
     
-    return ordered_locations
-
-def first_n(similar : dict, n : int):
-    """
-    Funcion para obtener los primeros n elementos de un diccionario
     Args:
-        similar (dict) : Diccionario con las palabras parecidas
-        int : cantidad de palabras similares deseadas
+        similar_locations (dict): Ciudades similares a la ubicación del usuario.
 
     Returns:
-        list: Lista de n palabras similares con la ubicacion deseada
+        dict: Ubicaciones ordenadas.
     """
-    first_n = []
-    for key in similar:
-        for item in similar.get(key):
-            if len(first_n) < n:
-                first_n.append(item)
-                
-    return first_n
+    return dict(sorted(similar_locations.items(), reverse=True))
 
-def revise(user_ubication : str, coincidence_index : int):
+def first_n(similar: dict, n: int) -> list:
     """
-    Funcion para correguir la entrada del usuario
+    Función para obtener los primeros n elementos del diccionario con las palabras ordenadas devueltas por revise.
+    Las primeras n palabras del diccionario ordenado son almacenadas en una lista de longitud n.
+    
     Args:
-        user_ubication (String): Ubicacion de la cual se desea conocer el clima
-        coincidence_index (int): Indice que se desea poner como condicion para las comparaciones 
+        similar (dict): Diccionario con palabras similares.
+        n (int): Número de palabras similares deseadas.
 
     Returns:
-        list: contiene las 5 palabras con mayor indice de coincidencia
+        list: Lista de n palabras similares a la ubicación deseada.
     """
-    ubication = ucode.unidecode(user_ubication).lower()
-    file_path = './weather_app/static/datalist/ciudades.csv'    
-    column = extract_column(file_path, ubication)
-    coincidences = {}
-    for x in column:
-        levenshtein_index  = lev.ratio(ubication, x)
-        if levenshtein_index >= coincidence_index:
-            if levenshtein_index not in coincidences:
-               coincidences[levenshtein_index] = set()
-            coincidences[levenshtein_index].add(x)
+    first_n_items = []
+    for items in similar.values():
+        for item in items:
+            if len(first_n_items) < n:
+                first_n_items.append(item)
+            else:
+                return first_n_items
+    return first_n_items
+
+def revise(ubication: str, cities: list) -> list:
+    """
+    Función para corregir la entrada del usuario empleando el algoritmo de distancia de Levenshtein.
+    Se emplea un índice de coincidencia de 0.4 por defecto y las coincidencias son almacenadas en un diccionario de acuerdo a su grado de coincidencia.
+
+    Args:
+        ubication (str): Ubicación para la cual se desea el clima.
+        cities (list): Lista con los nombres de las ciudades.
+
+    Returns:
+        list: Lista con las 5 ciudades con el mayor índice de coincidencia ordenadas
+              de mayor a menor.
+    """
+    if not ubication:
+        return []
+    user_ubication = ubication.lower()
+    coincidence_index = 0.4
+    coincidences = defaultdict(set)
+    for city in cities:
+        if city[0].lower() == user_ubication[0]:
+            levenshtein_index = lev.ratio(user_ubication, city)
+            if levenshtein_index >= coincidence_index:
+                coincidences[levenshtein_index].add(city)
     ordered_coincidences = organize(coincidences)
     return first_n(ordered_coincidences, 5)
