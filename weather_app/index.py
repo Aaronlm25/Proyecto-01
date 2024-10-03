@@ -1,3 +1,11 @@
+""" 
+Inicializa la págia, renderiza los templates correspondientes a los 
+que solicita el usuario y permite que la información necesaria 
+este disponibles para los templates.
+
+Author: @Gibran-RL @pamoraf @Aaronlm25 @Azakhy @LuisCarri
+Version: 1.0
+"""
 import weather_manager
 import sys
 import signal
