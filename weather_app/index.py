@@ -1,7 +1,7 @@
 """ 
-Inicializa la págia, renderiza los templates correspondientes a los 
+Inicializa la página, renderiza los templates correspondientes a los 
 que solicita el usuario y permite que la información necesaria 
-este disponibles para los templates.
+este disponible para los templates.
 
 Author: @Gibran-RL @pamoraf @Aaronlm25 @Azakhy @LuisCarri
 Version: 1.0
