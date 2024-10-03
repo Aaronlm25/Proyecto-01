@@ -15,29 +15,6 @@ body {
     position: relative;
 }
 
-/* body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url(stars.png);
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    opacity: 0.3;
-    z-index: -1;
-}
-
-.earth {
-    position: absolute;
-    height: 400px;
-    top: -100px;
-    left: -100px;
-    z-index: -1;
-}
- */
 header h1 {
     font-size: 50px;
     font-family: "Roboto", sans-serif;
