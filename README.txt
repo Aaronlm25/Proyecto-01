@@ -79,7 +79,7 @@ Para poder obtener tu propia API Key sigue estos pasos:
 	7.- Listo, esa es tu API Key, no la pierdas pues la necesitarás en el siguiente paso.
     
 6. Agregar API Key.
-Para poder hacer uso del programa es necesario crear un archivo .env dentro de weather app a la par de index.py; dentro de este archivo deberás escribir textualmente la palabra: KEY=(aquí debes escribir tu API Key, omite los paréntesis), ejemplo:
+Para poder hacer uso del programa es necesario crear un archivo,el archivo se debe llamar ".env" dentro de weather app a la par de index.py; dentro de este archivo deberás escribir textualmente la palabra: KEY=(aquí debes escribir tu API Key, omite los paréntesis), ejemplo:
 KEY=11c1bc65947aef112141a221f2dd111
 
 7. Ejecutar la Aplicación
