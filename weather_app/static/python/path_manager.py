@@ -52,17 +52,6 @@ class FileManager:
             raise FileNotFoundError(file_path)
         return file_path
 
-    def get_flight_path(self) -> Path:
-        """
-        Devuelve la ruta de 'vuelos.csv' y verifica su existencia.
-
-        Returns:
-            Path: Ruta completa del archivo 'vuelos.csv'.
-
-        Raises:
-            FileNotFound: Si el archivo 'vuelos.csv' no existe.
-        """
-        return self.check_existence('vuelos.csv')
 
     def get_destiny_path(self) -> Path:
         """
