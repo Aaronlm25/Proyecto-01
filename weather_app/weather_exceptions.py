@@ -15,6 +15,27 @@ class CityNotFoundError(Exception):
         """
         super().__init__(message)
 
+class IATANotFoundError(Exception):
+    """
+    Clase de excepción que se lanza cuando no se encuentra el código IATA especificado.
+    """
+    def __init__(self, message: str):
+        """
+        Args:
+            message (str): Mensaje de error que describe la excepción.
+        """
+        super().__init__(message)
+
+class FlightNotFoundError(Exception):
+    """
+    Clase de excepción que se lanza cuando no se encuentra la información del vuelo.
+    """
+    def __init__(self, message: str):
+        """
+        Args:
+            message (str): Mensaje de error que describe la excepción.
+        """
+        super().__init__(message)
 
 class WeatherRequestError(Exception):
     """

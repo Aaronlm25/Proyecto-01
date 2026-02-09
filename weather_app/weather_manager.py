@@ -12,7 +12,9 @@ import os
 from static.python.data_manager import DataManager
 from requests.exceptions import RequestException, HTTPError
 from dotenv import load_dotenv
-from weather_exceptions import (CityNotFoundError,                      
+from weather_exceptions import (CityNotFoundError, 
+                                IATANotFoundError, 
+                                FlightNotFoundError, 
                                 WeatherRequestError)
 
 load_dotenv()
@@ -112,7 +114,24 @@ def determine_icon(json_data: dict):
     except KeyError as e:
         raise ValueError('El JSON es inválido') from e
 
+def search_by_iata(iata_code: str, weather_records: dict) -> dict:
+    """
+    Hace la solicitud del clima a la API de acuerdo al código IATA.
 
+    Args:
+        iata_code (str): Código IATA.
+
+    Returns:
+        dict: Información del clima.
+
+    Raises:
+        IATANotFoundError: Si la ciudad no tiene un IATA asociado.
+    """
+    city = DATA_COLLECTOR.get_city(iata_code)
+    if not city:
+        raise IATANotFoundError('No se encontró el código IATA')
+    weather = get_weather(city, weather_records)
+    return weather
 
 def search_by_city(city: str, weather_records: dict) -> dict:
     """
@@ -132,3 +151,25 @@ def search_by_city(city: str, weather_records: dict) -> dict:
     weather = get_weather(city, weather_records)
     return weather
 
+def search_by_id(flight_number: str, weather_records: dict) -> tuple:
+    """
+    Hace la solicitud del clima a la API de acuerdo con un número de ticket.
+
+    Args:
+        flight_number (str): Ticket del vuelo.
+
+    Returns:
+        tuple: Contiene la información del clima de llegada y de salida.
+
+    Raises:
+        FlightNotFoundError: Si el vuelo no tiene datos asociados.
+    """
+    flight_info = DATA_COLLECTOR.search_flight(flight_number)
+    if not flight_info:
+        raise FlightNotFoundError('No se tiene registrado ese ticket.')
+    departure = DATA_COLLECTOR.get_city(flight_info['departure'])
+    arrival = DATA_COLLECTOR.get_city(flight_info['arrival'])
+    if not departure or not arrival:
+        raise FlightNotFoundError('Ticket con destino u origen invalidos.')
+    flight_weather = (get_weather(departure, weather_records), get_weather(arrival, weather_records))
+    return flight_weather
